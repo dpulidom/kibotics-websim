@@ -68,6 +68,13 @@ $(document).ready(()=>{
   $("#blocklyToPython").click(()=>{
     downloadZip(demoWorkspace, socket);
   });
+
+  $('#resetRobot').click(()=>{
+    var resetEvent = new CustomEvent('reset', {
+      'detail': ''
+    });
+    document.dispatchEvent(resetEvent);
+  });
   
 });
 

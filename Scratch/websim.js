@@ -39,6 +39,26 @@ document.addEventListener('code-to-run', (event)=>{
   mainInterval = jsonOutput["mainInterval"];
 });
 
+// Declare a listener to listen reset signal from UI
+document.addEventListener('reset', (event)=>{
+  var codeContent = `
+  myRobot.move(0, 0);
+  myRobot.resetRobot();
+  `
+  // This loop is necesary to first stop the current code execution, execute reset code and then stop it again to receive
+  // the new code from user
+  for(var i = 0; i<3; i++){
+    var jsonOutput = null;
+    if (i == 1){
+      jsonOutput = startStopCode(play, myRobot, reservedVariables, mainInterval, codeContent);
+    }else{
+      jsonOutput = startStopCode(play, myRobot, reservedVariables, mainInterval, "");
+    }
+    play = jsonOutput["play"];
+    mainInterval = jsonOutput["mainInterval"];
+  }
+});
+
 // Auxiliar function to implement a throttle of code.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
