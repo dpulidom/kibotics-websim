@@ -83,10 +83,6 @@ export default class RobotI
         return this.velocity.y;
     }
 
-    getInitialPosition(){
-
-    }
-
     setVelocity(body){
       /*
         This code run continiously, setting the speed of the robot every 30ms
