@@ -25,7 +25,7 @@ export function setupBlockly(workspace){
           scaleSpeed: 1.2
         },
     trashcan: true,
-    horizontalLayout: true,
+    horizontalLayout: false,
     scrollbars: true
   });
 

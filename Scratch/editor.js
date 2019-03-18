@@ -25,18 +25,15 @@ import $ from 'jquery';
 
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
-//var wsUri = window.wsUri
-var wsUri = 'ws://0.0.0.0:8000/'
+var wsUri = window.wsUri
 var userCode = window.userCode
-//var socket = window.socket 
 var socket = ""
 
 $(document).ready(()=>{
   configureCustomBlocks();
-  socket = WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
 
   demoWorkspace = setupBlockly(demoWorkspace); // Sets up blockly editor
-  //demoWorkspace = injectCode(demoWorkspace, userCode); // Inject (Load) blockly user code in editor
+  demoWorkspace = injectCode(demoWorkspace, userCode); // Inject (Load) blockly user code in editor
 
   // Toggle display when cambtn clicked
   $("#cambtn").click(()=>{
@@ -75,6 +72,11 @@ $(document).ready(()=>{
     });
     document.dispatchEvent(resetEvent);
   });
+
+  // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoid error with no registered users
+  if (wsUri != null){
+    socket = WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
+  }
   
 });
 

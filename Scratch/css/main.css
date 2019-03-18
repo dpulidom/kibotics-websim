@@ -48,34 +48,23 @@ html, body{
 #runbtn {
     background-color: #e6e6e6;
     color: black;
-    border: 2px solid #ACFF00;
+    /*border: 2px solid #ACFF00;*/
 }
 
 #runbtn:hover {
-    background-color: #ACFF00;
+    background-color: #3190f7;
     color: white;
 }
 
 #cambtn {
     background-color: #e6e6e6;
     color: black;
-    border: 2px solid #6b38d1;
+    /*border: 2px solid #6b38d1;*/
 }
 
-#resetRobot {
-  background-color: #e6e6e6;
-  color: black;
-  border: 2px solid #4da6ff;
-}
-
-#resetRobot:hover {
-  background-color: #4da6ff;
+#cambtn:hover {
+  background-color: #3190f7;
   color: white;
-}
-
-#resetRobot>img{
-  width: 36px;
-  height: 36px;
 }
 
 #saveCode {
@@ -83,15 +72,27 @@ html, body{
   color: black;
 }
 
+#saveCode:hover {
+  background-color: #ACFF00;
+  color: white;
+}
+
+#resetRobot {
+  background-color: #e6e6e6;
+  color: black;
+  /*border: 2px solid #ACFF00;*/
+}
+
+#resetRobot:hover {
+  background-color: #3190f7;
+  color: #e6e6e6;
+}
+
 #saveCode:disabled {
   background-color: red;
   color: black;
 }
 
-#cambtn:hover {
-    background-color: #6b38d1;
-    color: white;
-}
 #cambtn>img{
   width: 36px;
   height: 36px;
@@ -100,11 +101,11 @@ html, body{
 #pythonbtn {
     background-color: #e6e6e6;
     color: black;
-    border: 2px solid #b366ff;
+    border: 2px solid #3190f7;
 }
 
 #pythonbtn:hover {
-    background-color: #b366ff;
+    background-color: #3190f7;
     color: white;
 }
 
@@ -118,10 +119,10 @@ html, body{
 }
 
 button {
-    border-radius: 10px;
+    border-radius: 8px;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 12px 18px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -129,4 +130,8 @@ button {
     margin: 4px 2px;
     transition-duration: 0.1s;
     cursor: pointer;
+}
+
+.blocklyTreeRow > .blocklyTreeRow{
+  background-color: red
 }
