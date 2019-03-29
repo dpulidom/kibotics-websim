@@ -57,13 +57,16 @@ wsServer.on('request', function(request) {
   // This is the most important callback for us, we'll handle
   // all messages from users here.
   connection.on('message', function(message) {
-    // Here i must handle content
+    // On message get the python content and write it on template 'ejercicio.py'
     var pythonCode = JSON.parse(message.utf8Data).content;
+    
+    // Create a new ZIP file
     newArchive(pythonCode, `test-${+new Date}.zip`, [
       'PiBot/PiBot.py',
       'PiBot/__init__.py',
       'PiBot/ejercicio.py',
       'PiBot/Kibotics.yml',
+      'PiBot/real',
       'PiBot/real/__init__.py',
       'PiBot/real/piBot.py'
   ])
@@ -78,18 +81,19 @@ const stat = require('fs').statSync;
 const AdmZip = require('adm-zip');
 
 function newArchive(pythonCode, zipFileName, pathNames) {
-
     const zip = new AdmZip();
-    console.log(pathNames)
+
     pathNames.forEach(path => {
         const p = stat(path);
-        console.log(path);
+
         if (p.isFile() & (path != "PiBot/ejercicio.py")) {
           zip.addLocalFile(path);
         } else if (p.isDirectory()) {
           zip.addLocalFolder(path, path);
         } else if (path == 'PiBot/ejercicio.py'){
-          injectCode(pythonCode, path);
+          var exerciseCode = injectCode(pythonCode, path);
+          console.log(exerciseCode);
+          zip.addFile(path, exerciseCode);
         }
     });
 
@@ -99,10 +103,7 @@ function newArchive(pythonCode, zipFileName, pathNames) {
 
 function injectCode(pythonCode, pathFile){
   // ERROR reading file...
-  fs.readFileSync(__dirname + '/' + pathFile, (err, data)=>{
-    if (err){ console.log(err) }
-    console.log("Entra")
-    var newContent = data.replace('# Insert code here', pythonCode);
-    console.log(newContent);
-  });
+  var content = fs.readFileSync(__dirname + '/' + pathFile, 'utf8');
+  content = content.replace('# Insert code here', pythonCode);
+  return content
 }
