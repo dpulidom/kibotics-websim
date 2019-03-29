@@ -12,6 +12,11 @@ export default class RobotI
           'y': 0,
           'z': 0
         }
+        this.initialRotation = {
+          'x': 0,
+          'y': 0,
+          'z': 0
+        }
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.activeRays = false;
         this.raycastersArray = [];
