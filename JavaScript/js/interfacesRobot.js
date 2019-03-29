@@ -12,6 +12,11 @@ export default class RobotI
           'y': 0,
           'z': 0
         }
+        this.initialRotation = {
+          'x': 0,
+          'y': 0,
+          'z': 0
+        }
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.activeRays = false;
         this.raycastersArray = [];
@@ -106,19 +111,6 @@ export default class RobotI
     */
     {
         return {width: this.canvas2d.width, height: this.canvas2d.height};
-    }
-
-    clearAll()
-    /*
-      Resets all states of the robot.
-    */
-    {
-        clearTimeout(this.timeoutCamera); // Clear camera timeouts (stops camera)
-        clearTimeout(this.timeoutMotors); // Clear motors timeouts (stops motors)
-        clearInterval(this.followLineInterval); // Clears followLine intervals
-        this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
-        this.setVelocity();
-        this.robot.body.position.set(0, 0, 0);
     }
 
     getImageDescription()
@@ -506,6 +498,51 @@ export default class RobotI
       }
       return outputVal;
     }
+    /*
+      SPANISH API: This methods calls the same method in english
+
+    */
+
+    leerIRSigueLineas(){
+      return this.readIR();
+    }
+
+    avanzar(velocidadLineal){
+      return this.setV(Math.abs(velocidadLineal));
+    }
+
+    retroceder(velocidadLineal){
+      if (velocidadLineal > 0){
+        return this.setV(-velocidadLineal);
+      }else{
+        return this.setV(velocidadLineal);
+      }
+    }
+
+    girarIzquierda(velocidadGiro){
+      return this.setW(velocidadGiro);
+    }
+
+    girarDerecha(velocidadGiro){
+      return this.setW(-velocidadGiro);
+    }
+
+    parar(){
+      return this.move(0,0);
+    }
+
+    leerUltrasonido(){
+      return this.getDistance();
+    }
+
+    dameObjeto(filtroBajo, filtroAlto){
+      return this.getObjectColorRGB(filtroBajo, filtroAlto);
+    }
+
+    dameImagen(){
+      return this.getImage();
+    }
+
 }
 
 function updatePosition(rotation, velocity, robotPos){

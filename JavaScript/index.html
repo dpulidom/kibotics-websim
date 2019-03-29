@@ -24,11 +24,11 @@
         <!--<iframe id="websimframe" allowvr="yes" onload name="websim" src="./simulator.html" style="width: 100%; height:100%;" allow-same-origin allow-scripts></iframe>-->
         <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
-            <a-asset-item id="model-pibot" src="../assets/models/jrobotF.dae"></a-asset-item>
+            <a-asset-item id="model-pibot" src="../assets/models/jrobotFgltf.gltf"></a-asset-item>
             <img id="ground" src="../assets/textures/cheste-circuit.png" />
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity dynamic-body="mass: 50;" id="a-pibot" collada-model="#model-pibot" scale="20 20 20" rotation="0 -149.63 0" position="0 0.1 -6.0">
+          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 -149.63 0" position="0 0.1 -6.0">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
