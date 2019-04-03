@@ -25,17 +25,18 @@
         <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot" src="../assets/models/jrobotFgltf.gltf"></a-asset-item>
-            <img id="ground" src="../assets/textures/cheste-circuit.png" />
+            <img id="ground" src="../assets/textures/interlagos.png" />
+            <img id="sky" src="../assets/textures/sky.png" />
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 -149.63 0" position="0 0.1 -6.0">
+          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 50 0" position="12 0 25">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
           </a-entity>
           <a-entity id="positionSensor"></a-entity>
-          <a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="7.87 0.7 -0.16" rotation="0 0 0" color="#0000ff"></a-box>
+          <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="7.87 0.7 -0.16" rotation="0 0 0" color="#0000ff"></a-box>-->
           <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="2.75 0.7 3.27" rotation="0 89 0" color="#0000ff"></a-box>-->
           <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="2.83 0.7 -3.93" rotation="0 89 0" color="#0000ff"></a-box>-->
           <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="-2.0 0.7 -0.16" rotation="0 0 0" color="#0000ff"></a-box>-->
@@ -53,7 +54,7 @@
           <a-light type="ambient" color="white"></a-light>
           <!--<a-light type="point" intensity="1" position="-2 2 4"></a-light>-->
 
-          <a-entity id="primaryCamera" position="0 4 4" rotation="-45 0 0">
+          <a-entity id="primaryCamera" position="12 15 25" rotation="-75 0 0">
             <a-camera></a-camera>
           </a-entity>
         </a-scene>
