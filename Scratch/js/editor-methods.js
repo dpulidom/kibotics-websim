@@ -65,17 +65,22 @@ export function saveCode(demoWorkspace, socket){
   socket.send(JSON.stringify(message));
 }
 
+
+
+/////////////////// descarga local websim pibot
 export function downloadZip(demoWorkspace, socket){
   console.log("Getting code from the embedded editor.")
   var pythonContent = Blockly.Python.workspaceToCode(demoWorkspace);
 
   var message = {
-      type: "download",
+      type: "websim",
       content: pythonContent
   };
   console.log("Sending code to websocket")
   socket.send(JSON.stringify(message));
 }
+/////////////////////////////////////////////////////////////////////////////
+
 
 
 export function WebSocketConnection(uri) {

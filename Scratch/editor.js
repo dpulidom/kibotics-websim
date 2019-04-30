@@ -26,6 +26,10 @@ import $ from 'jquery';
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
 var wsUri = window.wsUri
+console.log("-----===================---------------------------------")
+console.log("@@@@@@@@@" + wsUri)
+console.log("----------------------===========----------------")
+
 var userCode = window.userCode
 var socket = ""
 
@@ -62,10 +66,25 @@ $(document).ready(()=>{
     saveCode(demoWorkspace, socket); // Declare function that extracts code from editor and sends to server via connection.send
   });
 
+
+
+
+
+
+
+
   $("#blocklyToPython").click(()=>{
     downloadZip(demoWorkspace, socket);
   });
 
+
+
+
+
+
+
+
+  
   $('#resetRobot').click(()=>{
     var resetEvent = new CustomEvent('reset', {
       'detail': ''
