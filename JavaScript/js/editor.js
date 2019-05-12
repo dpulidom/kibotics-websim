@@ -1,4 +1,4 @@
-import {setupACE, toggleCameraDisplay, getCode, insertCode, reset} from './js/editor-methods.js'
+import {setupACE, toggleCameraDisplay, getCode, insertCode, reset} from './editor-methods.js'
 
 var editor = null
 

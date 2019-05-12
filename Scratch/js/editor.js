@@ -1,26 +1,26 @@
-import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip} from './js/editor-methods.js'
-import initGetAngularSpeedBlock from './js/customBlocks/getAngularSpeedBlock.js'
-import initConsoleLogBlock from './js/customBlocks/consoleLogBlock.js'
-import initGetDistanceBlock from './js/customBlocks/getDistanceBlock.js'
-import initGetDistancesBlock from './js/customBlocks/getDistancesBlock.js'
-import initGetImageBlock from './js/customBlocks/getImageBlock.js'
-import initGetLateralSpeed from './js/customBlocks/getLateralSpeedBlock.js'
-import initGetLinearSpeedBlock from './js/customBlocks/getLinearSpeedBlock.js'
-import initGetObjectColorBlock from './js/customBlocks/getObjectColorBlock.js'
-import initGetPositionBlock from './js/customBlocks/getPositionBlock.js'
-import initGetRotationBlock from './js/customBlocks/getRotationBlock.js'
-import initMoveBackwardBlock from './js/customBlocks/moveBackwardBlock.js'
-import initMoveBlock from './js/customBlocks/moveBlock.js'
-import initMoveForwardBlock from './js/customBlocks/moveForwardBlock.js'
-import initPrintOnCanvasBlock from './js/customBlocks/printImgCanvasBlock.js'
-import initReadIRBlock from './js/customBlocks/readIRBlock.js'
-import initSetIntervalBlock from './js/customBlocks/setIntervalBlock.js'
-import initSetTimeoutBlock from './js/customBlocks/setTimeoutBlock.js'
-import initSetLateralSpeedBlock from './js/customBlocks/setLateralSpeedBlock.js'
-import initStopBlock from './js/customBlocks/stopBlock.js'
-import initTurnLeftBlock from './js/customBlocks/turnLeftBlock.js'
-import initTurnRightBlock from './js/customBlocks/turnRightBlock.js'
-import initWaitBlock from './js/customBlocks/waitBlock.js'
+import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip} from './editor-methods.js'
+import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
+import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
+import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
+import initGetDistancesBlock from '../customBlocks/getDistancesBlock.js'
+import initGetImageBlock from '../customBlocks/getImageBlock.js'
+import initGetLateralSpeed from '../customBlocks/getLateralSpeedBlock.js'
+import initGetLinearSpeedBlock from '../customBlocks/getLinearSpeedBlock.js'
+import initGetObjectColorBlock from '../customBlocks/getObjectColorBlock.js'
+import initGetPositionBlock from '../customBlocks/getPositionBlock.js'
+import initGetRotationBlock from '../customBlocks/getRotationBlock.js'
+import initMoveBackwardBlock from '../customBlocks/moveBackwardBlock.js'
+import initMoveBlock from '../customBlocks/moveBlock.js'
+import initMoveForwardBlock from '../customBlocks/moveForwardBlock.js'
+import initPrintOnCanvasBlock from '../customBlocks/printImgCanvasBlock.js'
+import initReadIRBlock from '../customBlocks/readIRBlock.js'
+import initSetIntervalBlock from '../customBlocks/setIntervalBlock.js'
+import initSetTimeoutBlock from '../customBlocks/setTimeoutBlock.js'
+import initSetLateralSpeedBlock from '../customBlocks/setLateralSpeedBlock.js'
+import initStopBlock from '../customBlocks/stopBlock.js'
+import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
+import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
+import initWaitBlock from '../customBlocks/waitBlock.js'
 import $ from 'jquery';
 
 var demoWorkspace = "";
@@ -66,25 +66,10 @@ $(document).ready(()=>{
     saveCode(demoWorkspace, socket); // Declare function that extracts code from editor and sends to server via connection.send
   });
 
-
-
-
-
-
-
-
   $("#blocklyToPython").click(()=>{
     downloadZip(demoWorkspace, socket);
   });
 
-
-
-
-
-
-
-
-  
   $('#resetRobot').click(()=>{
     var resetEvent = new CustomEvent('reset', {
       'detail': ''
