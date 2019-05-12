@@ -12,6 +12,11 @@ export default class RobotI
           'y': 0,
           'z': 0
         }
+        this.initialRotation = {
+          'x': 0,
+          'y': 0,
+          'z': 0
+        }
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.activeRays = false;
         this.raycastersArray = [];
@@ -35,7 +40,6 @@ export default class RobotI
       /*
         This function starts motors passing the robot
       */
-
       console.log("LOG ---------------- Setting up motors.")
       this.setVelocity(robot);
     }
@@ -519,5 +523,50 @@ export default class RobotI
 
       }
       return outputVal;
+    }
+
+    /*
+      SPANISH API: This methods calls the same method in english
+
+    */
+
+    leerIRSigueLineas(){
+      return this.readIR();
+    }
+
+    avanzar(velocidadLineal){
+      return this.setV(Math.abs(velocidadLineal));
+    }
+
+    retroceder(velocidadLineal){
+      if (velocidadLineal > 0){
+        return this.setV(-velocidadLineal);
+      }else{
+        return this.setV(velocidadLineal);
+      }
+    }
+
+    girarIzquierda(velocidadGiro){
+      return this.setW(velocidadGiro);
+    }
+
+    girarDerecha(velocidadGiro){
+      return this.setW(-velocidadGiro);
+    }
+
+    parar(){
+      return this.move(0,0);
+    }
+
+    leerUltrasonido(){
+      return this.getDistance();
+    }
+
+    dameObjeto(filtroBajo, filtroAlto){
+      return this.getObjectColorRGB(filtroBajo, filtroAlto);
+    }
+
+    dameImagen(){
+      return this.getImage();
     }
 }

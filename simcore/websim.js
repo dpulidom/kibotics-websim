@@ -1,11 +1,11 @@
 import 'aframe';
 import 'aframe-extras';
 import 'aframe-physics-system';
-import RobotI from './js/interfacesRobot.js';
-import {spectObject} from './js/spectatorComponent.js';
-import {intersectionHandlerObj} from './js/intersectionHandlerComponent.js';
-import {followBodyObj} from './js/followBodyComponent.js';
-import {startStopCode} from './js/websim-world-controller.js';
+import RobotI from './interfacesRobot.js';
+import {spectObject} from './aframe-components/spectatorComponent.js';
+import {intersectionHandlerObj} from './aframe-components/intersectionHandlerComponent.js';
+import {followBodyObj} from './aframe-components/followBodyComponent.js';
+import {startStopCode} from './websim-world-controller.js';
 import $ from 'jquery';
 // export for others scripts to use
 window.$ = $;
