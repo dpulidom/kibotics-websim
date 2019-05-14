@@ -54,8 +54,13 @@ ls
 
 `ls` command will show the following files and directories:
 
-```
-aframe-components  websim.js  interfacesRobot.js  package.json  webpack.config.js  websim-world-controller.js
+```bash
+aframe-components
+websim.js
+interfacesRobot.js
+package.json
+webpack.config.js
+websim-world-controller.js
 ```
 
 At this point run the following command to install all dependencies for development:
@@ -64,15 +69,21 @@ At this point run the following command to install all dependencies for developm
 npm install
 ```
 
+If the above command fails, check that you have `nodejs` and `node-gyp` installed. To install it type:
+
+```bash
+sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+sudo apt-get install npm
+```
+
 This will create `package-lock.json` file and `node_modules` on current directory. If there are no errors in the installation all dependencies are ready for local development.
 
 
 ### Running project
 
-To test the application Python is needed on local machin to use internal HTTP server module. If not installed go to [Install python 3](https://realpython.com/installing-python/). If Python 3 already installed go to project root directory and run:
+To test the application Python is needed on local machine to use internal HTTP server module. If not installed go to [Install python 3](https://realpython.com/installing-python/). If Python 3 already installed go to **project root** directory and run:
 
 ``` python
-
 python -m http.server <port>
 ```
 
@@ -82,7 +93,7 @@ Where `<port>` is unused port in local machine, `8000` by default. Command outpu
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
 ```
 
-Then go to web browser and write the URL `http://0.0.0.0:8000/`. Two application exists `JavaScript` and `Scratch` applications with the following URLs `http://0.0.0.0:8000/JavaScript` and `http://0.0.0.0:8000/Scratch`.
+Then go to web browser and write the URL [`http://0.0.0.0:8000/`](). Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://0.0.0.0:8000/JavaScript`]() and [`http://0.0.0.0:8000/Scratch`]().
 
 
 
