@@ -96,4 +96,16 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
 Then go to web browser and write the URL [`http://0.0.0.0:8000/`](). Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://0.0.0.0:8000/JavaScript`]() and [`http://0.0.0.0:8000/Scratch`]().
 
 
+### Webpack usage
 
+This project is packaged using webpack, this tool allows to create bundled package with all application dependencies. The bundles are located under `/JavaScript/build` and `/Scratch/build` folders and referenced from `index.html` for each application.
+
+Webpack is configured on this project with different modes with 3 different commands:
+
+- `npm run dev` : This command creates a development bundle called `websim.bundle.js`. In addition Webpack is listening every change on code and creates new bundles on every new code save. This allows developers to run server on other Terminal and see changes directly on web browser.
+- `npm run build` : This command creates a production bundle, this bundle is minified and optimized for production environments. **Note**: Use this command when the new features/changes are stable.
+
+
+## Youtube Videos
+
+[Installation and first Webpack usage](https://youtu.be/wKXzNYrnW3Q)
