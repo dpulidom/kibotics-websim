@@ -21,7 +21,6 @@
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <!--<iframe id="websimframe" allowvr="yes" onload name="websim" src="./simulator.html" style="width: 100%; height:100%;" allow-same-origin allow-scripts></iframe>-->
         <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot" src="../assets/models/jrobotFgltf.gltf"></a-asset-item>
@@ -54,8 +53,8 @@
           <a-light type="ambient" color="white"></a-light>
           <!--<a-light type="point" intensity="1" position="-2 2 4"></a-light>-->
 
-          <a-entity id="primaryCamera" position="12 15 25" rotation="-75 0 0">
-            <a-camera></a-camera>
+          <a-entity movement-controls="fly:true" position="0 0 0">
+              <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
           </a-entity>
         </a-scene>
         <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
