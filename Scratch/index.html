@@ -32,11 +32,12 @@
       <div id="myIFrame">
         <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
-            <img id="ground" />
-            <img id="sky"/>
+            <a-asset-item id="model-pibot" src="../assets/models/jrobotFgltf.gltf"></a-asset-item>
+            <img id="ground" src="../assets/textures/interlagos.png" />
+            <img id="sky" src="../assets/textures/sky.png" />
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity dynamic-body="mass: 50;" id="a-pibot">
+          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 50 0" position="12 0 25">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
@@ -56,16 +57,15 @@
           <!-- Illumination -->
           <a-light type="ambient" color="white"></a-light>
 
-          <a-entity id="primaryCamera" position="12 15 25" rotation="-75 0 0">
-            <a-camera fov="100"></a-camera>
-          </a-entity>
+          <a-entity movement-controls="fly:true" position="0 0 0">
+            <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+        </a-entity>
 
         </a-scene>
         <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
         <!-- Config file -->
         <!-- <script src="../simcore/config.js"></script> -->       
       </div>
-      <div id="scriptContainer"></div>
       <div id="right-container">
         <div id="blockly-div">
         <xml id="toolbox" style="display: none">
