@@ -1,0 +1,11 @@
+{
+  "robot": {
+    "model":"../assets/models/dronegltf/jrobotFgltf.gltf",
+    "scale": "0.5 0.5 0.5",
+    "position":"12 5 25",
+    "rotation": "0 50 0"
+  },
+  "ground": "../assets/textures/escenarioDrone.png",
+  "sky": "../assets/textures/sky.png",
+  "objects":[]
+}
