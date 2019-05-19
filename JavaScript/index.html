@@ -12,11 +12,11 @@
   </head>
   <body>
     <nav id="navbar">
-      <a href="/index.html"><img src="../assets/resources/jderobot.svg" style="width:70px; height:70px; margin-top: 6px;" /></a>
+      <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
       <div id="nav-button-container">
-        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" /></button>
-        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" /></button>
-        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" /></button>
+        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
       </div>
     </nav>
     <div id="container">
@@ -24,23 +24,18 @@
         <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot" src="../assets/models/jrobotFgltf.gltf"></a-asset-item>
-            <img id="ground" src="../assets/textures/interlagos.png" />
-            <img id="sky" src="../assets/textures/sky.png" />
+            <img id="ground" src="../assets/textures/interlagos.png" alt="Texture for the scene ground"/>
+            <img id="sky" src="../assets/textures/sky.png" alt="Texture for the sky of the scene"/>
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 50 0" position="12 0 25">
+          <a-entity bind="text.value: score"></a-entity>
+          <a-entity dynamic-body="mass: 50;" id="a-pibot" gltf-model="#model-pibot" scale="20 20 20" rotation="0 10 0" position="12 0 25">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
           </a-entity>
           <a-entity id="positionSensor"></a-entity>
-          <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="7.87 0.7 -0.16" rotation="0 0 0" color="#0000ff"></a-box>-->
-          <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="2.75 0.7 3.27" rotation="0 89 0" color="#0000ff"></a-box>-->
-          <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="2.83 0.7 -3.93" rotation="0 89 0" color="#0000ff"></a-box>-->
-          <!--<a-box class="collidable" dynamic-body="mass:1000;" scale="1 1 8" position="-2.0 0.7 -0.16" rotation="0 0 0" color="#0000ff"></a-box>-->
-          <!-- Scenario -->
-          <!--<a-sphere id="mySphere" class="collidable" dynamic-body="mass:10000;" scale="1 1 1" position="2.75 0.01 -2.27" rotation="0 90 0" color="#00ff00"></a-sphere>-->
           <a-plane static-body position="0 0 0"
                    rotation="-90 0 0"
                    width="100"
@@ -51,7 +46,6 @@
 
           <!-- Illumination -->
           <a-light type="ambient" color="white"></a-light>
-          <!--<a-light type="point" intensity="1" position="-2 2 4"></a-light>-->
 
           <a-entity movement-controls="fly:true" position="0 0 0">
               <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
@@ -76,6 +70,7 @@ mainInterval = setInterval(myAlgorithm, 33);
 
 async function myAlgorithm(){
   // Insert code here
+  myRobot.setW(0.3);
 }
 
         </div>
