@@ -21,17 +21,16 @@ import initStopBlock from '../customBlocks/stopBlock.js'
 import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
 import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
 import initWaitBlock from '../customBlocks/waitBlock.js'
-import $ from 'jquery';
 
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
-var wsUri = window.wsUri
-console.log("-----===================---------------------------------")
-console.log("@@@@@@@@@" + wsUri)
-console.log("----------------------===========----------------")
+var wsUri = window.wsUri;
+console.log("-----===================---------------------------------");
+console.log("@@@@@@@@@" + wsUri);
+console.log("----------------------===========----------------");
 
-var userCode = window.userCode
-var socket = ""
+var userCode = window.userCode;
+var socket = "";
 
 $(document).ready(()=>{
   configureCustomBlocks();
