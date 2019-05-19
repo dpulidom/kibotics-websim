@@ -33,11 +33,47 @@ These instructions will get you a copy of the project up and running on your loc
 
 This project needs the following installations.
 
-- [NodeJS](https://nodejs.org/es/download/)
+- [NodeJS](https://nodejs.org/es/download/) >= 6.11.5
 - NPM
 - Web browser, [Firefox](https://www.mozilla.org/es-ES/firefox/new/) recommended.
 
-### Installing for development
+#### NodeJS on Ubuntu
+
+The following instructions works on Ubuntu 16.04 and 18.04. 
+
+- **Step 1**: Add PPA repositories, two options possible, use **current** release of NodeJS or use the **LTS** release of NodeJS.
+
+``` bash
+## Current version
+sudo apt-get install curl python-software-properties
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+``` bash
+## LTS version
+sudo apt-get install curl python-software-properties
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+```
+
+- **Step 2**: Once added NodeJS to repositories, install via `apt-get`.
+
+``` bash
+sudo apt-get install nodejs
+```
+
+- **Step 3**: Check NodeJS installation. The following commands will show installed version of NodeJS and NPM.
+
+``` bash
+node -v
+```
+
+``` bash
+npm -v
+```
+
+**NOTE**: Installation of *LTS Version* is recommended.
+
+### Installing project for development
 
 First clone this repository on your local machine with the following command:
 

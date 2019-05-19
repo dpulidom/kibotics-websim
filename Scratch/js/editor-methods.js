@@ -13,7 +13,7 @@ export function setupBlockly(workspace){
 */
   workspace = Blockly.inject('blockly-div', {
     //media: '/static/websim/Scratch/google-blockly/media/',
-    media: '/Scratch/google-blockly/media/',
+    media: 'google-blockly/media/',
     toolbox: document.getElementById('toolbox'),
     zoom:
          {
@@ -45,9 +45,11 @@ export function toggleCameraDisplay(){
 }
 
 export function injectCode(workspace, xmlCodeText){
-  var xmlToInject = Blockly.Xml.textToDom(xmlCodeText);
-  Blockly.Xml.domToWorkspace(xmlToInject, workspace);
-  console.log("Code injected into workspace");
+  if (xmlCodeText != undefined){
+    var xmlToInject = Blockly.Xml.textToDom(xmlCodeText);
+    Blockly.Xml.domToWorkspace(xmlToInject, workspace);
+    console.log("Code injected into workspace");
+  }
   return workspace;
 }
 
@@ -100,7 +102,7 @@ export function WebSocketConnection(uri) {
 
   socket.onclose = function (evt) {
     wsClose(evt);
-  }
+  };
 
   return socket 
 }
