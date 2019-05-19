@@ -1,6 +1,6 @@
 const path = require('path');
 
-var config = {
+var configWebsim = {
   entry : {
     websim: './websim.js'
   },
@@ -27,7 +27,55 @@ var config = {
   mode: 'development'
 }
 
-var scratchOutput = Object.assign({}, config, {
+var configScratch = {
+  entry : {
+    editor: path.join(__dirname, "../Scratch/js/editor.js")
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  devServer: {
+    host: '0.0.0.0',
+    port: '8080',
+    inline: true
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
+var configJavaScript = {
+  entry : {
+    editor: path.join(__dirname, "../JavaScript/js/editor.js")
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  devServer: {
+    host: '0.0.0.0',
+    port: '8080',
+    inline: true
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
+var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
     path: path.join(__dirname, "../Scratch/build/"),
@@ -35,7 +83,7 @@ var scratchOutput = Object.assign({}, config, {
   }
 });
 
-var jsOutput = Object.assign({}, config, {
+var jsOutput = Object.assign({}, configWebsim, {
   name: "JavaScriptAPP",
   output: {
     path: path.join(__dirname, "../JavaScript/build/"),
@@ -43,4 +91,21 @@ var jsOutput = Object.assign({}, config, {
   }
 });
 
-module.exports = [scratchOutput, jsOutput];
+var scratchEditor = Object.assign({}, configScratch, {
+  name: "ScratchEditor",
+  output: {
+    path: path.join(__dirname, "../Scratch/build"),
+    filename: "[name].bundle.js"
+  }
+});
+
+var jsEditor = Object.assign({}, configJavaScript, {
+  name: "JavaScriptEditor",
+  output: {
+    path: path.join(__dirname, "../Scratch/build"),
+    filename: "[name].bundle.js"
+  }
+});
+
+
+module.exports = [scratchOutput, jsOutput, scratchEditor, jsEditor];
