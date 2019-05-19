@@ -7,16 +7,8 @@ export default class RobotI
 
         this.myRobotID = robotId;
         this.robot = document.getElementById(robotId);
-        this.initialPosition = {
-          'x': 0,
-          'y': 0,
-          'z': 0
-        }
-        this.initialRotation = {
-          'x': 0,
-          'y': 0,
-          'z': 0
-        }
+        this.initialPosition = { 'x': 0, 'y': 0, 'z': 0 };
+        this.initialRotation = {x: 0, y: 0, z: 0 };
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.activeRays = false;
         this.raycastersArray = [];
@@ -32,16 +24,17 @@ export default class RobotI
           white: {low: [230, 230, 230, 0], high: [255, 255, 255, 255]}
         };
         this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
-        this.motorsStarter(this.robot)
+        this.motorsStarter()
         this.startCamera();
         this.startRaycasters(defaultDistanceDetection, defaultNumOfRays);
     }
-    motorsStarter(robot){
+    motorsStarter(){
       /*
-        This function starts motors passing the robot
+        This function starts motors
       */
+     
       console.log("LOG ---------------- Setting up motors.")
-      this.setVelocity(robot);
+      this.setVelocity();
     }
 
     getRotation(){
@@ -52,10 +45,10 @@ export default class RobotI
     }
 
     resetRobot(){
-      this.setV(0);
-      this.setW(0);
-      this.setL(0);
-      this.robot.body.position.set(this.initialPosition.x, this.initialPosition.y, this.initialPosition.z)
+      this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
+      this.robot.body.position.set(this.robot.body.initPosition.x, this.robot.body.initPosition.y, this.robot.body.initPosition.z);
+      this.robot.body.quaternion.set(this.robot.body.initQuaternion.x, this.robot.body.initQuaternion.y, this.robot.body.initQuaternion.z, this.robot.body.initQuaternion.w)
+
     }
 
     storeInitialPosition(positionObject){
@@ -87,16 +80,13 @@ export default class RobotI
         return this.velocity.y;
     }
 
-    setVelocity(body){
+    setVelocity(){
       /*
         This code run continiously, setting the speed of the robot every 30ms
         This function will not be callable, use setV, setW or setL
       */
-
-      if(body != undefined){
-        this.robot = body;
-      }
       let rotation = this.getRotation();
+
 
       let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
 
@@ -124,19 +114,6 @@ export default class RobotI
     */
     {
         return {width: this.canvas2d.width, height: this.canvas2d.height};
-    }
-
-    clearAll()
-    /*
-      Resets all states of the robot.
-    */
-    {
-        clearTimeout(this.timeoutCamera); // Clear camera timeouts (stops camera)
-        clearTimeout(this.timeoutMotors); // Clear motors timeouts (stops motors)
-        clearInterval(this.followLineInterval); // Clears followLine intervals
-        this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
-        this.setVelocity();
-        this.robot.body.position.set(0, 0, 0);
     }
 
     getImageDescription()
@@ -222,7 +199,6 @@ export default class RobotI
         this.setListener();
       }else{
         this.stopRaycasters();
-        this.startRaycasters(distance, numOfRaycasters);
       }
     }
 
@@ -261,6 +237,7 @@ export default class RobotI
         emptyEntity.removeChild(emptyEntity.firstChild);
       }
       this.activeRays = false;
+      console.log("LOG ---------> Stopping sound sensors");
     }
 
     setListener()
@@ -384,7 +361,6 @@ export default class RobotI
       var image = this.getImage();
       var colorCodes = this.getColorCode(colorAsString);
       var binImg = new cv.Mat();
-      var lines = new cv.Mat();
       var M = cv.Mat.ones(5, 5, cv.CV_8U);
       var anchor = new cv.Point(-1, -1);
       var lowThresh = new cv.Mat(image.rows,image.cols, image.type(), colorCodes[0]);
@@ -420,7 +396,6 @@ export default class RobotI
     {
       var image = this.getImage();
       var binImg = new cv.Mat();
-      var lines = new cv.Mat();
       var M = cv.Mat.ones(5, 5, cv.CV_8U);
       var anchor = new cv.Point(-1, -1);
       var lowThresh = new cv.Mat(image.rows,image.cols, image.type(), lowval);
@@ -489,7 +464,6 @@ export default class RobotI
       var outputVal = 3;
       var image = this.getImage();
       var binImg = new cv.Mat();
-      var lines = new cv.Mat();
       var colorCodes = this.getColorCode(reqColor);
       var contours = new cv.MatVector();
       var hierarchy = new cv.Mat();
