@@ -33,13 +33,13 @@
             <a-scene stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
 
                 <a-assets>
-                    <img id="sky" src="assets/textures/sky.png">
-                    <a-asset-item id="model-pibot" src="assets/models/jrobotF.dae"></a-asset-item>
-                    <img id="ground" src="assets/textures/ground_text.jpg">
+                    <img id="sky">
+                    <a-asset-item id="model-pibot"></a-asset-item>
+                    <img id="ground">
                 </a-assets>
 
                 <!-- Pibot -->
-                <a-entity dynamic-body id="a-pibot" collada-model="#model-pibot" scale="20 20 20" rotation="0 180 0">
+                <a-entity dynamic-body id="a-pibot">
                     <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
                       <a-camera spectator="canvas:#spectatorDiv;" position="0 0.03 -0.01" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
                     </a-entity>
