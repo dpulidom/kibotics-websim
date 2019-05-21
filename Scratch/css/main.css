@@ -13,31 +13,34 @@ html, body{
     right: 0;
     width: 100%;
     height: 80%;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
-#myIFrame{
+.height-100{
   height: 100%;
-  float: left;
+}
+.simulator{
+  
+  /*float:right;*/
   left: 0;
-  width: 60%;
+  width: 40%;
   display: inline-block;
 }
 
 #websimframe{
-  height:100%
+  height:100%;
   position: absolute;
 }
 
 #container{
   width: 100%;
-  height: 100vh;
+  height: 91vh;
   display: inline-block;
 }
 
-#right-container{
-  float:right;
-  width:40%;
+.right-container{
+  float: left;
+  width:60%;
   height: 100%;
   display: block;
 }
