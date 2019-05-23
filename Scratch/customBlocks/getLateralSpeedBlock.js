@@ -2,7 +2,7 @@
 export default function initGetLateralSpeed(){
   var getLateral = {
     "type": "getLateralSpeed",
-    "message0": "Get Lateral speed for %1",
+    "message0": "%{BKY_GETLATERALSPEED_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -11,8 +11,8 @@ export default function initGetLateralSpeed(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_GETLATERALSPEED_TOOLTIP}",
     "helpUrl": ""
   };
 

@@ -2,7 +2,7 @@
 export default function initGetObjectColorBlock(){
   var getObjectColorBlock = {
     "type": "get_objcolor",
-    "message0": "For %1 get %2 for the object with color %3",
+    "message0": "%{BKY_GET_OBJCOLOR_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -34,8 +34,8 @@ export default function initGetObjectColorBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_LISTS_HUE}",
-    "tooltip": "Get center and area of object with given color",
+    "colour": "%{BKY_ROBOT_CAMERA_HUE}",
+    "tooltip": "%{BKY_GET_OBJCOLOR_TOOLTIP}",
     "helpUrl": ""
   };
 

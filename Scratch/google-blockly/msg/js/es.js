@@ -430,3 +430,60 @@ Blockly.Msg["TEXTS_HUE"] = "160";
 Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
+
+
+/**
+ * Declare text and tooltip text for ROBOT custom blocks
+ */
+
+Blockly.Msg["MOVE_COMBINED_TEXT"] = "Mover %1 a velocidad lineal %2 y velocidad angular %3";
+Blockly.Msg["MOVE_COMBINED_TOOLTIP"] = "Configura dos velocidades, la velocidad de avance del robot y la velocidad de giro";
+Blockly.Msg["MOVE_FORWARD_TEXT"] = "Avanzar %1 a velocidad %2";
+Blockly.Msg["MOVE_FORWARD_TOOLTIP"] = "Configura la velocidad de avance del robot";
+Blockly.Msg["MOVE_BACKWARD_TEXT"] = "Retrocede %1 a velocidad %2";
+Blockly.Msg["MOVE_BACKWARD_TOOLTIP"] = "Configura la velocidad de retroceso del robot";
+Blockly.Msg["GETLINEARSPEED_TEXT"] = "Obtener velocidad lineal de %1";
+Blockly.Msg["GETLINEARSPEED_TOOLTIP"] = "Devuelve la velocidad linean del robot, si es positiva el robot está avanzando, si es negativa está retrocediendo";
+Blockly.Msg["GETANGULARSPEED_TEXT"] = "Obtener velocidad de giro de %1";
+Blockly.Msg["GETANGULARSPEED_TOOLTIP"] = "Devuelve la velocidad de giro del robot";
+Blockly.Msg["GETLATERALSPEED_TEXT"] = "Obtener la velocidad de elevación de %1";
+Blockly.Msg["GETLATERALSPEED_TOOLTIP"] = "Obtiene la velocidad de elevación del robot";
+Blockly.Msg["TURN_LEFT_TEXT"] = "Girar %1 a la izquierda a velocidad %2";
+Blockly.Msg["TURN_LEFT_TOOLTIP"] = "Condigura la velocidad de giro a la izquierda del robot";
+Blockly.Msg["TURN_RIGHT_TEXT"] = "Girar %1 a la derecha a velocidad %2";
+Blockly.Msg["TURN_RIGHT_TOOLTIP"] = "Condigura la velocidad de giro a la derecha del robot";
+Blockly.Msg["SET_LATERAL_TEXT"] = "Eleva %1 a velocidad %2";
+Blockly.Msg["SET_LATERAL_TOOLTIP"] = "Configura la velocidad de elevación del robot";
+Blockly.Msg["STOP_ROBOT_TEXT"] = "Parar %1";
+Blockly.Msg["STOP_ROBOT_TOOLTIP"] = "Para el robot configurando todas sus velocidades a cero";
+Blockly.Msg["GET_IMAGE_TEXT"] = "Obtener la imagen de la cámara de %1";
+Blockly.Msg["GET_IMAGE_TOOLTIP"] = "Devuelve una lista con la imagen de la cámara integrada en el robot";
+Blockly.Msg["GET_OBJCOLOR_TEXT"] = "De la cámara de %1 obtener %2 del objeto de color %3";
+Blockly.Msg["GET_OBJCOLOR_TOOLTIP"] = "Obtiene la coordenada, X o Y del objeto con el color declarado que visualiza la cámara integrada en el robot";
+Blockly.Msg["GET_DISTANCE_TEXT"] = "Para %1 obten la distancia al obstáculo";
+Blockly.Msg["GET_DISTANCE_TOOLTIP"] = "Obtiene la distancia (metros) al obstáculo que se encuentra delante del robot";
+Blockly.Msg["GET_DISTANCES_TEXT"] = "Para %1 obtener las distancas en arco 180 grados";
+Blockly.Msg["GET_DISTANCES_TOOLTIP"] = "Obtiene la distancia (metros) a los obstáculos delante del robot pero en un haz de 180º";
+Blockly.Msg["GET_POSITION_TEXT"] = "Obten la coordenada %1 de %2 en la escena";
+Blockly.Msg["GET_POSITION_TOOLTIP"] = "Obtiene la posición del robot en el mundo, permite obtener la coordenada X, Y, Z o la rotación en el plano horizontal";
+Blockly.Msg["READ_IR_TEXT"] = "Para %1 detecta la línea de color %2";
+Blockly.Msg["READ_IR_TOOLTIP"] = "Devuelve los valores 0-1-2-3 dependiendo de si la línea se encuentra en el centro, izquierda, derecha o fuera de la imagen";
+Blockly.Msg["IMGTO_CANVAS_TEXT"] = "Muestra la imagen de la camara del robot en %1 %2";
+Blockly.Msg["IMGTO_CANVAS_TOOLTIP"] = "Muestra la imagen de la camara embebida en el robot debajo del editor de bloques de Scratch";
+Blockly.Msg["SET_TIMEOUT_TEXT"] = "Ejecuta después de %1 milisegundos %2";
+Blockly.Msg["SET_TIMEOUT_TOOLTIP"] = "Ejecuta el código contenido una vez después de X milisegundos";
+Blockly.Msg["WAIT_BLOCK_TEXT"] = "Para el codigo %1";
+Blockly.Msg["WAIT_BLOCK_TOOLTIP"] = "Para la ejecución del código durante X milisegundos";
+Blockly.Msg["LOGS_TEXT"] = "Muestra en consola 1%";
+Blockly.Msg["LOGS_TOOLTIP"] = "Muestra el contenido de la variable de entrada en la consola del navegador.";
+Blockly.Msg["SET_INTERVAL_TEXT"] = "Bucle infinito %1";
+Blockly.Msg["SET_INTERVAL_TOOLTIP"] = "Permite ejecutar un bucle infinito del tipo while true";
+
+/**
+ * Declare colors for ROBOT custom blocks used in WebSim application
+ */
+
+Blockly.Msg["ROBOT_MOTORS_HUE"] = "200";
+Blockly.Msg["ROBOT_SENSORS_HUE"] = "290";
+Blockly.Msg["ROBOT_CAMERA_HUE"] = "100";
+Blockly.Msg["ROBOT_TOOLS_HUE"] = "160";
