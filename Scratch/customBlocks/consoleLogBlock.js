@@ -2,7 +2,7 @@
 export default function initConsoleLogBlock(){
   var consoleLogBlock = {
     "type": "logs",
-    "message0": "Print log %1",
+    "message0": "%{BKY_LOGS_TEXT}",
     "args0": [
       {
         "type": "input_value",
@@ -11,8 +11,8 @@ export default function initConsoleLogBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_LOOPS_HUE}",
-    "tooltip": "",
+    "colour": "%{BKY_ROBOT_TOOLS_HUE}",
+    "tooltip": "%{BKY_LOGS_TOOLTIP}",
     "helpUrl": ""
   };
 

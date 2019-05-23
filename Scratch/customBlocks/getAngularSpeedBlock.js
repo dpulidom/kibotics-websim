@@ -2,7 +2,7 @@
 export default function initGetAngularSpeedBlock(){
   var getAngular = {
     "type": "getAngularSpeed",
-    "message0": "Get angular speed for %1",
+    "message0": "%{BKY_GETANGULARSPEED_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -11,8 +11,8 @@ export default function initGetAngularSpeedBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_GETANGULARSPEED_TOOLTIP}",
     "helpUrl": ""
   };
 

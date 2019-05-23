@@ -2,7 +2,7 @@
 export default function initReadIRBlock(){
   var readIRBlock = {
     "type": "read_ir",
-    "message0": "For  %1 read IR %2",
+    "message0": "%{BKY_READ_IR_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -15,8 +15,8 @@ export default function initReadIRBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_LISTS_HUE}",
-    "tooltip": "Returns 0/1/2/3 if IR sensors detect line",
+    "colour": "%{BKY_ROBOT_SENSORS_HUE}",
+    "tooltip": "%{BKY_READ_IR_TOOLTIP}",
     "helpUrl": ""
   };
 

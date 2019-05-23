@@ -2,7 +2,7 @@
 export default function initSetLateralSpeedBlock(){
   var setLateralBlock = {
     "type": "set_lateral",
-    "message0": "Move lateral %1 at speed %2",
+    "message0": "%{BKY_SET_LATERAL_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -17,8 +17,8 @@ export default function initSetLateralSpeedBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Sets lateral speed for the robot.",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_SET_LATERAL_TOOLTIP}",
     "helpUrl": ""
   }
 

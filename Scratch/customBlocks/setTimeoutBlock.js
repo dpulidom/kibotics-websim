@@ -2,7 +2,7 @@
 export default function initSetTimeoutBlock(){
   var setTimeoutBlock = {
     "type": "set_timeout",
-    "message0": "Execute once after %1 miliseconds %2",
+    "message0": "%{BKY_SET_TIMEOUT_TEXT}",
     "args0": [
       {
         "type": "field_number",
@@ -16,8 +16,8 @@ export default function initSetTimeoutBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_LOOPS_HUE}",
-    "tooltip": "Execute code inside every given miliseconds",
+    "colour": "%{BKY_ROBOT_TOOLS_HUE}",
+    "tooltip": "%{BKY_SET_TIMEOUT_TOOLTIP}",
     "helpUrl": ""
   };
 

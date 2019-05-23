@@ -2,7 +2,7 @@
 export default function initMoveBackwardBlock(){
   var moveBackwardBlock = {
     "type": "move_backward",
-    "message0": "Move backward %1 at speed %2",
+    "message0": "%{BKY_MOVE_BACKWARD_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -17,8 +17,8 @@ export default function initMoveBackwardBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Sets speed for the robot.",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_MOVE_BACKWARD_TOOLTIP}",
     "helpUrl": ""
   }
 
