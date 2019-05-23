@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "webpack --mode development --watch --colors",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
   },
   "author": "Alvaro Paniagua Tena",
   "license": "ISC",

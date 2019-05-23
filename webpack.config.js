@@ -2,15 +2,10 @@ const path = require('path');
 
 var configWebsim = {
   entry : {
-    websim: './websim.js'
+    websim: path.join(__dirname, 'simcore/websim.js')
   },
   resolve: {
     extensions: ['.js']
-  },
-  devServer: {
-    host: '0.0.0.0',
-    port: '8080',
-    inline: true
   },
   module:{
     rules: [
@@ -29,14 +24,14 @@ var configWebsim = {
 
 var configScratch = {
   entry : {
-    editor: path.join(__dirname, "../Scratch/js/editor.js")
+    editor: path.join(__dirname, 'Scratch/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
   },
   devServer: {
     host: '0.0.0.0',
-    port: '8080',
+    port: '8000',
     inline: true
   },
   module:{
@@ -53,15 +48,10 @@ var configScratch = {
 
 var configJavaScript = {
   entry : {
-    editor: path.join(__dirname, "../JavaScript/js/editor.js")
+    editor: path.join(__dirname, 'JavaScript/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
-  },
-  devServer: {
-    host: '0.0.0.0',
-    port: '8080',
-    inline: true
   },
   module:{
     rules: [
@@ -78,7 +68,7 @@ var configJavaScript = {
 var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
-    path: path.join(__dirname, "../Scratch/build/"),
+    path: path.join(__dirname, "Scratch/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -86,7 +76,7 @@ var scratchOutput = Object.assign({}, configWebsim, {
 var jsOutput = Object.assign({}, configWebsim, {
   name: "JavaScriptAPP",
   output: {
-    path: path.join(__dirname, "../JavaScript/build/"),
+    path: path.join(__dirname, "JavaScript/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -94,7 +84,7 @@ var jsOutput = Object.assign({}, configWebsim, {
 var scratchEditor = Object.assign({}, configScratch, {
   name: "ScratchEditor",
   output: {
-    path: path.join(__dirname, "../Scratch/build"),
+    path: path.join(__dirname, "Scratch/build"),
     filename: "[name].bundle.js"
   }
 });
@@ -102,7 +92,7 @@ var scratchEditor = Object.assign({}, configScratch, {
 var jsEditor = Object.assign({}, configJavaScript, {
   name: "JavaScriptEditor",
   output: {
-    path: path.join(__dirname, "../Scratch/build"),
+    path: path.join(__dirname, "JavaScript/build"),
     filename: "[name].bundle.js"
   }
 });
