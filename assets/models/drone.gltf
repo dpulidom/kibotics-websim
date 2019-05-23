@@ -1887,12 +1887,12 @@
   "buffers": [
     {
       "byteLength": 221688,
-      "uri": "scene.bin"
+      "uri": "drone.bin"
     }
   ],
   "images": [
     {
-      "uri": "textures/Material.006_baseColor.png"
+      "uri": "../textures/Material.006_baseColor.png"
     }
   ],
   "materials": [
@@ -2658,4 +2658,3 @@
     }
   ]
 }
-
