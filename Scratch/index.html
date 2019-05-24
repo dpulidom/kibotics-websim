@@ -4,7 +4,7 @@
     <title>WebSim - Alvaro Paniagua Tena</title>
     <meta charset="utf-8" />
     <!-- Physics for A-Frame VR -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
     <script src="build/websim.bundle.js" ></script>
     <script src="build/editor.bundle.js" ></script>
@@ -21,19 +21,19 @@
   <body>
     <nav id="navbar">
       <a href="/"><img src="../assets/resources/jderobot.svg" style="width:70px; height:70px; margin-top: 6px;" /></a>
-      <div id="nav-button-container">
-        <!--<button onclick id="generator" style="display:;">XML</button>-->
-        <button onclick id="injectCode">Inyectar XML</button>
-        <button onclick id="saveCode">Guardar código</button>
-        <button onclick id="blocklyToPython">Descarga Local</button>
-        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" /></button>
-        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" /></button>
-        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" /></button>
-      </div>
     </nav>
-    <div id="container" class="row">
-      <div id="right-container" class="height-100 col-4">
-        <div id="blockly-div">
+    <div id="container">
+
+      <!-- EDITOR -->
+      <div id="editor" class="height-100 col-md-7 padding-lr-0">
+          <div id="buttons" style="background-color:#d3dae5">  
+              <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
+              <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
+              <button onclick id="saveCode" disabled class="editor-button"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+              <button onclick id="blocklyToPython" class="editor-button">Descarga Local</button>
+              <button onclick id="injectCode" class="editor-button">Inyectar XML</button>
+          </div>
+        <div id="blockly-div" class="blockly-container">
         <xml id="toolbox" style="display: none">
           <category name="Variables" custom="VARIABLE"></category>
           <category name="Text" colour="%{BKY_MATH_HUE}">
@@ -182,8 +182,10 @@
           </div>
         </div>
       </div>
-      <div id="myIFrame" class="height-100 col-4" >
-        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
+
+      <!-- SIMULADOR -->
+      <div id="myIFrame" class="height-100 col-md-5 padding-lr-0" >
+        <a-scene id="scene" background="color: gray;" embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot"></a-asset-item>
             <img id="ground" />

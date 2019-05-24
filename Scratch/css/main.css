@@ -2,18 +2,24 @@ html, body{
   margin: 0px;
 }
 
+.padding-lr-0{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 #navbar{
   background-color: black;
   margin: 0px;
   top: 0px;
 }
 
-#ace, #blockly-div {
-    float: right;
-    right: 0;
+.blockly-container{
     width: 100%;
-    height: 80%;
-    /*display: inline-block;*/
+    height: 79%;
+}
+
+.editor-button{
+  padding: 5px 10px;
 }
 
 .height-100{
