@@ -10,8 +10,9 @@ export default function initReadIRBlock(){
         "variable": "myRobot"
       },
       {
-        "type": "input_value",
-        "name": "NAME"
+        "type": "field_input",
+        "name": "NAME",
+        "text": "white"
       }
     ],
     "output": null,
