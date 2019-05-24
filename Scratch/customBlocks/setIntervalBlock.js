@@ -9,8 +9,8 @@ export default function initSetIntervalBlock(){
         "name": "TEXT"
       }
     ],
-    "output": null,
-    "colour": "%{BKY_ROBOT_TOOLS_HUE}",
+    "previousStatement": null,
+    "colour": "%{BKY_LOOPS_HUE}",
     "tooltip": "%{BKY_SET_INTERVAL_TOOLTIP}",
     "helpUrl": ""
   };

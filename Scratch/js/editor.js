@@ -49,6 +49,7 @@ $(document).ready(()=>{
 
   $('#runbtn').click(()=>{
     var codeString = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+    console.log(codeString)
     var websimevent = new CustomEvent('code-to-run', {
       'detail': {
         'code': codeString
