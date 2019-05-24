@@ -2,7 +2,7 @@
 export default function initSetIntervalBlock(){
   var setIntervalBlock = {
     "type": "set_interval",
-    "message0": "Bucle infinito %1",
+    "message0": "%{BKY_SET_INTERVAL_TEXT}",
     "args0": [
       {
         "type": "input_statement",
@@ -10,8 +10,8 @@ export default function initSetIntervalBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_LOOPS_HUE}",
-    "tooltip": "Bucle infinto",
+    "colour": "%{BKY_ROBOT_TOOLS_HUE}",
+    "tooltip": "%{BKY_SET_INTERVAL_TOOLTIP}",
     "helpUrl": ""
   };
 

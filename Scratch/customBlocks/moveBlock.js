@@ -2,7 +2,7 @@
 export default function initMoveBlock(){
   var moveBlock = {
     "type": "move_combined",
-    "message0": "Move %1 at linear speed %2 and turn at speed %3",
+    "message0": "%{BKY_MOVE_COMBINED_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -23,8 +23,8 @@ export default function initMoveBlock(){
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Sets linear and angular speed for the robot.",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_MOVE_COMBINED_TOOLTIP}",
     "helpUrl": ""
   }
 

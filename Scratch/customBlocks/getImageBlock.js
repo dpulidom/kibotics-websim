@@ -2,7 +2,7 @@
 export default function initGetImageBlock(){
   var getImageBlock = {
     "type": "get_image",
-    "message0": "Get %1 camera image",
+    "message0": "%{BKY_GET_IMAGE_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -11,8 +11,8 @@ export default function initGetImageBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_LISTS_HUE}",
-    "tooltip": "Gets image from robot camera",
+    "colour": "%{BKY_ROBOT_CAMERA_HUE}",
+    "tooltip": "%{BKY_GET_IMAGE_TOOLTIP}",
     "helpUrl": ""
   };
 

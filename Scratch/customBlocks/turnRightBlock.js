@@ -2,7 +2,7 @@
 export default function initTurnRightBlock(){
   var turnRightBlock = {
     "type": "turn_right",
-    "message0": "Turn right %1 at speed %2",
+    "message0": "%{BKY_TURN_RIGHT_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -17,8 +17,8 @@ export default function initTurnRightBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Sets speed for the robot.",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_TURN_RIGHT_HUE}",
     "helpUrl": ""
   }
 

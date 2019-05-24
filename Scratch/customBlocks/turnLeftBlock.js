@@ -3,7 +3,7 @@
 export default function initTurnLeftBlock(){
   var turnLeftBlock = {
     "type": "turn_left",
-    "message0": "Turn left %1 at speed %2",
+    "message0": "%{BKY_TURN_LEFT_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -18,8 +18,8 @@ export default function initTurnLeftBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Sets speed for the robot.",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_TURN_LEFT_TOOLTIP}",
     "helpUrl": ""
   }
 

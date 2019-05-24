@@ -85,18 +85,6 @@ Once copied to your local machine in terminal run:
 
 ``` bash
 cd kibotics-websim/simcore
-ls
-```
-
-`ls` command will show the following files and directories:
-
-```bash
-aframe-components
-websim.js
-interfacesRobot.js
-package.json
-webpack.config.js
-websim-world-controller.js
 ```
 
 At this point run the following command to install all dependencies for development:
@@ -117,26 +105,24 @@ This will create `package-lock.json` file and `node_modules` on current director
 
 ### Running project
 
-To test the application Python is needed on local machine to use internal HTTP server module. If not installed go to [Install python 3](https://realpython.com/installing-python/). If Python 3 already installed go to **project root** directory and run:
+To test the application run:
 
-``` python
-python -m http.server <port>
-```
-
-Where `<port>` is unused port in local machine, `8000` by default. Command output looks:
 
 ```
-Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)
+npm run start
 ```
 
-Then go to web browser and write the URL [`http://0.0.0.0:8000/`](). Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://0.0.0.0:8000/JavaScript`]() and [`http://0.0.0.0:8000/Scratch`]().
+
+Then, your browser  will be open. Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://localhost:8000/JavaScript`]() and [`http://localhost:8000/Scratch`]().
+
+Now, every change in js files generates rebuild and reload orders in server, you don't need do nothing.  
 
 
 ### Webpack usage
 
 This project is packaged using webpack, this tool allows to create bundled package with all application dependencies. The bundles are located under `/JavaScript/build` and `/Scratch/build` folders and referenced from `index.html` for each application.
 
-Webpack is configured on this project with different modes with 3 different commands:
+Webpack is configured on this project with different modes with 2 different commands:
 
 - `npm run dev` : This command creates a development bundle called `websim.bundle.js`. In addition Webpack is listening every change on code and creates new bundles on every new code save. This allows developers to run server on other Terminal and see changes directly on web browser.
 - `npm run build` : This command creates a production bundle, this bundle is minified and optimized for production environments. **Note**: Use this command when the new features/changes are stable.

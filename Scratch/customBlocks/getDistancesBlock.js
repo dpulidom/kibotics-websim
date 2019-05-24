@@ -1,7 +1,7 @@
 export default function initGetDistancesBlock(){
   var getDistancesBlock = {
     "type": "get_distances",
-    "message0": "Get distances for %1",
+    "message0": "%{BKY_GET_DISTANCES_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -10,8 +10,8 @@ export default function initGetDistancesBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_VARIABLES_DYNAMIC_HUE}",
-    "tooltip": "Returns an array of distances for raycasters",
+    "colour": "%{BKY_ROBOT_SENSORS_HUE}",
+    "tooltip": "%{BKY_GET_DISTANCES_TOOLTIP}",
     "helpUrl": ""
   };
 
