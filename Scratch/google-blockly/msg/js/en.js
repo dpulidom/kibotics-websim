@@ -430,3 +430,58 @@ Blockly.Msg["TEXTS_HUE"] = "160";
 Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
+
+
+
+
+Blockly.Msg["MOVE_COMBINED_TEXT"] = "Move %1 at linear speed %2 and angular speed %3";
+Blockly.Msg["MOVE_COMBINED_TOOLTIP"] = "Sets two speeds for the robot, angular (turn speed) and linear (forward and backward)";
+Blockly.Msg["MOVE_FORWARD_TEXT"] = "Move %1 forward at speed %2";
+Blockly.Msg["MOVE_FORWARD_TOOLTIP"] = "Sets linear speed to move forward the robot";
+Blockly.Msg["MOVE_BACKWARD_TEXT"] = "Move %1 backwards at speed %2";
+Blockly.Msg["MOVE_BACKWARD_TOOLTIP"] = "Sets linear speed to move backward the robot";
+Blockly.Msg["GETLINEARSPEED_TEXT"] = "Get linear speed for %1";
+Blockly.Msg["GETLINEARSPEED_TOOLTIP"] = "Gets linear speed for the robot, positive if moving forward, else negative";
+Blockly.Msg["GETANGULARSPEED_TEXT"] = "Get angular speed %1";
+Blockly.Msg["GETANGULARSPEED_TOOLTIP"] = "Gets angular speed (turn) for the robot";
+Blockly.Msg["GETLATERALSPEED_TEXT"] = "Get lateral speed %1";
+Blockly.Msg["GETLATERALSPEED_TOOLTIP"] = "Gets elevation speed for the robot";
+Blockly.Msg["TURN_LEFT_TEXT"] = "Turn %1 to left at speed %2";
+Blockly.Msg["TURN_LEFT_TOOLTIP"] = "Sets turn left speed";
+Blockly.Msg["TURN_RIGHT_TEXT"] = "Turn %1 to right at speed %2";
+Blockly.Msg["TURN_RIGHT_TOOLTIP"] = "Sets turn right speed";
+Blockly.Msg["SET_LATERAL_TEXT"] = "Elevate %1 at speed %2";
+Blockly.Msg["SET_LATERAL_TOOLTIP"] = "Sets elevation speed for the robot";
+Blockly.Msg["STOP_ROBOT_TEXT"] = "Stop %1";
+Blockly.Msg["STOP_ROBOT_TOOLTIP"] = "Sets all speed to zero for the robot";
+Blockly.Msg["GET_IMAGE_TEXT"] = "Get image from embedded camera of %1";
+Blockly.Msg["GET_IMAGE_TOOLTIP"] = "Get image from embedded camer for the robot and returns an";
+Blockly.Msg["GET_OBJCOLOR_TEXT"] = "From the camera of %1 get %2 for the object with color %3";
+Blockly.Msg["GET_OBJCOLOR_TOOLTIP"] = "Gets coordinate X, Y or Z for the object seen in the camera of the robot";
+Blockly.Msg["GET_DISTANCE_TEXT"] = "For %1 get distance to the object in front";
+Blockly.Msg["GET_DISTANCE_TOOLTIP"] = "Get distance to the object in front of the robot (meters)";
+Blockly.Msg["GET_DISTANCES_TEXT"] = "For %1 get distances in 180 degrees arc";
+Blockly.Msg["GET_DISTANCES_TOOLTIP"] = "Get distances to the objects in front of the robot in an arc of 180 degrees, returns an array of distances";
+Blockly.Msg["GET_POSITION_TEXT"] = "Get coordinate %1 of %2 in the world";
+Blockly.Msg["GET_POSITION_TOOLTIP"] = "Gets X, Y, Z coordinates or Theta rotation for the robot in the object";
+Blockly.Msg["READ_IR_TEXT"] = "For %1 detect the line with color %2";
+Blockly.Msg["READ_IR_TOOLTIP"] = "Returns values 0-1-2-3 for the line with a given color, depending of the position center";
+Blockly.Msg["IMGTO_CANVAS_TEXT"] = "Print image from  %1 in the page %2";
+Blockly.Msg["IMGTO_CANVAS_TOOLTIP"] = "Shows the image from the embedded camera on robot on the current page";
+Blockly.Msg["SET_TIMEOUT_TEXT"] = "Run code after %1 miliseconds %2";
+Blockly.Msg["SET_TIMEOUT_TOOLTIP"] = "Executes contained code after a given miliseconds";
+Blockly.Msg["WAIT_BLOCK_TEXT"] = "Stops the code %1";
+Blockly.Msg["WAIT_BLOCK_TOOLTIP"] = "Stops the code a number of miliseconds";
+Blockly.Msg["LOGS_TEXT"] = "Show in console %1";
+Blockly.Msg["LOGS_TOOLTIP"] = "Show the content of a block in the browser console (DEBUG PURPOSE)";
+Blockly.Msg["SET_INTERVAL_TEXT"] = "Infinite loop %1";
+Blockly.Msg["SET_INTERVAL_TOOLTIP"] = "Executes a 'while True:' loop";
+
+/**
+ * Declare colors for ROBOT custom blocks used in WebSim application
+ */
+
+Blockly.Msg["ROBOT_MOTORS_HUE"] = "200";
+Blockly.Msg["ROBOT_SENSORS_HUE"] = "290";
+Blockly.Msg["ROBOT_CAMERA_HUE"] = "100";
+Blockly.Msg["ROBOT_TOOLS_HUE"] = "160";

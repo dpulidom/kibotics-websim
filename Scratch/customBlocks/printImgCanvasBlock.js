@@ -2,7 +2,7 @@
 export default function initPrintOnCanvasBlock(){
   var imgToCanvasBlock = {
     "type": "imgto_canvas",
-    "message0": "Print image on canvas %1 %2",
+    "message0": "%{BKY_IMGTO_CANVAS_TEXT}",
     "args0": [
       {
         "type": "field_input",
@@ -16,8 +16,8 @@ export default function initPrintOnCanvasBlock(){
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_LOOPS_HUE}",
-    "tooltip": "",
+    "colour": "%{BKY_ROBOT_TOOLS_HUE}",
+    "tooltip": "%{BKY_IMGTO_CANVAS_TOOLTIP}",
     "helpUrl": ""
   };
 

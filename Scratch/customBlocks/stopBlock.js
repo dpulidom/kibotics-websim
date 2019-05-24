@@ -2,7 +2,7 @@
 export default function initStopBlock(){
   var stopBlock = {
     "type": "stop_robot",
-    "message0": "%1 stop",
+    "message0": "%{BKY_STOP_ROBOT_TEXT}",
     "args0": [
       {
         "type": "field_variable",
@@ -13,8 +13,8 @@ export default function initStopBlock(){
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "%{BKY_MATH_HUE}",
-    "tooltip": "Stops the robot",
+    "colour": "%{BKY_ROBOT_MOTORS_HUE}",
+    "tooltip": "%{BKY_STOP_ROBOT_TOOLTIP}",
     "helpUrl": ""
   };
 

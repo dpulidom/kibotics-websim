@@ -2,7 +2,7 @@
 export default function initGetPositionBlock(){
   var getPositionBlock = {
     "type": "get_position",
-    "message0": "Get %1 coordinate for %2",
+    "message0": "%{BKY_GET_POSITION_TEXT}",
     "args0": [
       {
         "type": "field_dropdown",
@@ -33,8 +33,8 @@ export default function initGetPositionBlock(){
       }
     ],
     "output": null,
-    "colour": "%{BKY_VARIABLES_DYNAMIC_HUE}",
-    "tooltip": "Returns coordinate X, Y or Z for the robot. The X and Z coordinates represent the horizontal plane,",
+    "colour": "%{BKY_ROBOT_SENSORS_HUE}",
+    "tooltip": "%{BKY_GET_POSITION_TOOLTIP}",
     "helpUrl": ""
   };
 
