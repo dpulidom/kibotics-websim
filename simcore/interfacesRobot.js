@@ -75,17 +75,11 @@ export default class RobotI
     getV(){
         return this.velocity.x;
     }
-    setZ(z){
-      this.velocity.z=z;
-    }
     getW(){
         return this.velocity.ay;
     }
     getL(){
         return this.velocity.y;
-    }
-    getZ(){
-      return this.velocity.z;
     }
     setVelocity(){
       /*
@@ -558,18 +552,18 @@ export default class RobotI
       var position = this.getPosition();
       while(position.y>3){
         position = this.getPosition();
-        return  this.velocity = {x:0, y:0, z:-1, ax:0, ay:0, az:0};
+        return  this.velocity = {x:0, y:-1, z:0, ax:0, ay:0, az:0};
       }
-      return this.velocity.z=0;
+      return this.velocity.y=0;
     }
 
     despegar(){
       var position = this.getPosition();
-      while(position.y<6){
+      while(position.y<10){
         position = this.getPosition();
-        return this.velocity.z=2;
+        return this.velocity.y=2;
       }
-      return this.velocity.z=0;
+      return this.velocity.y=0;
     }
 
     parar(){
