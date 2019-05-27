@@ -21,7 +21,7 @@
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
+        <a-scene id="scene" physics="gravity:0;" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot"></a-asset-item>
             <img id="ground" alt="Texture for the scene ground"/>
@@ -29,7 +29,7 @@
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
           <a-entity bind="text.value: score"></a-entity>
-          <a-entity dynamic-body="mass: 50;" id="a-pibot">
+          <a-entity dynamic-body="mass: 1" id="a-pibot">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
@@ -49,7 +49,7 @@
           <a-light type="ambient" color="white"></a-light>
 
           <a-entity movement-controls="fly:true" position="0 0 0">
-              <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+              <a-entity id="primaryCamera" position="7 10 80" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
           </a-entity>
         </a-scene>
         <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
@@ -71,7 +71,8 @@ mainInterval = setInterval(myAlgorithm, 33);
 
 async function myAlgorithm(){
   // Insert code here
-  myRobot.setW(0.3);
+  myRobot.setL(0.3);
+  //myRobot.setV(0.3);
 }
 
         </div>

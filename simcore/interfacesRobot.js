@@ -32,7 +32,7 @@ export default class RobotI
       /*
         This function starts motors
       */
-     
+
       console.log("LOG ---------------- Setting up motors.")
       this.setVelocity();
     }
@@ -64,14 +64,19 @@ export default class RobotI
         this.velocity.ay = w*10;
     }
     setL(l){
-        this.velocity.y = l;
+      this.velocity.y = l;
     }
-    move(v, w){
+    move(v, w, h){
         this.setV(v);
         this.setW(w);
+        this.setL(h);
     }
+
     getV(){
         return this.velocity.x;
+    }
+    setZ(z){
+      this.velocity.z=z;
     }
     getW(){
         return this.velocity.ay;
@@ -79,7 +84,9 @@ export default class RobotI
     getL(){
         return this.velocity.y;
     }
-
+    getZ(){
+      return this.velocity.z;
+    }
     setVelocity(){
       /*
         This code run continiously, setting the speed of the robot every 30ms
@@ -91,6 +98,7 @@ export default class RobotI
       let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
 
       this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
+      // console.log("nueva posicion: " + newpos);
       this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
       this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 30);
     }
@@ -99,12 +107,18 @@ export default class RobotI
       /*
         This function calculates the new position of the robot.
       */
+      // let x = velocity.x/10 * Math.cos(rotation.y * Math.PI/180);
+      // let z = velocity.x/10 * Math.sin(rotation.y * Math.PI/180);
+      // let y = (velocity.z);
+      // robotPos.x += x;
+      // robotPos.z -= z;
+      // robotPos.y += y;
       let x = velocity.x/10 * Math.cos(rotation.y * Math.PI/180);
-      let z = velocity.x/10 * Math.sin(rotation.y * Math.PI/180);
-
+      let z = velocity.x/10 * Math.sin(-rotation.y * Math.PI/180);
+      let y = (velocity.y/10);
       robotPos.x += x;
-      robotPos.z -= z;
-
+      robotPos.z += z;
+      robotPos.y += y;
       return robotPos;
     }
 
@@ -526,6 +540,36 @@ export default class RobotI
 
     girarDerecha(velocidadGiro){
       return this.setW(-velocidadGiro);
+    }
+
+    // subir(velocidadSubida){
+    //   return this.setVz(Math.abs(velocidadSubida));
+    // }
+    //
+    // bajar(velocidadBajada){
+    //   if (velocidadBajada > 0){
+    //     return this.setVz(-velocidadBajada);
+    //   }else{
+    //     return this.setVz(velocidadBajada);
+    //   }
+    // }
+
+    aterrizar(){
+      var position = this.getPosition();
+      while(position.y>3){
+        position = this.getPosition();
+        return  this.velocity = {x:0, y:0, z:-1, ax:0, ay:0, az:0};
+      }
+      return this.velocity.z=0;
+    }
+
+    despegar(){
+      var position = this.getPosition();
+      while(position.y<6){
+        position = this.getPosition();
+        return this.velocity.z=2;
+      }
+      return this.velocity.z=0;
     }
 
     parar(){
