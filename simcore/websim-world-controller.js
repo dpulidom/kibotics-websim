@@ -11,7 +11,7 @@ export function startStopCode(play, myRobot, reservedVariables, mainInterval, co
   }else{
     image.src = "/static/websim/assets/resources/play-icon.png";
     clearInterval(mainInterval);
-    myRobot.move(0,0);
+    myRobot.move(0, 0, 0);
     play = false;
     console.log("Execution stopped.")
   }
