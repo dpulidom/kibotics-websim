@@ -27,6 +27,9 @@ export default class RobotI
         this.motorsStarter()
         this.startCamera();
         this.startRaycasters(defaultDistanceDetection, defaultNumOfRays);
+
+        var robotEvent = new CustomEvent("robot-loaded", {"detail": { "robot": this }});
+        document.dispatchEvent(robotEvent);
     }
     motorsStarter(){
       /*
