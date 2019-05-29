@@ -1,10 +1,12 @@
 
 export default class RobotI
 {
-    constructor(robotId){
+    constructor(robotId, uuidv4){
         const defaultDistanceDetection = 10;
         const defaultNumOfRays = 31;
 
+
+        this.uuid = uuidv4;
         this.myRobotID = robotId;
         this.robot = document.getElementById(robotId);
         this.initialPosition = { 'x': 0, 'y': 0, 'z': 0 };

@@ -7,6 +7,8 @@ import {intersectionHandlerObj} from './aframe-components/intersectionHandlerCom
 import {followBodyObj} from './aframe-components/followBodyComponent.js';
 import {startStopCode} from './websim-world-controller.js';
 import $ from 'jquery';
+import uuidv4 from 'uuid/v4';
+
 // export for others scripts to use
 window.$ = $;
 //Websim variables
@@ -26,7 +28,7 @@ document.addEventListener('body-loaded', (bodyLoaded)=>{ // No se lanza porque n
 
   if(bodyLoaded.target.id == "a-pibot"){
     console.log("------Robot body loaded, creating myRobot instance------")
-    myRobot = new RobotI('a-pibot');
+    myRobot = new RobotI('a-pibot', uuidv4());
   }
 });
 
