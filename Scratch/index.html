@@ -4,6 +4,7 @@
     <title>WebSim - Alvaro Paniagua Tena</title>
     <meta charset="utf-8" />
     <!-- Physics for A-Frame VR -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
     <script src="build/websim.bundle.js" ></script>
     <script src="build/editor.bundle.js" ></script>
@@ -20,56 +21,19 @@
   <body>
     <nav id="navbar">
       <a href="/"><img src="../assets/resources/jderobot.svg" style="width:70px; height:70px; margin-top: 6px;" /></a>
-      <div id="nav-button-container">
-        <!--<button onclick id="generator" style="display:;">XML</button>-->
-        <button onclick id="injectCode">Inyectar XML</button>
-        <button onclick id="saveCode">Guardar código</button>
-        <button onclick id="blocklyToPython">Descarga Local</button>
-        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" /></button>
-        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" /></button>
-        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" /></button>
-      </div>
     </nav>
     <div id="container">
-      <div id="myIFrame">
-        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
-          <a-assets>
-            <a-asset-item id="model-pibot"></a-asset-item>
-            <img id="ground" />
-            <img id="sky" />
-          </a-assets>
-          <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity dynamic-body="mass: 50;" id="a-pibot">
-            <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
-              <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
-              <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
-            </a-entity>
-          </a-entity>
-          <a-entity id="positionSensor"></a-entity>
-          <!-- Scenario -->
-          <a-sky src="#sky"></a-sky>
-          <a-plane static-body position="0 0 0"
-                   rotation="-90 0 0"
-                   width="100"
-                   height="100"
-                   repeat="1 1"
-                   src="#ground">
-          </a-plane>
 
-          <!-- Illumination -->
-          <a-light type="ambient" color="white"></a-light>
-
-          <a-entity movement-controls="fly:true" position="0 0 0">
-            <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
-        </a-entity>
-
-        </a-scene>
-        <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
-        <!-- Config file -->
-        <!-- <script src="../simcore/config.js"></script> -->
-      </div>
-      <div id="right-container">
-        <div id="blockly-div">
+      <!-- EDITOR -->
+      <div id="editor" class="height-100 col-md-7 padding-lr-0">
+          <div id="buttons" style="background-color:#d3dae5">  
+              <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
+              <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
+              <button onclick id="saveCode" disabled class="editor-button"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+              <button onclick id="blocklyToPython" class="editor-button">Descarga Local</button>
+              <button onclick id="injectCode" class="editor-button">Inyectar XML</button>
+          </div>
+        <div id="blockly-div" class="blockly-container">
         <xml id="toolbox" style="display: none">
           <category name="Variables" custom="VARIABLE"></category>
           <category name="Text" colour="%{BKY_MATH_HUE}">
@@ -117,6 +81,7 @@
             </block>
             <block type="controls_forEach"></block>
             <block type="controls_flow_statements"></block>
+            <block type="set_interval"></block>
           </category>
           <category name="Math" colour="%{BKY_MATH_HUE}">
             <block type="math_number">
@@ -192,9 +157,9 @@
               <block type="get_objcolor"></block>
             </category>
             <category name="Tools" colour=%{BKY_LOOPS_HUE}>
-              <block type="set_interval"></block>
+              
               <block type="set_timeout"></block>
-              <block type="logs"></block>
+              <!-- <block type="logs"></block> -->
               <block type="imgto_canvas"></block>
               <block type="wait_block"></block>
             </category>
@@ -217,6 +182,45 @@
             <div id="spectatorDiv" style="width: 150px; height: 100px;"></div>
           </div>
         </div>
+      </div>
+
+      <!-- SIMULADOR -->
+      <div id="myIFrame" class="height-100 col-md-5 padding-lr-0" >
+        <a-scene id="scene" background="color: gray;" embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
+          <a-assets>
+            <a-asset-item id="model-pibot"></a-asset-item>
+            <img id="ground" />
+            <img id="sky" />
+          </a-assets>
+          <!-- Pibot, which body is the asset item with ID = model-pibot -->
+          <a-entity dynamic-body="mass: 50;" id="a-pibot">
+            <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
+              <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
+              <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+            </a-entity>
+          </a-entity>
+          <a-entity id="positionSensor"></a-entity>
+          <!-- Scenario -->
+          <a-sky src="#sky"></a-sky>
+          <a-plane static-body position="0 0 0"
+                   rotation="-90 0 0"
+                   width="100"
+                   height="100"
+                   repeat="1 1"
+                   src="#ground">
+          </a-plane>
+
+          <!-- Illumination -->
+          <a-light type="ambient" color="white"></a-light>
+
+          <a-entity movement-controls="fly:true" position="0 0 0">
+            <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+        </a-entity>
+
+        </a-scene>
+        <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
+        <!-- Config file -->
+        <!-- <script src="../simcore/config.js"></script> -->
       </div>
     </div>
   </body>
