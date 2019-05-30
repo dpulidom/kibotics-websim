@@ -30,7 +30,7 @@
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
           <a-entity bind="text.value: score"></a-entity>
           <a-entity dynamic-body="mass: 1" id="a-pibot">
-            <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
+            <a-entity id="secondaryCamera" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>

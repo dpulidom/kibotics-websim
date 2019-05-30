@@ -7,5 +7,6 @@
   },
   "ground": "../assets/textures/escenarioDrone.png",
   "sky": "../assets/textures/sky.png",
+  "secondaryCamera": "12 1 25",
   "objects":[]
 }

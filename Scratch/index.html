@@ -26,7 +26,7 @@
 
       <!-- EDITOR -->
       <div id="editor" class="height-100 col-md-7 padding-lr-0">
-          <div id="buttons" style="background-color:#d3dae5">  
+          <div id="buttons" style="background-color:#d3dae5">
               <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
               <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
               <button onclick id="saveCode" disabled class="editor-button"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
@@ -157,7 +157,7 @@
               <block type="get_objcolor"></block>
             </category>
             <category name="Tools" colour=%{BKY_LOOPS_HUE}>
-              
+
               <block type="set_timeout"></block>
               <!-- <block type="logs"></block> -->
               <block type="imgto_canvas"></block>
@@ -194,7 +194,7 @@
           </a-assets>
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
           <a-entity dynamic-body="mass: 50;" id="a-pibot">
-            <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
+            <a-entity id="secondaryCamera" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>

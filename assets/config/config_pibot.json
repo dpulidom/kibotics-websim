@@ -7,5 +7,6 @@
   },
   "ground": "../assets/textures/interlagos.png",
   "sky": "../assets/textures/sky.png",
+  "secondaryCamera": "0 0 0",
   "objects":[]
 }
