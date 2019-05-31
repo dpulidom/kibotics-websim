@@ -1,5 +1,5 @@
 function loadJSON(callback) {
-  var config_file = '../assets/config/config_tello.json';
+  var config_file = '../assets/config/config_pibot.json';
    var xobj = new XMLHttpRequest();
    xobj.overrideMimeType("application/json");
    xobj.open('GET', config_file, true);
