@@ -1,6 +1,6 @@
 {
   "robot": {
-    "model":"../assets/models/jrobotFgltf.gltf",
+    "model":"../assets/models/F1.gltf",
     "scale": "20 20 20",
     "position":"12 0 25",
     "rotation": "0 50 0"
