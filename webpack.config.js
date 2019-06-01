@@ -81,6 +81,14 @@ var jsOutput = Object.assign({}, configWebsim, {
   }
 });
 
+var teleopOutput = Object.assign({}, configWebsim, {
+  name: "TeleopAPP",
+  output: {
+    path: path.join(__dirname, "Teleoperators/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
 var scratchEditor = Object.assign({}, configScratch, {
   name: "ScratchEditor",
   output: {
@@ -98,4 +106,4 @@ var jsEditor = Object.assign({}, configJavaScript, {
 });
 
 
-module.exports = [scratchOutput, jsOutput, scratchEditor, jsEditor];
+module.exports = [scratchOutput, jsOutput, teleopOutput, scratchEditor, jsEditor];
