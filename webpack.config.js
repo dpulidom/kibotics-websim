@@ -84,7 +84,7 @@ var jsOutput = Object.assign({}, configWebsim, {
 var teleopOutput = Object.assign({}, configWebsim, {
   name: "TeleopAPP",
   output: {
-    path: path.join(__dirname, "Teleoperators/build/"),
+    path: path.join(__dirname, "teleoperators/build/"),
     filename: "[name].bundle.js"
   }
 });
