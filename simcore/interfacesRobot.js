@@ -1,12 +1,10 @@
 
 export default class RobotI
 {
-    constructor(robotId, uuidv4){
+    constructor(robotId){
         const defaultDistanceDetection = 10;
         const defaultNumOfRays = 31;
 
-
-        this.uuid = uuidv4;
         this.myRobotID = robotId;
         this.robot = document.getElementById(robotId);
         this.initialPosition = { 'x': 0, 'y': 0, 'z': 0 };
@@ -29,8 +27,9 @@ export default class RobotI
         this.motorsStarter()
         this.startCamera();
         this.startRaycasters(defaultDistanceDetection, defaultNumOfRays);
-
-        var robotEvent = new CustomEvent("robot-loaded", {"detail": { "robot": this }});
+        var robotEvent = new CustomEvent('robot-loaded', {
+          'detail': this
+        });
         document.dispatchEvent(robotEvent);
     }
     motorsStarter(){
@@ -103,15 +102,6 @@ export default class RobotI
     }
 
     updatePosition(rotation, velocity, robotPos){
-      /*
-        This function calculates the new position of the robot.
-      */
-      // let x = velocity.x/10 * Math.cos(rotation.y * Math.PI/180);
-      // let z = velocity.x/10 * Math.sin(rotation.y * Math.PI/180);
-      // let y = (velocity.z);
-      // robotPos.x += x;
-      // robotPos.z -= z;
-      // robotPos.y += y;
       let x = velocity.x/10 * Math.cos(rotation.y * Math.PI/180);
       let z = velocity.x/10 * Math.sin(-rotation.y * Math.PI/180);
       let y = (velocity.y/10);
@@ -541,18 +531,6 @@ export default class RobotI
       return this.setW(-velocidadGiro);
     }
 
-    // subir(velocidadSubida){
-    //   return this.setVz(Math.abs(velocidadSubida));
-    // }
-    //
-    // bajar(velocidadBajada){
-    //   if (velocidadBajada > 0){
-    //     return this.setVz(-velocidadBajada);
-    //   }else{
-    //     return this.setVz(velocidadBajada);
-    //   }
-    // }
-
     aterrizar(){
       var position = this.getPosition();
       while(position.y>3){
@@ -568,7 +546,7 @@ export default class RobotI
         position = this.getPosition();
         return this.velocity.y=2;
       }
-      return this.velocity.y=0;
+      return this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
     }
 
     parar(){
