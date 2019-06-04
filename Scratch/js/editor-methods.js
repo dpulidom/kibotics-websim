@@ -74,6 +74,7 @@ export function downloadZip(demoWorkspace, socket){
   console.log("Getting code from the embedded editor.")
   var pythonContent = Blockly.Python.workspaceToCode(demoWorkspace);
 
+  console.log(pythonContent)
   var message = {
       type: "websim",
       content: pythonContent

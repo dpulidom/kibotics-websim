@@ -21,6 +21,7 @@ import initStopBlock from '../customBlocks/stopBlock.js'
 import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
 import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
 import initWaitBlock from '../customBlocks/waitBlock.js'
+import initRobotInstanceBlock from '../customBlocks/robotInstanceBlock.js'
 
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
@@ -88,6 +89,7 @@ function configureCustomBlocks(){
   initGetAngularSpeedBlock();
   initConsoleLogBlock();
   initGetDistanceBlock();
+  initRobotInstanceBlock();
   initGetDistancesBlock();
   initGetImageBlock();
   initGetLateralSpeed();
