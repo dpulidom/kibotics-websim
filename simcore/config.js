@@ -21,4 +21,5 @@ function loadJSON(callback) {
     sceneEl.querySelector('#ground').setAttribute('src',config.ground);
     sceneEl.querySelector('#sky').setAttribute('src',config.sky);
     sceneEl.querySelector('#ground').setAttribute('src',config.ground);
+    sceneEl.querySelector('#secondaryCamera').setAttribute('position',config.secondaryCamera);
  });
