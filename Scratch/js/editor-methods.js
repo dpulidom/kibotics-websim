@@ -75,15 +75,12 @@ export function downloadZip(demoWorkspace, socket){
   var pythonContent = Blockly.Python.workspaceToCode(demoWorkspace);
 
   console.log(pythonContent)
-
-  /*
   var message = {
       type: "websim",
       content: pythonContent
   };
   console.log("Sending code to websocket")
   socket.send(JSON.stringify(message));
-  */
 }
 /////////////////////////////////////////////////////////////////////////////
 
