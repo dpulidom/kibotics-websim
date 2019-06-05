@@ -5,31 +5,61 @@ Web robot simulator using A-Frame technologies.
 
 The project directory structure contains:
 
-## simcore
+## Index
+
+1. [Project structure](#structure) 
+    - [Simcore](#simcore)
+    - [Assets](#assets)
+    - [JavaScript](#js)
+    - [Scratch](#scratch)
+    - [Teleoperation](#teleop)
+2. [Getting started](#get_started)
+    - [Prerequisites](#prerequisites)
+      - [NodeJS in Ubuntu](#node_ubuntu)
+    - [Installing project for development](#develop)
+    - [Running project](#run)
+    - [Webpack usage](#webpack)
+3. [HAL API](#hal_api)
+    - [Motors interfaces](#motors)
+    - [Camera interfaces](#camera)
+    - [Position sensors](#sensors)
+4. [SIM API](#sim_api)
+5. [Scratch Blocks](#scratch_blocks)
+    - [Motors Blocks](#motorsBlockly)
+    - [Camera Blocks](#cameraBlockly)
+    - [Tools Blocks](#toolsBlockly)
+    - [Sensors Blocks](#sensorsBlockly)
+6. [Youtube videos](#yt)
+
+## Project structure <a name="structure"></a>
+
+This section is intended to explain folder structure and content for the project. As an overview the software is divided in app folders, simulator core and resources used in both web apps and simulator core.
+
+### Simcore <a name="simcore"></a>
 The AFrame core of the simulator, it includes Aframe components, JS programming interfaces for the supported robots (their HAL-API, Hardware Abstraction Layer).
 
-## assets
+### Assets <a name="assets"></a>
 World files, configuration files, images...
 
-## JavaScript
+### JavaScript <a name="js"></a>
 A webpage for programming of WebSim robots locally in JS, using the ACE editor and a local node or python webserver.
 
 Under the directory all ACE Editor config files are included.
 
-## Scratch
+### Scratch <a name="scratch"></a>
 A webpage for programming of WebSim robots locally in Scratch using the blockly editor and a local node or python webserver. In addition it hosts the use of WebSim from the Django webserver of KiBotics. It also includes the Scratch2JS converstion (using blocky) and the Scratch2Python conversion (using blocky).
 
 Under the directory all Scratch config files and custom block files are included.
 
-## teleoperation
+### Teleoperation <a name="teleop"></a>
 Several webpages to graphically teleoperate the supported robots and see their instantaneous sensor values. One for PiBot, one for Tello drone...
 
 
-## Getting Started
+## Getting Started <a name="get_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+### Prerequisites <a name="prerequisites"></a>
 
 This project needs the following installations.
 
@@ -37,7 +67,7 @@ This project needs the following installations.
 - NPM
 - Web browser, [Firefox](https://www.mozilla.org/es-ES/firefox/new/) recommended.
 
-#### NodeJS on Ubuntu
+#### NodeJS on Ubuntu <a name="node_ubuntu"></a>
 
 The following instructions works on Ubuntu 16.04 and 18.04. 
 
@@ -73,7 +103,7 @@ npm -v
 
 **NOTE**: Installation of *LTS Version* is recommended.
 
-### Installing project for development
+### Installing project for development <a name="develop"></a>
 
 First clone this repository on your local machine with the following command:
 
@@ -103,7 +133,7 @@ sudo apt-get install npm
 This will create `package-lock.json` file and `node_modules` on current directory. If there are no errors in the installation all dependencies are ready for local development.
 
 
-### Running project
+### Running project <a name="run"></a>
 
 To test the application run:
 
@@ -118,7 +148,7 @@ Then, your browser  will be open. Two application exists `JavaScript` and `Scrat
 Now, every change in js files generates rebuild and reload orders in server, you don't need do nothing.  
 
 
-### Webpack usage
+### Webpack usage <a name="webpack"></a>
 
 This project is packaged using webpack, this tool allows to create bundled package with all application dependencies. The bundles are located under `/JavaScript/build` and `/Scratch/build` folders and referenced from `index.html` for each application.
 
@@ -128,6 +158,301 @@ Webpack is configured on this project with different modes with 2 different comm
 - `npm run build` : This command creates a production bundle, this bundle is minified and optimized for production environments. **Note**: Use this command when the new features/changes are stable.
 
 
-## Youtube Videos
+## HAL API (*Hardware Abstraction Layer*) <a name="hal_api"></a>
+
+This section explains the methods for the robot interface, commonly called HAL API. This methods allows robot to execute instructions like move forward, turn, etc.
+
+The robot has mirror methods translated to spanish language too.
+
+### Motor interfaces <a name="motors"></a>
+
+Under this subsection are summarized and explained the motors methods, this methods allows robot to move.
+
+| Method | Description | Argument Description | Type | Example |
+| :----: | :---------: | :------------------: | :--: | :-----: |
+| setV(linearSpeed) | Sets linear speed for the robot. | linearSpeed: Linear speed for the body. | Float | myRobotInstance.setV(0.4) |
+| setW(angularSpeed) | Sets angular speed for the robot. | angularSpeed: Angular speed for the body. | Float | myRobotInstance.setW(0.4) |
+| setL(elevationSpeed) | Sets elevation speed for drone robots. | elevationSpeed: Lateral speed. | Float | myRobotInstance.setL(0.7) |
+| move(linearSpeed, angularSpeed, elevationSpeed) | Sets linear and angular speed for the robot. | linearSpeed: Linear speed. / angularSpeed: Angular speed / elevationSpeed: Elevation speed | Float , Float , Float| myRobotInstance.move(0.7, 0.5, 0.3) |
+| getV() | Returns linear speed given or 0 | - | - | myRobotInstance.getV() |
+| getW() | Returns angular speed given or 0 | - | - | myRobotInstance.getW() |
+| getL() | Returns elevation speed given or 0 | - | - | myRobotInstance.getL() |
+| getRotation() | Returns object with the rotation on X, Y, Z axis | - | - | myRobotInstance.getRotation() |
+
+**Spanish API**
+
+| Method | Description | Argument Description | Type | Example |
+| :----: | :---------: | :------------------: | :--: | :-----: |
+| avanzar(linearSpeed) | Sets linear speed for the robot. | linearSpeed: Linear speed for the body. | Float | myRobotInstance.avanzar(0.4) |
+| retroceder(linearSpeed) | Sets linear speed for the robot to move back. | linearSpeed: Linear speed for the body. | Float | myRobotInstance.retroceder(0.4) |
+| girarIzquierda(angularSpeed) | Sets angular speed for the robot to turn left. | angularSpeed: Angular speed for the body. | Float | myRobotInstance.setW(0.4) |
+| girarDerecha(angularSpeed) | Sets angular speed for the robot to move right. | angularSpeed: Angular speed for the body. | Float | myRobotInstance.setW(0.4) |
+| aterrizar() | Function used by drone robots to land on the ground | - | - | myRobotInstance.aterrizar() |
+| despegar(angularSpeed) | Function used by drone robots to fly. | - | - | myRobotInstance.despegar() |
+| parar(angularSpeed) | Stops the robot setting all speeds to 0 | - | - | myRobotInstance.parar() |
+
+
+### Camera interfaces <a name="camera"></a>
+
+
+This subsection explains all methods that involves camera usage.
+
+| Method | Description | Argument Description | Type | Example |
+| :----: | :---------: | :------------------: | :--: | :-----: |
+| startCamera() | This method is not callable, is a task to run the getImage_async after canvas is loaded | - | - | Not in use |
+| getImage_async() | This method is not callable, is a continious task to get the image from the WebGL canvas | - | - | Not in use |
+| getImage() | Returns a cv.Mat() object with the data from the WebGL canvas with id "camera2" | - | - | myRobotInstance.getImage() |
+| getObjectColor(color) | Returns an object with center coordinates of an object detected with color passed as argument. | color: color of the object to detect, given colors ( red, blue, green ) | string | myRobotInstance.getObjectColor("blue") |
+| getObjectColorRGB(arrayLowVal, arrayHighVal) | Returns same as getObjectColor but now it takes 2 arrays of values (RGBA) to avoid different color filters | array , array  | myRobotInstance.getObjectColor([230,0,0,0], [255,0,0,255]) |
+| getColorCode(color) | Returns a matrix with RGB low and high filter for an specified color, not callable. | color: color to search on predefined understandedColors object | string | Not in use |
+| followLine(lineColor, speed) | Executes a predefined follow line algorithm | colorLine: color for the line to follow / speed: linear speed for the robot | string / number | myRobotInstance.followLine("white", 0.4) |
+| readIR(reqColor) | Crops robot image, filters and calculates center of object with color passed as argument. Returns 0-1-2-3 depending of center position | reqColor: color for the object to filter on image | string | myRobotInstance.readIR("white") |
+
+
+### Position sensors <a name="sensors"></a>
+
+| Method | Description | Argument Description | Type | Example |
+| :----: | :---------: | :------------------: | :--: | :-----: |
+| startRaycasters(distance, numOfRaycasters) | This method sets up a given number of raycaster which far property is given by distance | distance: Distance for every raycaster (meters) / numOfRaycasters: Number of raycasters to check intersections. | Float , Float | Not in use, rays starts on robot load |
+| setListener() | This method is not callable, sets a listener for the event 'intersection-detected-id' and 'intersection-cleared-id' and gets distance emitted by event or null, every single raycaster has its own custom event. | - | - | Not in use |
+| getDistance() | This method returns the distance (float) between robot and the raycaster intersection in the center. | - | - | myRobotInstance.getDistance() |
+| getDistances() | This method returns the distance (float) between robot and each raycaster intersection. | - | - | myRobotInstance.getDistances() |
+| stopRaycasters() | This method erases all raycaster properties, disables sensor | - | - | myRobotInstance.stopRaycasters() |
+| createRaycaster( distance, angle, emptyEntity, group, number) | This method creates a single raycaster. Not callable. | distance, angle, group and number are raycaster properties, emptyEntity is the entity where raycaster will be appended. | Float, Float, String, Integer, HTML object | Not in use |
+| setListener() | This method creates event listener for every raycaster. Not callable. | - | - | Not in use |
+| updateDistance() | This method update distances catched by raycasters. Not callable. | - | - | Not in use |
+| eraseDistance() | This method erases distance entry when 'intersection-cleared' event fires up for a raycaster. Not callable. | - | - | Not in use |
+| removeListeners() | This method removes event listener for all raycasters. Not callable. | - | - | Not in use. |
+| getPosition() | This method returns the position of the robot and rotation on Y axis as JS object. | - | - | myRobotInstance.getPosition() |
+
+
+## SIM API (*Simulation API*) <a name="sim_api"></a>
+
+This section explains the functionality of thw simulation API implemented in WebSim simulator. SIM API methods are encapsulated inside `websim-world-controller.js` and are used to control the execution of code in the robot. 
+
+- **startStopCode**: This function is used to start or stop the code that robot is running.
+- **cleanRedefinition**: This function is used to remove `myRobot` and `mainInterval` calls from the code that robot will run.
+
+
+## Scratch Blocks <a name="scratch_blocks"></a>
+
+In this section references only to Scratch application, here the custom blockly blocks usage is explained.
+
+The new blocks are allocated on blockly editor under RobotAPI category, this category is subdivided in four new
+categories, [Motors](#motorsBlockly), [Sensors](#sensorsBlockly), [Tools](#toolsBlockly) and [Camera](#cameraBlockly).
+
+### Motors<a name="motorsBlockly"></a>
+
+![Move forward](/docs/blocklyScreenshots/setVBlock.PNG)
+
+This block is used to move forward the robot, is equivalent to code *myRobot.setV(linSpeed)*.
+Input value must be positive.
+
+
+![Move backward](/docs/blocklyScreenshots/setVBackBlock.PNG)
+
+This block is used to move backward the robot, is equivalent to code *myRobot.setV(-linSpeed)*.
+Input value must be positive.
+
+
+![Curves](/docs/blocklyScreenshots/moveBlock.PNG)
+
+This block is used to describe circles, you can set linear speed and angular speed
+in just one block, is equivalent to code *myRobot.move(linSpeed, angSpeed)*.
+Inputs can be negative or positive, it varies turn direction.
+
+
+![Get linear speed](/docs/blocklyScreenshots/getVBlock.PNG)
+
+This block is used to obtain the current linear speed for the robot, is equivalent to code *myRobot.getV()*.
+
+
+![Get angular speed](/docs/blocklyScreenshots/getWBlock.PNG)
+
+This block is used to obtain current angular speed for the robot, is equivalent to code *myRobot.getW()*.
+
+
+![Get lateral speed](/docs/blocklyScreenshots/getLBlock.PNG)
+
+This block is used to obtain current lateral speed (only for humanoid robots), is equivalent to code *myRobot.getL()*.
+
+
+![Turn left](/docs/blocklyScreenshots/setWLeft.PNG)
+
+This block is used to make robot turn left, is equivalent to code *myRobot.setW(angSpeed)*.
+Input value must be positive.
+
+
+![Turn right](/docs/blocklyScreenshots/setWRight.PNG)
+
+This block is used to make robot turn right, is equivalent to code *myRobot.setW(-angSpeed)*.
+Input value must be positive.
+
+
+![Move lateral](/docs/blocklyScreenshots/setLBlock.PNG)
+
+This block is used to set lateral speed (only for humanoid robots), is equivalent to code *myRobot.setL(latSpeed)*.
+
+![Stop](/docs/blocklyScreenshots/stopBlock.PNG)
+
+This block is used to stop robot.
+
+### Camera<a id="cameraBlockly"></a>
+
+![Get image](/docs/blocklyScreenshots/getImage.PNG)
+
+This block is used to set on a variable the image from the robot camera, is equivalent to code *myRobot.getImage()*.
+
+
+![Get object with color](/docs/blocklyScreenshots/getObjectColor.PNG)
+
+This block is used to obtain center and area of the entity with color passed. Is equivalent to code *myRobot.getObjectColor("blue")*.
+The returned object has next format:
+~~~
+{
+  center: Array[cx, cy],
+  area: number
+}
+~~~
+We provide a dropdown to chose between cx, cy and area.
+
+
+![Read IR](/docs/blocklyScreenshots/readIR.PNG)
+
+This block is used to read an object with a given color on the floor.
+The return value is a integer [0 1 2 3] depending on the center of the object filtered.
+
+| Value | Center Position |
+|-------|-----------------|
+| 0 | Pixel range 57 to 93 (center of image) |
+| 1 | Pixel range 0 to 57 (left of image) |
+| 2 | Pixel range 93 to 150 (right of image) |
+| 3 | Out of the image or object doesn't exists |
+
+
+### Tools <a id="toolsBlockly"></a>
+
+
+![Interval](/docs/blocklyScreenshots/setInterval.PNG)
+
+This block is used when you want to execute some code every given miliseconds, is used with other blocks like *get_image* and others.
+This is equivalent to the next code:
+
+~~~~
+  setInterval(function(){
+    //Code
+  }, intervalOnMiliseconds);
+~~~~
+
+
+![Timeout](/docs/blocklyScreenshots/setTimeout.PNG)
+
+This block is used when you want to execute some code once after given miliseconds.
+This is equivalent to the next code:
+
+~~~
+  setTimeout(function(){
+    //Code to execute just once
+  }, intervalOnMiliseconds);
+~~~
+
+
+![Logs](/docs/blocklyScreenshots/consoleLog.PNG)
+
+This block is used to print something in the browser console, by example you can use it to print center of an object.
+This block is equivalent to code *console.log(somethingToPrint)*.
+
+
+![Print image on canvas](/docs/blocklyScreenshots/printImgCanvas.PNG)
+
+This block is used to print image returned from *Get ROBOT camera image* block on _Camera_ category.
+
+
+![Wait](/docs/blocklyScreenshots/waitBlock.PNG)
+
+This block is used to stop code for some time give as input number block.
+
+
+### Sensors <a id="sensorsBlockly"></a>
+
+
+![Start Raycasters](/docs/blocklyScreenshots/startRays.PNG)
+
+This block is used to start a given raycaster sensor with a chosed distance, is equivalent to code *myRobot.startRaycasters(1, 3)*.
+The rays detects object when it intersects with a ray and returns a distance.
+We can use it but is optional, raycasters are actived on robot load.
+
+
+![Stop Raycasters](/docs/blocklyScreenshots/stopRays.PNG)
+
+This block is used to stop all raycasters, is equivalent to code *myRobot.stopRaycasters()*.
+
+
+![Obtain rotation](/docs/blocklyScreenshots/getRotation.PNG)
+
+This block is used to obtain an object with rotation on X, Y and Z axis. This is equivalent to code *myRobot.getRotation()*.
+
+
+![Get distance](/docs/blocklyScreenshots/getDistance.PNG)
+
+This block is used to get distance returned for the raycaster in the center of the arc of rays.
+This is equivalent to code *myRobot.getDistance()*.
+
+
+![Get distances](/docs/blocklyScreenshots/getDistances.PNG)
+
+This block is used to get all distances from the raycasters, if no intersection detected by a raycaster it returns 0.
+This returns an array with the distances, is equivalent to code *myRobot.getDistances()*.
+
+
+![Get position](/docs/blocklyScreenshots/getPos.PNG)
+
+This block is used to return X, Y and Z coordinates and rotation in the horizontal plane (*Rotation on Y axis*).
+This is equivalent to code *myRobot.getPosition()*.
+
+
+
+## Youtube Videos <a name="yt"></a>
 
 [Installation and first Webpack usage](https://youtu.be/wKXzNYrnW3Q)
+
+
+[OpenCV functionality with JS code](https://www.youtube.com/watch?v=7y5X0LIvkik&t=3s)
+
+[Follow Line](https://youtu.be/7vfqN4fS5FU)
+
+[Pibot detecting object](https://www.youtube.com/watch?v=OdjiArnrKoY)
+
+[Pibot moving between walls](https://youtu.be/2O_4U86pe2M)
+
+[Raycaster getDistance](https://www.youtube.com/watch?v=jSG7ly4C_qk)
+
+[Avoiding walls](https://www.youtube.com/watch?v=BaFc_mYDkS4)
+
+[Object detection by color](https://www.youtube.com/watch?v=_RfJrCThpAE)
+
+[New follow line method by color](https://www.youtube.com/watch?v=hf0u5lENR24)
+
+[Follow line Blockly](https://www.youtube.com/watch?v=6uXuuKfNBIA)
+
+[New follow line](https://www.youtube.com/watch?v=vs2r_J27kbE)
+
+[Follow green box](https://www.youtube.com/watch?v=9JIZO5E3jUo)
+
+[Blockly to python](https://www.youtube.com/watch?v=M3KwD8lCAi8)
+
+[Gazebo](https://www.youtube.com/watch?v=iouvTDALMl8)
+
+[Start/Stop](https://www.youtube.com/watch?v=GOaxPyp0Lk4)
+
+## Tutorials
+
+[Motors sensors](https://www.youtube.com/watch?v=SAeh9c8zf30)
+
+[Getting image](https://www.youtube.com/watch?v=LtEW6Ce85cE)
+
+[Hit and turn exercise](https://www.youtube.com/watch?v=VDW9FZcwA0g)
+
+[Connect keyboard](https://youtu.be/LlGeu95gEtk)
+
+[Follow ball](https://www.youtube.com/watch?v=NeNvb5V90MA)
