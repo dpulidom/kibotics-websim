@@ -453,6 +453,7 @@ Blockly.Msg["TURN_LEFT_TOOLTIP"] = "Condigura la velocidad de giro a la izquierd
 Blockly.Msg["TURN_RIGHT_TEXT"] = "Girar %1 a la derecha a velocidad %2";
 Blockly.Msg["TURN_RIGHT_TOOLTIP"] = "Condigura la velocidad de giro a la derecha del robot";
 Blockly.Msg["SET_LATERAL_TEXT"] = "Eleva %1 a velocidad %2";
+Blockly.Msg["TAKEOFF_TEXT"] = "Despega %1";
 Blockly.Msg["SET_LATERAL_TOOLTIP"] = "Configura la velocidad de elevación del robot";
 Blockly.Msg["STOP_ROBOT_TEXT"] = "Parar %1";
 Blockly.Msg["STOP_ROBOT_TOOLTIP"] = "Para el robot configurando todas sus velocidades a cero";
