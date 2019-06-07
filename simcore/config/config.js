@@ -17,6 +17,7 @@ function loadJSON(callback) {
     robot.setAttribute('scale',config.robot.scale);
     robot.setAttribute('position',config.robot.position);
     robot.setAttribute('rotation',config.robot.rotation);
+    sceneEl.setAttribute('physics',config.physics);
     sceneEl.querySelector('#ground').setAttribute('src',config.ground);
     sceneEl.querySelector('#sky').setAttribute('src',config.sky);
     sceneEl.querySelector('#ground').setAttribute('src',config.ground);
