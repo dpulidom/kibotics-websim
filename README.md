@@ -25,6 +25,7 @@ The project directory structure contains:
     - [Position sensors](#sensors)
 4. [SIM API](#sim_api)
 5. [Scratch Blocks](#scratch_blocks)
+    - [How to create Scratch Blocks](#create_blocks)
     - [Motors Blocks](#motorsBlockly)
     - [Camera Blocks](#cameraBlockly)
     - [Tools Blocks](#toolsBlockly)
@@ -240,6 +241,49 @@ In this section references only to Scratch application, here the custom blockly 
 
 The new blocks are allocated on blockly editor under RobotAPI category, this category is subdivided in four new
 categories, [Motors](#motorsBlockly), [Sensors](#sensorsBlockly), [Tools](#toolsBlockly) and [Camera](#cameraBlockly).
+
+### How to create Scratch block <a name="create_blocks"></a>
+
+This subsection is an overview of how to create and adapt Scratch Blocks to WebSim simulator, for a full documentation on Scratch go to [Google Blockly](https://developers.google.com/blockly/) documentation.
+
+Custom Scratch blocks are needed to implement blocks that interacts with robot **HAL API**. This blocks could be implemented in two ways as JSON or as JavaScript, due to simplicity we recommend to use JSON.
+
+This JSON has the following fields:
+
+![Blockly JSON](./docs/blocklyScreenshots/json_blockly.png)
+
+Where:
+- __type__: References to the name given to the block used to configure. This name is used when declaring toolbar on the web browser and when declaring function to init block and translate block to code.
+- __message0__: Text printed when the block is rendered, the field value uses an internal variable of blockly that will be explained later.
+- __args0__: Array of arguments that blockly will use, on this case we use an _input_value_ that could be a text block, number, etc.
+- __previousStatement__: This field is used to permit block to connect after a previous block. This block will be connected just under the previous block.
+- __nextStatement__: This field permits to connect following blocks under the current block.
+- __colour__: Sets the colour HUE value for the current block. The colour could be defined as an integer or could be defined as Blockly variable as shown in the previous image.
+- __tooltip__: Message that will be shown when you move the mouse over the block. Could be defined directly as text or defined through blockly variables, this feature is useful to reuse the same block on different languages.
+- __helpUrl__: Url that shows extended information for the block. (Unused)
+
+The blocks need to be created when Blockly starts, to start the block we need to create the function that inits the block like the example below.
+
+![Start block](./docs/blocklyScreenshots/start_block.png)
+
+This function just calls the method `this.jsonInit` of the object Blockly that initiates the block through the JSON object previously explained.
+
+Finally code generators are needed, this generators are used to convert block to code. Some differents languages are supported but here we will focus on JavaScript language. The function to translates the code looks like:
+
+![Generator](./docs/blocklyScreenshots/code_generator.png)
+
+The variables `value_to_log` contains the input content for the block and the variable `code` contains as string the full code translate to JavaScript.
+
+As shown before a number of blockly variables are used and previously defined, this variables permits to declare tooltip texts in different languages, color used for blocks of a certain category or the text rendered inside the block in different languages.
+
+This variables are declared inside the [msg](./Scratch/google-blockly/msg/js) folder. Here we can see a collection of `.js` files with names pointing to corresponding language in __alpha-2__ code. We used __Spanish (es)__ and __English (en)__ files to declare the variables. An example of how to declare Blockly variables is shown in the next image:
+
+![Blockly variables](./docs/blocklyScreenshots/blockly_variables.png)
+
+To use the variable on the blocks we need to append `BKY_` prefix to the variable, example `MOVE_FORWARD_TEXT` when declaring and `BKY_MOVE_FORWARD_TEXT` when using this variable. The output will be a text rendered like `Avanzar %1 a velocidad %2` where %1 and %2 points to the arguments of the block. 
+
+In the same way we can declare HUE for the blocks.
+
 
 ### Motors<a name="motorsBlockly"></a>
 
