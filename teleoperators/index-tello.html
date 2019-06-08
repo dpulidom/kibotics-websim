@@ -6,6 +6,7 @@
     <!-- Physics for A-Frame VR -->
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
     <script src="build/websim.bundle.js"></script>
+    <script>var config_file="../../assets/config/config_tello.json";</script>
     <script src="../simcore/config.js"></script>
     <script src="js/teleop.js"></script>
   </head>
@@ -18,7 +19,7 @@
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <a-scene id="scene" physics="gravity:0;" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
+        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot"></a-asset-item>
             <img id="ground" alt="Texture for the scene ground"/>
