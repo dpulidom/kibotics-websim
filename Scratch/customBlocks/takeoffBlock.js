@@ -1,6 +1,6 @@
 
-export default function takeoffBlock(){
-    var setLateralBlock = {
+export default function initTakeoffBlock(){
+    var takeoffBlock = {
       "type": "takeoff",
       "message0": "%{BKY_TAKEOFF_TEXT}",
       "args0": [
@@ -13,13 +13,13 @@ export default function takeoffBlock(){
       "previousStatement": null,
       "nextStatement": null,
       "colour": "%{BKY_ROBOT_MOTORS_HUE}",
-      "tooltip": "%{BKY_SET_LATERAL_TOOLTIP}",
+      "tooltip": "%{BKY_TAKEOFF_TOOLTIP}",
       "helpUrl": ""
     }
   
     Blockly.Blocks['takeoff'] = {
       init: function() {
-        this.jsonInit(setLateralBlock);
+        this.jsonInit(takeoffBlock);
   
       }
     };
