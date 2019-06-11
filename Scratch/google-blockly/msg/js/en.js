@@ -451,6 +451,7 @@ Blockly.Msg["TURN_LEFT_TOOLTIP"] = "Sets turn left speed";
 Blockly.Msg["TURN_RIGHT_TEXT"] = "Turn %1 to right at speed %2";
 Blockly.Msg["TURN_RIGHT_TOOLTIP"] = "Sets turn right speed";
 Blockly.Msg["SET_LATERAL_TEXT"] = "Elevate %1 at speed %2";
+Blockly.Msg["TAKEOFF_TEXT"] = "Takeoff %1";
 Blockly.Msg["SET_LATERAL_TOOLTIP"] = "Sets elevation speed for the robot";
 Blockly.Msg["STOP_ROBOT_TEXT"] = "Stop %1";
 Blockly.Msg["STOP_ROBOT_TOOLTIP"] = "Sets all speed to zero for the robot";

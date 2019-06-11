@@ -32,6 +32,6 @@ export default function initSetIntervalBlock(){
     var statements_text = Blockly.Python.statementToCode(block, 'TEXT');
 
     var code = 'while True:\n' + statements_text + '\ntime.sleep(0.1)\n';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return code;
   };
 }
