@@ -22,9 +22,6 @@ import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
 import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
 import initWaitBlock from '../customBlocks/waitBlock.js'
 import initRobotInstanceBlock from '../customBlocks/robotInstanceBlock.js'
-import initTakeoffBlock from '../customBlocks/takeoffBlock.js'
-import initLandBlock from '../customBlocks/landBlock.js'
-
 
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
@@ -90,7 +87,7 @@ $(document).ready(()=>{
 
 function configureCustomBlocks(){
   initGetAngularSpeedBlock();
-  initConsoleLogBlock();
+  //initConsoleLogBlock();
   initGetDistanceBlock();
   initRobotInstanceBlock();
   initGetDistancesBlock();
@@ -112,7 +109,4 @@ function configureCustomBlocks(){
   initTurnRightBlock();
   initWaitBlock();
   initSetLateralSpeedBlock();
-  initTakeoffBlock();
-  initLandBlock();
-
 }
