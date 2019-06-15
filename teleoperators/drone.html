@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>WebSim - F1 teleoperator </title>
+    <title>WebSim - Drone teleoperator</title>
     <meta charset="utf-8" />
     <!-- Physics for A-Frame VR -->
-    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/teleoperators.css"></link>
     <script src="build/websim.bundle.js"></script>
-    <script>var config_file="../assets/config/config_f1.json";</script>
+    <script>var config_file="../assets/config/config_tello.json";</script>
     <script src="../simcore/config/config.js"></script>
     <script src="js/teleop.js"></script>
   </head>
@@ -19,7 +19,7 @@
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
+        <a-scene id="scene" physics="gravity:0;" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot"></a-asset-item>
             <img id="ground" alt="Texture for the scene ground"/>
@@ -30,7 +30,7 @@
           <a-entity dynamic-body="mass: 1" id="a-pibot">
             <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
-              <a-camera position="0 0.04 -0.03" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+              <a-camera position="0 0.03 -0.01" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
           </a-entity>
           <a-entity id="positionSensor"></a-entity>
@@ -63,6 +63,10 @@
               <button onclick class="buttonArrow" id="left" ><img class="buttonArrow" src="../assets/resources/left.svg"/></button>
               <button onclick class="buttonArrow" id="brake"><img class="buttonArrow" src="../assets/resources/brake.svg"/></button>
               <button onclick class="buttonArrow" id="right"><img class="buttonArrow" src="../assets/resources/right.svg"/></button><br>
+          </div>
+          <div id="takeoff">
+            <button onclick id="up"><img class="buttonArrow" src="../assets/resources/goUp.svg" /></button>
+            <button onclick id="down"><img class="buttonArrow" src="../assets/resources/goDown.svg" /></button></button>
           </div>
         </div>
         <div id="cameras" style="display:inline-flex;">
