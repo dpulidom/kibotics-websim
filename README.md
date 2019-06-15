@@ -7,7 +7,7 @@ The project directory structure contains:
 
 ## Index
 
-1. [Project structure](#structure) 
+1. [Project structure](#structure)
     - [Simcore](#simcore)
     - [Assets](#assets)
     - [JavaScript](#js)
@@ -30,7 +30,8 @@ The project directory structure contains:
     - [Camera Blocks](#cameraBlockly)
     - [Tools Blocks](#toolsBlockly)
     - [Sensors Blocks](#sensorsBlockly)
-6. [Youtube videos](#yt)
+6. [Teleoperation](#tp)
+7. [Youtube videos](#yt)
 
 ## Project structure <a name="structure"></a>
 
@@ -53,7 +54,7 @@ A webpage for programming of WebSim robots locally in Scratch using the blockly 
 Under the directory all Scratch config files and custom block files are included.
 
 ### Teleoperation <a name="teleop"></a>
-Several webpages to graphically teleoperate the supported robots and see their instantaneous sensor values. One for PiBot, one for Tello drone...
+Several webpages to graphically teleoperate the supported robots and see their instantaneous sensor values. One for PiBot, one for Tello drone and one for F1 car.
 
 
 ## Getting Started <a name="get_started"></a>
@@ -70,7 +71,7 @@ This project needs the following installations.
 
 #### NodeJS on Ubuntu <a name="node_ubuntu"></a>
 
-The following instructions works on Ubuntu 16.04 and 18.04. 
+The following instructions works on Ubuntu 16.04 and 18.04.
 
 - **Step 1**: Add PPA repositories, two options possible, use **current** release of NodeJS or use the **LTS** release of NodeJS.
 
@@ -144,7 +145,7 @@ npm run start
 ```
 
 
-Then, your browser  will be open. Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://localhost:8000/JavaScript`]() and [`http://localhost:8000/Scratch`]().
+Then, your browser  will be open. Three application exists `JavaScript`, `Scratch` and `teleoperators` applications with the following URLs [`http://localhost:8080/JavaScript`](), [`http://localhost:8080/Scratch`]() and [`http://localhost:8080/teleoperators`]().
 
 Now, every change in js files generates rebuild and reload orders in server, you don't need do nothing.  
 
@@ -229,7 +230,7 @@ This subsection explains all methods that involves camera usage.
 
 ## SIM API (*Simulation API*) <a name="sim_api"></a>
 
-This section explains the functionality of thw simulation API implemented in WebSim simulator. SIM API methods are encapsulated inside `websim-world-controller.js` and are used to control the execution of code in the robot. 
+This section explains the functionality of thw simulation API implemented in WebSim simulator. SIM API methods are encapsulated inside `websim-world-controller.js` and are used to control the execution of code in the robot.
 
 - **startStopCode**: This function is used to start or stop the code that robot is running.
 - **cleanRedefinition**: This function is used to remove `myRobot` and `mainInterval` calls from the code that robot will run.
@@ -280,7 +281,7 @@ This variables are declared inside the [msg](./Scratch/google-blockly/msg/js) fo
 
 ![Blockly variables](./docs/blocklyScreenshots/blockly_variables.png)
 
-To use the variable on the blocks we need to append `BKY_` prefix to the variable, example `MOVE_FORWARD_TEXT` when declaring and `BKY_MOVE_FORWARD_TEXT` when using this variable. The output will be a text rendered like `Avanzar %1 a velocidad %2` where %1 and %2 points to the arguments of the block. 
+To use the variable on the blocks we need to append `BKY_` prefix to the variable, example `MOVE_FORWARD_TEXT` when declaring and `BKY_MOVE_FORWARD_TEXT` when using this variable. The output will be a text rendered like `Avanzar %1 a velocidad %2` where %1 and %2 points to the arguments of the block.
 
 In the same way we can declare HUE for the blocks.
 
@@ -453,6 +454,46 @@ This returns an array with the distances, is equivalent to code *myRobot.getDist
 
 This block is used to return X, Y and Z coordinates and rotation in the horizontal plane (*Rotation on Y axis*).
 This is equivalent to code *myRobot.getPosition()*.
+
+## Teleoperation <a name="tp"></a>
+
+
+You can drive each robot with the buttons in the left side. Also, it can use the keyboard:
+
+
+### Teleoperator drone
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves drone frontwards  	|
+| k           	| Moves drone backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+| u           	| Go up drone             	|
+| h           	| Do down drone           	|
+
+
+### Teleoperator PiBot
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves piBot frontwards  	|
+| k           	| Moves piBot backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+
+
+### Teleoperator F1
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves F1 frontwards  	|
+| k           	| Moves F1 backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+
+
+
 
 
 
