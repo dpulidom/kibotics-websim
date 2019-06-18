@@ -111,4 +111,6 @@ function configureCustomBlocks(){
   initTurnRightBlock();
   initWaitBlock();
   initSetLateralSpeedBlock();
+  initTakeoffBlock();
+  initLandBlock();
 }
