@@ -8,6 +8,11 @@ export default function initTakeoffBlock(){
           "type": "field_variable",
           "name": "ROBOT_VAR",
           "variable": "myRobot"
+        },
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": "Number"
         }
       ],
       "previousStatement": null,
