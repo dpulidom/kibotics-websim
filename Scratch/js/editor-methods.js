@@ -60,7 +60,7 @@ export function saveCode(demoWorkspace, socket){
   var xml_text = Blockly.Xml.domToText(xml);
 
   var message = {
-      type: "save",
+      type: "save_scratch",
       content: xml_text
   };
 
@@ -76,7 +76,7 @@ export function downloadZip(demoWorkspace, socket){
 
   console.log(pythonContent)
   var message = {
-      type: "websim",
+      type: "get_pibot_scratch",
       content: pythonContent
   };
   console.log("Sending code to websocket")
@@ -94,7 +94,13 @@ export function WebSocketConnection(uri) {
   };
 
   socket.onmessage = function(evt) {
-    console.log("MESSAGE")
+    if ( JSON.parse(event.data).type == 'get_pibot_scratch_R') {
+      console.log(JSON.parse(event.data))
+      window.location = JSON.parse(event.data).content
+      var win = window.open('http://10.3.141.1:8001', '_blank');
+      win.focus();
+    }
+    
   };
 
   socket.onerror = function(evt) {

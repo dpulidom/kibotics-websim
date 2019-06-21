@@ -86,6 +86,26 @@ html, body{
   color: white;
 }
 
+#blocklyToPython {
+  background-color: #e6e6e6;
+  color: black;
+}
+
+#blocklyToPython:hover {
+  background-color: #3190f7;
+  color: white;
+}
+
+#sendToRobot {
+  background-color: #e6e6e6;
+  color: black;
+}
+
+#sendToRobot:hover {
+  background-color: #3190f7;
+  color: white;
+}
+
 #resetRobot {
   background-color: #e6e6e6;
   color: black;
@@ -132,7 +152,7 @@ html, body{
   height: 100%;
 }
 
-button {
+button, a.button {
     border-radius: 8px;
     border: none;
     color: white;
