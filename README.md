@@ -7,7 +7,7 @@ The project directory structure contains:
 
 ## Index
 
-1. [Project structure](#structure) 
+1. [Project structure](#structure)
     - [Simcore](#simcore)
     - [Assets](#assets)
     - [JavaScript](#js)
@@ -25,11 +25,13 @@ The project directory structure contains:
     - [Position sensors](#sensors)
 4. [SIM API](#sim_api)
 5. [Scratch Blocks](#scratch_blocks)
+    - [How to create Scratch Blocks](#create_blocks)
     - [Motors Blocks](#motorsBlockly)
     - [Camera Blocks](#cameraBlockly)
     - [Tools Blocks](#toolsBlockly)
     - [Sensors Blocks](#sensorsBlockly)
-6. [Youtube videos](#yt)
+6. [Teleoperation](#tp)
+7. [Youtube videos](#yt)
 
 ## Project structure <a name="structure"></a>
 
@@ -52,7 +54,7 @@ A webpage for programming of WebSim robots locally in Scratch using the blockly 
 Under the directory all Scratch config files and custom block files are included.
 
 ### Teleoperation <a name="teleop"></a>
-Several webpages to graphically teleoperate the supported robots and see their instantaneous sensor values. One for PiBot, one for Tello drone...
+Several webpages to graphically teleoperate the supported robots and see their instantaneous sensor values. One for PiBot, one for Tello drone and one for F1 car.
 
 
 ## Getting Started <a name="get_started"></a>
@@ -69,7 +71,7 @@ This project needs the following installations.
 
 #### NodeJS on Ubuntu <a name="node_ubuntu"></a>
 
-The following instructions works on Ubuntu 16.04 and 18.04. 
+The following instructions works on Ubuntu 16.04 and 18.04.
 
 - **Step 1**: Add PPA repositories, two options possible, use **current** release of NodeJS or use the **LTS** release of NodeJS.
 
@@ -143,7 +145,7 @@ npm run start
 ```
 
 
-Then, your browser  will be open. Two application exists `JavaScript` and `Scratch` applications with the following URLs [`http://localhost:8000/JavaScript`]() and [`http://localhost:8000/Scratch`]().
+Then, your browser  will be open. Three application exists `JavaScript`, `Scratch` and `teleoperators` applications with the following URLs [`http://localhost:8080/JavaScript`](), [`http://localhost:8080/Scratch`]() and [`http://localhost:8080/teleoperators`]().
 
 Now, every change in js files generates rebuild and reload orders in server, you don't need do nothing.  
 
@@ -228,7 +230,7 @@ This subsection explains all methods that involves camera usage.
 
 ## SIM API (*Simulation API*) <a name="sim_api"></a>
 
-This section explains the functionality of thw simulation API implemented in WebSim simulator. SIM API methods are encapsulated inside `websim-world-controller.js` and are used to control the execution of code in the robot. 
+This section explains the functionality of thw simulation API implemented in WebSim simulator. SIM API methods are encapsulated inside `websim-world-controller.js` and are used to control the execution of code in the robot.
 
 - **startStopCode**: This function is used to start or stop the code that robot is running.
 - **cleanRedefinition**: This function is used to remove `myRobot` and `mainInterval` calls from the code that robot will run.
@@ -240,6 +242,49 @@ In this section references only to Scratch application, here the custom blockly 
 
 The new blocks are allocated on blockly editor under RobotAPI category, this category is subdivided in four new
 categories, [Motors](#motorsBlockly), [Sensors](#sensorsBlockly), [Tools](#toolsBlockly) and [Camera](#cameraBlockly).
+
+### How to create Scratch block <a name="create_blocks"></a>
+
+This subsection is an overview of how to create and adapt Scratch Blocks to WebSim simulator, for a full documentation on Scratch go to [Google Blockly](https://developers.google.com/blockly/) documentation.
+
+Custom Scratch blocks are needed to implement blocks that interacts with robot **HAL API**. This blocks could be implemented in two ways as JSON or as JavaScript, due to simplicity we recommend to use JSON.
+
+This JSON has the following fields:
+
+![Blockly JSON](./docs/blocklyScreenshots/json_blockly.png)
+
+Where:
+- __type__: References to the name given to the block used to configure. This name is used when declaring toolbar on the web browser and when declaring function to init block and translate block to code.
+- __message0__: Text printed when the block is rendered, the field value uses an internal variable of blockly that will be explained later.
+- __args0__: Array of arguments that blockly will use, on this case we use an _input_value_ that could be a text block, number, etc.
+- __previousStatement__: This field is used to permit block to connect after a previous block. This block will be connected just under the previous block.
+- __nextStatement__: This field permits to connect following blocks under the current block.
+- __colour__: Sets the colour HUE value for the current block. The colour could be defined as an integer or could be defined as Blockly variable as shown in the previous image.
+- __tooltip__: Message that will be shown when you move the mouse over the block. Could be defined directly as text or defined through blockly variables, this feature is useful to reuse the same block on different languages.
+- __helpUrl__: Url that shows extended information for the block. (Unused)
+
+The blocks need to be created when Blockly starts, to start the block we need to create the function that inits the block like the example below.
+
+![Start block](./docs/blocklyScreenshots/start_block.png)
+
+This function just calls the method `this.jsonInit` of the object Blockly that initiates the block through the JSON object previously explained.
+
+Finally code generators are needed, this generators are used to convert block to code. Some differents languages are supported but here we will focus on JavaScript language. The function to translates the code looks like:
+
+![Generator](./docs/blocklyScreenshots/code_generator.png)
+
+The variables `value_to_log` contains the input content for the block and the variable `code` contains as string the full code translate to JavaScript.
+
+As shown before a number of blockly variables are used and previously defined, this variables permits to declare tooltip texts in different languages, color used for blocks of a certain category or the text rendered inside the block in different languages.
+
+This variables are declared inside the [msg](./Scratch/google-blockly/msg/js) folder. Here we can see a collection of `.js` files with names pointing to corresponding language in __alpha-2__ code. We used __Spanish (es)__ and __English (en)__ files to declare the variables. An example of how to declare Blockly variables is shown in the next image:
+
+![Blockly variables](./docs/blocklyScreenshots/blockly_variables.png)
+
+To use the variable on the blocks we need to append `BKY_` prefix to the variable, example `MOVE_FORWARD_TEXT` when declaring and `BKY_MOVE_FORWARD_TEXT` when using this variable. The output will be a text rendered like `Avanzar %1 a velocidad %2` where %1 and %2 points to the arguments of the block.
+
+In the same way we can declare HUE for the blocks.
+
 
 ### Motors<a name="motorsBlockly"></a>
 
@@ -409,6 +454,46 @@ This returns an array with the distances, is equivalent to code *myRobot.getDist
 
 This block is used to return X, Y and Z coordinates and rotation in the horizontal plane (*Rotation on Y axis*).
 This is equivalent to code *myRobot.getPosition()*.
+
+## Teleoperation <a name="tp"></a>
+
+
+You can drive each robot with the buttons in the left side. Also, it can use the keyboard:
+
+
+### Teleoperator drone
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves drone frontwards  	|
+| k           	| Moves drone backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+| u           	| Go up drone             	|
+| h           	| Do down drone           	|
+
+
+### Teleoperator PiBot
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves piBot frontwards  	|
+| k           	| Moves piBot backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+
+
+### Teleoperator F1
+
+| Key pressed 	| Function                	|
+|-------------	|-------------------------	|
+| i           	| Moves F1 frontwards  	|
+| k           	| Moves F1 backwards   	|
+| j           	| Turn left               	|
+| l           	| Turn right              	|
+
+
+
 
 
 

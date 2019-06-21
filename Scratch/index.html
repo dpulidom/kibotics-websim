@@ -141,6 +141,9 @@
           <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
           </category>
           <category name="RobotAPI">
+            <category name="Constructor" colour=%{BKY_LOGIC_HUE}>
+              <block type="robot_instance"></block>
+            </category>
             <category name="Motors" colour='%{BKY_MATH_HUE}'>
               <block type="move_forward"></block>
               <block type="move_backward"></block>
@@ -152,14 +155,16 @@
               <block type="turn_right"></block>
               <block type="set_lateral"></block>
               <block type="stop_robot"></block>
+              <block type="takeoff"></block>
+              <block type="land"></block>
             </category>
             <category name="Camera" colour='%{BKY_LISTS_HUE}'>
               <block type="get_image"></block>
               <block type="get_objcolor"></block>
             </category>
             <category name="Tools" colour=%{BKY_LOOPS_HUE}>
-              <block type="robot_instance"></block>              
               <block type="set_timeout"></block>
+
               <!-- <block type="logs"></block> -->
               <block type="imgto_canvas"></block>
               <block type="wait_block"></block>

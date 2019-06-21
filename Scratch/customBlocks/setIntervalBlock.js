@@ -25,13 +25,13 @@ export default function initSetIntervalBlock(){
     var statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
 
     var code = 'setInterval(()=>{\n' + statements_text + '},100);\n';
-    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+    return code;
   };
 
   Blockly.Python['set_interval'] = function(block) {
     var statements_text = Blockly.Python.statementToCode(block, 'TEXT');
 
     var code = 'while True:\n' + statements_text + '\ntime.sleep(0.1)\n';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return code;
   };
 }
