@@ -27,7 +27,7 @@ export default function initStopBlock(){
   Blockly.JavaScript['stop_robot'] = function(block) {
     var variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_name + '.move(0, 0);\n';
+    var code = variable_name + '.move(0, 0, 0);\n';
     return code;
   };
 
