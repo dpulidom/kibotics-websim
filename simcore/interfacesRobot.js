@@ -175,7 +175,7 @@ export default class RobotI
     {
       if(!this.activeRays){
         console.log("LOG ---------> Starting sound sensors");
-        let emptyEntity = document.querySelector("#positionSensor");
+        let emptyEntity = document.querySelector("a-scene");
         // offsetAngle: angle between one raycaster and the next one.
         if((numOfRaycasters % 2) == 0){
           numOfRaycasters += 1;
@@ -218,7 +218,7 @@ export default class RobotI
       newRaycaster.setAttribute('raycaster', 'interval', 100);
       newRaycaster.setAttribute('raycaster', 'enabled', true);
       newRaycaster.setAttribute('line', 'color', "#ffffff");
-      newRaycaster.setAttribute('line', 'opacity', 0);
+      newRaycaster.setAttribute('line', 'opacity', 1);
       newRaycaster.setAttribute('line', 'end', "1 0 0");
       newRaycaster.setAttribute('follow-body', 'entityId', '#' + this.myRobotID);
       newRaycaster.setAttribute('follow-body',"offsetRotation", "0 " + angle + " 0");
