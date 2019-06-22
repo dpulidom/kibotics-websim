@@ -22,4 +22,17 @@ function loadJSON(callback) {
     sceneEl.querySelector('#sky').setAttribute('src',config.sky);
     sceneEl.querySelector('#ground').setAttribute('src',config.ground);
     sceneEl.querySelector('#secondaryCamera').setAttribute('position',config.secondaryCamera);
+    if(config.objects.length>0){
+      setObjects(config.objects,sceneEl);
+    }
  });
+
+function setObjects(object,scene){
+  for (let i in object){
+    var element = document.createElement(object[i].type);
+    element.setAttribute('position',object[i].position);
+    element.setAttribute('rotation',object[i].rotation);
+    element.setAttribute('color',object[i].color);
+    scene.appendChild(element);
+  }
+}
