@@ -28,6 +28,7 @@ function loadJSON(callback) {
   }
 });
 
+
 function setObjects(object,scene){
   for (let i in object){
     var element = document.createElement(object[i].type);
