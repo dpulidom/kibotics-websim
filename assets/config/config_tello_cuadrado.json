@@ -9,5 +9,6 @@
   "ground": "../assets/textures/escenarioDrone2.png",
   "sky": "../assets/textures/sky.png",
   "secondaryCamera": "14 1 20",
+  "cameraRobot":"0 0.03 -0.01",
   "objects":[]
 }
