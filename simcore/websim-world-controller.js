@@ -10,7 +10,8 @@ export function startStopCode(play, myRobot, reservedVariables, mainInterval, co
     console.log("Executing code.");
   }else{
     image.src = "/static/websim/assets/resources/play-icon.png";
-    clearInterval(mainInterval);
+    //clearInterval(mainInterval);
+    mainInterval(); //mainInterval now is a function that clears setIntervalSynchronous
     myRobot.move(0, 0, 0);
     play = false;
     console.log("Execution stopped.")

@@ -5,8 +5,10 @@ export default function initWaitBlock(){
     "message0": "%{BKY_WAIT_BLOCK_TEXT}",
     "args0": [
       {
-        "type": "input_value",
-        "name": "time_input"
+        "type": "field_number",
+        "name": "TIME",
+        "value": 0.5,
+        "min": 0
       }
     ],
     "previousStatement": null,
@@ -24,16 +26,16 @@ export default function initWaitBlock(){
   };
 
   Blockly.JavaScript['wait_block'] = function(block) {
-    var value_time_input = Blockly.JavaScript.valueToCode(block, 'time_input', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_time_input = block.getFieldValue('TIME');
 
     var code = 'await sleep(' + value_time_input + ');\n';
     return code;
   };
 
   Blockly.Python['wait_block'] = function(block) {
-    var value_time_input = Blockly.Python.valueToCode(block, 'time_input', Blockly.Python.ORDER_ATOMIC);
+    var value_time_input = block.getFieldValue('TIME');
 
-    var code = 'time.sleep(' + value_time_input/1000 + ')\r\n';
+    var code = 'time.sleep(' + value_time_input + ')\r\n';
     return code;
   };
 }
