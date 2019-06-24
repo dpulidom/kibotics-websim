@@ -24,7 +24,7 @@ export default function initSetIntervalBlock(){
   Blockly.JavaScript['set_interval'] = function(block) {
     var statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
 
-    var code = 'mainInterval = setIntervalSynchronous(async function(){\n' + statements_text + '},33);\n';
+    var code = 'mainInterval = setIntervalSynchronous(async function(){\n' + statements_text + '},66);\n';
     return code;
   };
 

@@ -6,12 +6,15 @@ export function startStopCode(play, myRobot, reservedVariables, mainInterval, co
     image.src = "/static/websim/assets/resources/stop-icon.png";
     codeContent = cleanRedefinition(codeContent, reservedVariables);
     play = true;
+    console.log(codeContent);
     eval(codeContent);
     console.log("Executing code.");
   }else{
     image.src = "/static/websim/assets/resources/play-icon.png";
     //clearInterval(mainInterval);
-    mainInterval(); //mainInterval now is a function that clears setIntervalSynchronous
+    if (mainInterval.typeof() == "function"){
+      mainInterval(); //mainInterval now is a function that clears setIntervalSynchronous
+    }
     myRobot.move(0, 0, 0);
     play = false;
     console.log("Execution stopped.")
@@ -25,7 +28,8 @@ export function cleanRedefinition(scriptContent, reservedVariables){
   This function removes redefinition of variables "myRobot" and "mainInterval"
 */
   var contentSplitted = scriptContent.split("\n");
-  var definitionLine = contentSplitted[0].split(" ");
+  var definitionLine = contentSplitted[1].split(" ");
+  console.log(definitionLine);
   reservedVariables.forEach((variable, position)=>{
     var index = definitionLine.indexOf(variable);
     if(index != -1){
@@ -37,6 +41,6 @@ export function cleanRedefinition(scriptContent, reservedVariables){
     }
   });
 
-  contentSplitted[0] = definitionLine.join(" ");
+  contentSplitted[1] = definitionLine.join(" ");
   return contentSplitted.join("\n");
 }

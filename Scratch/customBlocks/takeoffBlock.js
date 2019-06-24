@@ -8,11 +8,6 @@ export default function initTakeoffBlock(){
           "type": "field_variable",
           "name": "ROBOT_VAR",
           "variable": "myRobot"
-        },
-        {
-          "type": "input_value",
-          "name": "VALUE",
-          "check": "Number"
         }
       ],
       "previousStatement": null,
@@ -31,16 +26,14 @@ export default function initTakeoffBlock(){
   
     Blockly.JavaScript['takeoff'] = function(block) {
       var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-      var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
   
-      var code = robotvar + '.setL(' + value + '); \n';
+      var code = robotvar + '.setL(3); \nawait sleep(0.5); \n'+robotvar + '.setL(0);\n';
       return code;
     };
   
   
     Blockly.Python['takeoff'] = function(block) {
       var robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-      //var value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   
       var code = robotvar + '.despegar(); \r\n' + 'time.sleep(0.5)\r\n';
       return code;
