@@ -1,3 +1,15 @@
+function setObjects(object,scene){
+  for (let i in object){
+    let keys = Object.keys(object[i]);
+    var element = document.createElement(object[i][keys[0]]);
+    for (let j = 1; j < keys.length; j++) {
+      let attribute = object[i][keys[j]];
+      element.setAttribute(keys[j],attribute);
+    }
+    scene.appendChild(element);
+  }
+}
+
 function loadJSON(callback) {
    var xobj = new XMLHttpRequest();
    xobj.overrideMimeType("application/json");
@@ -27,14 +39,3 @@ function loadJSON(callback) {
       setObjects(config.objects,sceneEl);
   }
 });
-
-
-function setObjects(object,scene){
-  for (let i in object){
-    var element = document.createElement(object[i].type);
-    element.setAttribute('position',object[i].position);
-    element.setAttribute('rotation',object[i].rotation);
-    element.setAttribute('color',object[i].color);
-    scene.appendChild(element);
-  }
-}
