@@ -482,6 +482,8 @@ Blockly.Msg["LOGS_TEXT"] = "Muestra en consola 1%";
 Blockly.Msg["LOGS_TOOLTIP"] = "Muestra el contenido de la variable de entrada en la consola del navegador.";
 Blockly.Msg["SET_INTERVAL_TEXT"] = "Bucle infinito %1";
 Blockly.Msg["SET_INTERVAL_TOOLTIP"] = "Permite ejecutar un bucle infinito del tipo while true";
+Blockly.Msg["START_TEXT"] = "Inicio";
+
 
 /**
  * Declare colors for ROBOT custom blocks used in WebSim application
@@ -491,3 +493,4 @@ Blockly.Msg["ROBOT_MOTORS_HUE"] = "200";
 Blockly.Msg["ROBOT_SENSORS_HUE"] = "290";
 Blockly.Msg["ROBOT_CAMERA_HUE"] = "100";
 Blockly.Msg["ROBOT_TOOLS_HUE"] = "160";
+Blockly.Msg["ROBOT_START_HUE"] = "24";
