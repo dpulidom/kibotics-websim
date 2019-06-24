@@ -24,14 +24,13 @@ export default function intiLandBlock(){
       }
     };
     
-    //TODO: REVIEW JS CONVERSION
-    // Blockly.JavaScript['land'] = function(block) {
-    //   var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-    //   var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-  
-    //   var code = robotvar + '.setL(' + value + '); \n';
-    //   return code;
-    // };
+
+     Blockly.JavaScript['land'] = function(block) {
+       var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+
+      var code = robotvar + '.setL(-3); \nawait sleep(0.5); \n'+robotvar + '.setL(0);\n';
+      return code;
+    };
   
   
     Blockly.Python['land'] = function(block) {

@@ -34,7 +34,7 @@ document.addEventListener('body-loaded', (bodyLoaded)=>{ // No se lanza porque n
 
 //Declares a listener, listen to code generated for the editor
 document.addEventListener('code-to-run', (event)=>{
-  var codeContent = event.detail['code'];
+  var codeContent = "async function myAlgorithm(){\n"+event.detail['code']+"}\n myAlgorithm();";
   var jsonOutput = startStopCode(play, myRobot, reservedVariables, mainInterval, codeContent);
 
   play = jsonOutput["play"];
