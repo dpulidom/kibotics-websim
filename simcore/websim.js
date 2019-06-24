@@ -61,7 +61,4 @@ document.addEventListener('reset', (event)=>{
   }
 });
 
-// Auxiliar function to implement a throttle of code.
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+
