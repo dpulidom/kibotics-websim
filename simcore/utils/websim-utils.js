@@ -4,6 +4,10 @@ function sleep(s) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+
+  /*
+  https://gist.github.com/AndersDJohnson/4385908
+  */
   var setIntervalSynchronous = function (func, delay) {
     var intervalFunction, timeoutId, clear, stopped=false;
     // Call to clear the interval.
