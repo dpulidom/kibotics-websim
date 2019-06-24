@@ -40,7 +40,7 @@ export default function initMoveBlock(){
     var value_linear = Blockly.JavaScript.valueToCode(block, 'LINEARSPEED', Blockly.JavaScript.ORDER_ATOMIC);
     var value_angular = Blockly.JavaScript.valueToCode(block, 'ANGULARSPEED', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = variable_name + '.move(' + value_linear + ',' + value_angular + '); \n';
+    var code = variable_name + '.move(' + value_linear + ',' + value_angular + ',0); \n';
     return code;
   };
 
