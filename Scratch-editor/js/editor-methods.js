@@ -12,7 +12,7 @@ export function setupBlockly(workspace){
   It configures toolbox and injects a template
 */
   workspace = Blockly.inject('blockly-div', {
-    media: '/static/websim/Scratch/google-blockly/media/',
+    media: '/static/websim/Scratch-editor/google-blockly/media/',
     //media: 'google-blockly/media/',
     toolbox: document.getElementById('toolbox'),
     zoom:

@@ -24,7 +24,7 @@ var configWebsim = {
 
 var configScratch = {
   entry : {
-    editor: path.join(__dirname, 'Scratch/js/editor.js')
+    editor: path.join(__dirname, 'Scratch-editor/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
@@ -48,7 +48,7 @@ var configScratch = {
 
 var configJavaScript = {
   entry : {
-    editor: path.join(__dirname, 'JavaScript/js/editor.js')
+    editor: path.join(__dirname, 'JavaScript-editor/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
@@ -68,7 +68,7 @@ var configJavaScript = {
 var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
-    path: path.join(__dirname, "Scratch/build/"),
+    path: path.join(__dirname, "Scratch-editor/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -76,7 +76,7 @@ var scratchOutput = Object.assign({}, configWebsim, {
 var jsOutput = Object.assign({}, configWebsim, {
   name: "JavaScriptAPP",
   output: {
-    path: path.join(__dirname, "JavaScript/build/"),
+    path: path.join(__dirname, "JavaScript-editor/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -92,7 +92,7 @@ var teleopOutput = Object.assign({}, configWebsim, {
 var scratchEditor = Object.assign({}, configScratch, {
   name: "ScratchEditor",
   output: {
-    path: path.join(__dirname, "Scratch/build"),
+    path: path.join(__dirname, "Scratch-editor/build"),
     filename: "[name].bundle.js"
   }
 });
@@ -100,7 +100,7 @@ var scratchEditor = Object.assign({}, configScratch, {
 var jsEditor = Object.assign({}, configJavaScript, {
   name: "JavaScriptEditor",
   output: {
-    path: path.join(__dirname, "JavaScript/build"),
+    path: path.join(__dirname, "JavaScript-editor/build"),
     filename: "[name].bundle.js"
   }
 });
