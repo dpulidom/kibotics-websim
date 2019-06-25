@@ -1,0 +1,19 @@
+{
+  "robot": {
+    "model":"../assets/models/jrobotFgltf.gltf",
+    "scale": "40 40 40",
+    "position":"15 5 2",
+    "rotation": "0 50 0"
+  },
+  "gravity": -9.8,
+  "ground": "",
+  "sky": "../assets/textures/sky.png",
+  "secondaryCamera": "0 0 0",
+  "cameraRobot":"0 0.03 -0.01",
+  "objects":[{
+      "type": "a-gltf-model",
+      "src": "../assets/models/bumpandgo.gltf",
+      "scale": "7 7 7",
+      "position": "0 -1 0"
+      }]
+}
