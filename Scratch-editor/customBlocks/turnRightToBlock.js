@@ -35,7 +35,7 @@ export default function initTurnRightToBlock(){
         var value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
         //var value_rads = value_distance * 3.14/180;
         var value_rads = value_distance /425; //el simulador no va en rad/s
-        var vel = 0.0872665; // 5 degrees aprox
+        var vel = 1; // 5 degrees aprox
         var t = value_rads/vel;
         var code = variable_name + '.setW(-'+vel+'); \nawait sleep('+t+');\n'+variable_name + '.setW(0); \n';
         return code;
