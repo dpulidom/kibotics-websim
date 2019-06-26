@@ -25,6 +25,10 @@ import initRobotInstanceBlock from '../customBlocks/robotInstanceBlock.js'
 import initTakeoffBlock from '../customBlocks/takeoffBlock.js'	
 import initLandBlock from '../customBlocks/landBlock.js'
 import initStartBlock from '../customBlocks/startBlock.js'
+import initMoveBackwardToBlock from '../customBlocks/moveBackwardToBlock.js'
+import initMoveForwardToBlock from '../customBlocks/moveForwardToBlock.js'
+import initTurnLeftToBlock from '../customBlocks/turnLeftToBlock.js'
+import initTurnRightToBlock from '../customBlocks/turnRightToBlock.js'
 
 var demoWorkspace = "";
 // Load enviroment variables defined in the html template
@@ -115,4 +119,8 @@ function configureCustomBlocks(){
   initTakeoffBlock();
   initLandBlock();
   initStartBlock();
+  initMoveBackwardToBlock();
+  initMoveForwardToBlock();
+  initTurnLeftToBlock();
+  initTurnRightToBlock();
 }

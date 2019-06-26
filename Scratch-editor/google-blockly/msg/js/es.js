@@ -483,6 +483,14 @@ Blockly.Msg["LOGS_TOOLTIP"] = "Muestra el contenido de la variable de entrada en
 Blockly.Msg["SET_INTERVAL_TEXT"] = "Bucle infinito %1";
 Blockly.Msg["SET_INTERVAL_TOOLTIP"] = "Permite ejecutar un bucle infinito del tipo while true";
 Blockly.Msg["START_TEXT"] = "Inicio";
+Blockly.Msg["MOVE_FORWARD_TO_TEXT"] = "Avanza %1 %2 metros";
+Blockly.Msg["MOVE_FORWARD_TO_TOOLTIP"] = "Avanza X metros";
+Blockly.Msg["MOVE_BACKWARD_TO_TEXT"] = "Retrocede %1 %2 metros";
+Blockly.Msg["MOVE_BACKWARD_TO_TOOLTIP"] = "Retrocede X metros";
+Blockly.Msg["TURN_LEFT_TO_TEXT"] = "Gira %1 %2 grados a la izquierda";
+Blockly.Msg["TURN_LEFT_TO_TOOLTIP"] = "Gira X grados a la izquierda";
+Blockly.Msg["TURN_RIGHT_TO_TEXT"] = "Gira %1 %2 grados a la derecha";
+Blockly.Msg["TURN_RIGHT_TO_TOOLTIP"] = "Gira X grados a la derecha";
 
 
 /**

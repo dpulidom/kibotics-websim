@@ -28,7 +28,7 @@ export default function intiLandBlock(){
      Blockly.JavaScript['land'] = function(block) {
        var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
 
-      var code = robotvar + '.setL(-3); \nawait sleep(0.5); \n'+robotvar + '.setL(0);\n';
+      var code = robotvar + '.setL(-3); \nawait sleep(0.4); \n'+robotvar + '.setL(0);\n';
       return code;
     };
   

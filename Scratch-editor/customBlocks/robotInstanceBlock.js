@@ -37,7 +37,7 @@ export default function initRobotInstanceBlock(){
   };
 
   Blockly.JavaScript['robot_instance'] = function(block) {
-    return ['', Blockly.JavaScript.ORDER_ATOMIC];
+    return ["myRobot"];
   };
   /*Blockly.JavaScript['robot_instance'] = function(block) {
     var text_robot_id = block.getFieldValue('ROBOT_ID');
@@ -58,6 +58,6 @@ export default function initRobotInstanceBlock(){
       var code = 'Tello("",9500)\r\n';
     } 
 
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return code;
   };
 }
