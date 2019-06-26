@@ -21,7 +21,8 @@ export default class RobotI
           blue: {low: [0, 0, 235, 0], high: [0, 0, 255, 255]},
           green: {low: [0, 235, 0, 0], high: [0, 255, 0, 255]},
           red: {low: [235, 0, 0, 0], high: [255, 0, 0, 255]},
-          white: {low: [230, 230, 230, 0], high: [255, 255, 255, 255]}
+          white: {low: [230, 230, 230, 0], high: [255, 255, 255, 255]},
+          black: {low: [0, 0, 0, 255], high: [105,105,105 ,255]}
         };
         this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
         this.motorsStarter()
