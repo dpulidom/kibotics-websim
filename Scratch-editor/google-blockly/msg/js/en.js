@@ -481,6 +481,14 @@ Blockly.Msg["LOGS_TOOLTIP"] = "Show the content of a block in the browser consol
 Blockly.Msg["SET_INTERVAL_TEXT"] = "Infinite loop %1";
 Blockly.Msg["SET_INTERVAL_TOOLTIP"] = "Executes a 'while True:' loop";
 Blockly.Msg["START_TEXT"] = "Start";
+Blockly.Msg["MOVE_FORWARD_TO_TEXT"] = "Move %1 forward %2 meters";
+Blockly.Msg["MOVE_FORWARD_TO_TOOLTIP"] = "Moves forward X meters";
+Blockly.Msg["MOVE_BACKWARD_TO_TEXT"] = "Move %1 backward %2 meters";
+Blockly.Msg["MOVE_BACKWARD_TO_TOOLTIP"] = "Moves backward X meters";
+Blockly.Msg["TURN_LEFT_TO_TEXT"] = "Turn left %1 %2 degrees";
+Blockly.Msg["TURN_LEFT_TO_TOOLTIP"] = "Turn left X degrees";
+Blockly.Msg["TURN_RIGHT_TO_TEXT"] = "Turn Right %1 %2 degrees";
+Blockly.Msg["TURN_RIGHT_TO_TOOLTIP"] = "Turn Right X degrees";
 
 /**
  * Declare colors for ROBOT custom blocks used in WebSim application
