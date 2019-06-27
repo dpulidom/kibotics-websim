@@ -58,6 +58,6 @@ export default function initRobotInstanceBlock(){
       var code = 'Tello("",9500)\r\n';
     } 
 
-    return code;
+    return [code];
   };
 }
