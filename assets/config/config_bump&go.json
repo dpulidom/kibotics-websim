@@ -20,6 +20,13 @@
       },
       {
       "type": "a-gltf-model",
+      "src": "../assets/models/room/wallSmall.gltf",
+      "class": "collidable",
+      "scale": "6.1 3 6",
+      "position": "-0.5 -1 0"
+      },
+      {
+      "type": "a-gltf-model",
       "src": "../assets/models/room/wallLeft.gltf",
       "class": "collidable",
       "scale": "6 6 6",
