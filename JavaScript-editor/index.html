@@ -8,7 +8,7 @@
     <script src="js/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="build/websim.bundle.js"></script>
     <script src="build/editor.bundle.js"></script>
-    <script>var config_file = '../../assets/config/config_pibotIR.json';</script>
+    <script>var config_file = '../../assets/config/config_bump&go.json';</script>
     <script src="../simcore/utils/config.js"></script>
     <script src="../simcore/utils/websim-utils.js"></script>
   </head>
@@ -28,7 +28,9 @@
             <a-asset-item id="model-pibot"></a-asset-item>
             <img id="ground" alt="Texture for the scene ground"/>
             <img id="sky" alt="Texture for the sky of the scene"/>
+            <!-- <a-asset-item id="couch" src="../assets/models/room/couch.gltf"></a-asset-item> -->
           </a-assets>
+
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
           <a-entity bind="text.value: score"></a-entity>
           <a-entity dynamic-body="mass: 1" id="a-pibot">
@@ -37,6 +39,7 @@
               <a-camera id="cameraRobot" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
           </a-entity>
+          <!-- <a-entity class="collidable" collada-model="#couch" scale="6 6 6" position="0 0 0"> -->
           <a-plane static-body position="0 0 0"
                    rotation="-90 0 0"
                    width="100"
@@ -50,7 +53,7 @@
           <a-light type="ambient" color="white"></a-light>
 
           <a-entity movement-controls="fly:true" position="0 0 0">
-              <a-entity id="primaryCamera" position="7 10 80" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+              <a-entity id="primaryCamera" position="7 35 80" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
           </a-entity>
         </a-scene>
         <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
@@ -72,8 +75,16 @@ mainInterval = setInterval(myAlgorithm, 33);
 
 async function myAlgorithm(){
   // Insert code here
-  myRobot.setL(0.3);
-  //myRobot.setV(0.3);
+  //myRobot.setL(0.3);
+  var sensor = myRobot.getDistance();
+  console.log(sensor);
+  myRobot.setW(0);
+  myRobot.setV(2);
+  if(sensor && sensor<6){
+    myRobot.setV(0);
+    myRobot.setW(-0.5);
+    await sleep2(2000);
+  }
 }
 
         </div>
