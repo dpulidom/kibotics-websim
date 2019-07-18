@@ -225,9 +225,9 @@
           <!-- Illumination -->
           <a-light type="ambient" color="white"></a-light>
 
-          <a-entity movement-controls="fly:true" position="0 0 0">
-            <a-entity id="primaryCamera" position="14 10 35" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
-        </a-entity>
+          <a-entity id="cameraWrapper" movement-controls="fly:true" position="0 0 0">
+              <a-entity id="primaryCamera" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+          </a-entity>
 
         </a-scene>
         <script type="text/javascript" src="opencv/opencv3.3.1.js" ></script>
