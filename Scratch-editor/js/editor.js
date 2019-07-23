@@ -1,6 +1,6 @@
 import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip} from './editor-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
-//import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
+import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
 import initGetDistancesBlock from '../customBlocks/getDistancesBlock.js'
 import initGetImageBlock from '../customBlocks/getImageBlock.js'
@@ -94,7 +94,7 @@ $(document).ready(()=>{
 
 function configureCustomBlocks(){
   initGetAngularSpeedBlock();
-  //initConsoleLogBlock();
+  initConsoleLogBlock();
   initGetDistanceBlock();
   initRobotInstanceBlock();
   initGetDistancesBlock();
