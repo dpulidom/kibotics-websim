@@ -53,6 +53,16 @@ export function injectCode(workspace, xmlCodeText){
   return workspace;
 }
 
+export function changeSpectatorCamera(){
+  var subjCamera = document.querySelector("#subjCamera");
+  var spectatorCamera = document.querySelector("#primaryCamera");
+  var camera = subjCamera.getAttribute('camera','active');
+  if(camera.active===true){
+    spectatorCamera.setAttribute('camera', 'active', true);
+  }else{
+    subjCamera.setAttribute('camera', 'active', true);
+  }
+}
 
 export function saveCode(demoWorkspace, socket){
   console.log("Getting code from the embedded editor.")
@@ -100,7 +110,7 @@ export function WebSocketConnection(uri) {
       var win = window.open('http://10.3.141.1:8001', '_blank');
       win.focus();
     }
-    
+
   };
 
   socket.onerror = function(evt) {
@@ -111,7 +121,7 @@ export function WebSocketConnection(uri) {
     wsClose(evt);
   };
 
-  return socket 
+  return socket
 }
 
 export function wsClose(evt) {

@@ -73,6 +73,22 @@ html, body{
   height: 36px;
 }
 
+#spectatorCamera {
+    background-color: #e6e6e6;
+    color: black;
+    border: 2px solid #6b38d1;
+}
+
+#spectatorCamera:hover {
+    background-color: #6b38d1;
+    color: white;
+}
+
+#spectatorCamera>img{
+  width: 36px;
+  height: 36px;
+}
+
 #resetRobot {
   background-color: #e6e6e6;
   color: black;

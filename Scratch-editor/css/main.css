@@ -26,7 +26,7 @@ html, body{
   height: 100%;
 }
 .simulator{
-  
+
   /*float:right;*/
   left: 0;
   width: 40%;
@@ -61,6 +61,16 @@ html, body{
 }
 
 #runbtn:hover {
+    background-color: #3190f7;
+    color: white;
+}
+#spectatorCamera {
+    background-color: #e6e6e6;
+    color: black;
+    /*border: 2px solid #ACFF00;*/
+}
+
+#spectatorCamera:hover {
     background-color: #3190f7;
     color: white;
 }
