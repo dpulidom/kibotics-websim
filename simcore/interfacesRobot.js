@@ -95,7 +95,6 @@ export default class RobotI
 
 
       let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
-      this.cameraPosition(rotation,this.robot.body.position);
       this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
       // console.log("nueva posicion: " + newpos);
       this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
@@ -110,15 +109,6 @@ export default class RobotI
       robotPos.z += z;
       robotPos.y += y;
       return robotPos;
-    }
-
-    cameraPosition(rotation,robotPos){
-      var dx = Math.cos(rotation.y * Math.PI/180);
-      var dz = Math.sin(-rotation.y * Math.PI/180);
-      var cameraX = robotPos.x-(dx*6);
-      var cameraY = robotPos.y + 4;
-      var cameraZ = robotPos.z-(dz*6);
-      document.querySelector("#cameraWrapper").object3D.position.set(cameraX,cameraY,cameraZ);
     }
 
     getCameraDescription()
