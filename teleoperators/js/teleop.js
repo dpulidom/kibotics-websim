@@ -6,6 +6,16 @@ $(document).ready(()=>{
       toggleCameraDisplay();
     });
 
+    $("#spectatorCamera").click(()=>{
+      var subjCamera = document.querySelector("#subjCamera");
+      var spectatorCamera = document.querySelector("#primaryCamera");
+      var camera = subjCamera.getAttribute('camera','active');
+      if(camera.active===true){
+        spectatorCamera.setAttribute('camera', 'active', true);
+      }else{
+        subjCamera.setAttribute('camera', 'active', true);
+      }
+    });
 
   document.addEventListener('robot-loaded', (evt)=>{
     localRobot = evt.detail;
@@ -37,7 +47,6 @@ $(document).ready(()=>{
       land();
     });
   });
-});
 
 function keypressHandler(evt){
   if (evt.key == "i"){
@@ -134,3 +143,4 @@ function toggleCameraDisplay(){
     imageCamBtn.src = "assets/resources/play-camera-icon.png"
   }
 }
+});
