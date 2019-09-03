@@ -1,4 +1,4 @@
-import {setupACE, toggleCameraDisplay, getCode, insertCode, reset} from './editor-methods.js'
+import {setupACE, toggleCameraDisplay, getCode, insertCode, reset,changeSpectatorCamera} from './editor-methods.js'
 
 var editor = null
 
@@ -7,6 +7,10 @@ $(document).ready(()=>{
 
   $("#cambtn").click(()=>{
     toggleCameraDisplay();
+  });
+
+  $("#spectatorCamera").click(()=>{
+    changeSpectatorCamera();
   });
 
   $("#runbtn").click(()=>{
@@ -26,5 +30,3 @@ $(document).ready(()=>{
     document.dispatchEvent(resetEvent);
   });
 });
-
-

@@ -17,6 +17,18 @@ export function toggleCameraDisplay(){
     }
 }
 
+export function changeSpectatorCamera(){
+  var subjCamera = document.querySelector("#subjCamera");
+  var spectatorCamera = document.querySelector("#primaryCamera");
+  var camera = subjCamera.getAttribute('camera','active');
+  if(camera.active===true){
+    spectatorCamera.setAttribute('camera', 'active', true);
+  }else{
+    subjCamera.setAttribute('camera', 'active', true);
+  }
+}
+
+
 export function getCode(editor){
   var content = editor.getValue();
 
@@ -30,5 +42,5 @@ export function insertCode(textToInject, editor){
 }
 
 export function reset(){
-  
+
 }
