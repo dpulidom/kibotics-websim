@@ -111,8 +111,6 @@ export default class RobotI
       return robotPos;
     }
 
-
-
     getCameraDescription()
     /*
       Returns width and height for the robot camera.
