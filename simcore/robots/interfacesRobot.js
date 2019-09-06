@@ -1,5 +1,5 @@
 
-export default class RobotI
+export class RobotI
 {
     constructor(robotId){
         const defaultDistanceDetection = 10;
@@ -7,10 +7,10 @@ export default class RobotI
 
         this.myRobotID = robotId;
         this.robot = document.getElementById(robotId);
-        this.initialPosition = { 'x': 0, 'y': 0, 'z': 0 };
-        this.initialRotation = {x: 0, y: 0, z: 0 };
-        this.storeInitialPosition(this.robot.getAttribute('position'));
+        this.initialPosition = { x: 0, y: 0, z: 0 };
+        this.initialRotation = { x: 0, y: 0, z: 0 };
         this.activeRays = false;
+        this.camerasData = [];
         this.raycastersArray = [];
         this.distanceArray = {
           center: [],
@@ -25,6 +25,9 @@ export default class RobotI
           black: {low: [0, 0, 0, 255], high: [105,105,105 ,255]}
         };
         this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
+
+        this.storeInitialPosition(this.robot.getAttribute('position'));
+        this.findCameras();
         this.motorsStarter()
         this.startCamera();
         this.startRaycasters(defaultDistanceDetection, defaultNumOfRays);
@@ -33,6 +36,30 @@ export default class RobotI
         });
         document.dispatchEvent(robotEvent);
     }
+
+    findCameras(){
+      /**
+       * This function searchs for camera entities that has robotID 
+       * contained in cameraID which means the camera belongs to 
+       * the body of the robot (attached). This ID is stored in an array
+       * with the camera wrapper id that must be same as cameraID + 'Wrapper'
+       * 
+       */
+      var sceneCameras = document.getElementsByTagName('a-camera');
+
+      for(var i = 0; i < sceneCameras.length; i++){
+        var cameraID = sceneCameras[i].getAttribute('id');
+        if (cameraID.includes(this.myRobotID)){
+          this.camerasData.push(
+            {
+              'wrapperID': cameraID + 'Wrapper',
+              'cameraID': cameraID,
+              'canvasID': cameraID + 'Canvas'
+          })
+        }
+      }
+    }
+
     motorsStarter(){
       /*
         This function starts motors
@@ -80,12 +107,15 @@ export default class RobotI
     getV(){
         return this.velocity.x;
     }
+
     getW(){
         return this.velocity.ay;
     }
+
     getL(){
         return this.velocity.y;
     }
+
     setVelocity(){
       /*
         This code run continiously, setting the speed of the robot every 30ms
@@ -95,7 +125,7 @@ export default class RobotI
 
 
       let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
-      this.cameraPosition(rotation,this.robot.body.position);
+      //this.cameraPosition(rotation,this.robot.body.position);
       this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
       // console.log("nueva posicion: " + newpos);
       this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
@@ -113,12 +143,13 @@ export default class RobotI
     }
 
     cameraPosition(rotation,robotPos){
+      // This function should be removed
       var dx = Math.cos(rotation.y * Math.PI/180);
       var dz = Math.sin(-rotation.y * Math.PI/180);
       var cameraX = robotPos.x-(dx*6);
       var cameraY = robotPos.y + 4;
       var cameraZ = robotPos.z-(dz*6);
-      document.querySelector("#cameraWrapper").object3D.position.set(cameraX,cameraY,cameraZ);
+      document.querySelector("#camera1Wrapper").object3D.position.set(cameraX,cameraY,cameraZ);
     }
 
     getCameraDescription()
@@ -137,41 +168,42 @@ export default class RobotI
         return {width: this.imagedata.cols, height: this.imagedata.rows};
     }
 
-    getImageFormat()
-    {
-        return 1;
-    }
-
     startCamera(){
       // Starts camera from robot
       console.log("LOG ---------> Starting camera.");
       if (($('#spectatorDiv').length) && (document.querySelector("#spectatorDiv").firstChild != undefined)) {
-        this.canvas2d = document.querySelector("#camera2");
-
+        for(var i = 0; i < this.camerasData.length; i++){
+          var canvasID = '#' + this.camerasData[i]['canvasID'];
+          this.canvas2d = document.querySelector(canvasID);
+          this.camerasData[i]['canvasElement'];
+        }
         this.getImageData_async();
       }else{
         setTimeout(this.startCamera.bind(this), 100);
       }
     }
 
-    getImage(){
-      // Returns a screenshot from the robot camera
-      if(this.imagedata != undefined){
-        return this.imagedata;
-      }else{
-        setTimeout(this.getImage.bind(this), 200);
+    getImage(cameraID){
+      /**
+       * Returns a screenshot from the robot camera
+       */
+      for(var i = 0; i <= this.camerasData.length; i++){
+          console.log(this.camerasData[i]);
+
       }
     }
 
-    getImageData_async()
+    getImageData_async(cameraID)
     /*
       This function stores image from the robot in the variable
       "imagedata", this allows to obtain image from the robot
       with getImage() function.
     */
     {
-        this.imagedata = cv.imread('camera2');
-        this.timeoutCamera = setTimeout(this.getImageData_async.bind(this), 33);
+      for(var i = 0; i < this.camerasData.length; i++){
+        this.camerasData[i]['image'] = cv.imread(this.camerasData[i]['canvasID']);
+      }
+      this.timeoutCamera = setTimeout(this.getImageData_async.bind(this), 33);
     }
 
     startRaycasters(distance, numOfRaycasters)

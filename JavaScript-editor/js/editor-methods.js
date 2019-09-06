@@ -1,34 +1,37 @@
 
-export function setupACE(){
+var editor = {};
+
+editor.setup = () =>{
   var editor = ace.edit("ace");
   editor.setTheme("ace/theme/monokai");
   editor.session.setMode("ace/mode/javascript");
   return editor;
 }
 
-export function toggleCameraDisplay(){
+editor.toggleCamera = () =>{
     var opencvCam = document.querySelector("#outputCanvas");
     var imageCamBtn = document.querySelector("#cambtn").firstChild;
     $("#outputCanvas, #spectatorDiv").toggle();
     if(opencvCam.style.display != "none"){
-      imageCamBtn.src = "assets/resources/stop-camera-icon.png"
+      imageCamBtn.src = "../../assets/resources/stop-camera-icon.png"
     }else{
-      imageCamBtn.src = "assets/resources/play-camera-icon.png"
+      imageCamBtn.src = "../../assets/resources/play-camera-icon.png"
     }
 }
 
-export function getCode(editor){
-  var content = editor.getValue();
-
-  return content;
-}
-
-export function insertCode(textToInject, editor){
+editor.inserCode = (textToInject, editor) =>{
   // Reloads the code inside the editor erasing all content
   editor.setValue(textToInject);
   return editor;
 }
 
-export function reset(){
-  
+
+editor.sendEvent = (eventName, eventDetail = '') =>{
+  var ev = new CustomEvent(eventName, {
+    'detail': eventDetail
+  });
+  document.dispatchEvent(ev);
 }
+
+
+module.exports = editor;

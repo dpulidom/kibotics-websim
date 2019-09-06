@@ -12,13 +12,11 @@ export function startStopCode(play, myRobot, reservedVariables, mainInterval, co
   }else{
     console.log(mainInterval);
     image.src = "/static/websim/assets/resources/play-icon.png";
-    //clearInterval(mainInterval);
+
     if (mainInterval && typeof mainInterval === "function"){
-      console.log("hola");
       mainInterval(); //mainInterval now is a function that clears setIntervalSynchronous
-    }else{
-      console.log("adios")
     }
+    
     myRobot.move(0, 0, 0);
     play = false;
     console.log("Execution stopped.")

@@ -1,7 +1,8 @@
 export var followBodyObj = {
   'schema': {
     entityId: { type:'string', default:''},
-    offsetRotation: { type: 'vec3', default: "0 0 0" }
+    offsetRotation: { type: 'vec3', default: "0 0 0" },
+    offsetPosition: { type: 'vec3', default: "0 0 0" }
   },
   init: function(){
     this.pibot = document.querySelector(this.data.entityId);
@@ -20,7 +21,11 @@ export var followBodyObj = {
     let offsetX = 0.38*Math.cos(THREE.Math.radToDeg(pibotRotation.y) * Math.PI/180);
     let offsetZ = 0.38*Math.sin(THREE.Math.radToDeg(pibotRotation.y) * Math.PI/180);
 
-    el.object3D.position.set(pibotPos.x + offsetX , pibotPos.y + offsetY, pibotPos.z - offsetZ);
+    let finalPosX = pibotPos.x + offsetX + this.data.offsetPosition.x;
+    let finalPosY = pibotPos.y + offsetY + this.data.offsetPosition.y;
+    let finalPosZ = pibotPos.z + offsetZ + this.data.offsetPosition.z;
+
+    el.object3D.position.set(finalPosX , finalPosY, finalPosZ);
     el.object3D.rotation.set(pibotRotation.x, raycasterRotation, pibotRotation.z);
   }
 }

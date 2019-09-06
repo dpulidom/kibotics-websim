@@ -8,6 +8,18 @@ export var spectObject = {
       fps: {
         type: 'number',
         default: 30.0
+      },
+      canvasID: {
+        type: 'string',
+        default: 'cameraCanvas'
+      },
+      width: {
+        type: 'number',
+        default: 150
+      },
+      height: {
+        type: 'number',
+        default: 100
       }
     },
     'init': function() {
@@ -17,13 +29,13 @@ export var spectObject = {
         this.renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );
         this.renderer.id = "robotCam";
         this.renderer.setPixelRatio( window.devicePixelRatio );
-        this.renderer.setSize( targetEl.offsetWidth, targetEl.offsetHeight );
+        this.renderer.setSize( this.data.width, this.data.height );
         // creates spectator canvas
         targetEl.appendChild(this.renderer.domElement);
         targetEl.style.display = "none";
 
         this.canvas2d = document.createElement('canvas');
-        this.canvas2d.id = "camera2";
+        this.canvas2d.id = this.data.canvasID;
         this.canvas2d.width = this.renderer.domElement.width;
         this.canvas2d.height = this.renderer.domElement.height;
         this.canvas2d.style.display="none"; //Mantain this not displayed, to display camera change targetEl

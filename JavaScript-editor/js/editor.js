@@ -1,30 +1,43 @@
-import {setupACE, toggleCameraDisplay, getCode, insertCode, reset} from './editor-methods.js'
+import editor from './editor-methods.js'
 
-var editor = null
+var canExecute = true;
 
-$(document).ready(()=>{
-  editor = setupACE();
-
+$(document).ready(async ()=>{
+  editor.ui = editor.setup();
   $("#cambtn").click(()=>{
-    toggleCameraDisplay();
+    editor.toggleCamera();
   });
 
   $("#runbtn").click(()=>{
-    var codeString = getCode(editor);
-    var websimevent = new CustomEvent('code-to-run', {
-      'detail': {
-        'code': codeString
-      }
-    });
-    document.dispatchEvent(websimevent);
+    if (canExecute){
+      updateCode();
+    }else{
+      canExecute = false;
+    }
   });
 
   $('#resetRobot').click(()=>{
-    var resetEvent = new CustomEvent('reset', {
-      'detail': ''
-    });
-    document.dispatchEvent(resetEvent);
+    editor.sendEvent('reset');
   });
+
+  // This line executes a function to preconfigure Websim
+  await Websim.config.init('../assets/config/config.json');
+  console.log(Websim.globals.arrayRobots.length)
 });
 
+function updateCode(){
+  if (canExecute){
+    dispatchCode();
+    setInterval(updateCode, 5000);
+  }
+}
 
+function dispatchCode(){
+  var codeString = editor.ui.getValue();
+  var websimevent = new CustomEvent('code-to-run', {
+        'detail': {
+          'code': codeString
+        }
+    });
+  document.dispatchEvent(websimevent);
+}

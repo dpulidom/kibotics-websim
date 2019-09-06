@@ -1,14 +1,24 @@
-// Auxiliar function to implement a throttle of code.
-function sleep(s) {
-    ms = s*1000;
+export function sleep(s) {
+  /**
+   * Auxiliar function to implement a throttle of code.
+   * 
+   * @param {integer} s Number of seconds to stop the code
+   */
+    var ms = s*1000;
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}
 
 
   /*
   https://gist.github.com/AndersDJohnson/4385908
   */
-  var setIntervalSynchronous = function (func, delay) {
+export var setIntervalSynchronous = function (func, delay) {
+  /**
+   * This function sets interval synchronous
+   * 
+   * @param {function} func Function to be executed when reached interval time
+   * @param {integer} delay Time to wait between executions
+   */
     var intervalFunction, timeoutId, clear, stopped=false;
     // Call to clear the interval.
     clear = function () {
