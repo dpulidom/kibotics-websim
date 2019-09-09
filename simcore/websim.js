@@ -32,10 +32,9 @@ Websim.config.init = async (configFile)=>{
   return new Promise(async (resolve, reject) =>{
     Websim.simulation.robotLoader();
     Websim.simulation.extendAFrame();
-    Websim.robots.storeRobotID();
     await Websim.config.loadJSON(configFile);
-    console.log("Loaded Websim world")
     Websim.config.activateMainCamera();
+    await Websim.robots.createRobots();
     resolve();
   });
 }
