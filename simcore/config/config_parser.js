@@ -1,4 +1,4 @@
-
+import {arrayIds} from '../globals';
 
 export async function parseObjects(childs, parentItem){
     /**
@@ -49,9 +49,8 @@ export function createElement(tag, obj){
    */
   var element;
   if (tag == 'a-robot'){
-    var customEv = new CustomEvent('robot-parsed', { 'detail': obj['attr']['id'] });
-    console.log('Robot detected, sending event')
-    document.dispatchEvent(customEv);
+    arrayIds.push(obj['attr']['id']);
+    console.log('Robot detected, storing ID');
     element = document.createElement('a-entity');
   }else{
     element = document.createElement(tag);
@@ -101,7 +100,6 @@ export function parseAssets(assets){
       assetsWrapper.appendChild(newElement);
       scene.appendChild(assetsWrapper);
     }
-    console.log("Parsed assets, resolving.")
     resolve();
   })
 }
@@ -122,7 +120,6 @@ export function parseScene(sceneJSON, parentEl){
       scene.setAttribute(key, sceneJSON[key]);
     }
     parentEl.appendChild(scene);
-    console.log("Added scene to parent element.")
     resolve(scene);
   })
 }
@@ -143,11 +140,8 @@ export function parser(json){
     var parentEl = document.getElementById(sceneParentId);
     if (parentEl === null){ console.log("es null"); parentEl = document.body; }
     var scene = await parseScene(sceneAttrs, parentEl);
-    console.log("Parsed scene.")
     await parseAssets(sceneAssets);
-    console.log("Parsed assets.")
     await parseObjects(sceneObjects, scene);
-    console.log("Parsed objects.")
     resolve();
   })
 }
@@ -167,11 +161,8 @@ export async function loadJSON(url) {
     request.overrideMimeType("application/json");
     request.open('GET', url, false);
     request.send(null);
-    console.log("Requesting JSON file...");
     if (request.status == 200){
-      console.log("Response received from server with status 200 OK, parsing JSON");
       await parser(JSON.parse(request.responseText));
-      console.log("Created world.")
       resolve();
     }else{
       reject();
