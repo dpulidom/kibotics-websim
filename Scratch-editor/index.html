@@ -216,6 +216,10 @@
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera id="subjCamera" active="true" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
+            <a-entity id="firstPersonWrapper" position="0 0.1 0" rotation="-20 -90 0" >
+          <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
+            <a-camera id="firstPersonCamera" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+          </a-entity>
           </a-entity>
           <!-- Scenario -->
           <a-sky src="#sky"></a-sky>
