@@ -43,6 +43,10 @@
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera id="subjCamera" active="true" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
+            <a-entity id="firstPersonWrapper" position="0 0.1 0" rotation="-20 -90 0" >
+          <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
+          <a-camera id="firstPersonCamera" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+        </a-entity>
           </a-entity>
           <!-- <a-entity class="collidable" collada-model="#couch" scale="6 6 6" position="0 0 0"> -->
           <a-plane static-body position="0 0 0"
