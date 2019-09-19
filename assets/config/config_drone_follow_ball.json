@@ -1,0 +1,31 @@
+{
+  "robot": {
+    "model":"../assets/models/drone_animation.gltf",
+    "scale": "0.5 0.5 0.5",
+    "position":"12 1 25",
+    "rotation": "0 50 0"
+  },
+  "gravity": 0,
+  "ground": "../assets/textures/escenarioLiso.png",
+  "sky": "../assets/textures/sky.png",
+  "secondaryCamera": "4 20 30",
+  "cameraRobot":"0 0.03 -0.01",
+  "objects":[{
+      "type": "a-sphere",
+      "id":"redBall",
+      "position": "4 15 20",
+      "rotation": "0 0 0",
+      "color": "#FF0000",
+      "radius": "1.5",
+      "animation": "property: position; from: 4 15 20 ;to: 0 15 -20; dir: alternate; dur: 10000; loop: true",
+      "animation__2": "property: position; from: 0 15 -20 ;to: 0 2 -20 ; delay: 10000; dir: alternate; dur: 10000; loop: true",
+      "animation__3": "property: position; from: 0 2 -20 ;to: 4 2 20 ; delay: 20000; dir: alternate; dur: 10000; loop: true",
+      "animation__4": "property: position; from: 4 2 20 ;to: 4 15 20; delay: 30000; dir: alternate; dur: 10000; loop: true",
+      "animation__5": "property: position; from: 4 15 20 ;to: -10 15 10; delay: 40000; dir: alternate; dur: 10000; loop: true",
+      "animation__6": "property: position; from: -10 15 10 ;to: 20 8 -30; delay: 50000; dir: alternate; dur: 10000; loop: true"
+
+
+
+      }
+    ]
+}
