@@ -15,7 +15,7 @@
       "id":"redBall",
       "position": "4 15 20",
       "rotation": "0 0 0",
-      "color": "#FF0000",
+      "color": "#000000",
       "radius": "1.5",
       "animation": "property: position; from: 4 15 20 ;to: 0 15 -20; dir: alternate; dur: 10000; loop: true",
       "animation__2": "property: position; from: 0 15 -20 ;to: 0 2 -20 ; delay: 10000; dir: alternate; dur: 10000; loop: true",
