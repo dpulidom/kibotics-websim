@@ -37,3 +37,25 @@ export var setIntervalSynchronous = function (func, delay) {
     // You should capture the returned function for clearing.
     return clear;
   };
+
+export function arraysEqual(a, b) {
+  /**
+   * Function to check if to arrays are fully equals
+   * 
+   * @param {array} a Input array to compare with B
+   * @param {array} b Input array to compare with A
+   */
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+
+  // If you don't care about the order of the elements inside
+  // the array, you should sort both arrays here.
+  // Please note that calling sort on an array will modify that array.
+  // you might want to clone your array first.
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}

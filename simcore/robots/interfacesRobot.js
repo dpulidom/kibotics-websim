@@ -37,6 +37,35 @@ export class RobotI
         document.dispatchEvent(robotEvent);
     }
 
+    execute(newCode){
+      /**
+       * Function to execute the new code passed as
+       * input parameter checking if simulation is enabled
+       * 
+       * @param {string} newCode
+       */
+      newCode = newCode.replace('myRobot', 'this');
+      eval(newCode);
+
+      // Hay que poner un else que lo que haga es limpiar las variables del robot
+      // y parar el mismo
+    }
+
+    changeSimulationState(state){
+      /**
+       * Change the simulation state (SIM-API)
+       * 
+       * @param {boolean} state State of the simulation to be set up
+       */
+      if (typeof state === 'boolean'){
+        this.simulationState = state;
+      }
+    }
+
+    getID(){
+      return this.myRobotID;
+    }
+
     findCameras(){
       /**
        * This function searchs for camera entities that has robotID 
