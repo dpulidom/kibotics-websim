@@ -18,8 +18,9 @@ $(document).ready(async ()=>{
   $("#runbtn").click(()=>{
     console.log(codeFirst);
     console.log(codeSecond);
-    Websim.robots.executeCode(car1, codeFirst)
-    Websim.robots.executeCode(car2, codeSecond)
+
+    Websim.robots.executeCode(car1, codeFirst);
+    Websim.robots.executeCode(car2, codeSecond);
 
   });
 
@@ -61,9 +62,9 @@ $(document).ready(async ()=>{
 
   // This line executes a function to preconfigure Websim
   await Websim.config.init('../assets/config/config-duo.json');
-  var myRobot = Websim.robots.getRobotCopy('a-car1');
+  var myRobot1 = Websim.robots.getRobotCopy('a-car1');
   var myRobot2 = Websim.robots.getRobotCopy('a-car2');
-  console.log(myRobot);
+  console.log(myRobot1,myRobot2);
   // myRobot.setV(0.3);
   // myRobot2.setV(-0.3);
 });
