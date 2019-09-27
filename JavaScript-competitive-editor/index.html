@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebSim - JavaScript </title>
+    <meta charset="utf-8" />
+    <!-- Physics for A-Frame VR -->
+    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <script src="js/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="build/websim.bundle.js"></script>
+    <script src="build/editor.bundle.js"></script>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
+      <div id="nav-button-container">
+        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
+      </div>
+    </nav>
+    <div id="container">
+      <div id="myIFrame">
+      </div>
+      <div id="right-container">
+        <div id="ace">
+// Press Ctrl-, to enter code editor configuration.
+/*
+A global variable called myRobot that
+contains robot instance,
+you can call the robot API
+shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
+
+Example:
+  myRobot.move(0.2, 0.2);
+*/
+mainInterval = setInterval(myAlgorithm, 33);
+
+async function myAlgorithm(){
+  // Insert code here
+  //myRobot.setL(0.3);
+  var sensor = myRobot.getDistance();
+  console.log(sensor);
+  myRobot.setW(0);
+  myRobot.setV(2);
+  if(sensor && sensor<6){
+    myRobot.setV(0);
+    myRobot.setW(-0.5);
+    await sleep2(2000);
+  }
+}
+
+        </div>
+        <div id="cameras" style="display:inline-flex;">
+          <div id="robotCam" style="margin: 3px;">
+            <p>Robot Camera</p>
+            <div id="spectatorDiv" style="display: inline"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
+  </body>
+</html>

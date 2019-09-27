@@ -65,6 +65,25 @@ var configJavaScript = {
   mode: 'development'
 }
 
+var configJavaScriptCompetitive = {
+  entry : {
+    editor: path.join(__dirname, 'JavaScript-competitive-editor/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
 var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
@@ -77,6 +96,14 @@ var jsOutput = Object.assign({}, configWebsim, {
   name: "JavaScriptAPP",
   output: {
     path: path.join(__dirname, "JavaScript-editor/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
+var jsCompetitiveOutput = Object.assign({}, configWebsim, {
+  name: "JavaScriptCompetitiveAPP",
+  output: {
+    path: path.join(__dirname, "JavaScript-competitive-editor/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -105,5 +132,12 @@ var jsEditor = Object.assign({}, configJavaScript, {
   }
 });
 
+var jsCompetitiveEditor = Object.assign({}, configJavaScriptCompetitive, {
+  name: "JavaScriptCompetitiveEditor",
+  output: {
+    path: path.join(__dirname, "JavaScript-competitive-editor/build"),
+    filename: "[name].bundle.js"
+  }
+});
 
-module.exports = [scratchOutput, jsOutput, teleopOutput, scratchEditor, jsEditor];
+module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor];
