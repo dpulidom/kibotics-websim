@@ -13,6 +13,9 @@
     <nav id="navbar">
       <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
       <div id="nav-button-container">
+        <!-- EDITAR PARA PONER BOTONES DEL EDITOR -->
+        <button onclick id="firstRobot"><img src="../assets/resources/car1.svg" alt="First robot"/></button>
+        <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/></button>
         <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
         <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
         <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
@@ -38,15 +41,7 @@ mainInterval = setInterval(myAlgorithm, 33);
 async function myAlgorithm(){
   // Insert code here
   //myRobot.setL(0.3);
-  var sensor = myRobot.getDistance();
-  console.log(sensor);
-  myRobot.setW(0);
   myRobot.setV(2);
-  if(sensor && sensor<6){
-    myRobot.setV(0);
-    myRobot.setW(-0.5);
-    await sleep2(2000);
-  }
 }
 
         </div>
