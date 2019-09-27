@@ -17,8 +17,9 @@ $(document).ready(async ()=>{
 
   $("#runbtn").click(()=>{
     console.log(codeFirst);
-    Websim.robots.executeCode(car1, 'myRobot.setV(1);')
-    Websim.robots.executeCode(car2, 'myRobot.setV(-1);')
+    console.log(codeSecond);
+    Websim.robots.executeCode(car1, codeFirst)
+    Websim.robots.executeCode(car2, codeSecond)
 
   });
 
