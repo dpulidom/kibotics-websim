@@ -2,11 +2,6 @@ html, body{
   margin: 0px;
 }
 
-.padding-lr-0{
-  padding-left: 0;
-  padding-right: 0;
-}
-
 #navbar{
   background-color: black;
   margin: 0px;
@@ -14,13 +9,13 @@ html, body{
 }
 
 .dragbar {
-  padding: 6px;
+  padding: 4px;
   cursor: col-resize;
   background-color: black;
 }
 
 .editor{
-  min-width: 5%;
+  min-width: 6%;
 }
 
 .blockly-container{
@@ -29,20 +24,18 @@ html, body{
 
 .myIFrame{
   flex:1;
-  width: 60%;
+  width: 50%;
+  max-height: 70%;
 }
+
 .editor-button{
   padding: 5px 10px;
 }
 
-.height-100{
-  height: 100%;
-}
 .simulator{
   /*float:right;*/
   left: 0;
   width: 40%;
-  display: inline-block;
 }
 
 #websimframe{
@@ -57,9 +50,7 @@ html, body{
 
 .right-container{
   float: left;
-  width:60%;
-  height: 100%;
-  display: block;
+  display: flex;
 }
 
 #cameras{
