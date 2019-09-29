@@ -19,7 +19,7 @@ editor.toggleCamera = () =>{
     }
 }
 
-editor.inserCode = (textToInject, editor) =>{
+editor.insertCode = (textToInject, editor) =>{
   // Reloads the code inside the editor erasing all content
   editor.setValue(textToInject);
   return editor;
@@ -31,6 +31,10 @@ editor.sendEvent = (eventName, eventDetail = '') =>{
     'detail': eventDetail
   });
   document.dispatchEvent(ev);
+}
+
+editor.getCode = () =>{
+  
 }
 
 

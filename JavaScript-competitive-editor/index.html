@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebSim - JavaScript </title>
+    <meta charset="utf-8" />
+    <!-- Physics for A-Frame VR -->
+    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <script src="js/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="build/websim.bundle.js"></script>
+    <script src="build/editor.bundle.js"></script>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
+      <div id="nav-button-container">
+        <!-- EDITAR PARA PONER BOTONES DEL EDITOR -->
+        <button onclick id="firstRobot"><img src="../assets/resources/car1.svg" alt="First robot"/></button>
+        <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/></button>
+        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
+      </div>
+    </nav>
+    <div id="container">
+      <div id="myIFrame">
+      </div>
+      <div id="right-container">
+        <div id="ace">
+
+  myRobot.setV(1);
+
+        </div>
+        <div id="cameras" style="display:inline-flex;">
+          <div id="robotCam" style="margin: 3px;">
+            <p>Robot Camera</p>
+            <div id="spectatorDiv" style="display: inline"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
+  </body>
+</html>

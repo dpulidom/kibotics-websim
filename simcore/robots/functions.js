@@ -1,6 +1,6 @@
 import {RobotI} from './interfacesRobot.js';
-import {arrayRobots, arrayIds, arrayLoadedBodyRobots} from '../globals';
-import {sleep} from '../utils';
+import {arrayRobots, arrayIds, arrayLoadedBodyRobots, simEnabled} from '../globals';
+import {sleep, arraysEqual} from '../utils';
 
 export function resetRobots(){
     /**
@@ -25,27 +25,22 @@ export async function createRobots(){
     });
 }
 
-function arraysEqual(a, b) {
-    /**
-     * Function to check if to arrays are fully equals
-     * 
-     * @param {array} a Input array to compare with B
-     * @param {array} b Input array to compare with A
-     */
-    if (a === b) return true;
-    if (a == null || b == null) return false;
-    if (a.length != b.length) return false;
-  
-    // If you don't care about the order of the elements inside
-    // the array, you should sort both arrays here.
-    // Please note that calling sort on an array will modify that array.
-    // you might want to clone your array first.
-  
-    for (var i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
+export function executeCode(robotId, code){
+    var tempRobot = getRobotCopy(robotId);
+    if (simEnabled){
+        tempRobot.execute(code);
     }
-    return true;
-  }
+}
+
+export function getRobotCopy(robotId){
+    var robot = null;
+    arrayRobots.forEach((robotInstance)=>{
+        if (robotId === robotInstance.getID()){
+            robot = robotInstance;
+        }
+    });
+    return robot
+}
 
 function createRobot(htmlID){
     /**

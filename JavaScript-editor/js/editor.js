@@ -1,19 +1,16 @@
 import editor from './editor-methods.js'
 
-var canExecute = true;
+var editorRobot = 'a-pibot';
 
 $(document).ready(async ()=>{
   editor.ui = editor.setup();
+  
   $("#cambtn").click(()=>{
     editor.toggleCamera();
   });
 
   $("#runbtn").click(()=>{
-    if (canExecute){
-      updateCode();
-    }else{
-      canExecute = false;
-    }
+    Websim.robots.executeCode(editorRobot, 'myRobot.setV(1);')
   });
 
   $('#resetRobot').click(()=>{
@@ -22,22 +19,8 @@ $(document).ready(async ()=>{
 
   // This line executes a function to preconfigure Websim
   await Websim.config.init('../assets/config/config.json');
-  console.log(Websim.globals.arrayRobots.length)
+  var myRobot = Websim.robots.getRobotCopy('a-pibot');
+  console.log(myRobot);
+  myRobot.setV(0.3);
 });
 
-function updateCode(){
-  if (canExecute){
-    dispatchCode();
-    setInterval(updateCode, 5000);
-  }
-}
-
-function dispatchCode(){
-  var codeString = editor.ui.getValue();
-  var websimevent = new CustomEvent('code-to-run', {
-        'detail': {
-          'code': codeString
-        }
-    });
-  document.dispatchEvent(websimevent);
-}
