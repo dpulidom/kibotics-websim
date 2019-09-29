@@ -25,9 +25,8 @@
       <a href="/"><img src="../assets/resources/jderobot.svg" style="width:70px; height:70px; margin-top: 6px;" /></a>
     </nav>
     <div id="container">
-
       <!-- EDITOR -->
-      <div id="editor" class="height-100 col-md-7 padding-lr-0">
+      <div id="editor" class="editor">
           <div id="buttons" style="background-color:#d3dae5">
               <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
               <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
@@ -163,7 +162,6 @@
               <block type="move_backward_to"></block>
               <block type="turn_left_to"></block>
               <block type="turn_right_to"></block>
-
             </category>
             <category name="Camera" colour='%{BKY_LISTS_HUE}'>
               <block type="get_image"></block>
@@ -172,7 +170,6 @@
             <category name="Tools" colour=%{BKY_LOOPS_HUE}>
               <block type="set_timeout"></block>
               <block type="start"></block>
-
               <block type="logs"></block>
               <block type="imgto_canvas"></block>
               <block type="wait_block"></block>
@@ -197,9 +194,9 @@
           </div>
         </div>
       </div>
-
+      <div id="dragbar" class="dragbar"></div>
       <!-- SIMULADOR -->
-      <div id="myIFrame" class="height-100 col-md-5 padding-lr-0" >
+      <div id="myIFrame" class="myIFrame">
         <a-scene id="scene" background="color: gray;" embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
           <a-assets>
             <a-asset-item id="model-pibot"></a-asset-item>
