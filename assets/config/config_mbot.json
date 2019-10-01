@@ -1,14 +1,14 @@
 {
   "robot": {
     "model":"../assets/models/mBot.gltf",
-    "scale": "0.005 0.005 0.005",
+    "scale": "0.01 0.01 0.01",
     "position":"12 1 25",
     "rotation": "0 50 0"
   },
   "gravity": -9.8,
   "ground": "../assets/textures/interlagos.png",
   "sky": "../assets/textures/sky.png",
-  "secondaryCamera": "0 0 0",
-  "cameraRobot":"0 0.03 -0.01",
+  "secondaryCamera": "120 10 -44",
+  "cameraRobot":"0.01 0.03 0",
   "objects":[]
 }
