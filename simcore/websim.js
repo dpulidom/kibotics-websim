@@ -55,7 +55,6 @@ document.addEventListener('spectatorCamera',(event)=>{
   }else if(camera3.active==true){
     subjCamera.setAttribute('camera', 'active', true);
   }
-  myRobot.startCamera();
 })
 
 // Declare a listener to listen reset signal from UI
