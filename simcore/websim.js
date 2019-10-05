@@ -42,16 +42,12 @@ document.addEventListener('code-to-run', (event)=>{
 });
 
 document.addEventListener('spectatorCamera',(event)=>{
-  var opencvCam = document.querySelector("#spectatorDiv");
   var subjCamera = document.querySelector("#subjCamera");
   var spectatorCamera = document.querySelector("#primaryCamera");
   var firstPersonCamera = document.querySelector("#cameraRobot");
-  // var cameraRobot = document.querySelector("#cameraRobot");
   var camera1 = subjCamera.getAttribute('camera','active');
   var camera2 = spectatorCamera.getAttribute('camera','active');
   var camera3 = firstPersonCamera.getAttribute('camera','active');
-  console.log(firstPersonCamera);
-  console.log(opencvCam);
   if(camera1.active===true){
     spectatorCamera.setAttribute('camera', 'active', true);
   }else if(camera2.active===true){
@@ -59,8 +55,6 @@ document.addEventListener('spectatorCamera',(event)=>{
   }else if(camera3.active==true){
     subjCamera.setAttribute('camera', 'active', true);
   }
-  console.log(opencvCam);
-  console.log(firstPersonCamera);
   myRobot.startCamera();
 })
 
