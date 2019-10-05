@@ -29,6 +29,7 @@ The project directory structure contains:
 5. [SIM API](#sim_api)
 6. [Scratch Blocks](#scratch_blocks)
     - [How to create Scratch Blocks](#create_blocks)
+    - [Constructor Blocks](#constructorBlockly)
     - [Motors Blocks](#motorsBlockly)
     - [Camera Blocks](#cameraBlockly)
     - [Tools Blocks](#toolsBlockly)
@@ -322,6 +323,11 @@ To use the variable on the blocks we need to append `BKY_` prefix to the variabl
 
 In the same way we can declare HUE for the blocks.
 
+### Constructor <a name="constructorBlockly"></a>
+
+![Create robot](/docs/blocklyScreenshots/constructor.PNG)
+
+This block is used to instantiate a particular robot among all the robots available (currently PiBot and Tello - MBot is in a development state yet - ). This block has to be bonded to a variable which will act like our robot object in the whole program.
 
 ### Motors<a name="motorsBlockly"></a>
 
@@ -379,6 +385,37 @@ This block is used to set lateral speed (only for humanoid robots), is equivalen
 
 This block is used to stop robot.
 
+![Move forward](/docs/blocklyScreenshots/setVDegBlock.PNG)
+
+This block is used to move forward the robot an specific distance, is equivalent to code *myRobot.setV(1)* + *time.sleep(linSpeed)*.
+Input value must be positive.
+
+![Move backward](/docs/blocklyScreenshots/setVBackDegBlock.PNG)
+
+This block is used to move backward the robot an specific distance, is equivalent to code *myRobot.setV(-1)* + *time.sleep(linSpeed)*.
+Input value must be positive.
+
+![Turn left](/docs/blocklyScreenshots/setWDegLeft.PNG)
+
+This block is used to make robot turn left an specific amount of degrees, is equivalent to code *myRobot.setW(0.02)* + *time.sleep(X)*.
+Input value must be positive.
+
+
+![Turn right](/docs/blocklyScreenshots/setWDegRight.PNG)
+
+This block is used to make robot turn right an specific amount of degrees, is equivalent to code *myRobot.setW(-0.02)* + *time.sleep(X)*.
+Input value must be positive.
+
+**Drone commands**
+
+![Takeoff](/docs/blocklyScreenshots/takeoff.PNG)
+
+This block is used to take off the drone. It will rise to an specific height and will stand still until no more commands are sent to the robot. is equivalent to code *myRobot.takeoff()*
+
+![Land](/docs/blocklyScreenshots/land.PNG)
+
+This block is used to take off the drone. It will rise to an specific height and will stand still until no more commands are sent to the robot. is equivalent to code *myRobot.land()*
+
 ### Camera<a id="cameraBlockly"></a>
 
 ![Get image](/docs/blocklyScreenshots/getImage.PNG)
@@ -413,6 +450,10 @@ The return value is a integer [0 1 2 3] depending on the center of the object fi
 
 
 ### Tools <a id="toolsBlockly"></a>
+
+![Start](/docs/blocklyScreenshots/start.PNG)
+
+This block is used as an entry point for the algorithm. Similar to the same block in Scratch.
 
 
 ![Interval](/docs/blocklyScreenshots/setInterval.PNG)
@@ -491,6 +532,12 @@ This returns an array with the distances, is equivalent to code *myRobot.getDist
 
 This block is used to return X, Y and Z coordinates and rotation in the horizontal plane (*Rotation on Y axis*).
 This is equivalent to code *myRobot.getPosition()*.
+
+
+![detect the line with color](/docs/blocklyScreenshots/getLine.PNG)
+
+This block is used to return X coordinate of the line (if any) of the circuit. Is mainly meant to follow line type exercises.
+
 
 ## Teleoperation <a name="tp"></a>
 
