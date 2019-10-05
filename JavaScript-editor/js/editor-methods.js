@@ -17,23 +17,6 @@ export function toggleCameraDisplay(){
     }
 }
 
-export function changeSpectatorCamera(){
-  var subjCamera = document.querySelector("#subjCamera");
-  var spectatorCamera = document.querySelector("#primaryCamera");
-  var firstPersonCamera = document.querySelector("#firstPersonCamera");
-  var camera1 = subjCamera.getAttribute('camera','active');
-  var camera2 = spectatorCamera.getAttribute('camera','active');
-  var camera3 = firstPersonCamera.getAttribute('camera','active');
-  if(camera1.active===true){
-    spectatorCamera.setAttribute('camera', 'active', true);
-  }else if(camera2.active===true){
-    firstPersonCamera.setAttribute('camera', 'active', true);
-  }else if(camera3.active==true){
-    subjCamera.setAttribute('camera', 'active', true);
-  }
-}
-
-
 export function getCode(editor){
   var content = editor.getValue();
 

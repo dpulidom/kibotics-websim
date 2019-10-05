@@ -39,7 +39,7 @@ var onresize = function(e) {
   onresize();
   Blockly.svgResize(workspace);
   Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  
+
   const drag = (e) => {
     document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
     blocklyArea.style.width = (e.pageX - bar.offsetWidth / 2) + 'px';
@@ -74,22 +74,6 @@ export function injectCode(workspace, xmlCodeText){
     console.log("Code injected into workspace");
   }
   return workspace;
-}
-
-export function changeSpectatorCamera(){
-  var subjCamera = document.querySelector("#subjCamera");
-  var spectatorCamera = document.querySelector("#primaryCamera");
-  var firstPersonCamera = document.querySelector("#firstPersonCamera");
-  var camera1 = subjCamera.getAttribute('camera','active');
-  var camera2 = spectatorCamera.getAttribute('camera','active');
-  var camera3 = firstPersonCamera.getAttribute('camera','active');
-  if(camera1.active===true){
-    spectatorCamera.setAttribute('camera', 'active', true);
-  }else if(camera2.active===true){
-    firstPersonCamera.setAttribute('camera', 'active', true);
-  }else if(camera3.active==true){
-    subjCamera.setAttribute('camera', 'active', true);
-  }
 }
 
 export function saveCode(demoWorkspace, socket){

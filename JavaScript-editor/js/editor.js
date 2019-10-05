@@ -10,7 +10,10 @@ $(document).ready(()=>{
   });
 
   $("#spectatorCamera").click(()=>{
-    changeSpectatorCamera();
+    var changeCamera = new CustomEvent('spectatorCamera', {
+      'detail': ''
+    });
+    document.dispatchEvent(changeCamera);
   });
 
   $("#runbtn").click(()=>{
