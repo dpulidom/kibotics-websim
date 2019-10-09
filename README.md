@@ -174,7 +174,7 @@ In order to integrate Websim simulator with the production sevrer (Kibotics), th
 
 ### Generate Bundles <a name="gen_bundles"></a>
 
-The bundles for the production environment need to be generate within an **Ubuntu 18.04** distribution. Thus, once the new features/changes added or made to Websim JavaScript files are stable, it is just needed to run:
+The bundles for the production environment need to be generated within an **Ubuntu 18.04** distribution. Thus, once the new features/changes added or made to Websim JavaScript files are stable, it is just needed to run:
 ```
 $ npm run build
 ```
@@ -183,7 +183,7 @@ As said before, this command creates a production bundle, which is minified and 
 
 ### Copy Bundles' scripts <a name="copy_bundles"></a>
 
-Once the bundles or built, we need to place them in their correspondig directory of the web-server. This bundle files must be placed in `/var/www/kibotics/jderobot_server/kibotics-websim/Scratch-editor/build`, `/var/www/kibotics/jderobot_server/kibotics-websim/JavaScript-editor/build` and `/var/www/kibotics/jderobot_server/kibotics-websim/teleoperators/build`.
+Once the bundles are built, we need to place them in their correspondig directory of the web-server. This bundle files must be placed in `/var/www/kibotics/jderobot_server/kibotics-websim/Scratch-editor/build`, `/var/www/kibotics/jderobot_server/kibotics-websim/JavaScript-editor/build` and `/var/www/kibotics/jderobot_server/kibotics-websim/teleoperators/build`.
 
 **Note**: Pay special attention to the placement of the first, given that *Scratch-editor* is the one that is currently used in kibotics.
 
