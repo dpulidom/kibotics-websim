@@ -1,26 +1,49 @@
 import editor from './editor-methods.js'
 
-var editorRobot = 'a-pibot';
+var editorRobot1 = 'a-pibot';
+var editorRobot2 = 'alvaro-robot'
+
 
 $(document).ready(async ()=>{
-  editor.ui = editor.setup();
+  editor.setup();
   
   $("#cambtn").click(()=>{
     editor.toggleCamera();
   });
 
   $("#runbtn").click(()=>{
-    Websim.robots.executeCode(editorRobot, 'myRobot.setV(1);')
+    /**
+     * Function to execute when run button clicked, multiple options
+     * supported:
+     * - Creates thread for a robot if not exists and runs
+     * - Stop thread for a robot if exists and running
+     * - Resume thread for a robot if exists and not running
+     */
+    var myRobot = Websim.robots.getHalAPI(editorRobot1);
+
+    if (editor.threadExists(editorRobot1)){
+      if (editor.isThreadRunning(editorRobot1)){
+        editor.stopBrain(editorRobot1);
+      }else{
+        editor.resumeBrain(myRobot, editorRobot1);
+      }
+    }else{
+      editor.runBrain(myRobot, editorRobot1);
+    }
   });
+
 
   $('#resetRobot').click(()=>{
     editor.sendEvent('reset');
   });
 
-  // This line executes a function to preconfigure Websim
-  await Websim.config.init('../assets/config/config.json');
-  var myRobot = Websim.robots.getRobotCopy('a-pibot');
-  console.log(myRobot);
-  myRobot.setV(0.3);
-});
+  $('#simButton').click(()=>{
+    Websim.simulation.toggleSimulation();
+  });
 
+  // Init Websim simulator with config contained in the file passed
+  // as parameter
+  await Websim.config.init('../assets/config/config.json');
+
+  setInterval(editor.showThreads, 1000);
+});

@@ -32,7 +32,7 @@ export function executeCode(robotId, code){
     }
 }
 
-export function getRobotCopy(robotId){
+export function getHalAPI(robotId){
     var robot = null;
     arrayRobots.forEach((robotInstance)=>{
         if (robotId === robotInstance.getID()){
