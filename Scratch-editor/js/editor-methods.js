@@ -1,6 +1,5 @@
 /*
   This file sets up Blockly and ACE editors and manages their functions.
-
   This file provide 2 functions:
   - startStopCode: starts or stop the code from blockly workspace.
   - setupBlockly: Initial set up Blockly workspace.
@@ -11,25 +10,49 @@ export function setupBlockly(workspace){
   This function sets up Blockly editor.
   It configures toolbox and injects a template
 */
-  workspace = Blockly.inject('blockly-div', {
-    media: '/static/websim/Scratch-editor/google-blockly/media/',
-    //media: 'google-blockly/media/',
-    toolbox: document.getElementById('toolbox'),
-    zoom:
-         {
-          controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 3,
-          minScale: 0.3,
-          scaleSpeed: 1.2
-        },
-    trashcan: true,
-    horizontalLayout: false,
-    scrollbars: true
+  var blocklyArea = document.getElementById('editor');
+  var blocklyDiv = document.getElementById('blockly-div');
+  var right = document.getElementById('myIFrame');
+  var bar = document.getElementById('dragbar');
+
+  workspace = Blockly.inject(blocklyDiv,
+      {toolbox: document.getElementById('toolbox')});
+
+
+var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    Blockly.svgResize(workspace);
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
+  Blockly.svgResize(workspace);
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  
+  const drag = (e) => {
+    document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+    blocklyArea.style.width = (e.pageX - bar.offsetWidth / 2) + 'px';
+    onresize();
+  }
+
+  bar.addEventListener('mousedown', () => {
+    document.addEventListener('mousemove', drag);
   });
 
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  bar.addEventListener('mouseup', () => {
+    document.removeEventListener('mousemove', drag);
+  });
   return workspace;
 }
 
@@ -53,6 +76,21 @@ export function injectCode(workspace, xmlCodeText){
   return workspace;
 }
 
+export function changeSpectatorCamera(){
+  var subjCamera = document.querySelector("#subjCamera");
+  var spectatorCamera = document.querySelector("#primaryCamera");
+  var firstPersonCamera = document.querySelector("#firstPersonCamera");
+  var camera1 = subjCamera.getAttribute('camera','active');
+  var camera2 = spectatorCamera.getAttribute('camera','active');
+  var camera3 = firstPersonCamera.getAttribute('camera','active');
+  if(camera1.active===true){
+    spectatorCamera.setAttribute('camera', 'active', true);
+  }else if(camera2.active===true){
+    firstPersonCamera.setAttribute('camera', 'active', true);
+  }else if(camera3.active==true){
+    subjCamera.setAttribute('camera', 'active', true);
+  }
+}
 
 export function saveCode(demoWorkspace, socket){
   console.log("Getting code from the embedded editor.")
@@ -100,7 +138,7 @@ export function WebSocketConnection(uri) {
       var win = window.open('http://10.3.141.1:8001', '_blank');
       win.focus();
     }
-    
+
   };
 
   socket.onerror = function(evt) {
@@ -111,7 +149,7 @@ export function WebSocketConnection(uri) {
     wsClose(evt);
   };
 
-  return socket 
+  return socket
 }
 
 export function wsClose(evt) {

@@ -25,6 +25,7 @@ export class RobotI
           black: {low: [0, 0, 0, 255], high: [105,105,105 ,255]}
         };
         this.velocity = {x:0, y:0, z:0, ax:0, ay:0, az:0};
+        this.simulationEnabled = true;
 
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.findCameras();
@@ -37,28 +38,14 @@ export class RobotI
         document.dispatchEvent(robotEvent);
     }
 
-    execute(newCode){
-      /**
-       * Function to execute the new code passed as
-       * input parameter checking if simulation is enabled
-       * 
-       * @param {string} newCode
-       */
-      newCode = newCode.replace('myRobot', 'this');
-      eval(newCode);
-
-      // Hay que poner un else que lo que haga es limpiar las variables del robot
-      // y parar el mismo
-    }
-
     changeSimulationState(state){
       /**
        * Change the simulation state (SIM-API)
-       * 
+       *
        * @param {boolean} state State of the simulation to be set up
        */
       if (typeof state === 'boolean'){
-        this.simulationState = state;
+        this.simulationEnabled = state;
       }
     }
 
@@ -68,11 +55,11 @@ export class RobotI
 
     findCameras(){
       /**
-       * This function searchs for camera entities that has robotID 
-       * contained in cameraID which means the camera belongs to 
+       * This function searchs for camera entities that has robotID
+       * contained in cameraID which means the camera belongs to
        * the body of the robot (attached). This ID is stored in an array
        * with the camera wrapper id that must be same as cameraID + 'Wrapper'
-       * 
+       *
        */
       var sceneCameras = document.getElementsByTagName('a-camera');
 
@@ -119,13 +106,19 @@ export class RobotI
     }
 
     setV(v){
+      if (this.simulationEnabled){
         this.velocity.x = v;
+      }
     }
     setW(w){
+      if (this.simulationEnabled){
         this.velocity.ay = w*10;
+      }
     }
     setL(l){
-      this.velocity.y = l;
+      if (this.simulationEnabled){
+        this.velocity.y = l;
+      }
     }
     move(v, w, h){
         this.setV(v);
@@ -150,14 +143,15 @@ export class RobotI
         This code run continiously, setting the speed of the robot every 30ms
         This function will not be callable, use setV, setW or setL
       */
-      let rotation = this.getRotation();
+      if (this.simulationEnabled){
+        let rotation = this.getRotation();
 
 
-      let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
-      //this.cameraPosition(rotation,this.robot.body.position);
-      this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
-      // console.log("nueva posicion: " + newpos);
-      this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
+        let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
+
+        this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
+        this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
+      }
       this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 30);
     }
 
@@ -169,16 +163,6 @@ export class RobotI
       robotPos.z += z;
       robotPos.y += y;
       return robotPos;
-    }
-
-    cameraPosition(rotation,robotPos){
-      // This function should be removed
-      var dx = Math.cos(rotation.y * Math.PI/180);
-      var dz = Math.sin(-rotation.y * Math.PI/180);
-      var cameraX = robotPos.x-(dx*6);
-      var cameraY = robotPos.y + 4;
-      var cameraZ = robotPos.z-(dz*6);
-      document.querySelector("#camera1Wrapper").object3D.position.set(cameraX,cameraY,cameraZ);
     }
 
     getCameraDescription()
@@ -229,8 +213,10 @@ export class RobotI
       with getImage() function.
     */
     {
-      for(var i = 0; i < this.camerasData.length; i++){
-        this.camerasData[i]['image'] = cv.imread(this.camerasData[i]['canvasID']);
+      if (this.simulationEnabled){
+        for(var i = 0; i < this.camerasData.length; i++){
+          this.camerasData[i]['image'] = cv.imread(this.camerasData[i]['canvasID']);
+        }
       }
       this.timeoutCamera = setTimeout(this.getImageData_async.bind(this), 33);
     }
@@ -391,7 +377,6 @@ export class RobotI
       }else{
         return null;
       }
-
     }
 
     getDistances()
@@ -514,18 +499,20 @@ export class RobotI
       a given color and follows it.
     */
     {
-        var data = this.getObjectColorRGB(lowval, highval); // Filters image
+        if(this.simulationEnabled){
+          var data = this.getObjectColorRGB(lowval, highval); // Filters image
 
-        this.setV(speed);
+          this.setV(speed);
 
-        if(data.center[0] >= 75 && data.center[0] < 95){
-          this.setW(-0.2);
-        }else if(data.center[0] <= 75 && data.center[0] >= 55){
-          this.setW(0.2);
-        }else if(data.center[0] >= 95){
-          this.setW(-0.35);
-        }else if(data.center[0] <= 55){
-          this.setW(0.35)
+          if(data.center[0] >= 75 && data.center[0] < 95){
+            this.setW(-0.2);
+          }else if(data.center[0] <= 75 && data.center[0] >= 55){
+            this.setW(0.2);
+          }else if(data.center[0] >= 95){
+            this.setW(-0.35);
+          }else if(data.center[0] <= 55){
+            this.setW(0.35)
+          }
         }
     }
 
@@ -621,7 +608,7 @@ export class RobotI
     }
 
     parar(){
-      return this.move(0,0);
+      return this.move(0, 0, 0);
     }
 
     leerUltrasonido(){

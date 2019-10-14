@@ -1,5 +1,5 @@
 import {spectObject, intersectionHandlerObj, followBodyObj} from './aframe-components';
-import {arrayIds, arrayLoadedBodyRobots} from '../globals';
+import {arrayIds, arrayLoadedBodyRobots, simEnabled, arrayRobots, changeSimulationValue} from '../globals';
 export var active = false;
 export var refreshInterval = null;
 
@@ -24,4 +24,13 @@ export function extendAFrame(){
   AFRAME.registerComponent('spectator', spectObject);
   AFRAME.registerComponent("intersection-handler", intersectionHandlerObj);
   AFRAME.registerComponent("follow-body", followBodyObj);
+}
+
+export function toggleSimulation(){
+  console.log('Setting simulation state to:', !simEnabled);
+  changeSimulationValue(!simEnabled);
+  arrayRobots.forEach(robot =>{
+    robot.changeSimulationState(simEnabled);
+    console.log(robot);
+  });
 }

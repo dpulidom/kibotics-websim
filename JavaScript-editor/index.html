@@ -15,6 +15,7 @@
       <div id="nav-button-container">
         <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
         <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+        <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
         <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
       </div>
     </nav>
@@ -23,32 +24,22 @@
       </div>
       <div id="right-container">
         <div id="ace">
-// Press Ctrl-, to enter code editor configuration.
-/*
-A global variable called myRobot that
-contains robot instance,
-you can call the robot API
-shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
 
-Example:
-  myRobot.move(0.2, 0.2);
-*/
-mainInterval = setInterval(myAlgorithm, 33);
+          // Press Ctrl-, to enter code editor configuration.
+          /*
+          A global variable called myRobot that
+          contains robot instance,
+          you can call the robot API
+          shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
 
-async function myAlgorithm(){
-  // Insert code here
-  //myRobot.setL(0.3);
-  var sensor = myRobot.getDistance();
-  console.log(sensor);
-  myRobot.setW(0);
-  myRobot.setV(2);
-  if(sensor && sensor<6){
-    myRobot.setV(0);
-    myRobot.setW(-0.5);
-    await sleep2(2000);
-  }
-}
+          Example:
+            myRobot.move(0.2, 0.2);
+          */
 
+          async function myAlgorithm(){
+            myRobot.move(0.5, 0.5, 0);
+            console.log('Executing')
+           }
         </div>
         <div id="cameras" style="display:inline-flex;">
           <div id="robotCam" style="margin: 3px;">

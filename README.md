@@ -19,19 +19,23 @@ The project directory structure contains:
     - [Installing project for development](#develop)
     - [Running project](#run)
     - [Webpack usage](#webpack)
-3. [HAL API](#hal_api)
+3. [Integration with Official Production Server](#integration_server)
+    - [Generate Bundles](#gen_bundles)
+    - [Copy Bundles' scripts](#copy_bundles)
+4. [HAL API](#hal_api)
     - [Motors interfaces](#motors)
     - [Camera interfaces](#camera)
     - [Position sensors](#sensors)
-4. [SIM API](#sim_api)
-5. [Scratch Blocks](#scratch_blocks)
+5. [SIM API](#sim_api)
+6. [Scratch Blocks](#scratch_blocks)
     - [How to create Scratch Blocks](#create_blocks)
+    - [Constructor Blocks](#constructorBlockly)
     - [Motors Blocks](#motorsBlockly)
     - [Camera Blocks](#cameraBlockly)
     - [Tools Blocks](#toolsBlockly)
     - [Sensors Blocks](#sensorsBlockly)
-6. [Teleoperation](#tp)
-7. [Youtube videos](#yt)
+7. [Teleoperation](#tp)
+8. [Youtube videos](#yt)
 
 ## Project structure <a name="structure"></a>
 
@@ -78,6 +82,7 @@ The following instructions works on Ubuntu 16.04 and 18.04.
 ``` bash
 ## Current version
 sudo apt-get install curl python-software-properties
+[MAY BE DEPRECATED. IF SO, USE: sudo apt-get install curl software-properties-common]
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 ```
 
@@ -159,6 +164,39 @@ Webpack is configured on this project with different modes with 2 different comm
 - `npm run dev` : This command creates a development bundle called `websim.bundle.js`. In addition Webpack is listening every change on code and creates new bundles on every new code save. This allows developers to run server on other Terminal and see changes directly on web browser.
 - `npm run build` : This command creates a production bundle, this bundle is minified and optimized for production environments. **Note**: Use this command when the new features/changes are stable.
 
+## Integration with Official Production Server <a name="integration_server"></a>
+
+In order to integrate Websim simulator with the production sevrer (Kibotics), there are two steps to follow:
+1. Generate the bundles through webpack 
+2. Copy the generated files in the server
+
+**WARNING**: DO NOT upload the bundle files, neither the `/build` directories, to this repository, so potential problems with broken bundle files are not propagated and are therefore avoided.
+
+### Generate Bundles <a name="gen_bundles"></a>
+
+The bundles for the production environment need to be generated within an **Ubuntu 18.04** distribution. Thus, once the new features/changes added or made to Websim JavaScript files are stable, it is just needed to run:
+```
+$ npm run build
+```
+**NOTE**: Ensure to run the previous instruction in Ubuntu 18.04.
+As said before, this command creates a production bundle, which is minified and optimized for production environments.
+
+### Copy Bundles' scripts <a name="copy_bundles"></a>
+
+Once the bundles are built, we need to place them in their correspondig directory of the web-server. This bundle files must be placed in `/var/www/kibotics/jderobot_server/kibotics-websim/Scratch-editor/build`, `/var/www/kibotics/jderobot_server/kibotics-websim/JavaScript-editor/build` and `/var/www/kibotics/jderobot_server/kibotics-websim/teleoperators/build`.
+
+**Note**: Pay special attention to the placement of the first, given that *Scratch-editor* is the one that is currently used in kibotics.
+
+The instructions needed are the following:
+```
+$ sudo cp editor.bundle.js /var/www/kibotics/jderobot_server/kibotics-websim/[EDITOR]/build
+$ sudo cp websim.bundle.js /var/www/kibotics/jderobot_server/kibotics-websim/[EDITOR]/build
+```
+After that, refresh the collection of statics files of the server:
+```
+$ cd /var/www/kibotics/jderobot_server
+$ python manage.py collectstatic
+```
 
 ## HAL API (*Hardware Abstraction Layer*) <a name="hal_api"></a>
 
@@ -285,6 +323,11 @@ To use the variable on the blocks we need to append `BKY_` prefix to the variabl
 
 In the same way we can declare HUE for the blocks.
 
+### Constructor <a name="constructorBlockly"></a>
+
+![Create robot](/docs/blocklyScreenshots/constructor.PNG)
+
+This block is used to instantiate a particular robot among all the robots available (currently PiBot and Tello - MBot is in a development state yet - ). This block has to be bonded to a variable which will act like our robot object in the whole program.
 
 ### Motors<a name="motorsBlockly"></a>
 
@@ -342,6 +385,37 @@ This block is used to set lateral speed (only for humanoid robots), is equivalen
 
 This block is used to stop robot.
 
+![Move forward](/docs/blocklyScreenshots/setVDegBlock.PNG)
+
+This block is used to move forward the robot an specific distance, is equivalent to code *myRobot.setV(1)* + *time.sleep(linSpeed)*.
+Input value must be positive.
+
+![Move backward](/docs/blocklyScreenshots/setVBackDegBlock.PNG)
+
+This block is used to move backward the robot an specific distance, is equivalent to code *myRobot.setV(-1)* + *time.sleep(linSpeed)*.
+Input value must be positive.
+
+![Turn left](/docs/blocklyScreenshots/setWDegLeft.PNG)
+
+This block is used to make robot turn left an specific amount of degrees, is equivalent to code *myRobot.setW(0.02)* + *time.sleep(X)*.
+Input value must be positive.
+
+
+![Turn right](/docs/blocklyScreenshots/setWDegRight.PNG)
+
+This block is used to make robot turn right an specific amount of degrees, is equivalent to code *myRobot.setW(-0.02)* + *time.sleep(X)*.
+Input value must be positive.
+
+**Drone commands**
+
+![Takeoff](/docs/blocklyScreenshots/takeoff.PNG)
+
+This block is used to take off the drone. It will rise to an specific height and will stand still until no more commands are sent to the robot. is equivalent to code *myRobot.takeoff()*
+
+![Land](/docs/blocklyScreenshots/land.PNG)
+
+This block is used to take off the drone. It will rise to an specific height and will stand still until no more commands are sent to the robot. is equivalent to code *myRobot.land()*
+
 ### Camera<a id="cameraBlockly"></a>
 
 ![Get image](/docs/blocklyScreenshots/getImage.PNG)
@@ -376,6 +450,10 @@ The return value is a integer [0 1 2 3] depending on the center of the object fi
 
 
 ### Tools <a id="toolsBlockly"></a>
+
+![Start](/docs/blocklyScreenshots/start.PNG)
+
+This block is used as an entry point for the algorithm. Similar to the same block in Scratch.
 
 
 ![Interval](/docs/blocklyScreenshots/setInterval.PNG)
@@ -454,6 +532,12 @@ This returns an array with the distances, is equivalent to code *myRobot.getDist
 
 This block is used to return X, Y and Z coordinates and rotation in the horizontal plane (*Rotation on Y axis*).
 This is equivalent to code *myRobot.getPosition()*.
+
+
+![detect the line with color](/docs/blocklyScreenshots/getLine.PNG)
+
+This block is used to return X coordinate of the line (if any) of the circuit. Is mainly meant to follow line type exercises.
+
 
 ## Teleoperation <a name="tp"></a>
 
