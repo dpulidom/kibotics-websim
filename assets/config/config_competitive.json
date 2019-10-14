@@ -61,11 +61,10 @@
         {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":0, "y":2, "z":0},
-                "rotation": { "x":0, "y":0, "z":0},
-                "src": "../assets/models/infiniteBridge.gltf",
-                "scale": "30 30 30",
-                "class": "collidable",
+                "position": { "x":0.64, "y":-0.68, "z":0.42},
+                "rotation": { "x":0, "y":8.46, "z":0},
+                "src": "../assets/models/bridge.gltf",
+                "scale": "16.88 20 20",
                 "dynamic-body":{"mass": 1000}
             }
         },
@@ -83,8 +82,8 @@
                 "id": "a-car1",
                 "gltf-model":"../assets/models/f1_renault.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":13.84, "y":1, "z":15.66},
-                "rotation": { "x":0, "y":-26.64, "z":0},
+                "position": { "x":-4, "y":0, "z":15.66},
+                "rotation": { "x":0, "y":70, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
