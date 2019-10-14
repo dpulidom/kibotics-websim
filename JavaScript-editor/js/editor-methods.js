@@ -118,10 +118,4 @@ function sleep2(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-<<<<<<< HEAD
 module.exports = editor;
-=======
-export function reset(){
-
-}
->>>>>>> master
