@@ -1,4 +1,4 @@
-import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip} from './editor-methods.js'
+import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip,changeSpectatorCamera} from './editor-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -22,7 +22,7 @@ import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
 import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
 import initWaitBlock from '../customBlocks/waitBlock.js'
 import initRobotInstanceBlock from '../customBlocks/robotInstanceBlock.js'
-import initTakeoffBlock from '../customBlocks/takeoffBlock.js'	
+import initTakeoffBlock from '../customBlocks/takeoffBlock.js'
 import initLandBlock from '../customBlocks/landBlock.js'
 import initStartBlock from '../customBlocks/startBlock.js'
 import initMoveBackwardToBlock from '../customBlocks/moveBackwardToBlock.js'
@@ -39,6 +39,7 @@ console.log("----------------------===========----------------");
 
 var userCode = window.userCode;
 var socket = "";
+
 
 $(document).ready(()=>{
   configureCustomBlocks();
@@ -66,10 +67,14 @@ $(document).ready(()=>{
     document.dispatchEvent(websimevent);
   });
 
+  $('#spectatorCamera').click(()=>{
+    changeSpectatorCamera();
+  });
+
   $("#injectCode").click(()=>{
     demoWorkspace = injectCode(demoWorkspace, userCode);
   });
-  
+
   $("#saveCode").click(()=>{
     saveCode(demoWorkspace, socket); // Declare function that extracts code from editor and sends to server via connection.send
   });
@@ -89,7 +94,7 @@ $(document).ready(()=>{
   if (wsUri != null){
     socket = WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
   }
-  
+
 });
 
 function configureCustomBlocks(){

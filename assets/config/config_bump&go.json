@@ -16,63 +16,73 @@
       "src": "../assets/models/room/wallBack.gltf",
       "class": "collidable",
       "scale": "6 6 6",
-      "position": "0 0 0"
+      "position": "0 0 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/wallSmall.gltf",
       "class": "collidable",
       "scale": "6.1 3 6",
-      "position": "-0.5 -1 0"
+      "position": "-0.5 -1 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/wallLeft.gltf",
       "class": "collidable",
       "scale": "6 6 6",
-      "position": "0 0 0"
+      "position": "0 0 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/wallRight.gltf",
       "class": "collidable",
       "scale": "6 6 6",
-      "position": "0 0 0"
+      "position": "0 0 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/table1.gltf",
       "class": "collidable",
       "scale": "6 6 6",
-      "position": "0 -1 0"
+      "position": "0 -1 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/table2.gltf",
       "scale": "6 6 6",
       "class": "collidable",
-      "position": "0 -2 0"
+      "position": "0 -2 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/wall1.gltf",
       "scale": "6 6 6",
       "class": "collidable",
-      "position": "0 0 0"
+      "position": "0 0 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/wall2.gltf",
       "scale": "6 6 6",
       "class": "collidable",
-      "position": "0 0 0"
+      "position": "0 0 0",
+      "static-body": ""
+
       },
       {
       "type": "a-gltf-model",
       "src": "../assets/models/room/couch.gltf",
       "scale": "6 6 6",
       "class": "collidable",
-      "position": "0 -2 0"
+      "position": "0 0 0",
+      "static-body": ""
       },
       {
       "type": "a-gltf-model",

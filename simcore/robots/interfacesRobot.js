@@ -41,7 +41,7 @@ export class RobotI
     changeSimulationState(state){
       /**
        * Change the simulation state (SIM-API)
-       * 
+       *
        * @param {boolean} state State of the simulation to be set up
        */
       if (typeof state === 'boolean'){
@@ -55,11 +55,11 @@ export class RobotI
 
     findCameras(){
       /**
-       * This function searchs for camera entities that has robotID 
-       * contained in cameraID which means the camera belongs to 
+       * This function searchs for camera entities that has robotID
+       * contained in cameraID which means the camera belongs to
        * the body of the robot (attached). This ID is stored in an array
        * with the camera wrapper id that must be same as cameraID + 'Wrapper'
-       * 
+       *
        */
       var sceneCameras = document.getElementsByTagName('a-camera');
 

@@ -15,6 +15,7 @@
       <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
       <div id="nav-button-container">
         <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
+        <button onclick id="spectatorCamera"><img src="../assets/resources/focus.svg" alt="Change spectator camera"/></button>
       </div>
     </nav>
     <div id="container">
@@ -28,9 +29,16 @@
           <!-- Pibot, which body is the asset item with ID = model-pibot -->
           <a-entity bind="text.value: score"></a-entity>
           <a-entity dynamic-body="mass: 1" id="a-pibot">
-            <a-entity id="secondaryCamera" position="0 0 0" rotation="-20 -90 0">
+            <a-entity id="secondaryCamera" rotation="-20 -90 0" >
               <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
               <a-camera id="cameraRobot" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+            </a-entity>
+            <a-entity id="subjCameraWrapper" position="-0.3 0.3 0" rotation="-20 -90 0" >
+              <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
+              <a-camera id="subjCamera" active="true" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+            </a-entity>
+            <a-entity id="firstPersonWrapper" position="0 0.1 0" rotation="-20 -90 0" >
+              <a-camera id="firstPersonCamera" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
             </a-entity>
           </a-entity>
           <a-entity id="positionSensor"></a-entity>
@@ -46,8 +54,8 @@
           <!-- Illumination -->
           <a-light type="ambient" color="white"></a-light>
 
-          <a-entity id="cameraWrapper" movement-controls="fly:true" position="0 0 0">
-              <a-entity id="primaryCamera" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
+          <a-entity movement-controls="fly:true" position="0 0 0">
+              <a-entity id="primaryCamera" position="7 10 80" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
           </a-entity>
         </a-scene>
         <script type="text/javascript" src="js/opencv3.3.1.js" ></script>

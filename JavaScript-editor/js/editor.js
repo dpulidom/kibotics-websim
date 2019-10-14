@@ -6,9 +6,13 @@ var editorRobot2 = 'alvaro-robot'
 
 $(document).ready(async ()=>{
   editor.setup();
-  
+
   $("#cambtn").click(()=>{
     editor.toggleCamera();
+  });
+
+  $("#spectatorCamera").click(()=>{
+    changeSpectatorCamera();
   });
 
   $("#runbtn").click(()=>{

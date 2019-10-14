@@ -57,8 +57,8 @@ editor.runBrain = (myRobot, robotID) =>{
   /**
    * Function to create a "thread" and execute UI code
    * also saves the "thread" on an array of running threadss
-   * 
-   * @param {Object} myRobot RobotI object used to run code from UI 
+   *
+   * @param {Object} myRobot RobotI object used to run code from UI
    */
 
 
@@ -66,7 +66,7 @@ editor.runBrain = (myRobot, robotID) =>{
 
   editor.threadsBrains.push({
     "id": robotID,
-    "running": true, 
+    "running": true,
     "interval": editor.createThreadBrain(code, myRobot),
     "codeRunning": code
   });
@@ -84,7 +84,7 @@ editor.stopBrain = (threadID) =>{
 editor.isThreadRunning = (threadID)=>{
   /**
    * Function to check if a thread is running
-   * 
+   *
    * @param {string} threadID ID of the thread to check if running
    */
   var threadBrain = editor.threadsBrains.find((threadBrain)=> threadBrain.id == threadID);
@@ -118,4 +118,10 @@ function sleep2(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+<<<<<<< HEAD
 module.exports = editor;
+=======
+export function reset(){
+
+}
+>>>>>>> master
