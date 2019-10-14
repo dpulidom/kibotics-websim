@@ -1,12 +1,14 @@
-import {setupACE, toggleCameraDisplay, getCode, insertCode, reset,changeSpectatorCamera} from './editor-methods.js'
+import editor from './editor-methods.js'
 
-var editor = null
+var editorRobot1 = 'a-pibot';
+var editorRobot2 = 'alvaro-robot'
 
-$(document).ready(()=>{
-  editor = setupACE();
+
+$(document).ready(async ()=>{
+  editor.setup();
 
   $("#cambtn").click(()=>{
-    toggleCameraDisplay();
+    editor.toggleCamera();
   });
 
   $("#spectatorCamera").click(()=>{
@@ -14,19 +16,38 @@ $(document).ready(()=>{
   });
 
   $("#runbtn").click(()=>{
-    var codeString = getCode(editor);
-    var websimevent = new CustomEvent('code-to-run', {
-      'detail': {
-        'code': codeString
+    /**
+     * Function to execute when run button clicked, multiple options
+     * supported:
+     * - Creates thread for a robot if not exists and runs
+     * - Stop thread for a robot if exists and running
+     * - Resume thread for a robot if exists and not running
+     */
+    var myRobot = Websim.robots.getHalAPI(editorRobot1);
+
+    if (editor.threadExists(editorRobot1)){
+      if (editor.isThreadRunning(editorRobot1)){
+        editor.stopBrain(editorRobot1);
+      }else{
+        editor.resumeBrain(myRobot, editorRobot1);
       }
-    });
-    document.dispatchEvent(websimevent);
+    }else{
+      editor.runBrain(myRobot, editorRobot1);
+    }
   });
 
+
   $('#resetRobot').click(()=>{
-    var resetEvent = new CustomEvent('reset', {
-      'detail': ''
-    });
-    document.dispatchEvent(resetEvent);
+    editor.sendEvent('reset');
   });
+
+  $('#simButton').click(()=>{
+    Websim.simulation.toggleSimulation();
+  });
+
+  // Init Websim simulator with config contained in the file passed
+  // as parameter
+  await Websim.config.init('../assets/config/config.json');
+
+  setInterval(editor.showThreads, 1000);
 });
