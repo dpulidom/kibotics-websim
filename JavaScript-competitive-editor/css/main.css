@@ -31,6 +31,7 @@ html, body{
 }
 
 #container{
+  background-color: transparent;
   width: 100%;
   height: 100vh;
   display: inline-block;
@@ -42,6 +43,7 @@ html, body{
   height: 100%;
   display: block;
 }
+
 #cameras{
   display: flex;
 }
@@ -57,10 +59,69 @@ html, body{
     color: white;
 }
 
+
+#spectatorCamera {
+    background-color: #e6e6e6;
+    color: black;
+    border: 2px solid #6b38d1;
+}
+
+#spectatorCamera:hover {
+    background-color: #6b38d1;
+    color: white;
+}
+
+#spectatorCamera>img{
+  width: 36px;
+  height: 36px;
+}
+
+.evaluator {
+  /* background: rgba(0, 0, 0, 0); */
+  width: 40%;
+  opacity: 0.5;
+  line-height: 200px;
+  color: white;
+  margin: 0 auto;
+}
+
+.carMarker{
+  position:absolute;
+  margin-bottom: 0.5%;
+  left:42%;
+  width: 5%;
+  height: 5%;
+}
+
+#car1Progress{
+  margin-top: 5px;
+  width: 100%;
+  background-color: #ffa500;
+}
+
+#car2Progress {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #000000;
+}
+
+#a-car1bar,#a-car2bar {
+  width: 1%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 30px;
+}
+
 #cambtn {
     background-color: #e6e6e6;
     color: black;
     border: 2px solid #6b38d1;
+}
+#time{
+  text-align: center;
+  font-family: sans-serif;
+  color:white;
 }
 
 #cambtn:hover {

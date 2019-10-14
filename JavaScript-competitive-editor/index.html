@@ -18,17 +18,41 @@
         <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/></button>
         <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
         <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+        <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
         <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
       </div>
     </nav>
     <div id="container">
       <div id="myIFrame">
+        <div class="evaluator">
+          <img class="carMarker" src="../assets/resources/car1.svg" alt="First robot"/>
+          <div id="car1Progress">
+            <div id="a-car1bar">0%</div>
+          </div>
+          <img class="carMarker" src="../assets/resources/car2.svg" alt="Second robot"/>
+          <div id="car2Progress">
+            <div id="a-car2bar">0%</div>
+          </div>
+        </div>
+        <div id="time">Tiempo: 00:00</div>
       </div>
       <div id="right-container">
         <div id="ace">
+// Press Ctrl-, to enter code editor configuration.
+/*
+A global variable called myRobot that
+contains robot instance,
+you can call the robot API
+shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
 
-  myRobot.setV(1);
+Example:
+  myRobot.move(0.2, 0.2);
+*/
 
+async function myAlgorithm(){
+  myRobot.move(0.5, 0.5, 0);
+  console.log('Executing')
+ }
         </div>
         <div id="cameras" style="display:inline-flex;">
           <div id="robotCam" style="margin: 3px;">

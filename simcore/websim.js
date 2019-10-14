@@ -26,7 +26,7 @@ Websim.config.init = async (configFile)=>{
    * This function is used to configure Websim, some
    * functions needs to be executed before anything due to
    * they needs to listen events or extend AFrame components
-   * 
+   *
    * @param {string} configFile Config file url to request to load scene and robots
    */
   return new Promise(async (resolve, reject) =>{
@@ -35,6 +35,7 @@ Websim.config.init = async (configFile)=>{
     await Websim.config.loadJSON(configFile);
     Websim.config.activateMainCamera();
     await Websim.robots.createRobots();
+    //Websim.robots.evaluator();
     resolve();
   });
 }

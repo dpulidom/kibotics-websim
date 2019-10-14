@@ -1,6 +1,7 @@
 import {RobotI} from './interfacesRobot.js';
 import {arrayRobots, arrayIds, arrayLoadedBodyRobots, simEnabled} from '../globals';
 import {sleep, arraysEqual} from '../utils';
+import {progressBar,setTime} from './evaluator.js'
 
 export function resetRobots(){
     /**
@@ -42,11 +43,19 @@ export function getHalAPI(robotId){
     return robot
 }
 
+export function evaluator(){
+  /**
+    Do an evaluator taking the functions from ./evaluator.js
+  */
+  setInterval(progressBar,100,arrayRobots);
+  setTime(arrayRobots[0]);
+}
+
 function createRobot(htmlID){
     /**
      * This function creates new robots inside WebSim
      * and stores it in an array of robots
-     * 
+     *
      * @param {string} htmlID The identifier for the robot
      */
     return new Promise(async (resolve, reject)=>{
