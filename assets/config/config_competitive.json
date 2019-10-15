@@ -61,11 +61,11 @@
         {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":0.64, "y":-0.68, "z":0.42},
-                "rotation": { "x":0, "y":8.46, "z":0},
+                "position": { "x":1.06, "y":-0.32, "z":0.42},
+                "rotation": { "x":0, "y":6.58, "z":0},
                 "src": "../assets/models/bridge.gltf",
-                "scale": "16.88 20 20",
-                "dynamic-body":{"mass": 1000}
+                "scale": "12.46 13.88 14.98",
+                "dinamic-body":{"mass":1000,"shape":"mesh"}
             }
         },
         {
