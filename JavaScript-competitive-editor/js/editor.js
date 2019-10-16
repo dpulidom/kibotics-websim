@@ -99,7 +99,7 @@ $(document).ready(async ()=>{
 
   // Init Websim simulator with config contained in the file passed
   // as parameter
-  await Websim.config.init('../assets/config/config_competitive.json');
+  await Websim.config.init(config_file);
 
   setInterval(editor.showThreads, 1000);
 });
