@@ -3,7 +3,6 @@
     "scene": {
         "id": "scene",
         "gravity": -9.8,
-        "ground": "../assets/textures/bump&go.png",
         "sky": "../assets/textures/sky.png",
         "background": "color: gray;",
         "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
@@ -17,7 +16,7 @@
             "attr": {
                 "id": "ground",
                 "alt": "Texture for the scene ground",
-                "src": "../assets/textures/infiniteCircuit.png"
+                "src": "../assets/textures/interlagos-min.png"
             }
         },
         {
@@ -59,68 +58,14 @@
             ]
         },
         {
-            "tag": "a-gltf-model",
-            "attr": {
-                "position": { "x":1.06, "y":-0.32, "z":0.42},
-                "rotation": { "x":0, "y":6.58, "z":0},
-                "src": "../assets/models/bridge.gltf",
-                "scale": "12.46 13.88 14.98",
-                "dinamic-body":{"mass":1000,"shape":"mesh"}
-            }
-        },
-        {
-            "tag": "a-box",
-            "attr": {
-                "position": { "x":15, "y":1, "z":-3},
-                "color": "#ff0000",
-                "dynamic-body":{"mass": 1}
-            }
-        },
-        {
             "tag": "a-robot",
             "attr": {
                 "id": "a-car1",
                 "gltf-model":"../assets/models/f1_renault.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":-4, "y":0, "z":15.66},
-                "rotation": { "x":0, "y":70, "z":0},
-                "dynamic-body":{"mass": 1}
-
-            },
-            "childs": [
-                {
-                    "tag": "a-entity",
-                    "attr": {
-                        "id": "a-pibotCamera1Wrapper",
-                        "position": { "x": 0.02, "y": 0.025, "z": 0},
-                        "rotation": { "x": 0, "y":-90, "z":0}
-                    },
-                    "childs": [
-                        {
-                            "tag": "a-camera",
-                            "attr": {
-                                "id": "a-pibotCamera1",
-                                "position": { "x":0, "y":0, "z":0},
-                                "rotation": { "x":0, "y":0, "z":0},
-                                "active": false,
-                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
-                                "wasd-controls-enabled": false,
-                                "look-controls-enabled": false
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "tag": "a-robot",
-            "attr": {
-                "id": "a-car2",
-                "gltf-model":"../assets/models/f1_williams.gltf",
-                "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":12.56, "y":1, "z":20.50},
-                "rotation": { "x":-2.66, "y":-26.02, "z":0},
-                "dynamic-body":{"mass": 1}
+                "position": { "x":12, "y":0.5, "z":25},
+                "rotation": { "x":0, "y":50, "z":0},
+                "dynamic-body":{"mass": 500}
 
             },
             "childs": [
@@ -159,8 +104,6 @@
                 "width": "100",
                 "height": "100",
                 "src":"#ground"
-
-
             }
         },
         {

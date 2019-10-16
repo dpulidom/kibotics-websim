@@ -1,0 +1,129 @@
+{
+    "scene-parent-id": "myIFrame",
+    "scene": {
+        "id": "scene",
+        "gravity": 0,
+        "sky": "../assets/textures/sky.png",
+        "background": "color: gray;",
+        "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
+        "embedded": true,
+        "stats": true,
+        "physics": "debug: true"
+    },
+    "assets": [
+      {
+          "tag": "img",
+          "attr": {
+              "id": "ground",
+              "alt": "Texture for the scene ground",
+              "src": "../assets/textures/escenarioLiso-min.png"
+          }
+      },
+        {
+            "tag": "a-asset-item",
+            "attr": {
+                "id": "model-pibot"
+            }
+        },
+        {
+            "tag": "img",
+            "attr": {
+                "id": "sky",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/sky.png"
+            }
+        }
+    ],
+    "objects":[
+      {
+          "tag": "a-plane",
+          "attr": {
+              "static-body": {
+                  "mass": 100000
+              },
+              "position": { "x":0, "y":0, "z":0 },
+              "rotation": { "x":-90, "y":0, "z":0 },
+              "width": "100",
+              "height": "100",
+              "src":"#ground"
+          }
+      },
+        {
+            "tag": "a-entity",
+            "attr": {
+                "id": "sceneCamWrapper",
+                "position":{ "x":1, "y":9, "z":15},
+                "rotation": { "x":0, "y":0, "z":0},
+                "movement-controls": "fly:true"
+            },
+            "childs": [
+                {
+                    "tag": "a-camera",
+                    "attr": {
+                        "id": "sceneCam",
+                        "position": { "x":0, "y":0, "z":0},
+                        "rotation": { "x":0, "y":0, "z":0},
+                        "active": true,
+                        "wasd-controls-enabled": true,
+                        "look-controls-enabled": true
+                    }
+                }
+            ]
+        },
+        {
+            "tag": "a-sphere",
+            "attr": {
+                "position": { "x":4, "y":15, "z":20},
+                "color": "#ff0000",
+                "radius": "1.5",
+                "animation": "property: position; from: 4 15 20 ;to: 0 15 -20; dir: alternate; dur: 10000; loop: true",
+                "animation__2": "property: position; from: 0 15 -20 ;to: 0 2 -20 ; delay: 10000; dir: alternate; dur: 10000; loop: true",
+                "animation__3": "property: position; from: 0 2 -20 ;to: 4 2 20 ; delay: 20000; dir: alternate; dur: 10000; loop: true",
+                "animation__4": "property: position; from: 4 2 20 ;to: 4 15 20; delay: 30000; dir: alternate; dur: 10000; loop: true",
+                "animation__5": "property: position; from: 4 15 20 ;to: -10 15 10; delay: 40000; dir: alternate; dur: 10000; loop: true",
+                "animation__6": "property: position; from: -10 15 10 ;to: 20 8 -30; delay: 50000; dir: alternate; dur: 10000; loop: true"
+            }
+        },
+        {
+            "tag": "a-sky",
+            "attr": {
+                "src": "#sky"
+            }
+        },
+        {
+            "tag": "a-robot",
+            "attr": {
+                "id": "a-pibot",
+                "gltf-model":"../assets/models/drone_animation.gltf",
+                "scale": { "x":0.5, "y":0.5, "z":0.5},
+                "position": { "x":15, "y":4, "z":0},
+                "rotation": { "x":0, "y":90, "z":0},
+                "dynamic-body":{"mass": 1}
+
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 2.74, "y": 0.1, "z": -0.1},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        }]
+  }

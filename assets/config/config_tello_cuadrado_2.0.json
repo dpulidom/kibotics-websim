@@ -2,8 +2,7 @@
     "scene-parent-id": "myIFrame",
     "scene": {
         "id": "scene",
-        "gravity": -9.8,
-        "ground": "../assets/textures/bump&go.png",
+        "gravity": 0,
         "sky": "../assets/textures/sky.png",
         "background": "color: gray;",
         "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
@@ -17,7 +16,7 @@
             "attr": {
                 "id": "ground",
                 "alt": "Texture for the scene ground",
-                "src": "../assets/textures/interlagos.png"
+                "src": "../assets/textures/escenarioDrone2-min.png"
             }
         },
         {
@@ -57,9 +56,9 @@
                     }
                 }
             ]
-        },      
+        },
         {
-            "tag": "a-entity",
+            "tag": "a-plane",
             "attr": {
                 "static-body": {
                     "mass": 100000
@@ -68,8 +67,7 @@
                 "rotation": { "x":-90, "y":0, "z":0 },
                 "width": "100",
                 "height": "100",
-                "geometry":"primitive:plane;width:200;height:200",
-                "material":"src:../assets/textures/escenarioLiso-tile.png;repeat: 80 80"
+                "src":"#ground"
             }
         },
         {
@@ -82,9 +80,9 @@
             "tag": "a-robot",
             "attr": {
                 "id": "a-pibot",
-                "gltf-model":"../assets/models/drone.gltf",
+                "gltf-model":"../assets/models/drone_animation.gltf",
                 "scale": { "x":0.5, "y":0.5, "z":0.5},
-                "position": { "x":0, "y":4, "z":0},
+                "position": { "x":14, "y":1, "z":20},
                 "rotation": { "x":0, "y":90, "z":0},
                 "dynamic-body":{"mass": 1}
 
