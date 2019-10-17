@@ -2,7 +2,7 @@ import editor from './editor-methods.js'
 import brains from '../../simcore/brains/brains-methods.js'
 
 var editorRobot1 = 'a-pibot';
-var editorRobot2 = 'alvaro-robot'
+var editorRobot2 = 'alvaro-robot';
 
 $(document).ready(async ()=>{
   editor.setup();
@@ -48,5 +48,5 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
 
-  setInterval(editor.showThreads, 1000);
+  setInterval(brains.showThreads, 1000);
 });

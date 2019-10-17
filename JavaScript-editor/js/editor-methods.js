@@ -4,8 +4,6 @@ var editor = {};
 // Used to store current UI context for later use
 editor.ui = {};
 
-editor.threadsBrains = [];
-
 editor.setup = () =>{
   editor.ui = ace.edit("ace");
   editor.ui.setTheme("ace/theme/monokai");
