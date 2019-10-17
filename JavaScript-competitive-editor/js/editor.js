@@ -1,4 +1,5 @@
 import editor from './editor-methods.js'
+import brains from '../../simcore/brains/brains-methods.js'
 
 var editorRobot1 = 'a-car1';
 var editorRobot2 = 'a-car2';
@@ -10,7 +11,7 @@ var codeSecond = null;
 
 $(document).ready(async ()=>{
   editor.setup();
-
+  
   $("#spectatorCamera").click(()=>{
     editor.sendEvent("spectator");
   });
@@ -29,21 +30,22 @@ $(document).ready(async ()=>{
      */
     console.log(codeFirst);
     console.log(codeSecond);
+    console.log(brains);
 
-    var myRobot1 = Websim.robots.getHalAPI(editorRobot1);
-    var myRobot2 = Websim.robots.getHalAPI(editorRobot2);
+    // var myRobot1 = Websim.robots.getHalAPI(editorRobot1);
+    // var myRobot2 = Websim.robots.getHalAPI(editorRobot2);
 
-    if (editor.threadExists(editorRobot1)){
-      if (editor.isThreadRunning(editorRobot1)){
-        editor.stopBrain(editorRobot1);
-        editor.stopBrain(editorRobot2);
+    if (brains.threadExists(editorRobot1)){
+      if (brains.isThreadRunning(editorRobot1)){
+        brains.stopBrain(editorRobot1);
+        brains.stopBrain(editorRobot2);
       }else{
-        editor.resumeBrain(myRobot1, editorRobot1);
-        editor.resumeBrain(myRobot2, editorRobot2);
+        brains.resumeBrain(editorRobot1,codeFirst);
+        brains.resumeBrain(editorRobot2,codeSecond);
       }
     }else{
-      editor.runBrain(myRobot1, editorRobot1,codeFirst);
-      editor.runBrain(myRobot2, editorRobot2,codeSecond);
+      brains.runBrain(editorRobot1,codeFirst);
+      brains.runBrain(editorRobot2,codeSecond);
     }
   });
 
@@ -101,5 +103,5 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
 
-  setInterval(editor.showThreads, 1000);
+  // setInterval(brains.showThreads, 1000);
 });
