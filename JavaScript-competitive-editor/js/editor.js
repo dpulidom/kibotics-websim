@@ -1,4 +1,5 @@
 import editor from './editor-methods.js'
+import brains from '../../simcore/brains/brains-methods.js'
 
 var editorRobot1 = 'a-car1';
 var editorRobot2 = 'a-car2';
@@ -29,21 +30,17 @@ $(document).ready(async ()=>{
      */
     console.log(codeFirst);
     console.log(codeSecond);
-
-    var myRobot1 = Websim.robots.getHalAPI(editorRobot1);
-    var myRobot2 = Websim.robots.getHalAPI(editorRobot2);
-
-    if (editor.threadExists(editorRobot1)){
-      if (editor.isThreadRunning(editorRobot1)){
-        editor.stopBrain(editorRobot1);
-        editor.stopBrain(editorRobot2);
+    if (brains.threadExists(editorRobot1)){
+      if (brains.isThreadRunning(editorRobot1)){
+        brains.stopBrain(editorRobot1);
+        brains.stopBrain(editorRobot2);
       }else{
-        editor.resumeBrain(myRobot1, editorRobot1);
-        editor.resumeBrain(myRobot2, editorRobot2);
+        brains.resumeBrain(editorRobot1,codeFirst);
+        brains.resumeBrain(editorRobot2,codeSecond);
       }
     }else{
-      editor.runBrain(myRobot1, editorRobot1,codeFirst);
-      editor.runBrain(myRobot2, editorRobot2,codeSecond);
+      brains.runBrain(editorRobot1,codeFirst);
+      brains.runBrain(editorRobot2,codeSecond);
     }
   });
 
@@ -52,8 +49,6 @@ $(document).ready(async ()=>{
   });
 
   $('#firstRobot').click(()=>{
-    console.log(codeFirst);
-    console.log(codeSecond);
     if(editFirst){
       codeFirst = editor.getCode();
     }
@@ -62,18 +57,14 @@ $(document).ready(async ()=>{
       editSecond=false;
       if(codeFirst==null){
         editor.insertCode("",editor);
-        // editor.ui.setValue("");
       }else{
         editor.insertCode(codeFirst,editor);
-        // editor.ui.setValue(codeFirst);
       }
     }
     editFirst= true;
   });
 
   $('#secondRobot').click(()=>{
-    console.log(codeFirst);
-    console.log(codeSecond);
     if(editSecond){
       codeSecond = editor.getCode();
     }
@@ -81,13 +72,9 @@ $(document).ready(async ()=>{
       codeFirst = editor.getCode();
       editFirst=false;
       if(codeSecond==null){
-        console.log("pasa por null", editor);
         editor.insertCode("async function myAlgorithm(){\nmyRobot.move(0.5, 0, 0);\n}",editor);
-        // editor.ui.setValue("");
       }else{
-        console.log(codeSecond);
         editor.insertCode(codeSecond,editor);
-        // editor.ui.setValue(codeSecond);
       }
     }
     editSecond= true;
@@ -101,5 +88,5 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
 
-  setInterval(editor.showThreads, 1000);
+  // setInterval(brains.showThreads, 1000);
 });
