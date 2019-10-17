@@ -1,8 +1,8 @@
 import editor from './editor-methods.js'
+import brains from '../../simcore/brains/brains-methods.js'
 
 var editorRobot1 = 'a-pibot';
 var editorRobot2 = 'alvaro-robot'
-
 
 $(document).ready(async ()=>{
   editor.setup();
@@ -23,19 +23,18 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
-    var myRobot = Websim.robots.getHalAPI(editorRobot1);
-
-    if (editor.threadExists(editorRobot1)){
-      if (editor.isThreadRunning(editorRobot1)){
-        editor.stopBrain(editorRobot1);
+    var code = editor.getCode()
+    console.log(code);
+    if (brains.threadExists(editorRobot1)){
+      if (brains.isThreadRunning(editorRobot1)){
+        brains.stopBrain(editorRobot1);
       }else{
-        editor.resumeBrain(myRobot, editorRobot1);
+        brains.resumeBrain(editorRobot1,code);
       }
     }else{
-      editor.runBrain(myRobot, editorRobot1);
+      brains.runBrain(editorRobot1,code);
     }
   });
-
 
   $('#resetRobot').click(()=>{
     editor.sendEvent('reset');
@@ -47,7 +46,7 @@ $(document).ready(async ()=>{
 
   // Init Websim simulator with config contained in the file passed
   // as parameter
-  await Websim.config.init('../assets/config/config.json');
+  await Websim.config.init(config_file);
 
   setInterval(editor.showThreads, 1000);
 });
