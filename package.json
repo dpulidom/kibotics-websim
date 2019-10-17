@@ -1,6 +1,6 @@
 {
   "name": "WebSim",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Robot simulator using A-Frame technologies.",
   "main": "server.js",
   "scripts": {
