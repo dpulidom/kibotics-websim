@@ -11,7 +11,7 @@ var codeSecond = null;
 
 $(document).ready(async ()=>{
   editor.setup();
-  
+
   $("#spectatorCamera").click(()=>{
     editor.sendEvent("spectator");
   });
@@ -30,11 +30,6 @@ $(document).ready(async ()=>{
      */
     console.log(codeFirst);
     console.log(codeSecond);
-    console.log(brains);
-
-    // var myRobot1 = Websim.robots.getHalAPI(editorRobot1);
-    // var myRobot2 = Websim.robots.getHalAPI(editorRobot2);
-
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
@@ -54,8 +49,6 @@ $(document).ready(async ()=>{
   });
 
   $('#firstRobot').click(()=>{
-    console.log(codeFirst);
-    console.log(codeSecond);
     if(editFirst){
       codeFirst = editor.getCode();
     }
@@ -64,18 +57,14 @@ $(document).ready(async ()=>{
       editSecond=false;
       if(codeFirst==null){
         editor.insertCode("",editor);
-        // editor.ui.setValue("");
       }else{
         editor.insertCode(codeFirst,editor);
-        // editor.ui.setValue(codeFirst);
       }
     }
     editFirst= true;
   });
 
   $('#secondRobot').click(()=>{
-    console.log(codeFirst);
-    console.log(codeSecond);
     if(editSecond){
       codeSecond = editor.getCode();
     }
@@ -83,13 +72,9 @@ $(document).ready(async ()=>{
       codeFirst = editor.getCode();
       editFirst=false;
       if(codeSecond==null){
-        console.log("pasa por null", editor);
         editor.insertCode("async function myAlgorithm(){\nmyRobot.move(0.5, 0, 0);\n}",editor);
-        // editor.ui.setValue("");
       }else{
-        console.log(codeSecond);
         editor.insertCode(codeSecond,editor);
-        // editor.ui.setValue(codeSecond);
       }
     }
     editSecond= true;
