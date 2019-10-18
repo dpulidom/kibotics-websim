@@ -7,6 +7,8 @@ var editor = {};
 
 editor.ui = {};
 
+editor.mainVarId = null;
+
 editor.setup = () =>{
   editor.ui = editor.setupBlockly(editor.ui); // Sets up blockly editor
   if (window.userCode1) {
@@ -129,7 +131,23 @@ editor.storeCode = (demoWorkspace) =>{
   //REVISITAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRR
   console.log("Getting code from the embedded editor.")
   var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
+  variables = xml.getElementsByTagName('variable');
+  for (var v=0;v<variables.length;v++){
+    if (variables[v].innerHTML == "myRobot"){
+        if (!editor.mainVarId) {
+            editor.mainVarId = variables[v].id
+        }
+        variables[v].parentNode.removeChild(variables[v]);
+    }
+  }
+  fields = xml.getElementsByTagName('field');
+  for (var f=0;f<fields.length;f++){
+    if (fields[f].innerHTML == "myRobot"){      
+        fields[f].id = editor.mainVarId;
+    }
+  }
   var xml_text = Blockly.Xml.domToText(xml);
+  //xml_text = xml_text.replace('<variables><variable type="" id="+gDVzTI%nKgp-?rh@/_o">myRobot</variable>','');
   console.log(xml_text);
   demoWorkspace.clear();
   return xml_text

@@ -72,20 +72,21 @@ $(document).ready(async ()=>{
     console.log("EHECUTANDO...");
     console.log(codeFirst);
     console.log(codeSecond);
-    editor.ui = editor.injectCode(editor.ui,codeFirst);
-    c1 = editor.getCode();
-    //editor.ui.clear();
-    editor.ui = editor.injectCode(editor.ui,codeSecond);
-    c2 = editor.getCode();
-    console.log(c1);
-    console.log(c2);
+    
+    var c1, c2;
     if (editFirst) {
+        c1 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
+        c2 = editor.getCode();
         editor.ui = editor.injectCode(editor.ui,codeFirst);
     } else {
+        c2 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeFirst);
+        c1 = editor.getCode();
         editor.ui = editor.injectCode(editor.ui,codeSecond);
     }
-    
-    
+    console.log(c1);
+    console.log(c2);   
     
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
