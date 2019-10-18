@@ -79,7 +79,7 @@ editor.toggleCamera = () =>{
     }
 }
 
-editor.injectCode = (xmlCodeText, workspace) =>{
+editor.injectCode = (workspace, xmlCodeText) =>{
   if (xmlCodeText != undefined){
     var xmlToInject = Blockly.Xml.textToDom(xmlCodeText);
     Blockly.Xml.domToWorkspace(xmlToInject, workspace);
@@ -123,6 +123,16 @@ editor.saveCode = (demoWorkspace, socket) =>{
   };
 
   socket.send(JSON.stringify(message));
+}
+
+editor.storeCode = (demoWorkspace) =>{
+  //REVISITAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRR
+  console.log("Getting code from the embedded editor.")
+  var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
+  var xml_text = Blockly.Xml.domToText(xml);
+  console.log(xml_text);
+  demoWorkspace.clear();
+  return xml_text
 }
 
 

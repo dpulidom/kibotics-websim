@@ -69,19 +69,35 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
+    console.log("EHECUTANDO...");
     console.log(codeFirst);
     console.log(codeSecond);
+    editor.ui = editor.injectCode(editor.ui,codeFirst);
+    c1 = editor.getCode();
+    //editor.ui.clear();
+    editor.ui = editor.injectCode(editor.ui,codeSecond);
+    c2 = editor.getCode();
+    console.log(c1);
+    console.log(c2);
+    if (editFirst) {
+        editor.ui = editor.injectCode(editor.ui,codeFirst);
+    } else {
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
+    }
+    
+    
+    
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
         brains.stopBrain(editorRobot2);
       }else{
-        brains.resumeBrain(editorRobot1,codeFirst);
-        brains.resumeBrain(editorRobot2,codeSecond);
+        brains.resumeBrain(editorRobot1,c1);
+        brains.resumeBrain(editorRobot2,c2);
       }
     }else{
-      brains.runScratchBrain(editorRobot1,codeFirst);
-      brains.runScratchBrain(editorRobot2,codeSecond);
+      brains.runScratchBrain(editorRobot1,c1);
+      brains.runScratchBrain(editorRobot2,c2);
     }
   });
 
@@ -99,32 +115,36 @@ $(document).ready(async ()=>{
   });
 
   $('#firstRobot').click(()=>{
+    console.log(codeFirst);
+    console.log(codeSecond);
     if(editFirst){
-      codeFirst = editor.getCode();
+      codeFirst = editor.storeCode(editor.ui);
     }
     if(editSecond){
-      codeSecond = editor.getCode();
+      codeSecond = editor.storeCode(editor.ui);
       editSecond=false;
       if(codeFirst==null){
-        editor.injectCode(" ",editor);
+        editor = editor.injectCode(editor.ui, '<xml></xml>');
       }else{
-        editor.injectCode(codeFirst,editor);
+        editor = editor.injectCode(editor.ui, codeFirst);
       }
     }
     editFirst= true;
   });
 
   $('#secondRobot').click(()=>{
+    console.log(codeFirst);
+    console.log(codeSecond);
     if(editSecond){
-      codeSecond = editor.getCode();
+      codeSecond = editor.storeCode(editor.ui);
     }
     if(editFirst){
-      codeFirst = editor.getCode();
+      codeFirst = editor.storeCode(editor.ui);
       editFirst=false;
       if(codeSecond==null){
-        editor.injectCode(" ",editor);
+        editor.ui = editor.injectCode(editor.ui,'<xml></xml>');
       }else{
-        editor.injectCode(codeSecond,editor);
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
       }
     }
     editSecond= true;
