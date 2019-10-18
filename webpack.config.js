@@ -84,6 +84,25 @@ var configJavaScriptCompetitive = {
   mode: 'development'
 }
 
+var configScratchCompetitive = {
+  entry : {
+    editor: path.join(__dirname, 'Competitive-Scratch/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
 var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
@@ -104,6 +123,14 @@ var jsCompetitiveOutput = Object.assign({}, configWebsim, {
   name: "CompetitiveJavaScriptAPP",
   output: {
     path: path.join(__dirname, "Competitive-JavaScript/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
+var scratchCompetitiveOutput = Object.assign({}, configWebsim, {
+  name: "CompetitiveScratchAPP",
+  output: {
+    path: path.join(__dirname, "Competitive-Scratch/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -140,4 +167,12 @@ var jsCompetitiveEditor = Object.assign({}, configJavaScriptCompetitive, {
   }
 });
 
-module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor];
+var scratchCompetitiveEditor = Object.assign({}, configScratchCompetitive, {
+  name: "CompetitiveScratch",
+  output: {
+    path: path.join(__dirname, "Competitive-Scratch/build"),
+    filename: "[name].bundle.js"
+  }
+});
+
+module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor, scratchCompetitiveEditor];
