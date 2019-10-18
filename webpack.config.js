@@ -67,7 +67,7 @@ var configJavaScript = {
 
 var configJavaScriptCompetitive = {
   entry : {
-    editor: path.join(__dirname, 'JavaScript-competitive-editor/js/editor.js')
+    editor: path.join(__dirname, 'Competitive-JavaScript/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
@@ -101,9 +101,9 @@ var jsOutput = Object.assign({}, configWebsim, {
 });
 
 var jsCompetitiveOutput = Object.assign({}, configWebsim, {
-  name: "JavaScriptCompetitiveAPP",
+  name: "CompetitiveJavaScriptAPP",
   output: {
-    path: path.join(__dirname, "JavaScript-competitive-editor/build/"),
+    path: path.join(__dirname, "Competitive-JavaScript/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -133,9 +133,9 @@ var jsEditor = Object.assign({}, configJavaScript, {
 });
 
 var jsCompetitiveEditor = Object.assign({}, configJavaScriptCompetitive, {
-  name: "JavaScriptCompetitiveEditor",
+  name: "CompetitiveJavaScript",
   output: {
-    path: path.join(__dirname, "JavaScript-competitive-editor/build"),
+    path: path.join(__dirname, "Competitive-JavaScript/build"),
     filename: "[name].bundle.js"
   }
 });

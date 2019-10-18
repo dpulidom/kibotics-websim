@@ -1,5 +1,5 @@
 import editor from './editor-methods.js'
-import brains from '../../simcore/brains/brains-methods.js'
+import brains from '../../brains/brains-methods.js'
 
 var editorRobot1 = 'a-pibot';
 var editorRobot2 = 'alvaro-robot';

@@ -25,6 +25,22 @@ brains.runBrain = (robotID, code) =>{
   });
 }
 
+brains.runScratchBrain = (robotID, code) =>{
+  /**
+   * Function to create a "thread" and execute UI code
+   * also saves the "thread" on an array of running threadss
+   *
+   * @param {Object} myRobot RobotI object used to run code from UI
+   */
+  //code = code + 'myAlgorithm();';
+  brains.threadsBrains.push({
+    "id": robotID,
+    "running": true,
+    "interval": brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID)),
+    "codeRunning": code
+  });
+}
+
 brains.threadExists = (robotID)=>{
   return brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
 }

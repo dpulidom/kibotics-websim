@@ -1,4 +1,5 @@
-import {setupBlockly, toggleCameraDisplay, saveCode, injectCode, WebSocketConnection, downloadZip,changeSpectatorCamera} from './editor-methods.js'
+import editor from './editor-methods.js'
+import brains from '../../brains/brains-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -30,74 +31,87 @@ import initMoveForwardToBlock from '../customBlocks/moveForwardToBlock.js'
 import initTurnLeftToBlock from '../customBlocks/turnLeftToBlock.js'
 import initTurnRightToBlock from '../customBlocks/turnRightToBlock.js'
 
-var demoWorkspace = "";
 // Load enviroment variables defined in the html template
 var wsUri = window.wsUri;
 console.log("-----===================---------------------------------");
 console.log("@@@@@@@@@" + wsUri);
 console.log("----------------------===========----------------");
 
-var userCode = window.userCode;
+//var userCode = window.userCode;
 var socket = "";
 
+var editorRobot1 = 'a-pibot'; //id del robot (fichero json)
 
-$(document).ready(()=>{
+$(document).ready(async ()=>{
   configureCustomBlocks();
-
-  demoWorkspace = setupBlockly(demoWorkspace); // Sets up blockly editor
-  demoWorkspace = injectCode(demoWorkspace, userCode); // Inject (Load) blockly user code in editor
+  editor.setup();
+  
 
   // Toggle display when cambtn clicked
   $("#cambtn").click(()=>{
-    toggleCameraDisplay();
+    editor.toggleCamera();
   });
 
-  $('#generator').click(()=>{
-    showMe(demoWorkspace);
+  $("#spectatorCamera").click(()=>{
+    editor.changeSpectatorCamera(); //cambiar a editor.changeSpectatorCamera porque ya no hay import
   });
 
-  $('#runbtn').click(()=>{
-    var codeString = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-    console.log(codeString)
-    var websimevent = new CustomEvent('code-to-run', {
-      'detail': {
-        'code': codeString
+  $("#runbtn").click(()=>{
+    /**
+     * Function to execute when run button clicked, multiple options
+     * supported:
+     * - Creates thread for a robot if not exists and runs
+     * - Stop thread for a robot if exists and running
+     * - Resume thread for a robot if exists and not running
+     */
+
+    var code = editor.getCode()
+    console.log(code);
+    if (brains.threadExists(editorRobot1)){
+      if (brains.isThreadRunning(editorRobot1)){
+        brains.stopBrain(editorRobot1);
+      } else {
+        brains.resumeBrain(editorRobot1,code);
       }
-    });
-    document.dispatchEvent(websimevent);
+    }else{
+      brains.runScratchBrain(editorRobot1,code);
+    }
   });
 
-  $('#spectatorCamera').click(()=>{
-    changeSpectatorCamera();
-  });
-
-  $("#injectCode").click(()=>{
-    demoWorkspace = injectCode(demoWorkspace, userCode);
-  });
+  /*$("#injectCode").click(()=>{
+    editor.ui = editor.injectCode(editor.ui, userCode);
+  });*/
 
   $("#saveCode").click(()=>{
-    saveCode(demoWorkspace, socket); // Declare function that extracts code from editor and sends to server via connection.send
+    editor.saveCode(editor.ui, socket); // Declare function that extracts code from editor and sends to server via connection.send
   });
 
   $("#blocklyToPython").click(()=>{
-    downloadZip(demoWorkspace, socket);
+    editor.downloadZip(editor.ui, socket);
   });
 
   $('#resetRobot').click(()=>{
-    var resetEvent = new CustomEvent('reset', {
-      'detail': ''
-    });
-    document.dispatchEvent(resetEvent);
+    editor.sendEvent('reset');
+  });
+
+  $('#simButton').click(()=>{
+    Websim.simulation.toggleSimulation();
   });
 
   // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoid error with no registered users
   if (wsUri != null){
-    socket = WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
+    socket = editor.WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
   }
+
+  // Init Websim simulator with config contained in the file passed
+  // as parameter
+  await Websim.config.init(config_file);
+
+  setInterval(editor.showThreads, 1000);
 
 });
 
-function configureCustomBlocks(){
+function configureCustomBlocks() {
   initGetAngularSpeedBlock();
   initConsoleLogBlock();
   initGetDistanceBlock();

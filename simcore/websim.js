@@ -40,6 +40,9 @@ Websim.config.init = async (configFile)=>{
   });
 }
 
+document.addEventListener('reset', (event)=>{
+  Websim.robots.resetRobots();
+});
 
 // This line exports websim to be used from other scripts
 module.exports = window.Websim = Websim;
