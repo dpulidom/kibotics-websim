@@ -8,7 +8,7 @@
         "background": "color: gray;",
         "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
         "embedded": true,
-        "stats": true,
+        "stats": false,
         "physics": "debug: true"
     },
     "assets": [
