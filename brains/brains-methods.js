@@ -32,7 +32,6 @@ brains.runScratchBrain = (robotID, code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
-  //code = code + 'myAlgorithm();';
   brains.threadsBrains.push({
     "id": robotID,
     "running": true,
@@ -57,6 +56,13 @@ brains.isThreadRunning = (robotID)=>{
 
 brains.resumeBrain = (robotID, code) =>{
   code = code + 'myAlgorithm();';
+  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+  threadBrain.interval = brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID));
+  threadBrain.running = true;
+  threadBrain.codeRunning = code;
+}
+
+brains.resumeScratchBrain = (robotID, code) =>{
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
   threadBrain.interval = brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID));
   threadBrain.running = true;

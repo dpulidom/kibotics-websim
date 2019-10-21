@@ -55,6 +55,10 @@ var codeSecond = {
   xml: null,
   edit: false
 };
+/*var editFirst = true;
+var editSecond = false;
+var codeFirst = null;
+var codeSecond = null;*/
 
 $(document).ready(async ()=>{
   configureCustomBlocks();
@@ -76,29 +80,54 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
-    console.log("EHECUTANDO...");
+    //console.log("EHECUTANDO...");
+    //console.log(codeFirst);
+    //console.log(codeSecond);
 
-    // if (codeFirst.edit) {
-    //     codefirst.js = editor.getCode();
-    //     editor.ui = editor.injectCode(editor.ui,codeSecond);
-    //     codeSecond.js = editor.getCode();
-    //     editor.ui = editor.injectCode(editor.ui,codeFirst);
-    // } else {
-    //     codeSecond.js = editor.getCode();
-    //     editor.ui = editor.injectCode(editor.ui,codeFirst);
-    //     codeFirst.js = editor.getCode();
-    //     editor.ui = editor.injectCode(editor.ui,codeSecond);
-    // }
-    console.log(codeFirst);
-    console.log(codeSecond);
-
+    if (codeFirst.edit) {
+        // Store the current code (XML). Necessary to avoid var names collisions.
+        codeFirst.xml = editor.storeCode(editor.ui);
+        // Injects and gets Code of the second user
+        editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
+        codeSecond.js = editor.getCode();
+        // Injects and gets Code of the first user, so that the state of the editor 
+        // remains the same
+        editor.ui = editor.injectCode(editor.ui,codeFirst.xml);
+        codeFirst.js = editor.getCode();
+    } else {
+        codeSecond.xml = editor.storeCode(editor.ui);
+        editor.ui = editor.injectCode(editor.ui,codeFirst.xml);
+        codeFirst.js = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
+        codeSecond.js = editor.getCode();
+    }
+    
+    /*var c1, c2;
+    if (editFirst) {
+        codeFirst = editor.storeCode(editor.ui);
+        //c1 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
+        c2 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeFirst);
+        c1 = editor.getCode();
+    } else {
+        codeSecond = editor.storeCode(editor.ui);
+        //c2 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeFirst);
+        c1 = editor.getCode();
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
+        c2 = editor.getCode();
+    }*/
+    console.log(codeFirst.js);
+    console.log(codeSecond.js);   
+    
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
         brains.stopBrain(editorRobot2);
       }else{
-        brains.resumeBrain(editorRobot1,codeFirst.js);
-        brains.resumeBrain(editorRobot2,codeSecond.js);
+        brains.resumeScratchBrain(editorRobot1,codeFirst.js);
+        brains.resumeScratchBrain(editorRobot2,codeSecond.js);
       }
     }else{
       brains.runScratchBrain(editorRobot1,codeFirst.js);
@@ -119,41 +148,61 @@ $(document).ready(async ()=>{
   });
 
   $('#firstRobot').click(()=>{
-    if(codeFirst.edit){
-      codeFirst.js = editor.getCode();
-      codeFirst.xml = editor.storeCode(editor.ui);
+    /*if(editFirst){
+      codeFirst = editor.storeCode(editor.ui);
     }
-    if(codeSecond.edit){
-      codeSecond.js = editor.getCode();
-      codeSecond.xml = editor.storeCode(editor.ui);
-      codeSecond.edit =false;
-      if(codeFirst.xml!=null){
-        //FALLO AL INYECTAR CÓDIGO
-        editor = editor.injectCode(editor.ui, codeFirst.xml);
+    if(editSecond){
+      codeSecond = editor.storeCode(editor.ui);
+      editSecond=false;
+      if(codeFirst==null){
+        editor = editor.injectCode(editor.ui, '<xml></xml>');
+      }else{
+        editor = editor.injectCode(editor.ui, codeFirst);
       }
     }
-    codeSecond.edit = true;
-    console.log(codeFirst);
-    console.log(codeSecond);
+    editFirst= true;*/
+    if(codeFirst.edit){
+      codeFirst.xml = editor.storeCode(editor.ui);
+    }     
+    if(codeSecond.edit){
+      codeSecond.xml = editor.storeCode(editor.ui);
+      codeSecond.edit = false;
+      if(codeFirst.xml == null){
+        editor.ui = editor.injectCode(editor.ui, '<xml></xml>');
+      } else{
+        editor.ui = editor.injectCode(editor.ui, codeFirst.xml);
+      }
+    }
+    codeFirst.edit = true;
   });
 
   $('#secondRobot').click(()=>{
-    if(codeSecond.edit){
-      codeFirst.js = editor.getCode();
-      codeSecond.xml = editor.storeCode(editor.ui);
+    /*if(editSecond){
+      codeSecond = editor.storeCode(editor.ui);
     }
+    if(editFirst){
+      codeFirst = editor.storeCode(editor.ui);
+      editFirst=false;
+      if(codeSecond==null){
+        editor.ui = editor.injectCode(editor.ui,'<xml></xml>');
+      }else{
+        editor.ui = editor.injectCode(editor.ui,codeSecond);
+      }
+    }
+    editSecond= true;*/
+    if(codeSecond.edit){
+      codeSecond.xml = editor.storeCode(editor.ui);
+    }     
     if(codeFirst.edit){
-      codeFirst.js = editor.getCode();
       codeFirst.xml = editor.storeCode(editor.ui);
-      codeFirst.edit=false;
-      if(codeSecond.xml!=null){
-        //FALLO AL INYECTAR CÓDIGO
-        editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
+      codeFirst.edit = false;
+      if(codeSecond.xml == null){
+        editor.ui = editor.injectCode(editor.ui, '<xml></xml>');
+      } else{
+        editor.ui = editor.injectCode(editor.ui, codeSecond.xml);
       }
     }
     codeSecond.edit = true;
-    console.log(codeFirst);
-    console.log(codeSecond);
   });
 
   $('#simButton').click(()=>{

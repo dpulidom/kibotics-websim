@@ -53,7 +53,7 @@ editor.setupBlockly = (workspace) =>{
   onresize();
   Blockly.svgResize(workspace);
   Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-
+  
   const drag = (e) => {
     document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
     blocklyArea.style.width = (e.pageX - bar.offsetWidth / 2) + 'px';
@@ -83,6 +83,7 @@ editor.toggleCamera = () =>{
 
 editor.injectCode = (workspace, xmlCodeText) =>{
   if (xmlCodeText != undefined){
+    workspace.clear();
     var xmlToInject = Blockly.Xml.textToDom(xmlCodeText);
     Blockly.Xml.domToWorkspace(xmlToInject, workspace);
     console.log("Code injected into workspace");
@@ -118,6 +119,7 @@ editor.saveCode = (demoWorkspace, socket) =>{
   console.log("Getting code from the embedded editor.")
   var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
   var xml_text = Blockly.Xml.domToText(xml);
+
   var message = {
       type: "save_scratch",
       content: xml_text
@@ -127,8 +129,7 @@ editor.saveCode = (demoWorkspace, socket) =>{
 }
 
 editor.storeCode = (demoWorkspace) =>{
-  //REVISITAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRR
-  console.log("Getting code from the embedded editor.")
+  console.log("Storing code from the embedded editor.")
   var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
   variables = xml.getElementsByTagName('variable');
   for (var v=0;v<variables.length;v++){
@@ -141,13 +142,12 @@ editor.storeCode = (demoWorkspace) =>{
   }
   fields = xml.getElementsByTagName('field');
   for (var f=0;f<fields.length;f++){
-    if (fields[f].innerHTML == "myRobot"){
+    if (fields[f].innerHTML == "myRobot"){      
         fields[f].id = editor.mainVarId;
     }
   }
   var xml_text = Blockly.Xml.domToText(xml);
-  //xml_text = xml_text.replace('<variables><variable type="" id="+gDVzTI%nKgp-?rh@/_o">myRobot</variable>','');
-  console.log(xml_text);
+  //console.log(xml_text);
   demoWorkspace.clear();
   return xml_text
 }
