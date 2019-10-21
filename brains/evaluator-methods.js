@@ -1,9 +1,14 @@
+export function runEvaluator(arrayRobots){
+  setInterval(progressBar,500,arrayRobots);
+  setTime(arrayRobots[0]);
+}
 
-export function progressBar(arrayRobots){
+function progressBar(arrayRobots){
   /**
   *This function do a progress bar and text how much percent walked each robot
   */
-  arrayRobots.forEach(function(robot){
+  arrayRobots.forEach(function(robotID){
+    let robot = Websim.robots.getHalAPI(robotID);
     var left=38.24 + robot.getPosition().x;
     var completed=(left*100)/78.48;
     var element = document.getElementById(robot.myRobotID+"bar");
@@ -17,9 +22,10 @@ export function progressBar(arrayRobots){
   });
 }
 
-export function setTime(robot){
+function setTime(robotID){
   /**This function do a cronometer and put it in index.html
   */
+  let robot=Websim.robots.getHalAPI(robotID)
   var time= document.getElementById("time");
   var id= setInterval(function(){
     if(robot.velocity.x>0){ // Maybe change the condition to when code is executed
