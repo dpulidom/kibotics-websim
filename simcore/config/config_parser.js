@@ -5,13 +5,13 @@ export async function parseObjects(childs, parentItem){
      * This function parses a JSON file recursively
      * creating all objects of the scene and setting
      * up its attributes
-     * 
+     *
      * @param {object} obj Json parsed object contiaining
      *                     tag, attributes and childs
-     * 
+     *
      * @param {object} parentItem HTML parent tag where new
      *                            elements wil be appended
-     * 
+     *
      * @return {Promise}
      */
     return new Promise(async (resolve, reject)=> {
@@ -41,10 +41,10 @@ export async function parseObjects(childs, parentItem){
 export function createElement(tag, obj){
   /**
    * Create elements filtering the ones with 'a-robot' tag
-   * 
+   *
    * @param {string} tag Tag used to create element at DOM
    * @param {object} object Contains attributes for the current object.
-   * 
+   *
    * @return {object} Object containing the new tag element to be inserted in DOM.
    */
   var element;
@@ -62,10 +62,10 @@ export function createElement(tag, obj){
 export function setAttributes(attr, element){
   /**
    * Sets up attributes for a given element in DOM
-   * 
+   *
    * @param {array} attr Array of attributes to add to current element
    * @param {object} element DOM element where attributes will be inserted
-   * 
+   *
    * @return {object} Input DOM element with configured attributes
    */
   for (var attrKey in attr) {
@@ -80,20 +80,20 @@ export function parseAssets(assets){
   /**
    * This function parses the scene element is exists
    * and sets up its attributes
-   * 
+   *
    * @param {object} sceneJSON JSON object containing scene attributes
    * @param {object} parentEl HTML object where scene element will be appended
-   * 
+   *
    * @return {Promise}
    */
   return new Promise((resolve, reject)=> {
     var scene = document.querySelector('a-scene');
     var assetsWrapper = document.createElement('a-assets');
-    
+
     for (var pos in assets){
       var tag = assets[pos]['tag'];
       var newElement = document.createElement(tag);
-      
+
       for (var attr in assets[pos]['attr']){
         newElement.setAttribute(attr, assets[pos]['attr'][attr]);
       }
@@ -108,10 +108,10 @@ export function parseScene(sceneJSON, parentEl){
   /**
    * This function parses the scene element is exists
    * and sets up its attributes
-   * 
+   *
    * @param {object} sceneJSON JSON object containing scene attributes
    * @param {object} parentEl HTML object where scene element will be appended
-   * 
+   *
    * @return {Promise}
    */
   return new Promise((resolve, reject) => {
@@ -121,6 +121,7 @@ export function parseScene(sceneJSON, parentEl){
     }
     parentEl.appendChild(scene);
     resolve(scene);
+    scene.systems.physics.driver.world.gravity.y = sceneJSON["gravity"];
   })
 }
 
@@ -128,7 +129,7 @@ export function parser(json){
   /**
    * This function splits parse function into parseScene
    * and parseObjects functions
-   * 
+   *
    * @param {object} json JSON object containing scene composition
    *                      and parent element to append the full scene
    */
@@ -151,10 +152,10 @@ export async function loadJSON(url) {
   /**
    * This function loads JSON configuration file
    * using AJAX protocol
-   * 
+   *
    * @param {string} url URL where the JSON file is located
-   * @param {function} callback Callback function to be executed when 
-   *                            response returned 
+   * @param {function} callback Callback function to be executed when
+   *                            response returned
    */
   return new Promise(async (resolve, reject) =>{
     var request = new XMLHttpRequest();
