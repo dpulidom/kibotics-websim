@@ -1,6 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
-
+import {runEvaluator} from '../../brains/evaluator-methods.js'
 var editorRobot1 = 'a-car1';
 var editorRobot2 = 'a-car2';
 
@@ -87,6 +87,6 @@ $(document).ready(async ()=>{
   // Init Websim simulator with config contained in the file passed
   // as parameter
   await Websim.config.init(config_file);
-
+  runEvaluator([editorRobot1,editorRobot2]);
   setInterval(brains.showThreads, 1000);
 });
