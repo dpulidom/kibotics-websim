@@ -57,24 +57,7 @@
                 }
             ]
         },
-        {
-            "tag": "a-gltf-model",
-            "attr": {
-                "position": { "x":1.06, "y":-0.32, "z":0.42},
-                "rotation": { "x":0, "y":6.58, "z":0},
-                "src": "../assets/models/bridge.gltf",
-                "scale": "12.46 13.88 14.98",
-                "dinamic-body":""
-            }
-        },
-        {
-            "tag": "a-box",
-            "attr": {
-                "position": { "x":15, "y":1, "z":-3},
-                "color": "#ff0000",
-                "dynamic-body":{"mass": 1}
-            }
-        },
+
         {
             "tag": "a-robot",
             "attr": {
@@ -146,6 +129,72 @@
                     ]
                 }
             ]
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 1
+                },
+                "position": { "x":-1.22, "y":0.24, "z":9.84 },
+                "rotation": { "x":-76.0, "y":-23.8, "z":0},
+                "width": "10",
+                "height": "5",
+                "src":"../assets/textures/line.png"
+            }
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 1
+                },
+                "position": { "x":0.40, "y":1.2, "z":6.24 },
+                "rotation": { "x":-75.9, "y":-23, "z":0},
+                "width": "10",
+                "height": "3.36",
+                "src":"../assets/textures/line.png"
+            }
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 1
+                },
+                "position": { "x":3.26, "y":1.58, "z":-0.42},
+                "rotation": { "x":-90, "y":-23, "z":0},
+                "width": "10",
+                "height": "12",
+                "src":"../assets/textures/line.png"
+
+            }
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 1
+                },
+                "position": { "x":6.16, "y":1.27, "z":-7.5},
+                "rotation": { "x":-98.8, "y":-18.5, "z":-1.18},
+                "width": "10",
+                "height": "3.86",
+                "src":"../assets/textures/line.png"
+            }
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 1
+                },
+                "position": { "x":7.40, "y":0.5, "z":-11.3 },
+                "rotation": { "x":-101, "y":-17.2, "z":0},
+                "width": "10",
+                "height": "5",
+                "src":"../assets/textures/line.png"
+            }
         },
         {
             "tag": "a-plane",
