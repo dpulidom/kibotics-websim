@@ -1,5 +1,5 @@
 export function runEvaluator(arrayRobots){
-  setInterval(progressBar,500,arrayRobots);
+  setInterval(progressBar,200,arrayRobots);
   setTime(arrayRobots[0]);
 }
 
@@ -35,7 +35,7 @@ function setTime(robotID){
         var realTime = new Date(new Date() - timeInitial);
         var formatTime = timeFormatter(realTime);
         time.innerHTML = "Tiempo: " + formatTime;
-      },100);
+      },500);
     }
   },500,robot,time);
 }
