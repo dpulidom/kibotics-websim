@@ -87,6 +87,6 @@ $(document).ready(async ()=>{
   // Init Websim simulator with config contained in the file passed
   // as parameter
   await Websim.config.init(config_file);
-  runEvaluator([editorRobot1,editorRobot2]);
+  runEvaluator([editorRobot1,editorRobot2],config_evaluator);
   setInterval(brains.showThreads, 1000);
 });

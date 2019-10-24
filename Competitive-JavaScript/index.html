@@ -8,13 +8,13 @@
     <script src="js/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="build/websim.bundle.js"></script>
     <script src="build/editor.bundle.js"></script>
-    <script>var config_file = '../assets/config/config-prueba.json';</script>
+    <script>var config_evaluator = "config_evaluator_forest.js";</script>
+    <script>var config_file = '../assets/config/config-forest_2.0.json';</script>
   </head>
   <body>
     <nav id="navbar">
       <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
       <div id="nav-button-container">
-        <!-- EDITAR PARA PONER BOTONES DEL EDITOR -->
         <button onclick id="firstRobot"><img src="../assets/resources/car1.svg" alt="First robot"/></button>
         <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/></button>
         <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
@@ -25,18 +25,8 @@
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <div class="evaluator">
-          <img class="carMarker" src="../assets/resources/car1.svg" alt="First robot"/>
-          <div id="car1Progress">
-            <div id="a-car1bar">0%</div>
-          </div>
-          <img class="carMarker" src="../assets/resources/car2.svg" alt="Second robot"/>
-          <div id="car2Progress">
-            <div id="a-car2bar">0%</div>
-          </div>
-        </div>
-        <div id="time">Tiempo: 00:00</div>
       </div>
+
       <div id="right-container">
         <div id="ace">
 // Press Ctrl-, to enter code editor configuration.
