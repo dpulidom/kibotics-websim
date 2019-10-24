@@ -20,7 +20,7 @@ var configWebsim = {
     ]
   },
   mode: 'development'
-}
+};
 
 var configScratch = {
   entry : {
@@ -44,11 +44,30 @@ var configScratch = {
     ]
   },
   mode: 'development'
-}
+};
 
 var configJavaScript = {
   entry : {
     editor: path.join(__dirname, 'JavaScript-editor/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+};
+
+var configPython = {
+  entry : {
+    editor: path.join(__dirname, 'Python-editor/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
@@ -81,6 +100,14 @@ var jsOutput = Object.assign({}, configWebsim, {
   }
 });
 
+var pythonOutput = Object.assign({}, configWebsim, {
+  name: "PythonAPP",
+  output: {
+    path: path.join(__dirname, "Python-editor/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
 var teleopOutput = Object.assign({}, configWebsim, {
   name: "TeleopAPP",
   output: {
@@ -105,5 +132,13 @@ var jsEditor = Object.assign({}, configJavaScript, {
   }
 });
 
+var pythonEditor = Object.assign({}, configPython, {
+  name: "PythonEditor",
+  output: {
+    path: path.join(__dirname, "Python-editor/build"),
+    filename: "[name].bundle.js"
+  }
+});
 
-module.exports = [scratchOutput, jsOutput, teleopOutput, scratchEditor, jsEditor];
+
+module.exports = [scratchOutput, jsOutput, teleopOutput, scratchEditor, jsEditor, pythonOutput, pythonEditor];
