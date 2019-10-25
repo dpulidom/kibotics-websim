@@ -5,7 +5,7 @@ brains.threadsBrains = [];
 brains.createThreadBrain = (code, myRobot)=>{
   let brainInterval = setInterval(()=>{
     eval(code);
-  }, 60);
+  }, 100;
   return brainInterval;
 }
 
