@@ -15,7 +15,7 @@ $(document).ready(()=>{
 
   $("#runbtn").click(()=>{
     var pythonCodeString = getCode(editor);
-    const request = new Request('http://127.0.0.1:8000/backend/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
+    const request = new Request('http://127.0.0.1:8000/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
     fetch(request)
       .then(response => {
         return response.text();
