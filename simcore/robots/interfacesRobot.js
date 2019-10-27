@@ -187,8 +187,8 @@ export class RobotI
       if (($('#spectatorDiv').length) && (document.querySelector("#spectatorDiv").firstChild != undefined)) {
         for(var i = 0; i < this.camerasData.length; i++){
           var canvasID = '#' + this.camerasData[i]['canvasID'];
-          this.canvas2d = document.querySelector(canvasID);
-          this.camerasData[i]['canvasElement'];
+          let canvas2d = document.querySelector(canvasID);
+          this.camerasData[i]['canvasElement'] = canvas2d;
         }
         this.getImageData_async();
       }else{
@@ -200,10 +200,9 @@ export class RobotI
       /**
        * Returns a screenshot from the robot camera
        */
-      for(var i = 0; i <= this.camerasData.length; i++){
-          console.log(this.camerasData[i]);
-
-      }
+      if (cameraID == undefined){ return this.camerasData[0].image; }
+      var camData = this.camerasData.find((camData)=> camData.cameraID == cameraID);
+      return camData.image;
     }
 
     getImageData_async(cameraID)
@@ -409,7 +408,7 @@ export class RobotI
       return { x:x , y:y , z:z , theta:rot };
     }
 
-    getObjectColor(colorAsString)
+    getObjectColor(colorAsString, camID)
     /*
       This function filters an object in the scene with a given color passed as string, uses OpenCVjs
       to filter by color and calculates the center of the object and the area.
@@ -417,7 +416,7 @@ export class RobotI
       Returns center: CenterX (cx), CenterY (cy) and the area of the object detected in the image.
     */
     {
-      var image = this.getImage();
+      var image = this.getImage(camID);
       var colorCodes = this.getColorCode(colorAsString);
       var binImg = new cv.Mat();
       var M = cv.Mat.ones(5, 5, cv.CV_8U);
@@ -445,7 +444,7 @@ export class RobotI
       return {center: [parseInt(cx), parseInt(cy)], area: parseInt(objArea)};
     }
 
-    getObjectColorRGB(lowval, highval)
+    getObjectColorRGB(lowval, highval, camID)
     /*
       This function filters an object in the scene with a given color, uses OpenCVjs to filter
       by color and calculates the center of the object.
@@ -453,7 +452,7 @@ export class RobotI
       Returns center: CenterX (cx), CenterY (cy) and the area of the object detected in the image.
     */
     {
-      var image = this.getImage();
+      var image = this.getImage(camID);
       var binImg = new cv.Mat();
       var M = cv.Mat.ones(5, 5, cv.CV_8U);
       var anchor = new cv.Point(-1, -1);
@@ -493,14 +492,14 @@ export class RobotI
       }
     }
 
-    followLine(lowval, highval, speed)
+    followLine(lowval, highval, speed, camID)
     /*
       This function is a simple implementation of follow line algorithm, the robot filters an object with
       a given color and follows it.
     */
     {
         if(this.simulationEnabled){
-          var data = this.getObjectColorRGB(lowval, highval); // Filters image
+          var data = this.getObjectColorRGB(lowval, highval, camID); // Filters image
 
           this.setV(speed);
 
@@ -516,14 +515,14 @@ export class RobotI
         }
     }
 
-    readIR(reqColor)
+    readIR(reqColor, camID)
     /*
       This function filters an object on the robot image and returns 0-1-2-3 depending of the
       position of the center on X axis for the detected object.
     */
     {
       var outputVal = 3;
-      var image = this.getImage();
+      var image = this.getImage(camID);
       var binImg = new cv.Mat();
       var colorCodes = this.getColorCode(reqColor);
       var contours = new cv.MatVector();
