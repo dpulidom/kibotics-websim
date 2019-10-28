@@ -144,11 +144,15 @@ export class RobotI
         This function will not be callable, use setV, setW or setL
       */
       if (this.simulationEnabled){
+        if(this.robot.body.position.y>1){ //to activate animation of drone
+          var robot = document.querySelector("#"+this.myRobotID);
+          robot.setAttribute('animation-mixer',"clip:*;timeScale:1.5");
+        }else{
+          var robot = document.querySelector("#"+this.myRobotID);
+          robot.setAttribute('animation-mixer',"clip:None");
+        }
         let rotation = this.getRotation();
-
-
         let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
-
         this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
         this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
       }
