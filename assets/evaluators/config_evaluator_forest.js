@@ -36,6 +36,8 @@ function createInterface(){
   var time = document.createElement("div");
   time.setAttribute("id","time");
   time.innerHTML="Tiempo: 00:00";
+  time.style.marginTop="-87px";
+  time.style.color="white";
   node.appendChild(time);
   var myiframe= document.getElementById("myIFrame");
   myiframe.insertBefore(node,myiframe.childNodes[0]);
