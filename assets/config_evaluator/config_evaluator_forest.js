@@ -2,8 +2,7 @@ var evaluator = {};
 
 evaluator.main= (arrayRobots)=>{
   createInterface();
-  setInterval(progressBar,200,arrayRobots);
-  setTime(arrayRobots[0]);
+  setEvaluator(arrayRobots);
 }
 
 function createInterface(){
@@ -42,39 +41,21 @@ function createInterface(){
   myiframe.insertBefore(node,myiframe.childNodes[0]);
 }
 
-function progressBar(arrayRobots){
-  /**
-  *This function do a progress bar and text how much percent walked each robot
-  */
-  arrayRobots.forEach(function(robotID){
-    let robot = Websim.robots.getHalAPI(robotID);
-    var left=38.24 + robot.getPosition().x;
-    var completed=(left*100)/78.48;
-    var element = document.getElementById(robot.myRobotID+"bar");
-    if((100-completed)>100){
-      element.style.width = 100 + '%';
-      element.innerHTML = 100 + '%';
-    }else{
-      element.style.width = Math.round(100-completed) + '%';
-      element.innerHTML = Math.round(100-completed) + '%';
-    }
-  });
-}
-
-function setTime(robotID){
+function setEvaluator(arrayRobots){
   /**This function do a cronometer and put it in index.html
   */
-  let robot=Websim.robots.getHalAPI(robotID)
+  let robot=Websim.robots.getHalAPI(arrayRobots[0]);
   var time= document.getElementById("time");
   var id= setInterval(function(){
     if(robot.velocity.x>0){ // Maybe change the condition to when code is executed
       clearInterval(id);
       var timeInitial = new Date();
       setInterval(function(){
+        progressBar(arrayRobots);
         var realTime = new Date(new Date() - timeInitial);
         var formatTime = timeFormatter(realTime);
         time.innerHTML = "Tiempo: " + formatTime;
-      },500);
+      },400);
     }
   },500,robot,time);
 }
@@ -93,6 +74,25 @@ function timeFormatter(time){
     formatTime+=time.getSeconds();
   }
   return formatTime;
+}
+
+function progressBar(arrayRobots){
+  /**
+  *This function do a progress bar and text how much percent walked each robot
+  */
+  arrayRobots.forEach(function(robotID){
+    let robot = Websim.robots.getHalAPI(robotID);
+    var left=38.24 + robot.getPosition().x;
+    var completed=(left*100)/78.48;
+    var element = document.getElementById(robot.myRobotID+"bar");
+    if((100-completed)>100){
+      element.style.width = 100 + '%';
+      element.innerHTML = 100 + '%';
+    }else{
+      element.style.width = Math.round(100-completed) + '%';
+      element.innerHTML = Math.round(100-completed) + '%';
+    }
+  });
 }
 
 module.exports = evaluator;
