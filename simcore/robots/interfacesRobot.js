@@ -156,7 +156,7 @@ export class RobotI
         this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
         this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
       }
-      this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 30);
+      this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 50);
     }
 
     updatePosition(rotation, velocity, robotPos){
@@ -222,7 +222,7 @@ export class RobotI
           this.camerasData[i]['image'] = cv.imread(this.camerasData[i]['canvasID']);
         }
       }
-      this.timeoutCamera = setTimeout(this.getImageData_async.bind(this), 33);
+      this.timeoutCamera = setTimeout(this.getImageData_async.bind(this), 60);
     }
 
     startRaycasters(distance, numOfRaycasters)
