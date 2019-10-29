@@ -79,6 +79,7 @@ html, body{
 .evaluator {
   /* background: rgba(0, 0, 0, 0); */
   width: 40%;
+  height: 10%;
   opacity: 0.5;
   line-height: 200px;
   color: white;
@@ -94,8 +95,8 @@ html, body{
 }
 
 #car1Progress{
-  margin-top: 5px;
   width: 100%;
+  margin-top: 5px;
   background-color: #ffa500;
 }
 
@@ -122,6 +123,8 @@ html, body{
   text-align: center;
   font-family: sans-serif;
   color:white;
+  font-size: x-large;
+  margin-top: -81px;
 }
 
 #cambtn:hover {

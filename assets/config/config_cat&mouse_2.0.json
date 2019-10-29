@@ -1,0 +1,151 @@
+{
+    "scene-parent-id": "myIFrame",
+    "scene": {
+        "id": "scene",
+        "gravity": 0,
+        "sky": "../assets/textures/sky.png",
+        "background": "color: gray;",
+        "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
+        "embedded": true,
+        "stats": false,
+        "physics": "debug: true"
+    },
+    "assets": [
+        {
+            "tag": "img",
+            "attr": {
+                "id": "ground",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/escenarioLiso-min.png"
+            }
+        },
+        {
+            "tag": "a-asset-item",
+            "attr": {
+                "id": "model-pibot"
+            }
+        },
+        {
+            "tag": "img",
+            "attr": {
+                "id": "sky",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/sky.png"
+            }
+        }
+    ],
+    "objects":[
+        {
+            "tag": "a-entity",
+            "attr": {
+                "id": "sceneCamWrapper",
+                "position":{ "x":1, "y":9, "z":15},
+                "rotation": { "x":0, "y":0, "z":0},
+                "movement-controls": "fly:true"
+            },
+            "childs": [
+                {
+                    "tag": "a-camera",
+                    "attr": {
+                        "id": "sceneCam",
+                        "position": { "x":0, "y":0, "z":0},
+                        "rotation": { "x":0, "y":0, "z":0},
+                        "active": true,
+                        "wasd-controls-enabled": true,
+                        "look-controls-enabled": true
+                    }
+                }
+            ]
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 100000
+                },
+                "position": { "x":0, "y":0, "z":0 },
+                "rotation": { "x":-90, "y":0, "z":0 },
+                "width": "100",
+                "height": "100",
+                "src":"#ground"
+            }
+        },
+        {
+            "tag": "a-sky",
+            "attr": {
+                "src": "#sky"
+            }
+        },
+        {
+            "tag": "a-robot",
+            "attr": {
+                "id": "a-car1",
+                "gltf-model":"../assets/models/red_drone.gltf",
+                "scale": { "x":0.5, "y":0.5, "z":0.5},
+                "position": { "x":0, "y":0.5, "z":0},
+                "rotation": { "x":0, "y":90, "z":0},
+                "dynamic-body":{"mass": 1}
+
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 2.8, "y": 0.1, "z": -0.1},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "a-robot",
+            "attr": {
+                "id": "a-car2",
+                "gltf-model":"../assets/models/drone_animation.gltf",
+                "scale": { "x":0.5, "y":0.5, "z":0.5},
+                "position": { "x":12.56, "y":1, "z":20.50},
+                "rotation": { "x":-2.66, "y":-26.02, "z":0},
+                "dynamic-body":{"mass": 1}
+
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        }]
+  }
