@@ -8,9 +8,7 @@
     <script src="js/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="build/websim.bundle.js"></script>
     <script src="build/editor.bundle.js"></script>
-    <script>var config_file = '../../assets/config/config_bump&go.json';</script>
-    <script src="../simcore/utils/config.js"></script>
-    <script src="../simcore/utils/websim-utils.js"></script>
+    <script>var config_file = '../assets/config/config_pibotIR_2.0.json';</script>
   </head>
   <body>
     <nav id="navbar">
@@ -18,96 +16,40 @@
       <div id="nav-button-container">
         <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
         <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
-        <button onclick id="spectatorCamera"><img src="../assets/resources/focus.svg" alt="Change spectator camera"/></button>
+        <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
         <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
       </div>
     </nav>
     <div id="container">
       <div id="myIFrame">
-        <a-scene id="scene" background="color: gray;" stats embedded physics="debug: true" inspector="url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js">
-          <a-assets>
-            <a-asset-item id="model-pibot"></a-asset-item>
-            <img id="ground" alt="Texture for the scene ground"/>
-            <img id="sky" alt="Texture for the sky of the scene"/>
-            <!-- <a-asset-item id="couch" src="../assets/models/room/couch.gltf"></a-asset-item> -->
-          </a-assets>
-
-          <!-- Pibot, which body is the asset item with ID = model-pibot -->
-          <a-entity bind="text.value: score"></a-entity>
-          <a-entity dynamic-body="mass: 1" id="a-pibot">
-            <a-entity id="secondaryCamera" rotation="-20 -90 0" >
-              <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
-              <a-camera id="cameraRobot" spectator="canvas:#spectatorDiv;" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
-            </a-entity>
-            <a-entity id="subjCameraWrapper" position="-0.3 0.3 0" rotation="-20 -90 0" >
-              <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
-              <a-camera id="subjCamera" active="true" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
-            </a-entity>
-            <a-entity id="firstPersonWrapper" position="0 0.1 0" rotation="-20 -90 0" >
-          <!-- Create a second third-person camera which cant be controlled, the Pibot camera -->
-          <a-camera id="firstPersonCamera" active="false" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
-        </a-entity>
-          </a-entity>
-          <!-- <a-entity class="collidable" collada-model="#couch" scale="6 6 6" position="0 0 0"> -->
-          <a-plane static-body position="0 0 0"
-                   rotation="-90 0 0"
-                   width="100"
-                   height="100"
-                   repeat="1 1"
-                   src="#ground">
-          </a-plane>
-          <a-sky src="#sky"></a-sky>
-
-          <!-- Illumination -->
-          <a-light type="ambient" color="white"></a-light>
-
-          <a-entity id="cameraWrapper" movement-controls="fly:true" position="10 10 0">
-            <a-entity id="primaryCamera" camera look-controls wasd-controls scale="10 10 10" ></a-entity>
-        </a-entity>
-        </a-scene>
-        <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
       </div>
-      <div id="scriptContainer"></div>
       <div id="right-container">
         <div id="ace">
-// Press Ctrl-, to enter code editor configuration.
-/*
-A global variable called myRobot that
-contains robot instance,
-you can call the robot API
-shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
 
-Example:
-  myRobot.move(0.2, 0.2);
-*/
-mainInterval = setInterval(myAlgorithm, 33);
+          // Press Ctrl-, to enter code editor configuration.
+          /*
+          A global variable called myRobot that
+          contains robot instance,
+          you can call the robot API
+          shown in https://github.com/JdeRobot/WebSim/blob/master/README.md
 
-async function myAlgorithm(){
-  // Insert code here
-  //myRobot.setL(0.3);
-  var sensor = myRobot.getDistance();
-  console.log(sensor);
-  myRobot.setW(0);
-  myRobot.setV(2);
-  if(sensor && sensor<6){
-    myRobot.setV(0);
-    myRobot.setW(-0.5);
-    await sleep2(2000);
-  }
-}
+          Example:
+            myRobot.move(0.2, 0.2);
+          */
 
+          async function myAlgorithm(){
+            myRobot.move(0.5, 0.5, 0);
+            console.log('Executing')
+           }
         </div>
         <div id="cameras" style="display:inline-flex;">
-          <div id="cameraOpenCV" style="margin-left: 5px;">
-            <p>OpenCV image</p>
-            <canvas id="outputCanvas" ></canvas>
-          </div>
-          <div id="robotCam">
+          <div id="robotCam" style="margin: 3px;">
             <p>Robot Camera</p>
-            <div id="spectatorDiv" style="width: 150px; height: 100px;"></div>
+            <div id="spectatorDiv" style="display: inline"></div>
           </div>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
   </body>
 </html>

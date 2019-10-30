@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebSim - Competitive-Scratch </title>
+    <meta charset="utf-8" />
+    <!-- Physics for A-Frame VR -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <script src="build/websim.bundle.js"></script>
+    <script src="build/editor.bundle.js"></script>
+    <script src="google-blockly/blockly_compressed.js"></script>
+    <script src="google-blockly/blocks_compressed.js"></script>
+    <script src="google-blockly/msg/js/es.js"></script>
+    <script src="google-blockly/core/css.js"></script>
+    <script src="google-blockly/core/block_render_svg.js"></script>
+    <script src="google-blockly/javascript_compressed.js"></script>
+    <script src="google-blockly/python_compressed.js"></script>
+    <script>var config_file = '../assets/config/config_competitive_2.0.json';</script>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="/"><img src="../assets/resources/jderobot.svg" style="width:70px; height:70px; margin-top: 6px;" /></a>
+    </nav>
+    <div id="container">
+      <!-- EDITOR -->
+      <div id="editor" class="editor">
+          <div id="buttons" style="background-color:#d3dae5">
+              <button onclick id="firstRobot"><img src="../assets/resources/car1.svg" alt="First robot"/><span class="glyphicon glyphicon-play"></span>Robot 1</button>
+            <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/><span class="glyphicon glyphicon-play"></span>Robot 2</button>
+              <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
+              <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+              <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
+              <!--<button onclick id="spectatorCamera" class="editor-button"><span class="glyphicon glyphicon-eye-open"></span> Espectador</button></button>-->
+              <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+              <!--<button onclick id="saveCode" disabled class="editor-button"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>-->
+              <!--<button onclick id="blocklyToPython" class="editor-button">Descarga Local</button>-->
+              <!--<button onclick id="injectCode" class="editor-button">Inyectar XML</button>-->
+          </div>
+        <div id="blockly-div" class="blockly-container">
+        <xml id="toolbox" style="display: none">
+          <category name="Variables" custom="VARIABLE"></category>
+          <category name="Text" colour="%{BKY_MATH_HUE}">
+            <block type="text"></block>
+          </category>
+          <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+            <category name="If">
+              <block type="controls_if"></block>
+            </category>
+            <category name="Boolean" colour="%{BKY_LOGIC_HUE}">
+              <block type="logic_compare"></block>
+              <block type="logic_operation"></block>
+              <block type="logic_negate"></block>
+              <block type="logic_boolean"></block>
+              <block type="logic_null"></block>
+              <block type="logic_ternary"></block>
+            </category>
+          </category>
+          <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+            <block type="controls_repeat_ext">
+              <value name="TIMES">
+                <block type="math_number">
+                  <field name="NUM">10</field>
+                </block>
+              </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+              <field name="VAR">i</field>
+              <value name="FROM">
+                <block type="math_number">
+                  <field name="NUM">1</field>
+                </block>
+              </value>
+              <value name="TO">
+                <block type="math_number">
+                  <field name="NUM">10</field>
+                </block>
+              </value>
+              <value name="BY">
+                <block type="math_number">
+                  <field name="NUM">1</field>
+                </block>
+              </value>
+            </block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+            <block type="set_interval"></block>
+          </category>
+          <category name="Math" colour="%{BKY_MATH_HUE}">
+            <block type="math_number">
+              <field name="NUM">123</field>
+            </block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_trig"></block>
+            <block type="math_constant"></block>
+            <block type="math_number_property"></block>
+            <block type="math_round"></block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo"></block>
+            <block type="math_constrain">
+              <value name="LOW">
+                <block type="math_number">
+                  <field name="NUM">1</field>
+                </block>
+              </value>
+              <value name="HIGH">
+                <block type="math_number">
+                  <field name="NUM">100</field>
+                </block>
+              </value>
+            </block>
+            <block type="math_random_int">
+              <value name="FROM">
+                <block type="math_number">
+                  <field name="NUM">1</field>
+                </block>
+              </value>
+              <value name="TO">
+                <block type="math_number">
+                  <field name="NUM">100</field>
+                </block>
+              </value>
+            </block>
+            <block type="math_random_float"></block>
+          </category>
+          <category name="Lists" colour="%{BKY_LISTS_HUE}">
+            <block type="lists_create_empty"></block>
+            <block type="lists_create_with"></block>
+            <block type="lists_repeat">
+              <value name="NUM">
+                <block type="math_number">
+                  <field name="NUM">5</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="lists_indexOf"></block>
+            <block type="lists_getIndex"></block>
+            <block type="lists_setIndex"></block>
+          </category>
+          <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
+          </category>
+          <category name="RobotAPI">
+            <category name="Constructor" colour=%{BKY_LOGIC_HUE}>
+              <block type="robot_instance"></block>
+            </category>
+            <category name="Motors" colour='%{BKY_MATH_HUE}'>
+              <block type="move_forward"></block>
+              <block type="move_backward"></block>
+              <block type="move_combined"></block>
+              <block type="getLinearSpeed"></block>
+              <block type="getAngularSpeed"></block>
+              <block type="getLateralSpeed"></block>
+              <block type="turn_left"></block>
+              <block type="turn_right"></block>
+              <block type="set_lateral"></block>
+              <block type="stop_robot"></block>
+              <block type="takeoff"></block>
+              <block type="land"></block>
+              <block type="move_forward_to"></block>
+              <block type="move_backward_to"></block>
+              <block type="turn_left_to"></block>
+              <block type="turn_right_to"></block>
+            </category>
+            <category name="Camera" colour='%{BKY_LISTS_HUE}'>
+              <block type="get_image"></block>
+              <block type="get_objcolor"></block>
+            </category>
+            <category name="Tools" colour=%{BKY_LOOPS_HUE}>
+              <block type="set_timeout"></block>
+              <block type="start"></block>
+              <block type="logs"></block>
+              <block type="imgto_canvas"></block>
+              <block type="wait_block"></block>
+            </category>
+            <category name="Sensors" colour="%{BKY_VARIABLES_DYNAMIC_HUE}">
+              <block type="get_distance"></block>
+              <block type="get_distances"></block>
+              <block type="get_position"></block>
+              <block type="read_ir"></block>
+            </category>
+          </category>
+        </xml>
+      </div>
+        <div id="cameras" style="display:inline-flex;">
+          <div id="cameraOpenCV" style="margin-left: 5px; margin-right: 15px;">
+            <p>OpenCV image</p>
+            <canvas id="outputCanvas" style="width:150px; height:100px; display: none" ></canvas>
+          </div>
+          <div id="robotCam">
+            <p>Robot Camera</p>
+            <div id="spectatorDiv" style="width: 150px; height: 100px;"></div>
+          </div>
+        </div>
+      </div>
+      <div id="dragbar" class="dragbar"></div>
+      <!-- SIMULADOR -->
+      <div id="myIFrame" class="myIFrame">
+        <!-- config.json -->
+      </div>
+    </div>
+  <script type="text/javascript" src="opencv/opencv3.3.1.js" ></script>
+  </body>
+</html>

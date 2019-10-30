@@ -1,0 +1,126 @@
+{
+    "scene-parent-id": "myIFrame",
+    "scene": {
+        "id": "scene",
+        "gravity": -9.8,
+        "sky": "../assets/textures/sky.png",
+        "background": "color: gray;",
+        "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
+        "embedded": true,
+        "stats": false,
+        "physics": "debug: true"
+    },
+    "assets": [
+        {
+            "tag": "img",
+            "attr": {
+                "id": "ground",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/escenarioLiso-min.png"
+            }
+        },
+        {
+            "tag": "a-asset-item",
+            "attr": {
+                "id": "model-pibot"
+            }
+        },
+        {
+            "tag": "img",
+            "attr": {
+                "id": "sky",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/sky.png"
+            }
+        }
+    ],
+    "objects":[
+        {
+            "tag": "a-entity",
+            "attr": {
+                "id": "sceneCamWrapper",
+                "position":{ "x":1, "y":9, "z":15},
+                "rotation": { "x":0, "y":0, "z":0},
+                "movement-controls": "fly:true"
+            },
+            "childs": [
+                {
+                    "tag": "a-camera",
+                    "attr": {
+                        "id": "sceneCam",
+                        "position": { "x":0, "y":0, "z":0},
+                        "rotation": { "x":0, "y":0, "z":0},
+                        "active": true,
+                        "wasd-controls-enabled": true,
+                        "look-controls-enabled": true
+                    }
+                }
+            ]
+        },
+        {
+            "tag": "a-robot",
+            "attr": {
+                "id": "a-car1",
+                "gltf-model":"../assets/models/jrobotFgltf.gltf",
+                "scale": { "x":20, "y":20, "z":20},
+                "position": { "x":12, "y":0.5, "z":25},
+                "rotation": { "x":0, "y":320, "z":0},
+                "dynamic-body":{"mass": 500}
+
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "a-sphere",
+            "attr": {
+                "position": { "x":4, "y":2, "z":20},
+                "color": "#ff0000",
+                "radius": "1.5",
+                "animation": "property: position; to: -15 2 5; dir: alternate; dur: 10000; loop: true",
+                "animation__2": "property: position; from: -15 2 5 ;to:20 2 10 ; delay: 10000; dir: alternate; dur: 10000; loop: true",
+                "animation__3": "property: position; from: 20 2 10;to: 15 2 -30 ; delay: 20000; dir: alternate; dur: 10000; loop: true"
+            }
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 100000
+                },
+                "position": { "x":0, "y":0, "z":0 },
+                "rotation": { "x":-90, "y":0, "z":0 },
+                "width": "100",
+                "height": "100",
+                "src":"#ground"
+            }
+        },
+        {
+            "tag": "a-sky",
+            "attr": {
+                "src": "#sky"
+            }
+        }]
+  }

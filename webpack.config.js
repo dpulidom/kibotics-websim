@@ -84,6 +84,44 @@ var configPython = {
   mode: 'development'
 }
 
+var configJavaScriptCompetitive = {
+  entry : {
+    editor: path.join(__dirname, 'Competitive-JavaScript/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
+var configScratchCompetitive = {
+  entry : {
+    editor: path.join(__dirname, 'Competitive-Scratch/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+}
+
 var scratchOutput = Object.assign({}, configWebsim, {
   name: "ScratchAPP",
   output: {
@@ -100,10 +138,18 @@ var jsOutput = Object.assign({}, configWebsim, {
   }
 });
 
-var pythonOutput = Object.assign({}, configWebsim, {
-  name: "PythonAPP",
+var jsCompetitiveOutput = Object.assign({}, configWebsim, {
+  name: "CompetitiveJavaScriptAPP",
   output: {
-    path: path.join(__dirname, "Python-editor/build/"),
+    path: path.join(__dirname, "Competitive-JavaScript/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
+var scratchCompetitiveOutput = Object.assign({}, configWebsim, {
+  name: "CompetitiveScratchAPP",
+  output: {
+    path: path.join(__dirname, "Competitive-Scratch/build/"),
     filename: "[name].bundle.js"
   }
 });
@@ -132,13 +178,20 @@ var jsEditor = Object.assign({}, configJavaScript, {
   }
 });
 
-var pythonEditor = Object.assign({}, configPython, {
-  name: "PythonEditor",
+var jsCompetitiveEditor = Object.assign({}, configJavaScriptCompetitive, {
+  name: "CompetitiveJavaScript",
   output: {
-    path: path.join(__dirname, "Python-editor/build"),
+    path: path.join(__dirname, "Competitive-JavaScript/build"),
     filename: "[name].bundle.js"
   }
 });
 
+var scratchCompetitiveEditor = Object.assign({}, configScratchCompetitive, {
+  name: "CompetitiveScratch",
+  output: {
+    path: path.join(__dirname, "Competitive-Scratch/build"),
+    filename: "[name].bundle.js"
+  }
+});
 
-module.exports = [scratchOutput, jsOutput, teleopOutput, scratchEditor, jsEditor, pythonOutput, pythonEditor];
+module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor, scratchCompetitiveEditor];
