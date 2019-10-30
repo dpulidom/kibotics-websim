@@ -207,7 +207,15 @@ export class RobotI
           console.log(this.camerasData[i]);
 
       }*/
-      return this.camerasData[0]['image']
+      if (this.camerasData.length == 1) {
+        // Robots with one camera get the only one available
+        return this.camerasData[0]['image'];
+      } else {
+        // Robots with two or more cameras
+        // ToDo
+        return this.camerasData[0]['image'];
+      }
+
     }
 
     getImageData_async(cameraID)

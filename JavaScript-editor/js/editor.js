@@ -48,5 +48,5 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
 
-  setInterval(brains.showThreads, 1000);
+  //setInterval(brains.showThreads, 1000);
 });

@@ -88,5 +88,5 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
   runEvaluator([editorRobot1,editorRobot2],config_evaluator);
-  setInterval(brains.showThreads, 1000);
+  //setInterval(brains.showThreads, 1000);
 });

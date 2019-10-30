@@ -107,7 +107,7 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
 
-  setInterval(editor.showThreads, 1000);
+  //setInterval(editor.showThreads, 1000);
 
 });
 
