@@ -20,7 +20,7 @@ var configWebsim = {
     ]
   },
   mode: 'development'
-}
+};
 
 var configScratch = {
   entry : {
@@ -44,11 +44,30 @@ var configScratch = {
     ]
   },
   mode: 'development'
-}
+};
 
 var configJavaScript = {
   entry : {
     editor: path.join(__dirname, 'JavaScript-editor/js/editor.js')
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module:{
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: "/node_modules/"
+      }
+    ]
+  },
+  mode: 'development'
+};
+
+var configPython = {
+  entry : {
+    editor: path.join(__dirname, 'Python-editor/js/editor.js')
   },
   resolve: {
     extensions: ['.js']
