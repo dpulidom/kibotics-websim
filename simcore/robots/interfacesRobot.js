@@ -62,10 +62,9 @@ export class RobotI
        *
        */
       var sceneCameras = document.getElementsByTagName('a-camera');
-
       for(var i = 0; i < sceneCameras.length; i++){
         var cameraID = sceneCameras[i].getAttribute('id');
-        if (cameraID.includes(this.myRobotID)){
+        if (cameraID.includes(this.myRobotID)){ 
           this.camerasData.push(
             {
               'wrapperID': cameraID + 'Wrapper',
@@ -204,10 +203,11 @@ export class RobotI
       /**
        * Returns a screenshot from the robot camera
        */
-      for(var i = 0; i <= this.camerasData.length; i++){
+      /*for(var i = 0; i <= this.camerasData.length; i++){
           console.log(this.camerasData[i]);
 
-      }
+      }*/
+      return this.camerasData[0]['image']
     }
 
     getImageData_async(cameraID)
