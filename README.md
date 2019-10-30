@@ -1,5 +1,5 @@
 
-# WebSim repository
+# WebSim 1.0 repository
 
 Web robot simulator using A-Frame technologies.
 
@@ -167,7 +167,7 @@ Webpack is configured on this project with different modes with 2 different comm
 ## Integration with Official Production Server <a name="integration_server"></a>
 
 In order to integrate Websim simulator with the production sevrer (Kibotics), there are two steps to follow:
-1. Generate the bundles through webpack 
+1. Generate the bundles through webpack
 2. Copy the generated files in the server
 
 **WARNING**: DO NOT upload the bundle files, neither the `/build` directories, to this repository, so potential problems with broken bundle files are not propagated and are therefore avoided.
