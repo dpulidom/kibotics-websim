@@ -29,7 +29,8 @@ html, body{
 }
 
 .editor-button{
-  padding: 5px 10px;
+  padding: 5px 8px;
+  height: 100px;
 }
 
 .simulator{
@@ -67,6 +68,18 @@ html, body{
     background-color: #3190f7;
     color: white;
 }
+
+#simButton {
+    background-color: #e6e6e6;
+    color: black;
+    /*border: 2px solid #ACFF00;*/
+}
+
+#simButton:hover {
+    background-color: #3190f7;
+    color: white;
+}
+
 #spectatorCamera {
     background-color: #e6e6e6;
     color: black;
@@ -141,6 +154,38 @@ html, body{
 
 #cambtn>img{
   width: 36px;
+  height: 36px;
+}
+
+#firstRobot {
+    background-color: #e6e6e6;
+    color: black;
+    /*border: 2px solid #6b38d1;*/
+}
+
+#firstRobot:hover {
+  background-color: #3190f7;
+  color: white;
+}
+
+#firstRobot img{
+  width: 55px;
+  height: 45px;
+}
+
+#secondRobot {
+    background-color: #e6e6e6;
+    color: black;
+    /*border: 2px solid #6b38d1;*/
+}
+
+#secondRobot:hover {
+  background-color: #3190f7;
+  color: white;
+}
+
+#secondRobot>img{
+  width: 46px;
   height: 36px;
 }
 

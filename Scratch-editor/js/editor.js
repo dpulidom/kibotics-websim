@@ -30,6 +30,7 @@ import initMoveBackwardToBlock from '../customBlocks/moveBackwardToBlock.js'
 import initMoveForwardToBlock from '../customBlocks/moveForwardToBlock.js'
 import initTurnLeftToBlock from '../customBlocks/turnLeftToBlock.js'
 import initTurnRightToBlock from '../customBlocks/turnRightToBlock.js'
+import initGetImageOfBlock from '../customBlocks/getImageOfBlock.js'
 
 // Load enviroment variables defined in the html template
 var wsUri = window.wsUri;
@@ -40,7 +41,23 @@ console.log("----------------------===========----------------");
 //var userCode = window.userCode;
 var socket = "";
 
-var editorRobot1 = 'a-pibot'; //id del robot (fichero json)
+// parse A-Frame config
+var r = new XMLHttpRequest();
+r.overrideMimeType("application/json");
+r.open('GET', config_file, false);
+r.send(null);
+if (r.status == 200){
+  var f = JSON.parse(r.responseText);
+}
+// Identify robot ID
+var robID;
+for (var obj in f.objects) {
+    if (f.objects[obj].tag == 'a-robot') {
+        robID = f.objects[obj].attr.id;
+    }
+}
+
+var editorRobot1 = robID; //id del robot (fichero json)
 
 $(document).ready(async ()=>{
   configureCustomBlocks();
@@ -64,6 +81,16 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
+    var iconRunBtn = document.querySelector("#runbtn").firstChild;
+    if ($(iconRunBtn).hasClass("glyphicon-stop")){
+        iconRunBtn.classList.remove("glyphicon-stop");
+        iconRunBtn.classList.add("glyphicon-play");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Pausar Código', 'Ejecutar Código');
+    } else {
+        iconRunBtn.classList.remove("glyphicon-play");
+        iconRunBtn.classList.add("glyphicon-stop");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Ejecutar Código','Pausar Código');
+    }
 
     var code = editor.getCode()
     console.log(code);
@@ -71,7 +98,7 @@ $(document).ready(async ()=>{
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
       } else {
-        brains.resumeBrain(editorRobot1,code);
+        brains.resumeScratchBrain(editorRobot1,code);
       }
     }else{
       brains.runScratchBrain(editorRobot1,code);
@@ -95,7 +122,16 @@ $(document).ready(async ()=>{
   });
 
   $('#simButton').click(()=>{
+    var imageSimBtn = document.querySelector("#simButton").firstChild;
     Websim.simulation.toggleSimulation();
+
+    if(imageSimBtn.src.indexOf('play-icon.png') == -1){
+      imageSimBtn.src = "../../assets/resources/play-icon.png"
+      document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Pausar Simulación', 'Reanudar Simulación');
+    }else{
+      imageSimBtn.src = "../../assets/resources/stop-icon.png"
+      document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Reanudar Simulación','Pausar Simulación');
+    }
   });
 
   // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoid error with no registered users
@@ -142,4 +178,5 @@ function configureCustomBlocks() {
   initMoveForwardToBlock();
   initTurnLeftToBlock();
   initTurnRightToBlock();
+  initGetImageOfBlock();
 }
