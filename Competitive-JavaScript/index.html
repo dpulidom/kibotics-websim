@@ -9,8 +9,8 @@
     <script src="build/websim.bundle.js"></script>
     <script src="build/editor.bundle.js"></script>
     <script type="text/javascript" src="../js/jsgl.min.js"></script>
-     <script>var config_evaluator = "config_evaluator_forest.js";</script>
-  <script>var config_file = '../assets/config/config-prueba.json';</script>
+    <script>var config_evaluator = "config_evaluator_follow_line.js";</script> 
+  <script>var config_file = '../assets/config/config_competitive_2.0.json';</script>
   </head>
   <body>
     <nav id="navbar">
@@ -41,10 +41,24 @@ Example:
   myRobot.move(0.2, 0.2);
 */
 
+
+
+
 async function myAlgorithm(){
-  myRobot.move(2, 2, 0);
-  console.log('Executing')
+ var camara=myRobot.getObjectColor("white");
+ console.log(camara);
+ myRobot.setV(1);
+ myRobot.setW(0);
+
+ if(camara.center[0]<40){
+   myRobot.setW(0.4);
+ }else if(camara.center[0]>70){
+   myRobot.setW(-0.4);
  }
+}
+
+
+
         </div>
         <div id="cameras" style="display:inline-flex;">
           <div id="robotCam" style="margin: 3px;">

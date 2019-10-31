@@ -67,10 +67,10 @@
               "static-body": {
                   "mass": 1
               },
-              "position": { "x":3.26, "y":1.58, "z":-0.42},
+              "position": { "x":3.22, "y":1.58, "z":-0.46},
               "rotation": { "x":-90, "y":-23, "z":0},
               "width": "10",
-              "height": "12",
+              "height": "11.61",
               "src":"../assets/textures/line.png"
 
           }
@@ -143,8 +143,8 @@
                 "id": "a-car1",
                 "gltf-model":"../assets/models/f1_renault.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":-7, "y":0, "z":15.66},
-                "rotation": { "x":0, "y":70, "z":0},
+                "position": { "x":12.90, "y":0, "z":15.66},
+                "rotation": { "x":0, "y":133.14, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
@@ -153,7 +153,7 @@
                     "tag": "a-entity",
                     "attr": {
                         "id": "a-car1Wrapper",
-                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "position": { "x": 0.04, "y": 0.03, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
                     "childs": [
@@ -179,8 +179,8 @@
                 "id": "a-car2",
                 "gltf-model":"../assets/models/f1_williams.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":12.56, "y":1, "z":20.50},
-                "rotation": { "x":-2.66, "y":-26.02, "z":0},
+                "position": { "x":10.82, "y":1, "z":19.82},
+                "rotation": { "x":-2.66, "y":133, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
@@ -189,7 +189,7 @@
                     "tag": "a-entity",
                     "attr": {
                         "id": "a-car2Wrapper",
-                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "position": { "x": 0.04, "y": 0.03, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
                     "childs": [
