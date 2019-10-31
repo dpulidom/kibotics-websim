@@ -1,5 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
+import {runEvaluator} from '../../brains/evaluator-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
