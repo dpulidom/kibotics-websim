@@ -138,6 +138,14 @@ var jsOutput = Object.assign({}, configWebsim, {
   }
 });
 
+var pythonOutput = Object.assign({}, configWebsim, {
+  name: "PythonAPP",
+  output: {
+    path: path.join(__dirname, "Python-editor/build/"),
+    filename: "[name].bundle.js"
+  }
+});
+
 var jsCompetitiveOutput = Object.assign({}, configWebsim, {
   name: "CompetitiveJavaScriptAPP",
   output: {
@@ -178,6 +186,14 @@ var jsEditor = Object.assign({}, configJavaScript, {
   }
 });
 
+var pythonEditor = Object.assign({}, configPython, {
+  name: "PythonEditor",
+  output: {
+    path: path.join(__dirname, "Python-editor/build"),
+    filename: "[name].bundle.js"
+  }
+});
+
 var jsCompetitiveEditor = Object.assign({}, configJavaScriptCompetitive, {
   name: "CompetitiveJavaScript",
   output: {
@@ -194,4 +210,5 @@ var scratchCompetitiveEditor = Object.assign({}, configScratchCompetitive, {
   }
 });
 
-module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor, scratchCompetitiveEditor];
+
+module.exports = [scratchOutput, jsOutput, teleopOutput, jsCompetitiveOutput, scratchCompetitiveOutput, scratchEditor, jsEditor,jsCompetitiveEditor, scratchCompetitiveEditor, pythonOutput, pythonEditor];
