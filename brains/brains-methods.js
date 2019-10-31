@@ -32,6 +32,7 @@ brains.runScratchBrain = (robotID, code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
+  code = "async function myAlgorithm(){\n" + code + "}\n myAlgorithm();";
   brains.threadsBrains.push({
     "id": robotID,
     "running": true,
