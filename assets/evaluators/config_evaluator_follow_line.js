@@ -94,13 +94,10 @@ function progressBar(arrayRobots,cars){
   arrayRobots.forEach(function(robotID){
     let robot = Websim.robots.getHalAPI(robotID);
     var posNow = {x:robot.getPosition().x,z:robot.getPosition().z};
-    distNow =  Math.sqrt(Math.pow(posNow.x-cars[i].pos.x,2)+Math.pow(posNow.z-cars[i].pos.z,2));
-    console.log(distNow);
-    cars[i]={pos:posNow,
-              dist: cars[i].dist+Math.abs(distNow)
-    }
-    console.log(cars);
-    var completed = (cars[i].dist*100/90);
+    distNow =  Math.sqrt(Math.pow(cars[i].pos.x-posNow.x,2)+Math.pow(cars[i].pos.z-posNow.z,2));
+    cars[i].pos=posNow;
+    cars[i].dist=cars[i].dist+Math.abs(distNow);
+    var completed = (cars[i].dist*100/185);
     var element = document.getElementById(robot.myRobotID+"bar");
     if(completed>100){
       element.style.width = 100 + '%';
