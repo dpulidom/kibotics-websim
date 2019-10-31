@@ -30,6 +30,7 @@ html, body{
 
 .editor-button{
   padding: 5px 10px;
+  height: 65px;
 }
 
 .simulator{
@@ -67,6 +68,18 @@ html, body{
     background-color: #3190f7;
     color: white;
 }
+
+#simButton {
+    background-color: #e6e6e6;
+    color: black;
+    /*border: 2px solid #ACFF00;*/
+}
+
+#simButton:hover {
+    background-color: #3190f7;
+    color: white;
+}
+
 #spectatorCamera {
     background-color: #e6e6e6;
     color: black;

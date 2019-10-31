@@ -11,6 +11,7 @@ export class RobotI
         this.initialRotation = { x: 0, y: 0, z: 0 };
         this.activeRays = false;
         this.camerasData = [];
+        //this.activeCamera = 0;
         this.raycastersArray = [];
         this.distanceArray = {
           center: [],
@@ -199,6 +200,16 @@ export class RobotI
       }
     }
 
+    /*toggleCamera(){
+      var availableCameras = this.camerasData.length;
+      if (this.activeCamera + 1 + 1 <= availableCameras) {
+        this.activeCamera += 1;
+      } else {
+        this.activeCamera = 0;
+      }
+      console.log(this.activeCamera);
+    }*/
+
     getImage(cameraID){
       /**
        * Returns a screenshot from the robot camera
@@ -207,13 +218,14 @@ export class RobotI
           console.log(this.camerasData[i]);
 
       }*/
-      if (this.camerasData.length == 1) {
+      if (!cameraID || (this.camerasData.length == 1) || (cameraID > this.camerasData.length-1)) {
         // Robots with one camera get the only one available
+        // Requests for cameras that don't exist returns default camera
         return this.camerasData[0]['image'];
+        
       } else {
         // Robots with two or more cameras
-        // ToDo
-        return this.camerasData[0]['image'];
+        return this.camerasData[cameraID]['image'];
       }
 
     }
