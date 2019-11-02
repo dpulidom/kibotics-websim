@@ -180,18 +180,18 @@ html, body{
   height: 36px;
 }
 
-#secondRobot {
+#secondRobot,#firstRobot {
   background-color: #e6e6e6;
   color: black;
   border: 2px solid #4da6ff;
 }
 
-#secondRobot:hover {
+#secondRobot:hover,#firstRobot:hover {
   background-color: #4da6ff;
   color: white;
 }
 
-#secondRobot>img{
+#secondRobot>img,#firstRobot>img{
   width: 36px;
   height: 36px;
 }
