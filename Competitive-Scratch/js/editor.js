@@ -31,6 +31,7 @@ import initMoveBackwardToBlock from '../customBlocks/moveBackwardToBlock.js'
 import initMoveForwardToBlock from '../customBlocks/moveForwardToBlock.js'
 import initTurnLeftToBlock from '../customBlocks/turnLeftToBlock.js'
 import initTurnRightToBlock from '../customBlocks/turnRightToBlock.js'
+import initGetImageOfBlock from '../customBlocks/getImageOfBlock.js'
 
 
 // Load enviroment variables defined in the html template
@@ -42,8 +43,25 @@ console.log("----------------------===========----------------");
 //var userCode = window.userCode;
 var socket = "";
 
-var editorRobot1 = 'a-car1';
-var editorRobot2 = 'a-car2';
+
+// parse A-Frame config
+var r = new XMLHttpRequest();
+r.overrideMimeType("application/json");
+r.open('GET', config_file, false);
+r.send(null);
+if (r.status == 200){
+  var f = JSON.parse(r.responseText);
+}
+// Identify multiple robot IDs
+var robIDs = [];
+for (var obj in f.objects) {
+    if (f.objects[obj].tag == 'a-robot') {
+        robIDs.push(f.objects[obj].attr.id);
+    }
+}
+
+var editorRobot1 = robIDs[0];
+var editorRobot2 = robIDs[1];
 
 // Editor Control Variables for each Robot
 var codeFirst = {
@@ -78,6 +96,17 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
+
+    var iconRunBtn = document.querySelector("#runbtn").firstChild;
+    if ($(iconRunBtn).hasClass("glyphicon-stop")){
+        iconRunBtn.classList.remove("glyphicon-stop");
+        iconRunBtn.classList.add("glyphicon-play");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Pausar Código', 'Ejecutar Código');
+    } else {
+        iconRunBtn.classList.remove("glyphicon-play");
+        iconRunBtn.classList.add("glyphicon-stop");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Ejecutar Código','Pausar Código');
+    }
 
     if (codeFirst.edit) {
         // Store the current code (XML). Necessary to avoid var names collisions.
@@ -140,6 +169,8 @@ $(document).ready(async ()=>{
       }
     }
     codeFirst.edit = true;
+    document.querySelector("#firstRobot").style.background = '#5addf1';
+    document.querySelector("#secondRobot").style.background = '#e6e6e6';
   });
 
   $('#secondRobot').click(()=>{
@@ -157,10 +188,21 @@ $(document).ready(async ()=>{
       }
     }
     codeSecond.edit = true;
+    document.querySelector("#secondRobot").style.background = '#5addf1';
+    document.querySelector("#firsRobot").style.background = '#e6e6e6';
   });
 
   $('#simButton').click(()=>{
+    var imageSimBtn = document.querySelector("#simButton").firstChild;
     Websim.simulation.toggleSimulation();
+
+    if(imageSimBtn.src.indexOf('play-icon.png') == -1){
+      imageSimBtn.src = "../../assets/resources/play-icon.png"
+      document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Pausar Simulación', 'Reanudar Simulación');
+    }else{
+      imageSimBtn.src = "../../assets/resources/stop-icon.png"
+      document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Reanudar Simulación','Pausar Simulación');
+    }
   });
 
    // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoid error with no registered users
@@ -208,4 +250,5 @@ function configureCustomBlocks() {
   initMoveForwardToBlock();
   initTurnLeftToBlock();
   initTurnRightToBlock();
+  initGetImageOfBlock();
 }
