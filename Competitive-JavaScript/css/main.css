@@ -133,21 +133,23 @@ html, body{
   width: 36px;
   height: 36px;
 }
-#firstRobot {
+
+#secondRobot,#firstRobot {
   background-color: #e6e6e6;
   color: black;
   border: 2px solid #4da6ff;
 }
 
-#firstRobot:hover {
+#secondRobot:hover,#firstRobot:hover  {
   background-color: #4da6ff;
   color: white;
 }
 
-#firstRobot>img{
+#secondRobot>img,#firstRobot>img{
   width: 36px;
   height: 36px;
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -206,21 +208,6 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-#secondRobot {
-  background-color: #e6e6e6;
-  color: black;
-  border: 2px solid #4da6ff;
-}
-
-#secondRobot:hover {
-  background-color: #4da6ff;
-  color: white;
-}
-
-#secondRobot>img{
-  width: 36px;
-  height: 36px;
 }
 
 #resetRobot {
