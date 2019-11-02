@@ -1,3 +1,6 @@
+const utils = require('../simcore/utils/index.js');
+const sleep = utils.sleep;
+
 var brains = {};
 
 brains.threadsBrains = [];
@@ -8,6 +11,7 @@ brains.createThreadBrain = (code, myRobot)=>{
   }, 100);
   return brainInterval;
 }
+
 
 brains.runBrain = (robotID, code) =>{
   /**
@@ -88,4 +92,5 @@ brains.showThreads = ()=>{
     console.log(threadBrain);
   })
 }
+
 module.exports = brains;
