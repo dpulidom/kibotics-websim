@@ -1,5 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
+import {runEvaluator} from '../../brains/evaluator-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -113,7 +114,7 @@ $(document).ready(async ()=>{
         // Injects and gets Code of the second user
         editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
         codeSecond.js = editor.getCode();
-        // Injects and gets Code of the first user, so that the state of the editor 
+        // Injects and gets Code of the first user, so that the state of the editor
         // remains the same
         editor.ui = editor.injectCode(editor.ui,codeFirst.xml);
         codeFirst.js = editor.getCode();
@@ -124,9 +125,9 @@ $(document).ready(async ()=>{
         editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
         codeSecond.js = editor.getCode();
     }
-    console.log(codeFirst.js);
-    console.log(codeSecond.js);   
-    
+    console.log(codeFirst);
+    console.log(codeSecond);
+
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
@@ -157,7 +158,7 @@ $(document).ready(async ()=>{
     if(codeFirst.edit){
       codeFirst.xml = editor.storeCode(editor.ui);
       editor.ui = editor.injectCode(editor.ui, codeFirst.xml);
-    }     
+    }
     if(codeSecond.edit){
       codeSecond.xml = editor.storeCode(editor.ui);
       codeSecond.edit = false;
@@ -176,7 +177,7 @@ $(document).ready(async ()=>{
     if(codeSecond.edit){
       codeSecond.xml = editor.storeCode(editor.ui);
       editor.ui = editor.injectCode(editor.ui, codeSecond.xml);
-    }     
+    }
     if(codeFirst.edit){
       codeFirst.xml = editor.storeCode(editor.ui);
       codeFirst.edit = false;
@@ -212,7 +213,9 @@ $(document).ready(async ()=>{
   // Init Websim simulator with config contained in the file passed
   // as parameter
   await Websim.config.init(config_file);
-
+  if(typeof config_evaluator!=="undefined"){
+    runEvaluator([editorRobot1,editorRobot2],config_evaluator);
+  }
   //setInterval(brains.showThreads, 1000);
 });
 

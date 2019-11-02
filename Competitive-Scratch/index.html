@@ -6,17 +6,18 @@
     <!-- Physics for A-Frame VR -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
-    <script>var config_file = '../assets/config/config_competitive_2.0.json';</script>
     <script src="build/websim.bundle.js"></script>
     <script src="build/editor.bundle.js"></script>
     <script src="google-blockly/blockly_compressed.js"></script>
     <script src="google-blockly/blocks_compressed.js"></script>
     <script src="google-blockly/msg/js/es.js"></script>
+    <script type="text/javascript" src="../js/jsgl.min.js"></script>
     <script src="google-blockly/core/css.js"></script>
     <script src="google-blockly/core/block_render_svg.js"></script>
     <script src="google-blockly/javascript_compressed.js"></script>
     <script src="google-blockly/python_compressed.js"></script>
-    
+    <!-- <script>var config_evaluator = "config_evaluator_follow_line.js";</script> -->
+    <script>var config_file = '../assets/config/config_competitive_2.0.json';</script>
   </head>
   <body>
     <nav id="navbar">
@@ -26,14 +27,14 @@
       <!-- EDITOR -->
       <div id="editor" class="editor">
           <div id="buttons" style="background-color:#d3dae5">
-              <button onclick id="firstRobot" class="editor-button"><img src="../assets/resources/car1.svg" alt="First robot"/>Robot 1</button>
-              <button onclick id="secondRobot" class="editor-button"><img src="../assets/resources/car2.svg" alt="Second robot"/>Robot 2</button>
-              <button onclick id="runbtn" class="editor-button" value=><span class="glyphicon glyphicon-play"></span> Ejecutar Código</button>
-              <button onclick id="simButton" class="editor-button"><img src="../assets/resources/stop-icon.png" alt="Run button image"/>Pausar Simulación</button>
-              <button onclick id="cambtn" class="editor-button"><img src="../assets/resources/play-camera-icon.png" alt="Play Camera image"/> Cámara</button>
+              <button onclick id="firstRobot"><img src="../assets/resources/car1.svg" alt="First robot"/><span class="glyphicon glyphicon-play"></span>Robot 1</button>
+            <button onclick id="secondRobot"><img src="../assets/resources/car2.svg" alt="Second robot"/><span class="glyphicon glyphicon-play"></span>Robot 2</button>
+              <button onclick id="runbtn" class="editor-button"><span class="glyphicon glyphicon-play"></span> Ejecutar</button></button>
+              <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+              <button onclick id="cambtn" class="editor-button"><span class="glyphicon glyphicon-facetime-video"></span> Cámara</button></button>
               <!--<button onclick id="spectatorCamera" class="editor-button"><span class="glyphicon glyphicon-eye-open"></span> Espectador</button></button>-->
-              <button onclick id="resetRobot" class="editor-button"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
-              <button onclick id="saveCode" class="editor-button" disabled><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+              <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+              <!--<button onclick id="saveCode" disabled class="editor-button"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>-->
               <!--<button onclick id="blocklyToPython" class="editor-button">Descarga Local</button>-->
               <!--<button onclick id="injectCode" class="editor-button">Inyectar XML</button>-->
           </div>
@@ -168,7 +169,6 @@
             <category name="Camera" colour='%{BKY_LISTS_HUE}'>
               <block type="get_image"></block>
               <block type="get_objcolor"></block>
-              <block type="get_image_of"></block>
             </category>
             <category name="Tools" colour=%{BKY_LOOPS_HUE}>
               <block type="set_timeout"></block>

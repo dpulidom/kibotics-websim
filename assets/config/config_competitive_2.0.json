@@ -38,9 +38,11 @@
       {
           "tag": "a-plane",
           "attr": {
-              "static-body": {
-                  "mass": 1
-              },
+            "static-body": {
+                "mass": 1000,
+                "linearDamping":-1.3,
+                "angularDamping":-1.3
+            },
               "position": { "x":-1.22, "y":0.24, "z":9.84 },
               "rotation": { "x":-76.0, "y":-23.8, "z":0},
               "width": "10",
@@ -52,7 +54,9 @@
           "tag": "a-plane",
           "attr": {
               "static-body": {
-                  "mass": 1
+                  "mass": 1000,
+                  "linearDamping":-1.3,
+                  "angularDamping":-1.3
               },
               "position": { "x":0.40, "y":1.2, "z":6.24 },
               "rotation": { "x":-75.9, "y":-23, "z":0},
@@ -64,13 +68,15 @@
       {
           "tag": "a-plane",
           "attr": {
-              "static-body": {
-                  "mass": 1
-              },
-              "position": { "x":3.26, "y":1.58, "z":-0.42},
+            "static-body": {
+                "mass": 1,
+                "linearDamping":0,
+                "angularDamping":0
+            },
+              "position": { "x":3.22, "y":1.58, "z":-0.46},
               "rotation": { "x":-90, "y":-23, "z":0},
               "width": "10",
-              "height": "12",
+              "height": "11.61",
               "src":"../assets/textures/line.png"
 
           }
@@ -78,9 +84,11 @@
       {
           "tag": "a-plane",
           "attr": {
-              "static-body": {
-                  "mass": 1
-              },
+            "static-body": {
+                "mass": 10,
+                "linearDamping":0.95,
+                "angularDamping":0.95
+            },
               "position": { "x":6.16, "y":1.27, "z":-7.5},
               "rotation": { "x":-98.8, "y":-18.5, "z":-1.18},
               "width": "10",
@@ -91,9 +99,11 @@
       {
           "tag": "a-plane",
           "attr": {
-              "static-body": {
-                  "mass": 1
-              },
+            "static-body": {
+                "mass": 10,
+                "linearDamping":1.2,
+                "angularDamping":1.2
+            },
               "position": { "x":7.40, "y":0.5, "z":-11.3 },
               "rotation": { "x":-101, "y":-17.2, "z":0},
               "width": "10",
@@ -143,8 +153,8 @@
                 "id": "a-car1",
                 "gltf-model":"../assets/models/f1_renault.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":-7, "y":0, "z":15.66},
-                "rotation": { "x":0, "y":70, "z":0},
+                "position": { "x":12.90, "y":0, "z":15.66},
+                "rotation": { "x":0, "y":133.14, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
@@ -153,8 +163,8 @@
                     "tag": "a-entity",
                     "attr": {
                         "id": "a-car1Wrapper",
-                        "position": { "x": 0.02, "y": 0.025, "z": 0},
-                        "rotation": { "x": 0, "y":-90, "z":0}
+                        "position": { "x": 0.03, "y": 0.05, "z": 0},
+                        "rotation": { "x": -12.24, "y":-90, "z":0}
                     },
                     "childs": [
                         {
@@ -179,8 +189,8 @@
                 "id": "a-car2",
                 "gltf-model":"../assets/models/f1_williams.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":12.56, "y":1, "z":20.50},
-                "rotation": { "x":-2.66, "y":-26.02, "z":0},
+                "position": { "x":10.82, "y":1, "z":19.82},
+                "rotation": { "x":-2.66, "y":133, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
@@ -189,8 +199,8 @@
                     "tag": "a-entity",
                     "attr": {
                         "id": "a-car2Wrapper",
-                        "position": { "x": 0.02, "y": 0.025, "z": 0},
-                        "rotation": { "x": 0, "y":-90, "z":0}
+                        "position": { "x": 0.03, "y": 0.05, "z": 0},
+                        "rotation": { "x": -12.24, "y":-90, "z":0}
                     },
                     "childs": [
                         {
