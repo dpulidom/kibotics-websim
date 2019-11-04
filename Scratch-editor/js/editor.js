@@ -1,5 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
+import {runEvaluator} from '../../brains/evaluator-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -62,7 +63,7 @@ var editorRobot1 = robID; //id del robot (fichero json)
 $(document).ready(async ()=>{
   configureCustomBlocks();
   editor.setup();
-  
+
 
   // Toggle display when cambtn clicked
   $("#cambtn").click(()=>{
@@ -142,7 +143,9 @@ $(document).ready(async ()=>{
   // Init Websim simulator with config contained in the file passed
   // as parameter
   await Websim.config.init(config_file);
-
+  if(typeof config_evaluator!=="undefined"){
+    runEvaluator([editorRobot1],config_evaluator);
+  }
   //setInterval(editor.showThreads, 1000);
 
 });
