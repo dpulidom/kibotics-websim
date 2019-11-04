@@ -1,5 +1,6 @@
 const utils = require('../simcore/utils/index.js');
 const sleep = utils.sleep;
+const setIntervalSynchronous = utils.setIntervalSynchronous;
 
 var brains = {};
 
@@ -36,7 +37,7 @@ brains.runScratchBrain = (robotID, code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
-  code = "async function myAlgorithm(){\n" + code + "}\n myAlgorithm();";
+  code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
   brains.threadsBrains.push({
     "id": robotID,
     "running": true,
@@ -68,6 +69,7 @@ brains.resumeBrain = (robotID, code) =>{
 }
 
 brains.resumeScratchBrain = (robotID, code) =>{
+  code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
   threadBrain.interval = brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID));
   threadBrain.running = true;

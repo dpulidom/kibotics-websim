@@ -154,6 +154,7 @@ $(document).ready(async ()=>{
     editor.sendEvent('reset');
   });
 
+  document.querySelector("#firstRobot").style.background = '#5addf1';
   $('#firstRobot').click(()=>{
     if(codeFirst.edit){
       codeFirst.xml = editor.storeCode(editor.ui);
@@ -189,7 +190,7 @@ $(document).ready(async ()=>{
     }
     codeSecond.edit = true;
     document.querySelector("#secondRobot").style.background = '#5addf1';
-    document.querySelector("#firsRobot").style.background = '#e6e6e6';
+    document.querySelector("#firstRobot").style.background = '#e6e6e6';
   });
 
   $('#simButton').click(()=>{

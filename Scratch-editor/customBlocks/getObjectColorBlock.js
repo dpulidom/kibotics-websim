@@ -53,11 +53,11 @@ export default function initGetObjectColorBlock(){
     var code = '';
 
     if(dropdown_options === "X"){
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[0];\n';
+      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[0]\n';
     }else if(dropdown_options === "Y"){
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[1];\n';
+      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[1]\n';
     }else{
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").area;\n';
+      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").area\n';
     }
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
