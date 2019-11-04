@@ -126,10 +126,10 @@ $(document).ready(async ()=>{
     Websim.simulation.toggleSimulation();
 
     if(imageSimBtn.src.indexOf('play-icon.png') == -1){
-      imageSimBtn.src = "../../assets/resources/play-icon.png"
+      imageSimBtn.src = play_icon;
       document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Pausar Simulación', 'Reanudar Simulación');
     }else{
-      imageSimBtn.src = "../../assets/resources/stop-icon.png"
+      imageSimBtn.src = stop_icon;
       document.querySelector("#simButton").innerHTML = document.querySelector("#simButton").innerHTML.replace('Reanudar Simulación','Pausar Simulación');
     }
   });
