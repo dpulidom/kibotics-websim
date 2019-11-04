@@ -1,5 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
+import agents from '../../brains/agents-methods.js'
 import {runEvaluator} from '../../brains/evaluator-methods.js'
 var editorRobot1 = 'a-car1';
 var editorRobot2 = 'a-car2';
@@ -28,8 +29,7 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
-    console.log(codeFirst);
-    console.log(codeSecond);
+
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
@@ -40,6 +40,7 @@ $(document).ready(async ()=>{
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst);
+      // agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
       brains.runBrain(editorRobot2,codeSecond);
     }
   });
