@@ -1,51 +1,49 @@
 
-export function setupACE(){
-  var editor = ace.edit("ace");
-  editor.setTheme("ace/theme/monokai");
-  editor.session.setMode("ace/mode/javascript");
-  return editor;
+var editor = {};
+
+// Used to store current UI context for later use
+editor.ui = {};
+
+editor.setup = () =>{
+  editor.ui = ace.edit("ace");
+  editor.ui.setTheme("ace/theme/monokai");
+  editor.ui.session.setMode("ace/mode/javascript");
 }
 
-export function toggleCameraDisplay(){
+editor.toggleCamera = () =>{
     var opencvCam = document.querySelector("#outputCanvas");
     var imageCamBtn = document.querySelector("#cambtn").firstChild;
     $("#outputCanvas, #spectatorDiv").toggle();
     if(opencvCam.style.display != "none"){
-      imageCamBtn.src = "assets/resources/stop-camera-icon.png"
+      imageCamBtn.src = "../../assets/resources/stop-camera-icon.png"
     }else{
-      imageCamBtn.src = "assets/resources/play-camera-icon.png"
+      imageCamBtn.src = "../../assets/resources/play-camera-icon.png"
     }
 }
 
-export function changeSpectatorCamera(){
-  var subjCamera = document.querySelector("#subjCamera");
-  var spectatorCamera = document.querySelector("#primaryCamera");
-  var firstPersonCamera = document.querySelector("#firstPersonCamera");
-  var camera1 = subjCamera.getAttribute('camera','active');
-  var camera2 = spectatorCamera.getAttribute('camera','active');
-  var camera3 = firstPersonCamera.getAttribute('camera','active');
-  if(camera1.active===true){
-    spectatorCamera.setAttribute('camera', 'active', true);
-  }else if(camera2.active===true){
-    firstPersonCamera.setAttribute('camera', 'active', true);
-  }else if(camera3.active==true){
-    subjCamera.setAttribute('camera', 'active', true);
-  }
-}
-
-
-export function getCode(editor){
-  var content = editor.getValue();
-
-  return content;
-}
-
-export function insertCode(textToInject, editor){
+editor.insertCode = (textToInject) =>{
   // Reloads the code inside the editor erasing all content
-  editor.setValue(textToInject);
-  return editor;
+  editor.ui.setValue(textToInject);
 }
 
-export function reset(){
 
+editor.sendEvent = (eventName, eventDetail = '') =>{
+  var ev = new CustomEvent(eventName, {
+    'detail': eventDetail
+  });
+  document.dispatchEvent(ev);
 }
+
+editor.getCode = () =>{
+  /**
+   * Function that extracts code of the current context
+   * of the editor
+   */
+  return editor.ui.getValue();
+}
+
+function sleep2(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+module.exports = editor;

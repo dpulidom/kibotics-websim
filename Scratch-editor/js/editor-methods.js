@@ -127,6 +127,7 @@ editor.getCode = () =>{
    */
   c = Blockly.JavaScript.workspaceToCode(editor.ui);
   c =  c.replace('var myRobot;', '');
+  c =  c.replace('var myRobot,', 'var');
   c =  c.replace(', myRobot;', ';');
   return c
 }

@@ -72,7 +72,7 @@ $(document).ready(async ()=>{
       codeFirst = editor.getCode();
       editFirst=false;
       if(codeSecond==null){
-        editor.insertCode("async function myAlgorithm(){\nmyRobot.move(0.5, 0, 0);\n}",editor);
+        editor.insertCode("myRobot.move(0.5, 0, 0);",editor);
       }else{
         editor.insertCode(codeSecond,editor);
       }

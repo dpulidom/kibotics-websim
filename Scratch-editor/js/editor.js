@@ -98,10 +98,10 @@ $(document).ready(async ()=>{
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
       } else {
-        brains.resumeScratchBrain(editorRobot1,code);
+        brains.resumeBrain(editorRobot1,code);
       }
     }else{
-      brains.runScratchBrain(editorRobot1,code);
+      brains.runBrain(editorRobot1,code);
     }
   });
 

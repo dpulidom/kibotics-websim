@@ -133,12 +133,12 @@ $(document).ready(async ()=>{
         brains.stopBrain(editorRobot1);
         brains.stopBrain(editorRobot2);
       }else{
-        brains.resumeScratchBrain(editorRobot1,codeFirst.js);
-        brains.resumeScratchBrain(editorRobot2,codeSecond.js);
+        brains.resumeBrain(editorRobot1,codeFirst.js);
+        brains.resumeBrain(editorRobot2,codeSecond.js);
       }
     }else{
-      brains.runScratchBrain(editorRobot1,codeFirst.js);
-      brains.runScratchBrain(editorRobot2,codeSecond.js);
+      brains.runBrain(editorRobot1,codeFirst.js);
+      brains.runBrain(editorRobot2,codeSecond.js);
     }
   });
 
