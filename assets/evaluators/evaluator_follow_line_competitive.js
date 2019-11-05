@@ -22,11 +22,22 @@ function createInterface(){
   node3.innerHTML = "0%";
   node2.appendChild(node3);
   node.appendChild(node2);
+  var img2 = document.createElement("img");
+  img2.setAttribute("class","carMarker");
+  img2.setAttribute("src","../assets/resources/car2.svg")
+  node.appendChild(img2);
+  var node4 = document.createElement("div");
+  node4.setAttribute("id","car2Progress");
+  var node5 = document.createElement("div");
+  node5.setAttribute("id","a-car2bar");
+  node5.innerHTML = "0%";
+  node4.appendChild(node5);
+  node.appendChild(node4);
   var time = document.createElement("div");
   time.setAttribute("id","time");
   time.innerHTML="Tiempo: 00:00";
   time.style.marginTop="-87px";
-  time.style.color="black";
+  time.style.color="white";
   node.appendChild(time);
   var myiframe= document.getElementById("myIFrame");
   myiframe.insertBefore(node,myiframe.childNodes[0]);
@@ -36,17 +47,21 @@ function setEvaluator(arrayRobots){
   /**This function do a cronometer and put it in index.html
   */
   let robot1=Websim.robots.getHalAPI(arrayRobots[0]);
+  let robot2=Websim.robots.getHalAPI(arrayRobots[1]);
+
   var time= document.getElementById("time");
   var car1={pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
             dist: 0
   }
-
+  var car2={pos:{x:robot2.getPosition().x,z:robot2.getPosition().z},
+            dist: 0
+  }
   var id= setInterval(function(){
     if(robot1.velocity.x>0){ // Maybe change the condition to when code is executed
       clearInterval(id);
       var timeInitial = new Date();
       setInterval(function(){
-        progressBar(arrayRobots,[car1]);
+        progressBar(arrayRobots,[car1,car2]);
         var realTime = new Date(new Date() - timeInitial);
         var formatTime = timeFormatter(realTime);
         time.innerHTML = "Tiempo: " + formatTime;
@@ -82,9 +97,8 @@ function progressBar(arrayRobots,cars){
     distNow =  Math.sqrt(Math.pow(cars[i].pos.x-posNow.x,2)+Math.pow(cars[i].pos.z-posNow.z,2));
     cars[i].pos=posNow;
     cars[i].dist=cars[i].dist+Math.abs(distNow);
-    console.log(cars[i].dist);
-    var completed = (cars[i].dist*100/370);
-    var element = document.getElementById("a-car1bar");
+    var completed = (cars[i].dist*100/185);
+    var element = document.getElementById(robot.myRobotID+"bar");
     if(completed>100){
       element.style.width = 100 + '%';
       element.innerHTML = 100 + '%';
