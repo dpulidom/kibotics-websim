@@ -44,8 +44,8 @@ $(document).ready(async ()=>{
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst);
-      agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
-      // brains.runBrain(editorRobot2,codeSecond);
+      // agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
+      brains.runBrain(editorRobot2,codeSecond);
     }
   });
 

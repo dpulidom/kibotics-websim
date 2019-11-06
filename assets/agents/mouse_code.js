@@ -7,7 +7,7 @@
   myRobot.setW(0.02);
   await sleep(8.064516129032258);
   myRobot.setW(0);
-  myRobot.setV(1);
+  myRobot.setV(2);
   await sleep(10);
   myRobot.setV(0);
   myRobot.setW(0.02);
