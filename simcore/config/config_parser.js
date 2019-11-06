@@ -120,10 +120,8 @@ export function parseScene(sceneJSON, parentEl){
       scene.setAttribute(key, sceneJSON[key]);
     }
     parentEl.appendChild(scene);
-    console.log('hola');
     resolve(scene);
-    scene.systems.physics.driver.world.gravity.y = sceneJSON["gravity"];
-    console.log('adios');
+    //scene.systems.physics.driver.world.gravity.y = sceneJSON["gravity"];
   })
 }
 
