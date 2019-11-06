@@ -1,4 +1,3 @@
-async function myAlgorithm(){
   myRobot.setL(3);
   await sleep(0.5);
   myRobot.setL(0);
@@ -38,4 +37,3 @@ async function myAlgorithm(){
   myRobot.setL(-3);
   await sleep(0.4);
   myRobot.setL(0);
-}
