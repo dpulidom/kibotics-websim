@@ -40,12 +40,12 @@ $(document).ready(async ()=>{
      */
     var pythonCodeString = editor.getCode()
     console.log(pythonCodeString);
-    const request = new Request('http://127.0.0.1:8000/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
+    const request = new Request('http://www.kibotics.org/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
     fetch(request)
       .then(response => {
         return response.text();
       }).then(function(javascriptCodeString) {
-        console.log(javascriptCodeString)
+        console.log(javascriptCodeString);
         if (brains.threadExists(editorRobot1)) {
           if (brains.isThreadRunning(editorRobot1)) {
             brains.stopBrain(editorRobot1);
