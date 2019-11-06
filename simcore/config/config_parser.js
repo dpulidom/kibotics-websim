@@ -120,8 +120,10 @@ export function parseScene(sceneJSON, parentEl){
       scene.setAttribute(key, sceneJSON[key]);
     }
     parentEl.appendChild(scene);
+    console.log('hola');
     resolve(scene);
     scene.systems.physics.driver.world.gravity.y = sceneJSON["gravity"];
+    console.log('adios');
   })
 }
 
@@ -141,6 +143,7 @@ export function parser(json){
     var parentEl = document.getElementById(sceneParentId);
     if (parentEl === null){ console.log("es null"); parentEl = document.body; }
     var scene = await parseScene(sceneAttrs, parentEl);
+    scene.systems.physics.driver.world.gravity.y = sceneAttrs["gravity"];
     await parseAssets(sceneAssets);
     await parseObjects(sceneObjects, scene);
     resolve();
