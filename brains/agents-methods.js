@@ -1,5 +1,6 @@
 const brains = require('./brains-methods.js');
 
+
 var agents = {};
 
 agents.runAgents = (robotID,file) =>{
@@ -14,17 +15,32 @@ agents.runAgents = (robotID,file) =>{
    request.onreadystatechange = function () {
      if(request.status === 200 || request.status == 0) {
          var code = request.responseText;
-         code = code + 'myAlgorithm();';
-         console.log(code);
+         code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
          brains.threadsBrains.push({
            "id": robotID,
            "running": true,
-           "interval": brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID)),
+           "iteration": brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID),
            "codeRunning": code
          });
      }
    }
    request.send();
+}
+
+agents.resumeAgents = (robotID, file) =>{
+  var request = new XMLHttpRequest();
+  request.open("GET", file, false);
+  request.onreadystatechange = function () {
+    if(request.status === 200 || request.status == 0) {
+        var code = request.responseText;
+        code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
+        var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+        threadBrain.iteration = brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID);
+        threadBrain.running = true;
+        threadBrain.codeRunning = code;
+    }
+  }
+  request.send();
 }
 
 module.exports = agents;

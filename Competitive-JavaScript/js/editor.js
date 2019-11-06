@@ -29,7 +29,11 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
-
+     if (editFirst) {
+       codeFirst = editor.getCode();
+     } else {
+       codeSecond = editor.getCode();
+     }
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
@@ -40,8 +44,8 @@ $(document).ready(async ()=>{
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst);
-      // agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
-      brains.runBrain(editorRobot2,codeSecond);
+      agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
+      // brains.runBrain(editorRobot2,codeSecond);
     }
   });
 
