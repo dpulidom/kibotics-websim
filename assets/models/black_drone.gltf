@@ -900,12 +900,12 @@
                 0,
                 0
             ],
-            "name" : "Material_005-effect",
+            "name" : "Material_001-effect.002",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.6399999856948853,
-                    0.003167665796354413,
-                    0,
+                    0.02817416936159134,
+                    0.02817416936159134,
+                    0.02817416936159134,
                     1
                 ],
                 "metallicFactor" : 0,
@@ -949,21 +949,17 @@
             }
         },
         {
-            "emissiveFactor" : [
-                0,
-                0,
-                0
-            ],
-            "name" : "Material_001-effect.002",
+            "doubleSided" : true,
+            "name" : "Material",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.02817416936159134,
-                    0.02817416936159134,
-                    0.02817416936159134,
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
                     1
                 ],
                 "metallicFactor" : 0,
-                "roughnessFactor" : 1
+                "roughnessFactor" : 0.4000000059604645
             }
         },
         {
@@ -1014,6 +1010,24 @@
                     0.800000011920929,
                     0.800000011920929,
                     0.800000011920929,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 1
+            }
+        },
+        {
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Material_005-effect",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.6399999856948853,
+                    0.003167665796354413,
+                    0,
                     1
                 ],
                 "metallicFactor" : 0,
@@ -1218,7 +1232,7 @@
                         "NORMAL" : 38
                     },
                     "indices" : 39,
-                    "material" : 0
+                    "material" : 7
                 }
             ]
         },
@@ -1231,7 +1245,7 @@
                         "NORMAL" : 41
                     },
                     "indices" : 39,
-                    "material" : 7
+                    "material" : 8
                 }
             ]
         }
