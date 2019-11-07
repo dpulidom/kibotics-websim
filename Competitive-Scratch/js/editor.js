@@ -1,5 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
+import agents from '../../brains/agents-methods.js'
 import {runEvaluator} from '../../brains/evaluator-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
@@ -134,10 +135,12 @@ $(document).ready(async ()=>{
         brains.stopBrain(editorRobot2);
       }else{
         brains.resumeBrain(editorRobot1,codeFirst.js);
+        //agents.resumeAgent(editorRobot2,agents.code);
         brains.resumeBrain(editorRobot2,codeSecond.js);
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst.js);
+      //agents.runAgent(editorRobot2,agents.code);
       brains.runBrain(editorRobot2,codeSecond.js);
     }
   });
