@@ -40,11 +40,12 @@ $(document).ready(async ()=>{
         brains.stopBrain(editorRobot2);
       }else{
         brains.resumeBrain(editorRobot1,codeFirst);
+        //agents.resumeAgent(editorRobot2,agents.code);
         brains.resumeBrain(editorRobot2,codeSecond);
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst);
-      // agents.runAgents(editorRobot2,"../assets/agents/mouse_code.js");
+      //agents.runAgent(editorRobot2,agents.code);
       brains.runBrain(editorRobot2,codeSecond);
     }
   });
