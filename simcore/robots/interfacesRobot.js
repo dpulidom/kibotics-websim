@@ -21,7 +21,7 @@ export class RobotI
         this.understandedColors = {
           blue: {low: [0, 0, 235, 0], high: [0, 0, 255, 255]},
           green: {low: [0, 235, 0, 0], high: [0, 255, 0, 255]},
-          red: {low: [235, 0, 0, 0], high: [255, 0, 0, 255]},
+          red: {low: [110, 0 , 0 ,0], high: [155, 0, 0, 255]},
           white: {low: [230, 230, 230, 0], high: [255, 255, 255, 255]},
           black: {low: [0, 0, 0, 255], high: [105,105,105 ,255]}
         };
@@ -65,7 +65,7 @@ export class RobotI
       var sceneCameras = document.getElementsByTagName('a-camera');
       for(var i = 0; i < sceneCameras.length; i++){
         var cameraID = sceneCameras[i].getAttribute('id');
-        if (cameraID.includes(this.myRobotID)){ 
+        if (cameraID.includes(this.myRobotID)){
           this.camerasData.push(
             {
               'wrapperID': cameraID + 'Wrapper',
@@ -222,7 +222,7 @@ export class RobotI
         // Robots with one camera get the only one available
         // Requests for cameras that don't exist returns default camera
         return this.camerasData[0]['image'];
-        
+
       } else {
         // Robots with two or more cameras
         return this.camerasData[cameraID]['image'];
