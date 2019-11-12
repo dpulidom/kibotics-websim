@@ -1,11 +1,9 @@
 var evaluator = {};
 
-evaluator.main= (arrayRobots)=>{
-  createInterface();
-  setEvaluator(arrayRobots);
-}
+var timeInit;
+var clock;
 
-function createInterface(){
+evaluator.createInterface= ()=>{
   /**
   *This function do a progress bar and text how much percent walked each robot
   */
@@ -43,23 +41,21 @@ function createInterface(){
   myiframe.insertBefore(node,myiframe.childNodes[0]);
 }
 
-function setEvaluator(arrayRobots){
+evaluator.setEvaluator = (arrayRobots) =>{
   /**This function do a cronometer and put it in index.html
   */
   let robot=Websim.robots.getHalAPI(arrayRobots[0]);
-  var time= document.getElementById("time");
-  var id= setInterval(function(){
-    if(robot.velocity.x>0){ // Maybe change the condition to when code is executed
-      clearInterval(id);
-      var timeInitial = new Date();
-      setInterval(function(){
-        progressBar(arrayRobots);
-        var realTime = new Date(new Date() - timeInitial);
-        var formatTime = timeFormatter(realTime);
-        time.innerHTML = "Tiempo: " + formatTime;
-      },400);
-    }
-  },500,robot,time);
+  if(!clock){
+    timeInit = new Date();
+  }
+  if(robot.velocity.x>0){
+    clock=true;
+    var time= document.getElementById("time");
+    progressBar(arrayRobots);
+    var realTime = new Date(new Date() - timeInit);
+    var formatTime = timeFormatter(realTime);
+    time.innerHTML = "Tiempo: " + formatTime;
+  }
 }
 
 function timeFormatter(time){

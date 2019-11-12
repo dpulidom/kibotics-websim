@@ -1,6 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
-import {runEvaluator} from '../../brains/evaluator-methods.js'
+import evaluators from '../../brains/evaluators-methods.js'
 
 var editorRobot1 = 'a-pibot';
 var editorRobot2 = 'alvaro-robot';
@@ -49,7 +49,6 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
   if(typeof config_evaluator!=="undefined"){
-    runEvaluator([editorRobot1],config_evaluator);
+    evaluators.runEvaluator([editorRobot1],config_evaluator);
   }
-  //setInterval(brains.showThreads, 1000);
 });

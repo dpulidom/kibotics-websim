@@ -7,12 +7,6 @@ var brains = {};
 
 brains.threadsBrains = [];
 
-brains.createThreadBrain = (code, myRobot)=>{
-  let brainInterval = setInterval(()=>{
-    eval(code);
-  }, 100);
-  return brainInterval;
-}
 
 var stopTimeoutRequested;
 brains.createTimeoutBrain = (code, myRobot, id)=>{
@@ -27,20 +21,6 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
   }, 100);
   return brainIteration;
 }
-
-/*brains.runBrain = (robotID, code) =>{
-  
-  code = code + 'myAlgorithm();';
-  brains.threadsBrains.push({
-    "id": robotID,
-    "running": true,
-    "interval": brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID)),
-    "codeRunning": code
-  });
-}
-var pegote = '\nif (!stopTimeout) {\nlet p = setTimeout(()=>{eval(newCode);}, 100);console.log(p);\nvar threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == "'+id+'");\nthreadBrain.interval = p;\n}\n'
-
-*/
 
 brains.runBrain = (robotID, code) =>{
   /**
@@ -73,14 +53,6 @@ brains.isThreadRunning = (robotID)=>{
   return threadBrain.running;
 }
 
-/*brains.resumeBrain = (robotID, code) =>{
-  code = code + 'myAlgorithm();';
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  threadBrain.interval = brains.createThreadBrain(code, Websim.robots.getHalAPI(robotID));
-  threadBrain.running = true;
-  threadBrain.codeRunning = code;
-}*/
-
 brains.resumeBrain = (robotID, code) =>{
   code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
@@ -88,13 +60,6 @@ brains.resumeBrain = (robotID, code) =>{
   threadBrain.running = true;
   threadBrain.codeRunning = code;
 }
-
-
-/*brains.stopBrain = (robotID) =>{
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  clearInterval(threadBrain.interval);
-  threadBrain.running = false;
-}*/
 
 brains.stopBrain = (robotID) =>{
   /**

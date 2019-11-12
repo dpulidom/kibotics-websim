@@ -1,11 +1,12 @@
 var evaluator = {};
 
-evaluator.main= (arrayRobots)=>{
-  createInterface();
-  setEvaluator(arrayRobots);
-}
+var x = 20;
+var timeInit;
+var myPanel;
+var line;
+var clock;
 
-function createInterface(){
+evaluator.createInterface= ()=>{
   /**
   *This function do a progress bar and text how much percent walked each robot
   */
@@ -22,6 +23,11 @@ function createInterface(){
   node.appendChild(time);
   var myiframe= document.getElementById("myIFrame");
   myiframe.insertBefore(node,myiframe.childNodes[0]);
+  myPanel = new jsgl.Panel(document.getElementById("panel"));
+  setAxis(myPanel);
+  line = myPanel.createPolyline();
+  line.getStroke().setColor('blue');
+  line.getStroke().setWeight(2);
 }
 
 function setAxis(myPanel){
@@ -59,37 +65,25 @@ function setAxis(myPanel){
   myPanel.addElement(myLabel2);
 }
 
-function setEvaluator(arrayRobots){
-  /**This function do a cronometer and graphic and put it in index.html
-  */
-  myPanel = new jsgl.Panel(document.getElementById("panel"));
-  setAxis(myPanel);
-  var line = myPanel.createPolyline();
-  line.getStroke().setColor('blue');
-  line.getStroke().setWeight(2);
-  var x= 20;
+evaluator.setEvaluator = (arrayRobots) => {
   var robot1 = Websim.robots.getHalAPI(arrayRobots[0]);
   var robot2 = Websim.robots.getHalAPI(arrayRobots[1]);
-  var time= document.getElementById("time");
-  var id= setInterval(function(){
-    if(robot1.velocity.x>0){
-      clearInterval(id);
-      var timeInitial = new Date();
-      setInterval(function(){
-        var realTime = new Date(new Date() - timeInitial);
-        var formatTime = timeFormatter(realTime);
-        time.innerHTML = "Tiempo: " + formatTime;
-        if(robot1.velocity.x >0 || robot2.velocity.x>0){
-          var pos1 = robot1.getPosition();
-          var pos2 = robot2.getPosition();
-          var dist = Math.sqrt(Math.pow(pos2.x-pos1.x,2)+Math.pow(pos2.y-pos1.y,2)+Math.pow(pos2.z-pos1.z,2));
-          line.addPointXY(x,dist+10);
-          x=x+0.5;
-          myPanel.addElement(line);
-        }
-      },200);
-    }
-  },500,robot1,time);
+  if(!clock){
+    timeInit = new Date();
+  }
+  if(robot1.velocity.x >0 || robot2.velocity.x>0){
+    clock = true;
+    var time= document.getElementById("time");
+    var realTime = new Date(new Date() - timeInit);
+    var formatTime = timeFormatter(realTime);
+    time.innerHTML = "Tiempo: " + formatTime;
+    var pos1 = robot1.getPosition();
+    var pos2 = robot2.getPosition();
+    var dist = Math.sqrt(Math.pow(pos2.x-pos1.x,2)+Math.pow(pos2.y-pos1.y,2)+Math.pow(pos2.z-pos1.z,2));
+    line.addPointXY(x,dist+10);
+    x=x+0.5;
+    myPanel.addElement(line);
+  }
 }
 
 function timeFormatter(time){

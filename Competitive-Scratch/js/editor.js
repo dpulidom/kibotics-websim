@@ -1,7 +1,7 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
 import agents from '../../brains/agents-methods.js'
-import {runEvaluator} from '../../brains/evaluator-methods.js'
+import evaluators from '../../brains/evaluators-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -218,7 +218,7 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
   if(typeof config_evaluator!=="undefined"){
-    runEvaluator([editorRobot1,editorRobot2],config_evaluator);
+    evaluators.runEvaluator([editorRobot1,editorRobot2],config_evaluator);
   }
   //setInterval(brains.showThreads, 1000);
 });

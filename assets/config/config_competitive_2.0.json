@@ -45,7 +45,7 @@
             },
               "position": { "x":-1.22, "y":0.24, "z":9.84 },
               "rotation": { "x":-76.0, "y":-23.8, "z":0},
-              "width": "10",
+              "width": "7.40",
               "height": "5",
               "src":"../assets/textures/line.png"
           }
@@ -60,7 +60,7 @@
               },
               "position": { "x":0.40, "y":1.2, "z":6.24 },
               "rotation": { "x":-75.9, "y":-23, "z":0},
-              "width": "10",
+              "width": "7.40",
               "height": "3.36",
               "src":"../assets/textures/line.png"
           }
@@ -75,7 +75,7 @@
             },
               "position": { "x":3.22, "y":1.58, "z":-0.46},
               "rotation": { "x":-90, "y":-23, "z":0},
-              "width": "10",
+              "width": "7.40",
               "height": "11.61",
               "src":"../assets/textures/line.png"
 
@@ -91,7 +91,7 @@
             },
               "position": { "x":6.16, "y":1.27, "z":-7.5},
               "rotation": { "x":-98.8, "y":-18.5, "z":-1.18},
-              "width": "10",
+              "width": "7.40",
               "height": "3.86",
               "src":"../assets/textures/line.png"
           }
@@ -106,7 +106,7 @@
             },
               "position": { "x":7.40, "y":0.5, "z":-11.3 },
               "rotation": { "x":-101, "y":-17.2, "z":0},
-              "width": "10",
+              "width": "7.40",
               "height": "5",
               "src":"../assets/textures/line.png"
           }
