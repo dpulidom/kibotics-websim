@@ -1,11 +1,11 @@
 var evaluator = {};
 
-evaluator.main= (arrayRobots)=>{
-  createInterface();
-  setEvaluator(arrayRobots);
-}
+var car1;
+var car2;
+var timeInit;
+var clock;
 
-function createInterface(){
+evaluator.createInterface=()=>{
   /**
   *This function do a progress bar and text how much percent walked each robot
   */
@@ -43,31 +43,28 @@ function createInterface(){
   myiframe.insertBefore(node,myiframe.childNodes[0]);
 }
 
-function setEvaluator(arrayRobots){
+evaluator.setEvaluator = (arrayRobots) => {
   /**This function do a cronometer and put it in index.html
   */
   let robot1=Websim.robots.getHalAPI(arrayRobots[0]);
   let robot2=Websim.robots.getHalAPI(arrayRobots[1]);
-
-  var time= document.getElementById("time");
-  var car1={pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
-            dist: 0
-  }
-  var car2={pos:{x:robot2.getPosition().x,z:robot2.getPosition().z},
-            dist: 0
-  }
-  var id= setInterval(function(){
-    if(robot1.velocity.x>0){ // Maybe change the condition to when code is executed
-      clearInterval(id);
-      var timeInitial = new Date();
-      setInterval(function(){
-        progressBar(arrayRobots,[car1,car2]);
-        var realTime = new Date(new Date() - timeInitial);
-        var formatTime = timeFormatter(realTime);
-        time.innerHTML = "Tiempo: " + formatTime;
-      },400);
+  if(!clock){
+    timeInit = new Date();
+    car1 = {pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
+                      dist: 0
+                    };
+    car2={pos:{x:robot2.getPosition().x,z:robot2.getPosition().z},
+              dist: 0
     }
-  },500,robot1,time);
+  }
+  if(robot1.velocity.x>0){
+    clock=true;
+    var time= document.getElementById("time");
+    progressBar(arrayRobots,[car1,car2]);
+    var realTime = new Date(new Date() - timeInit);
+    var formatTime = timeFormatter(realTime);
+    time.innerHTML = "Tiempo: " + formatTime;
+  }
 }
 
 function timeFormatter(time){
@@ -97,7 +94,7 @@ function progressBar(arrayRobots,cars){
     distNow =  Math.sqrt(Math.pow(cars[i].pos.x-posNow.x,2)+Math.pow(cars[i].pos.z-posNow.z,2));
     cars[i].pos=posNow;
     cars[i].dist=cars[i].dist+Math.abs(distNow);
-    var completed = (cars[i].dist*100/185);
+    var completed = (cars[i].dist*100/190);
     var element = document.getElementById(robot.myRobotID+"bar");
     if(completed>100){
       element.style.width = 100 + '%';

@@ -1,11 +1,10 @@
 var evaluator = {};
 
-evaluator.main= (arrayRobots)=>{
-  createInterface();
-  setEvaluator(arrayRobots);
-}
+var car1;
+var timeInit;
+var clock;
 
-function createInterface(){
+evaluator.createInterface=()=>{
   /**
   *This function do a progress bar and text how much percent walked each robot
   */
@@ -32,27 +31,22 @@ function createInterface(){
   myiframe.insertBefore(node,myiframe.childNodes[0]);
 }
 
-function setEvaluator(arrayRobots){
-  /**This function do a cronometer and put it in index.html
-  */
+evaluator.setEvaluator = (arrayRobots) => {
   let robot1=Websim.robots.getHalAPI(arrayRobots[0]);
-  var time= document.getElementById("time");
-  var car1={pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
-            dist: 0
+  if(!clock){
+    timeInit = new Date();
+    car1 = {pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
+                      dist: 0
+                    }
   }
-
-  var id= setInterval(function(){
-    if(robot1.velocity.x>0){ // Maybe change the condition to when code is executed
-      clearInterval(id);
-      var timeInitial = new Date();
-      setInterval(function(){
-        progressBar(arrayRobots,[car1]);
-        var realTime = new Date(new Date() - timeInitial);
-        var formatTime = timeFormatter(realTime);
-        time.innerHTML = "Tiempo: " + formatTime;
-      },400);
+  if(robot1.velocity.x>0){
+    clock=true;
+    var time= document.getElementById("time");
+    progressBar(arrayRobots,[car1]);
+    var realTime = new Date(new Date() - timeInit);
+    var formatTime = timeFormatter(realTime);
+    time.innerHTML = "Tiempo: " + formatTime;
     }
-  },500,robot1,time);
 }
 
 function timeFormatter(time){
@@ -73,7 +67,7 @@ function timeFormatter(time){
 
 function progressBar(arrayRobots,cars){
   /**
-  *This function do a progress bar and text how much percent walked each robot
+  *Do a progress bar and text how much percent walked each robot
   */
   var i=0;
   arrayRobots.forEach(function(robotID){
@@ -82,7 +76,6 @@ function progressBar(arrayRobots,cars){
     distNow =  Math.sqrt(Math.pow(cars[i].pos.x-posNow.x,2)+Math.pow(cars[i].pos.z-posNow.z,2));
     cars[i].pos=posNow;
     cars[i].dist=cars[i].dist+Math.abs(distNow);
-    console.log(cars[i].dist);
     var completed = (cars[i].dist*100/370);
     var element = document.getElementById("a-car1bar");
     if(completed>100){
