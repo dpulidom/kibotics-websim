@@ -62,8 +62,8 @@
             "tag": "a-robot",
             "attr": {
                 "id": "a-pibot",
-                "gltf-model":"../assets/models/mBot.gltf",
-                "scale": { "x":0.01, "y":0.01, "z":0.01},
+                "gltf-model":"../assets/models/mBot_reduced.gltf",
+                "scale": { "x":20, "y":20, "z":20},
                 "position": { "x":12.40, "y":0.5, "z":25},
                 "rotation": { "x":0, "y":43.70, "z":0},
                 "dynamic-body":{"mass": 1}
@@ -74,7 +74,7 @@
                     "tag": "a-entity",
                     "attr": {
                         "id": "a-pibotCamera1Wrapper",
-                        "position": { "x": 130, "y": 14.35, "z": -0.9},
+                        "position": { "x": 0.05, "y": 0.02, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
                     "childs": [
