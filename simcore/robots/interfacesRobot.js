@@ -391,6 +391,7 @@ export class RobotI
       }
     }
 
+    
     getDistance()
     /*
       This function returns the distance for the raycaster in the center of the arc of rays.
@@ -399,26 +400,30 @@ export class RobotI
       if(this.distanceArray["center"][0] != null){
         return this.distanceArray["center"][0].d;
       }else{
-        return null;
+        return 10;
       }
     }
 
     getDistances()
-    /*
-      This function returns an array with all the distances detected by the rays.
-    */
-    {
-        var distances = [];
-        var groups = ["center", "right", "left"];
-
-        for(var i = 0; i < groups.length; i++){
-          this.distanceArray[groups[i]].forEach((obj)=>{
-            distances.push(obj.d);
-          });
-        }
-        return distances;
-    }
-
+  /*
+    This function returns an array with all the distances detected by the rays.
+  */
+  {
+      var distances = []
+      for(var i = 0; i <= 31; i++){
+          distances.push(10);
+      }
+      var groups = ["center", "right", "left"];
+      for(var i = 0; i < groups.length; i++){
+        this.distanceArray[groups[i]].forEach((obj)=>{
+          if(typeof obj.d !="undefined"){
+            distances[obj.id]=obj.d;
+          }
+        });
+      }
+      return distances;
+  }
+    
     getPosition()
     /*
       This function returns an object with X-Y-Z positions and rotation (theta)
