@@ -52,6 +52,11 @@ function setAxis(myPanel){
   myLabel.setText("01:30");
   myPanel.addElement(myLabel);
   var myLabel = myPanel.createLabel();
+  myLabel.setLocation(new jsgl.Vector2D(275,100));
+  myLabel.setText("02:00");
+  myPanel.addElement(myLabel);
+
+  var myLabel = myPanel.createLabel();
   myLabel.setLocation(new jsgl.Vector2D(0,20));
   myLabel.setText("10");
   myPanel.addElement(myLabel);
@@ -71,7 +76,7 @@ evaluator.setEvaluator = (arrayRobots) => {
   if(!clock){
     timeInit = new Date();
   }
-  if(robot1.velocity.x >0 || robot2.velocity.x>0){
+  if(robot1.velocity.x!=0 || robot2.velocity.x!= 0 || robot1.velocity.ay != 0 || robot2.velocity.ay != 0){
     clock = true;
     var time= document.getElementById("time");
     var realTime = new Date(new Date() - timeInit);
@@ -81,7 +86,7 @@ evaluator.setEvaluator = (arrayRobots) => {
     var pos2 = robot2.getPosition();
     var dist = Math.sqrt(Math.pow(pos2.x-pos1.x,2)+Math.pow(pos2.y-pos1.y,2)+Math.pow(pos2.z-pos1.z,2));
     line.addPointXY(x,dist+10);
-    x=x+0.5;
+    x=x+1;
     myPanel.addElement(line);
   }
 }
