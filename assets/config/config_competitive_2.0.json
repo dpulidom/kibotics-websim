@@ -16,7 +16,7 @@
             "attr": {
                 "id": "ground",
                 "alt": "Texture for the scene ground",
-                "src": "../assets/textures/infiniteCircuit.png"
+                "src": "../assets/textures/infiniteCircuit-min.png"
             }
         },
         {
@@ -161,8 +161,8 @@
                 "id": "a-car1",
                 "gltf-model":"../assets/models/f1_renault.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":-2.10, "y":0, "z":15.66},
-                "rotation": { "x":0, "y":64.18, "z":0},
+                "position": { "x":10.78, "y":1, "z":13.3},
+                "rotation": { "x":0, "y":133.14, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
@@ -197,8 +197,8 @@
                 "id": "a-car2",
                 "gltf-model":"../assets/models/f1_williams.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":-5.88, "y":1, "z":13.76},
-                "rotation": { "x":-2.66, "y":56, "z":0},
+                "position": { "x":8.36, "y":1, "z":16.98},
+                "rotation": { "x":-2.66, "y":133, "z":0},
                 "dynamic-body":{"mass": 1}
 
             },
