@@ -111,7 +111,7 @@ $(document).ready(async ()=>{
 
     if (codeFirst.edit) {
         // Store the current code (XML). Necessary to avoid var names collisions.
-        codeFirst.xml = editor.storeCode(editor.ui);
+        codeFirst.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
         // Injects and gets Code of the second user
         editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
         codeSecond.js = editor.getCode();
@@ -120,7 +120,7 @@ $(document).ready(async ()=>{
         editor.ui = editor.injectCode(editor.ui,codeFirst.xml);
         codeFirst.js = editor.getCode();
     } else {
-        codeSecond.xml = editor.storeCode(editor.ui);
+        codeSecond.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
         editor.ui = editor.injectCode(editor.ui,codeFirst.xml);
         codeFirst.js = editor.getCode();
         editor.ui = editor.injectCode(editor.ui,codeSecond.xml);
@@ -160,11 +160,11 @@ $(document).ready(async ()=>{
   document.querySelector("#firstRobot").style.background = '#5addf1';
   $('#firstRobot').click(()=>{
     if(codeFirst.edit){
-      codeFirst.xml = editor.storeCode(editor.ui);
+      codeFirst.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
       editor.ui = editor.injectCode(editor.ui, codeFirst.xml);
     }
     if(codeSecond.edit){
-      codeSecond.xml = editor.storeCode(editor.ui);
+      codeSecond.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
       codeSecond.edit = false;
       if(codeFirst.xml == null){
         editor.ui = editor.injectCode(editor.ui, '<xml></xml>');
@@ -179,11 +179,11 @@ $(document).ready(async ()=>{
 
   $('#secondRobot').click(()=>{
     if(codeSecond.edit){
-      codeSecond.xml = editor.storeCode(editor.ui);
+      codeSecond.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
       editor.ui = editor.injectCode(editor.ui, codeSecond.xml);
     }
     if(codeFirst.edit){
-      codeFirst.xml = editor.storeCode(editor.ui);
+      codeFirst.xml = editor.storeCode(editor.ui, codeFirst.edit, codeSecond.edit);
       codeFirst.edit = false;
       if(codeSecond.xml == null){
         editor.ui = editor.injectCode(editor.ui, '<xml></xml>');
