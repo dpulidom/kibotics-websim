@@ -21,7 +21,7 @@ export class RobotI
         this.understandedColors = {
           blue: {low: [0, 0, 235, 0], high: [0, 0, 255, 255]},
           green: {low: [0, 235, 0, 0], high: [0, 255, 0, 255]},
-          red: {low: [110, 0 , 0 ,0], high: [155, 0, 0, 255]},
+          red: {low: [110, 0 , 0 ,0], high: [255, 30, 30, 255]},
           white: {low: [230, 230, 230, 0], high: [255, 255, 255, 255]},
           black: {low: [0, 0, 0, 255], high: [105,105,105 ,255]}
         };
@@ -391,7 +391,7 @@ export class RobotI
       }
     }
 
-    
+
     getDistance()
     /*
       This function returns the distance for the raycaster in the center of the arc of rays.
@@ -423,7 +423,7 @@ export class RobotI
       }
       return distances;
   }
-    
+
     getPosition()
     /*
       This function returns an object with X-Y-Z positions and rotation (theta)
