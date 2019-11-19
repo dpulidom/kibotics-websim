@@ -135,13 +135,20 @@ $(document).ready(async ()=>{
         brains.stopBrain(editorRobot2);
       }else{
         brains.resumeBrain(editorRobot1,codeFirst.js);
-        //agents.resumeAgent(editorRobot2,agents.code);
-        brains.resumeBrain(editorRobot2,codeSecond.js);
+        if(agent){
+          agents.resumeAgent(editorRobot2,agents.code);
+        }else{
+          brains.resumeBrain(editorRobot2,codeSecond.js);
+        }
       }
     }else{
       brains.runBrain(editorRobot1,codeFirst.js);
-      //agents.runAgent(editorRobot2,agents.code);
-      brains.runBrain(editorRobot2,codeSecond.js);
+      if(agent){
+        agents.runAgent(editorRobot2,agents.code);
+      }else{
+        brains.runBrain(editorRobot2,codeSecond.js);
+      }
+
     }
   });
 
