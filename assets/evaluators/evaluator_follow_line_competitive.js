@@ -13,7 +13,7 @@ evaluator.createInterface=()=>{
   node.setAttribute("class","evaluator");
   var img1 = document.createElement("img");
   img1.setAttribute("class","carMarker");
-  img1.setAttribute("src","../assets/resources/car1.svg")
+  img1.setAttribute("src",evaluator_icon1)
   node.appendChild(img1);
   var node2 = document.createElement("div");
   node2.setAttribute("id","car1Progress");
@@ -24,7 +24,7 @@ evaluator.createInterface=()=>{
   node.appendChild(node2);
   var img2 = document.createElement("img");
   img2.setAttribute("class","carMarker");
-  img2.setAttribute("src","../assets/resources/car2.svg")
+  img2.setAttribute("src",evaluator_icon2)
   node.appendChild(img2);
   var node4 = document.createElement("div");
   node4.setAttribute("id","car2Progress");
