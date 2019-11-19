@@ -40,6 +40,6 @@ agents.getCode = (file) => {
   request.send();
 }
 
-agents.getCode("../assets/agents/mouse_code.js");
+agents.getCode(file_agent);
 
 module.exports = agents;
