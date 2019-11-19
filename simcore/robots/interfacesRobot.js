@@ -262,9 +262,12 @@ export class RobotI
           numOfRaycasters += 1;
         }
         var offsetAngle = 180 / numOfRaycasters;
-        var angle = 0;
+        var angle = -90;
         for(var i = 0; i < numOfRaycasters; i++){
-          if( i < (numOfRaycasters-1)/2){
+          if(i == (numOfRaycasters-1)/2){
+            angle += offsetAngle;
+            var group = "center";
+          }else if( i < (numOfRaycasters-1)/2){
             angle = angle * 1;
             angle += offsetAngle;
             group = "left";
@@ -272,10 +275,6 @@ export class RobotI
             angle = angle * 1;
             angle += offsetAngle;
             group = "right";
-          }else{
-            angle = angle * -1;
-            angle += offsetAngle;
-            var group = "center";
           }
           this.createRaycaster(distance, angle, emptyEntity, group, i);
         }
