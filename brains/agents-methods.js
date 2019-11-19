@@ -39,7 +39,8 @@ agents.getCode = (file) => {
   }
   request.send();
 }
-
-agents.getCode(file_agent);
+if(typeof file_agent!="undefined"){
+  agents.getCode(file_agent);
+}
 
 module.exports = agents;
