@@ -263,19 +263,21 @@ export class RobotI
         }
         var offsetAngle = 180 / numOfRaycasters;
         var angle = 0;
-        var group = "center";
+        // var group = "center";
         for(var i = 0; i < numOfRaycasters; i++){
-          if( (i%2) == 0 ){
-            angle = angle * -1;
-            if(i != 0){
-              group = "right";
-            }
+          if( i < (numOfRaycasters-1)/2){
+            angle = angle * 1;
+            angle += offsetAngle;
+            group = "left";
+          }else if( i > (numOfRaycasters-1)/2){
+            angle = angle * 1;
+            angle += offsetAngle;
+            group = "right";
           }else{
             angle = angle * -1;
             angle += offsetAngle;
-            if(i != 0){
-              group = "left";
-            }
+            var group = "center";
+            console.log(i);
           }
           this.createRaycaster(distance, angle, emptyEntity, group, i);
         }
@@ -397,6 +399,7 @@ export class RobotI
       This function returns the distance for the raycaster in the center of the arc of rays.
     */
     {
+      console.log(this.distanceArray);
       if(this.distanceArray["center"][0] != null){
         return this.distanceArray["center"][0].d;
       }else{
