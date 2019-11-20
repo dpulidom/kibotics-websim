@@ -10,6 +10,12 @@
         "stats": false,
         "physics": "debug: true"
     },
+    "robots_config": [ 
+        {
+            "controller": "user1",
+            "id": "a-pibot"
+        }
+    ],
     "assets": [
         {
             "tag": "img",

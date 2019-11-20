@@ -10,6 +10,12 @@
         "stats": false,
         "physics": "debug: true"
     },
+    "robots_config": [ 
+        {
+            "controller": "user1",
+            "id": "a-pibot"
+        }
+    ],
     "assets": [
         {
             "tag": "img",
@@ -60,7 +66,7 @@
         {
             "tag": "a-robot",
             "attr": {
-                "id": "a-car1",
+                "id": "a-pibot",
                 "gltf-model":"../assets/models/jrobotFgltf.gltf",
                 "scale": { "x":20, "y":20, "z":20},
                 "position": { "x":12, "y":0.5, "z":25},

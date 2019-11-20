@@ -10,6 +10,16 @@
         "embedded": true,
         "physics": "debug: true"
     },
+    "robots_config": [ 
+        {
+            "controller": "user1",
+            "id": "a-car1"
+        },
+        {
+            "controller": "user2",
+            "id": "a-car2"
+        }
+    ],
     "assets": [
         {
             "tag": "img",
@@ -102,7 +112,7 @@
                 {
                     "tag": "a-entity",
                     "attr": {
-                        "id": "a-pibotCamera1Wrapper",
+                        "id": "a-car1Wrapper",
                         "position": { "x": 0.02, "y": 0.025, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
@@ -110,11 +120,11 @@
                         {
                             "tag": "a-camera",
                             "attr": {
-                                "id": "a-pibotCamera1",
+                                "id": "a-car1",
                                 "position": { "x":0, "y":0, "z":0},
                                 "rotation": { "x":0, "y":0, "z":0},
                                 "active": false,
-                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-car1Canvas;",
                                 "wasd-controls-enabled": false,
                                 "look-controls-enabled": false
                             }
@@ -138,7 +148,7 @@
                 {
                     "tag": "a-entity",
                     "attr": {
-                        "id": "a-pibotCamera1Wrapper",
+                        "id": "a-car2Wrapper",
                         "position": { "x": 0.02, "y": 0.025, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
@@ -146,11 +156,11 @@
                         {
                             "tag": "a-camera",
                             "attr": {
-                                "id": "a-pibotCamera1",
+                                "id": "a-car2",
                                 "position": { "x":0, "y":0, "z":0},
                                 "rotation": { "x":0, "y":0, "z":0},
                                 "active": false,
-                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-car2Canvas;",
                                 "wasd-controls-enabled": false,
                                 "look-controls-enabled": false
                             }

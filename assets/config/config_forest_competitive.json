@@ -11,6 +11,16 @@
         "stats": true,
         "physics": "debug: true"
     },
+    "robots_config": [ 
+        {
+            "controller": "user1",
+            "id": "a-car1"
+        },
+        {
+            "controller": "user2",
+            "id": "a-car2"
+        }
+    ],
     "assets": [
         {
             "tag": "img",
