@@ -7,7 +7,7 @@ brains.threadsBrains = [];
 
 function cleanCode(c) {
   /* Remove anything subsequent to an infinite loop */
-  if (c.split("while(true)").length <= 2) {
+  if (c.split("while(true)").length <= 2 && c.indexOf("while(true)") != -1) {
     // only one infinite loop allowed
     var loop = c.split("while(true)")[1];
     var endwhile;
