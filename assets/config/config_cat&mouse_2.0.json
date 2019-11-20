@@ -10,6 +10,17 @@
         "stats": false,
         "physics": "debug: true"
     },
+    "robots_config": [ 
+        {
+            "controller": "user1",
+            "id": "a-car1"
+        },
+        {
+            "controller": "agent",
+            "id": "a-car2",
+            "code": "../assets/agents/mouse_code.js"
+        }
+    ],
     "assets": [
         {
             "tag": "img",
