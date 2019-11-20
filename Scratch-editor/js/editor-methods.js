@@ -125,10 +125,12 @@ editor.getCode = () =>{
    * Function that extracts code of the current context
    * of the editor
    */
+
   c = Blockly.JavaScript.workspaceToCode(editor.ui);
   c =  c.replace('var myRobot;', '');
   c =  c.replace('var myRobot,', 'var');
   c =  c.replace(', myRobot;', ';');
+
   return c
 }
 
