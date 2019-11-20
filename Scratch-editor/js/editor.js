@@ -42,7 +42,7 @@ console.log("----------------------===========----------------");
 //var userCode = window.userCode;
 var socket = "";
 
-// parse A-Frame config
+// parse robots config
 var r = new XMLHttpRequest();
 r.overrideMimeType("application/json");
 r.open('GET', config_file, false);
@@ -50,13 +50,18 @@ r.send(null);
 if (r.status == 200){
   var f = JSON.parse(r.responseText);
 }
-// Identify robot ID
+// Identify robot ID for the user and each agent
 var robID;
-for (var obj in f.objects) {
-    if (f.objects[obj].tag == 'a-robot') {
-        robID = f.objects[obj].attr.id;
-    }
+var agentsIDs = [];
+for (var robot in f.robots_config) {
+  if (f.robots_config[robot].controller == 'user1') {
+    robID = f.robots_config[robot].id;
+  } else if (f.robots_config[robot].controller == 'agent') {
+    agentsIDs.push([f.robots_config[robot].id, f.robots_config[robot].code]);
+  }
 }
+console.log("user: " + robID);
+console.log("agents: " + agentsIDs);
 
 var editorRobot1 = robID; //id del robot (fichero json)
 
