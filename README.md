@@ -524,9 +524,14 @@ This is equivalent to code *myRobot.getDistance()*.
 
 ![Get distances](/docs/blocklyScreenshots/getDistances.PNG)
 
-This block is used to get all distances from the raycasters, if no intersection detected by a raycaster it returns 0.
+This block is used to get all distances from the raycasters, if no intersection detected by a raycaster it returns 10.
 This returns an array with the distances, is equivalent to code *myRobot.getDistances()*.
 
+| IDs | Position |
+|-------|-----------------|
+| 0-14 |RayCasters of left side |
+| 15 | RayCaster of center  |
+| 16-30 | RayCasters of right side |
 
 ![Get position](/docs/blocklyScreenshots/getPos.PNG)
 
