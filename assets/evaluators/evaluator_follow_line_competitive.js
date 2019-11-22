@@ -50,20 +50,29 @@ evaluator.setEvaluator = (arrayRobots) => {
   let robot2=Websim.robots.getHalAPI(arrayRobots[1]);
   if(!clock){
     timeInit = new Date();
-    car1 = {pos:{x:robot1.getPosition().x,z:robot1.getPosition().z},
-                      dist: 0
-                    };
-    car2={pos:{x:robot2.getPosition().x,z:robot2.getPosition().z},
-              dist: 0
+    car1 = {
+            pos:{
+              x:robot1.getPosition().x,
+              z:robot1.getPosition().z
+            },
+            dist: 0
+            };
+    car2={
+        pos:{
+          x:robot2.getPosition().x,
+          z:robot2.getPosition().z
+        },
+        dist: 0
     }
-  }
-  if(robot1.velocity.x>0){
-    clock=true;
+  }else{
     var time= document.getElementById("time");
     progressBar(arrayRobots,[car1,car2]);
     var realTime = new Date(new Date() - timeInit);
     var formatTime = timeFormatter(realTime);
     time.innerHTML = "Tiempo: " + formatTime;
+  }
+  if(robot1.velocity.x>0 || robot2.velocity.x>0){
+    clock=true;
   }
 }
 

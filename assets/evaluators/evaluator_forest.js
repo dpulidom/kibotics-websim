@@ -45,16 +45,19 @@ evaluator.setEvaluator = (arrayRobots) =>{
   /**This function do a cronometer and put it in index.html
   */
   let robot=Websim.robots.getHalAPI(arrayRobots[0]);
+  let robot2=Websim.robots.getHalAPI(arrayRobots[1]);
+
   if(!clock){
     timeInit = new Date();
-  }
-  if(robot.velocity.x>0){
-    clock=true;
+  }else{
     var time= document.getElementById("time");
     progressBar(arrayRobots);
     var realTime = new Date(new Date() - timeInit);
     var formatTime = timeFormatter(realTime);
     time.innerHTML = "Tiempo: " + formatTime;
+  }
+  if(robot.velocity.x>0 || robot2.velocity.x>0){
+    clock=true;
   }
 }
 
