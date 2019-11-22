@@ -55,7 +55,6 @@ function setAxis(myPanel){
   myLabel.setLocation(new jsgl.Vector2D(275,100));
   myLabel.setText("02:00");
   myPanel.addElement(myLabel);
-
   var myLabel = myPanel.createLabel();
   myLabel.setLocation(new jsgl.Vector2D(0,20));
   myLabel.setText("10");
@@ -75,9 +74,7 @@ evaluator.setEvaluator = (arrayRobots) => {
   var robot2 = Websim.robots.getHalAPI(arrayRobots[1]);
   if(!clock){
     timeInit = new Date();
-  }
-  if(robot1.velocity.x!=0 || robot2.velocity.x!= 0 || robot1.velocity.ay != 0 || robot2.velocity.ay != 0){
-    clock = true;
+  }else{
     var time= document.getElementById("time");
     var realTime = new Date(new Date() - timeInit);
     var formatTime = timeFormatter(realTime);
@@ -88,6 +85,9 @@ evaluator.setEvaluator = (arrayRobots) => {
     line.addPointXY(x,dist+10);
     x=x+1;
     myPanel.addElement(line);
+  }
+  if(robot1.velocity.x!=0 || robot2.velocity.x!= 0 || robot1.velocity.ay != 0 || robot2.velocity.ay != 0){
+    clock = true;
   }
 }
 
