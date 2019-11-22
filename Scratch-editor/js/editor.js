@@ -158,7 +158,12 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
   if(typeof config_evaluator!=="undefined"){
-    evaluators.runEvaluator([editorRobot1],config_evaluator);
+    var robots_list = [];
+    robots_list.push(robID);
+    for (var a in agentsIDs) {
+      robots_list.push(agentsIDs[a][0]);
+    }
+    evaluators.runEvaluator(robots_list,config_evaluator);
   }
   //setInterval(editor.showThreads, 1000);
 });

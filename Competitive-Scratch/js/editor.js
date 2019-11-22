@@ -244,7 +244,15 @@ $(document).ready(async ()=>{
   // as parameter
   await Websim.config.init(config_file);
   if(typeof config_evaluator!=="undefined"){
-    evaluators.runEvaluator([editorRobot1,editorRobot2],config_evaluator);
+    //evaluators.runEvaluator([editorRobot1,editorRobot2],config_evaluator);
+    var robots_list = [];
+    for (var r in robIDs) {
+      robots_list.push(robIDs[r]);
+    }
+    for (var a in agentsIDs) {
+      robots_list.push(agentsIDs[a][0]);
+    }
+    evaluators.runEvaluator(robots_list,config_evaluator);
   }
   //setInterval(brains.showThreads, 1000);
 });
