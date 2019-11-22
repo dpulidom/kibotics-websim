@@ -41,7 +41,7 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
   stopTimeoutRequested = false;
   var iterative_code, sequential_code;
   // SI+ Applications
-  if (code.split("while(true)").length <= 2) { 
+  if (code.split("while(true)").length <= 2 && code.split("while ( (__PyTrue__).__bool__ () === __PyTrue__)").length <= 2) {
     // only one infinite loop allowed
     if (code.indexOf("while(true)") != -1) {
       if (code.split("while(true)")[0] == "async function myAlgorithm(){\n"){
