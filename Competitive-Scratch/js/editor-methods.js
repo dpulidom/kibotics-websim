@@ -199,9 +199,9 @@ editor.WebSocketConnection = (uri) =>{
   };
 
   socket.onmessage = function(evt) {
-    if ( JSON.parse(event.data).type == 'get_pibot_scratch_R') {
-      console.log(JSON.parse(event.data))
-      window.location = JSON.parse(event.data).content
+    if ( JSON.parse(evt.data).type == 'get_pibot_scratch_R') {
+      console.log(JSON.parse(evt.data))
+      window.location = JSON.parse(evt.data).content
       var win = window.open('http://10.3.141.1:8001', '_blank');
       win.focus();
     }

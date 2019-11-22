@@ -136,9 +136,22 @@ $(document).ready(async ()=>{
     }
   });
 
-  // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoid error with no registered users
+  // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoiding error with no registered users
   if (wsUri != null){
-    socket = editor.WebSocketConnection(wsUri) // Create WebSocket connection with server to save system
+    socket = wsocket; // declared in WebServer Template
+    if (socket.readyState == WebSocket.OPEN) {
+      document.getElementById("saveCode").disabled = false;
+      socket.onclose = function (evt) {
+        console.error(evt.data);
+        console.log("Cierre de conexión WebSockets detectado. Intentando Reconectar.")
+        document.getElementById("saveCode").disabled = true
+        setTimeout(function() {
+          socket = editor.WebSocketConnection(wsUri);
+        },500);
+      };
+    } else {
+      socket = editor.WebSocketConnection(wsUri); // Create WebSocket connection with server to save system
+    }
   }
 
   // Init Websim simulator with config contained in the file passed
