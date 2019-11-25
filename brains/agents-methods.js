@@ -57,6 +57,7 @@ agents.getCode = (file) => {
   request.send();
 }
 if(typeof file_agent!="undefined"){
+  // only for JS editors
   agents.getCode(file_agent);
 }
 
