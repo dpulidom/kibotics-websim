@@ -1,6 +1,7 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
 import evaluators from '../../brains/evaluators-methods.js'
+import agents from '../../brains/agents-methods.js'
 import initGetAngularSpeedBlock from '../customBlocks/getAngularSpeedBlock.js'
 import initConsoleLogBlock from '../customBlocks/consoleLogBlock.js'
 import initGetDistanceBlock from '../customBlocks/getDistanceBlock.js'
@@ -57,7 +58,16 @@ for (var robot in f.robots_config) {
   if (f.robots_config[robot].controller == 'user1') {
     robID = f.robots_config[robot].id;
   } else if (f.robots_config[robot].controller == 'agent') {
-    agentsIDs.push([f.robots_config[robot].id, f.robots_config[robot].code]);
+    var js_content;
+    var request = new XMLHttpRequest();
+    request.open("GET", f.robots_config[robot].code, false);
+    request.onreadystatechange = function () {
+      if(request.status === 200 || request.status == 0) {
+          js_content = request.responseText;
+      }
+    }
+    request.send(null);
+    agentsIDs.push([f.robots_config[robot].id, js_content]);
   }
 }
 console.log("user: " + robID);
@@ -103,11 +113,20 @@ $(document).ready(async ()=>{
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
+        for (var agent in agentsIDs) {
+          agents.stopAgent(agentsIDs[agent][0]);
+        }
       } else {
         brains.resumeBrain(editorRobot1,code);
+        for (var agent in agentsIDs) {
+          agents.resumeAgent(agentsIDs[agent][0], agentsIDs[agent][1]);
+        }
       }
     }else{
       brains.runBrain(editorRobot1,code);
+      for (var agent in agentsIDs) {
+        agents.runAgent(agentsIDs[agent][0], agentsIDs[agent][1]);
+      }
     }
   });
 
