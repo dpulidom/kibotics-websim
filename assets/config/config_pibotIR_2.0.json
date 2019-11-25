@@ -9,7 +9,7 @@
         "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
         "embedded": true,
         "stats": false,
-        "physics": "debug: true"
+        "physics": "debug: true; friction: 0.0000001"
     },
     "robots_config": [ 
         {

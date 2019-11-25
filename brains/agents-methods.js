@@ -5,11 +5,12 @@ var agents = {};
 agents.code;
 
 agents.runAgent = (robotID, code) =>{
-  /**
-   * Function to create a "thread" and execute UI code
-   * also saves the "thread" on an array of running threadss
+  /*
+   * Function to create a "thread" and execute Agent's code
+   * also saves the "thread" on an array of running threads
    *
-   * @param {Object} myRobot RobotI object used to run code from UI
+   * @param {Object} robotID string used to identify the robot 
+      associated with the Agent
    */
 
   code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
@@ -22,6 +23,9 @@ agents.runAgent = (robotID, code) =>{
 }
 
 agents.resumeAgent = (robotID, code) =>{
+  /*
+   * Resumes Agent's running code
+   */
   code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
   threadBrain.iteration = brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID);
@@ -29,7 +33,20 @@ agents.resumeAgent = (robotID, code) =>{
   threadBrain.codeRunning = code;
 }
 
+agents.stopAgent = (robotID) =>{
+  /*
+   * Stops Agent's running code
+   */
+  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+  stopTimeoutRequested = true;
+  clearTimeout(threadBrain.iteration);
+  threadBrain.running = false;
+}
+
 agents.getCode = (file) => {
+  //
+   // Reads Agent's code from file
+   //
   var request = new XMLHttpRequest();
   request.open("GET", file);
   request.onreadystatechange = function () {
@@ -40,6 +57,7 @@ agents.getCode = (file) => {
   request.send();
 }
 if(typeof file_agent!="undefined"){
+  // only for JS editors
   agents.getCode(file_agent);
 }
 
