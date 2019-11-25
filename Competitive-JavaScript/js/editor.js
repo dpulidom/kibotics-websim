@@ -38,6 +38,7 @@ $(document).ready(async ()=>{
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
         brains.stopBrain(editorRobot2);
+        //agents.stopAgent(editorRobot2,agents.code);
       }else{
         brains.resumeBrain(editorRobot1,codeFirst);
         //agents.resumeAgent(editorRobot2,agents.code);
