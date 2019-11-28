@@ -14,27 +14,34 @@
   <body>
     <nav id="navbar">
       <a href="/index.html" ><img src="../assets/resources/jderobot.svg" alt="JdeRobot logo" style="width:70px; height:70px; margin-top: 6px;" /></a>
-      <div id="nav-button-container">
-        <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
-        <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
-        <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
-        <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
-      </div>
     </nav>
     <div id="container">
-      <div id="myIFrame">
-      </div>
-      <div id="right-container">
-        <div id="ace">
-
-        </div>
-        <div id="cameras" style="display:inline-flex;">
-          <div id="robotCam" style="margin: 3px;">
-            <p>Robot Camera</p>
-            <div id="spectatorDiv" style="display: inline"></div>
+        <div id="editor" class="editor">
+          <div id="buttons">
+            <button onclick id="resetRobot"><img src="../assets/resources/reset.png" alt="Reset button image"/></button>
+            <button onclick id="runbtn"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+            <button onclick id="simButton"><img src="../assets/resources/play-icon.png" alt="Run button image"/></button>
+            <button onclick id="cambtn"><img src="../assets/resources/play-camera-icon.png" alt="Stop button image"/></button>
+          </div>
+          <div id="ace">
+            <!-- ACE-Editor -->
+          </div>
+          <div id="cameras" style="display:inline-flex;">
+            <div id="cameraOpenCV" style="margin-left: 5px; margin-right: 15px;">
+              <p>OpenCV image</p>
+              <canvas id="outputCanvas" style="width:150px; height:100px; display: none" ></canvas>
+            </div>
+            <div id="robotCam">
+              <p>Robot Camera</p>
+              <div id="spectatorDiv" style="width: 150px; height: 100px;"></div>
+            </div>
           </div>
         </div>
-      </div>
+        <div id="dragbar" class="dragbar"></div>
+        <!-- SIMULADOR -->
+        <div id="myIFrame" class="myIFrame">
+          <!-- config.json -->
+        </div>
     </div>
     <script type="text/javascript" src="js/opencv3.3.1.js" ></script>
   </body>
