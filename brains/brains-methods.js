@@ -29,11 +29,12 @@ function getLoopEnd(loop) {
     }
   }
   if (endWhile+1 < loop.length-1) {
-    Swal.fire({
+    alert('Detectado código después del bucle infinito')
+    /*Swal.fire({
       type: 'info',
       text: 'Ese código no se ejecutará',
       title: 'Detectado código después del bucle infinito',
-    });
+    });*/
   }
   return endWhile;
 }
@@ -109,11 +110,12 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
     return brainIteration;
 
   } else {
-    Swal.fire({
+    alert('Error en el código.\nSólo puedes poner un bucle infinito');
+    /*Swal.fire({
       type: 'error',
       text: 'Modifica el código y vuelve a ejecutar',
       title: 'Error en el código.\nSólo puedes poner un bucle infinito',
-    });
+    });*/
     return undefined;
   }
 };
