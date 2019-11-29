@@ -108,7 +108,7 @@ $(document).ready(async ()=>{
         document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Ejecutar Código','Pausar Código');
     }
 
-    var code = editor.getCode()
+    var code = editor.getCode();
     console.log(code);
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
