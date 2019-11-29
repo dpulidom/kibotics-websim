@@ -29,7 +29,7 @@ function getLoopEnd(loop) {
     }
   }
   if (endWhile+1 < loop.length-1) {
-    alert('Detectado código después del bucle infinito')
+    alert('Detectado código después del bucle infinito. Ese código se ignorará.')
     /*Swal.fire({
       type: 'info',
       text: 'Ese código no se ejecutará',
@@ -110,7 +110,7 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
     return brainIteration;
 
   } else {
-    alert('Error en el código.\nSólo puedes poner un bucle infinito');
+    alert('Error en el código.\nSólo puedes poner un bucle infinito.');
     /*Swal.fire({
       type: 'error',
       text: 'Modifica el código y vuelve a ejecutar',
