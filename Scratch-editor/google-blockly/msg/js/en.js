@@ -435,6 +435,7 @@ Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 
 
 Blockly.Msg["MOVE_COMBINED_TEXT"] = "Move %1 at linear speed %2 and angular speed %3";
+Blockly.Msg["MOVE_COMBINED_ALL_TEXT"] = "Move %1 at linear speed %2 angular speed %3 and vertical speed %4";
 Blockly.Msg["MOVE_COMBINED_TOOLTIP"] = "Sets two speeds for the robot, angular (turn speed) and linear (forward and backward)";
 Blockly.Msg["MOVE_FORWARD_TEXT"] = "Move %1 forward at speed %2";
 Blockly.Msg["MOVE_FORWARD_TOOLTIP"] = "Sets linear speed to move forward the robot";

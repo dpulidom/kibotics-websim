@@ -14,6 +14,7 @@ import initGetPositionBlock from '../customBlocks/getPositionBlock.js'
 import initGetRotationBlock from '../customBlocks/getRotationBlock.js'
 import initMoveBackwardBlock from '../customBlocks/moveBackwardBlock.js'
 import initMoveBlock from '../customBlocks/moveBlock.js'
+import initMoveAllBlock from '../customBlocks/moveAllBlock.js'
 import initMoveForwardBlock from '../customBlocks/moveForwardBlock.js'
 import initPrintOnCanvasBlock from '../customBlocks/printImgCanvasBlock.js'
 import initReadIRBlock from '../customBlocks/readIRBlock.js'
@@ -201,6 +202,7 @@ function configureCustomBlocks() {
   initGetRotationBlock();
   initMoveBackwardBlock();
   initMoveBlock();
+  initMoveAllBlock();
   initMoveForwardBlock();
   initPrintOnCanvasBlock();
   initReadIRBlock();
