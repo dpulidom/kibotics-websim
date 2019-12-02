@@ -23,9 +23,9 @@ export default function initGetAngularSpeedBlock(){
   };
 
   Blockly.JavaScript['getAngularSpeed'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.getW()';
+    let code = variable_robotvar + '.getW()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };

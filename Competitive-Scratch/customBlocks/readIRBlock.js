@@ -37,10 +37,10 @@ export default function initReadIRBlock(){
   };
 
   Blockly.Python['read_ir'] = function(block) {
-    var variable_robot_var = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-    var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+    let variable_robot_var = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+    let value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
 
-    var code = variable_robot_var + '.leerIRSigueLineas()\r\n';
+    let code = variable_robot_var + '.leerIRSigueLineas()\r\n';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };

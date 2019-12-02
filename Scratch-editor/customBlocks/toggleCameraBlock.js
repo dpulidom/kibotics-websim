@@ -26,17 +26,17 @@ export default function initToggleCameraBlock(){
   };
 
   Blockly.JavaScript['toggle_camera'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar.toString() + '.toggleCamera()';
+    let code = variable_robotvar.toString() + '.toggleCamera()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['toggle_camera'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.toggleCamera()\r\n';
+    let code = variable_robotvar + '.toggleCamera()\r\n';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };

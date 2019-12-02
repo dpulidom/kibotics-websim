@@ -22,17 +22,16 @@ export default function initSetIntervalBlock(){
   };
 
   Blockly.JavaScript['set_interval'] = function(block) {
-    var statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
+    let statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
 
-    //var code = 'mainInterval = setIntervalSynchronous(async function(){\n' + statements_text + '},66);\n';
-    var code = 'while(true) {\n' + statements_text + '\n}';
+    let code = 'while(true) {\n' + statements_text + '\n}';
     return code;
   };
 
   Blockly.Python['set_interval'] = function(block) {
-    var statements_text = Blockly.Python.statementToCode(block, 'TEXT');
+    let statements_text = Blockly.Python.statementToCode(block, 'TEXT');
 
-    var code = 'while True:\n' + statements_text + '\ntime.sleep(0.1)\n';
+    let code = 'while True:\n' + statements_text + '\ntime.sleep(0.1)\n';
     return code;
   };
 }

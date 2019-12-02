@@ -1,6 +1,6 @@
 
-export default function initTakeoffBlock(){
-    var takeoffBlock = {
+export default function initTakeOffBlock(){
+    var takeOffBlock = {
       "type": "takeoff",
       "message0": "%{BKY_TAKEOFF_TEXT}",
       "args0": [
@@ -19,24 +19,24 @@ export default function initTakeoffBlock(){
   
     Blockly.Blocks['takeoff'] = {
       init: function() {
-        this.jsonInit(takeoffBlock);
+        this.jsonInit(takeOffBlock);
   
       }
     };
   
     Blockly.JavaScript['takeoff'] = function(block) {
-      var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+        var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
   
-      var code = robotvar + '.setL(3); \nawait sleep(0.5); \n'+robotvar + '.setL(0);\n';
-      return code;
+        let code = 'await ' + robotvar + '.despegar();\n';
+        return code;
     };
   
   
     Blockly.Python['takeoff'] = function(block) {
-      var robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-  
-      var code = robotvar + '.despegar(); \r\n' + 'time.sleep(0.5)\r\n';
-      return code;
+        let robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+
+        let code = robotvar + '.despegar(); \r\n' + 'time.sleep(0.5)\r\n';
+        return code;
     };
   }
   

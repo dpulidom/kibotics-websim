@@ -24,17 +24,17 @@ export default function initGetImageBlock(){
   };
 
   Blockly.JavaScript['get_image'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar.toString() + '.getImage()';
+    let code = variable_robotvar.toString() + '.getImage()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['get_image'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.leerIRSigueLineas()\r\n';
+    let code = variable_robotvar + '.leerIRSigueLineas()\r\n';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };

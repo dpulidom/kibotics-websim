@@ -30,18 +30,18 @@ export default function initMoveBackwardBlock(){
   };
 
   Blockly.JavaScript['move_backward'] = function(block) {
-    var variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var value_robotvar = Blockly.JavaScript.valueToCode(block, 'ROBOTVAR', Blockly.JavaScript.ORDER_ATOMIC);
+    let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    let value_robotvar = Blockly.JavaScript.valueToCode(block, 'ROBOTVAR', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = variable_name + '.setV(-' + value_robotvar + '); \n';
+    let code = variable_name + '.setV(-' + value_robotvar + '); \n';
     return code;
   };
 
   Blockly.Python['move_backward'] = function(block) {
-    var variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var value_robotvar = Blockly.Python.valueToCode(block, 'ROBOTVAR', Blockly.Python.ORDER_ATOMIC);
+    let variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    let value_robotvar = Blockly.Python.valueToCode(block, 'ROBOTVAR', Blockly.Python.ORDER_ATOMIC);
 
-    var code = variable_name + '.retroceder(' + value_robotvar + ')\r\n';
+    let code = variable_name + '.retroceder(' + value_robotvar + ')\r\n';
     return code;
   };
 }

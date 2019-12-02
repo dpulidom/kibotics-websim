@@ -41,19 +41,19 @@ export default function initGetImageOfBlock(){
   };
 
   Blockly.JavaScript['get_image_of'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var dropdown_options = block.getFieldValue('OPTIONS');    
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let dropdown_options = block.getFieldValue('OPTIONS');
     
-    var code = variable_robotvar.toString() + '.getImage(' + dropdown_options + ')';
+    let code = variable_robotvar.toString() + '.getImage(' + dropdown_options + ')';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['get_image_of'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var dropdown_options = block.getFieldValue('OPTIONS');    
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let dropdown_options = block.getFieldValue('OPTIONS');
 
-    var code = variable_robotvar + '.getImage(' + dropdown_options + ')';
+    let code = variable_robotvar + '.getImage(' + dropdown_options + ')';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };

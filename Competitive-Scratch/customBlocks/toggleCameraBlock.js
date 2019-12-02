@@ -34,9 +34,9 @@ export default function initToggleCameraBlock(){
   };
 
   Blockly.Python['toggle_camera'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.toggleCamera()\r\n';
+    let code = variable_robotvar + '.toggleCamera()\r\n';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };

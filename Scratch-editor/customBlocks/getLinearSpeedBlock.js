@@ -23,9 +23,9 @@ export default function initGetLinearSpeedBlock(){
   };
 
   Blockly.JavaScript['getLinearSpeed'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.getV()';
+    let code = variable_robotvar + '.getV()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };

@@ -624,6 +624,17 @@ export class RobotI {
         this.setV(0);
     }
 
+    async retrocederHasta(distance) {
+        let initial_position_x = this.getPosition().x;
+        let initial_position_z = this.getPosition().z;
+        this.setV(-1);
+        while (Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
+            + Math.pow(initial_position_z-this.getPosition().z,2)) <= distance) {
+            await sleep(0.01);
+        }
+        this.setV(0);
+    }
+
     retroceder(velocidadLineal) {
         if (velocidadLineal > 0) {
             return this.setV(-velocidadLineal);

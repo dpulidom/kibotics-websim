@@ -28,19 +28,19 @@ export default function initReadIRBlock(){
   };
 
   Blockly.JavaScript['read_ir'] = function(block) {
-    var variable_robot_var = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-    var value_name = '"'+block.getFieldValue('NAME') +'"';
+    let variable_robot_var = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+    let value_name = '"'+block.getFieldValue('NAME') +'"';
 
-    var code = variable_robot_var + '.readIR(' + value_name + ')';
+    let code = variable_robot_var + '.readIR(' + value_name + ')';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['read_ir'] = function(block) {
-    var variable_robot_var = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-    var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+    let variable_robot_var = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+    let value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
 
-    var code = variable_robot_var + '.leerIRSigueLineas()\r\n';
+    let code = variable_robot_var + '.leerIRSigueLineas()\r\n';
 
     return [code, Blockly.Python.ORDER_ATOMIC];
   };
