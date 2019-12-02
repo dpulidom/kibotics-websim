@@ -24,17 +24,17 @@ export default function initGetDistanceBlock(){
   };
 
   Blockly.JavaScript['get_distance'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.getDistance()';
+    let code = variable_robotvar + '.getDistance()';
 
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Python['get_distance'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.leerUltrasonido()\r\n';
+    let code = variable_robotvar + '.leerUltrasonido()\r\n';
 
     return [code, Blockly.Python.ORDER_NONE];
   };

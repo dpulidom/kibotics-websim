@@ -28,18 +28,18 @@ export default function initSetTimeoutBlock(){
   };
 
   Blockly.JavaScript['set_timeout'] = function(block) {
-    var number_name = block.getFieldValue('TIME');
-    var statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
+    let number_name = block.getFieldValue('TIME');
+    let statements_text = Blockly.JavaScript.statementToCode(block, 'TEXT');
 
-    var code = 'setTimeout(()=>{\n' + statements_text + '},' + number_name + ');\n';
+    let code = 'setTimeout(()=>{\n' + statements_text + '},' + number_name + ');\n';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['set_timeout'] = function(block) {
-    var number_name = parseInt(block.getFieldValue('TIME'));
-    var statements_text = Blockly.Python.statementToCode(block, 'TEXT');
-    var time_secs = number_name / 1000;
-    var code = 'time.sleep(' + time_secs + ')\n' + statements_text + "\r\n";
+    let number_name = parseInt(block.getFieldValue('TIME'));
+    let statements_text = Blockly.Python.statementToCode(block, 'TEXT');
+    let time_secs = number_name / 1000;
+    let code = 'time.sleep(' + time_secs + ')\n' + statements_text + "\r\n";
     return code;
   };
 }

@@ -24,8 +24,8 @@ export default function initStopRaycastersBlock(){
   };
 
   Blockly.JavaScript['stop_rays'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var code = variable_robotvar + '.stopRaycasters();\n';
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let code = variable_robotvar + '.stopRaycasters();\n';
     return code;
   };
 }

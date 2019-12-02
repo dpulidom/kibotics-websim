@@ -28,10 +28,10 @@ export default function initPrintOnCanvasBlock(){
   };
 
   Blockly.JavaScript['imgto_canvas'] = function(block) {
-    var text_canvas_id = block.getFieldValue('canvas_id');
-    var value_img_input = Blockly.JavaScript.valueToCode(block, 'img_input', Blockly.JavaScript.ORDER_ATOMIC);
+    let text_canvas_id = block.getFieldValue('canvas_id');
+    let value_img_input = Blockly.JavaScript.valueToCode(block, 'img_input', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = 'cv.imshow("' + text_canvas_id + '", ' + value_img_input +');\n';
+    let code = 'cv.imshow("' + text_canvas_id + '", ' + value_img_input +');\n';
     return code;
   };
 }

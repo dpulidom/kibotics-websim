@@ -47,26 +47,19 @@ export default function initGetObjectColorBlock(){
   };
 
   Blockly.JavaScript['get_objcolor'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var dropdown_options = block.getFieldValue('OPTIONS');
-    var text_colour = block.getFieldValue('COLOUR');
-    var code = '';
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let dropdown_options = block.getFieldValue('OPTIONS');
+    let text_colour = block.getFieldValue('COLOUR');
 
-    if(dropdown_options === "X"){
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[0];\n';
-    }else if(dropdown_options === "Y"){
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").center[1];\n';
-    }else{
-      code = variable_robotvar + '.getObjectColor("' + text_colour +  '").area;\n';
-    }
+    let code = variable_robotvar + '.getObjectColorPosition("' + text_colour + '",'+ dropdown_options+')';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Python['get_objcolor'] = function(block) {
-    var variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var dropdown_options = block.getFieldValue('OPTIONS');
-    var text_colour = block.getFieldValue('COLOUR');
+    let variable_robotvar = Blockly.Python.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let dropdown_options = block.getFieldValue('OPTIONS');
+    let text_colour = block.getFieldValue('COLOUR');
     var code = '';
 
     if(dropdown_options === "X"){

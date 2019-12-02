@@ -31,22 +31,18 @@ export default function initTurnLeftToBlock(){
     };
   
     Blockly.JavaScript['turn_left_to'] = function(block) {
-      var variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-      var value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
-      //var value_rads = value_distance * 3.14/180;
-      //var value_rads = value_distance /425; //el simulador no va en rad/s (Pibot)
-      var value_rads = value_distance /620; //el simulador no va en rad/s (Drone)
-      var vel = 0.02; // 5 degrees aprox
-      var t = value_rads/vel;
-      var code = variable_name + '.setW('+vel+'); \nawait sleep('+t+');\n'+variable_name + '.setW(0); \n';
+      let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+      let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
+      let code = 'await ' + variable_name + '.girarIzquierdaHasta(' + value_distance + ');\n';
+
       return code;
     };
   
     Blockly.Python['turn_left_to'] = function(block) {
-      var variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-      var value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
+      let variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+      let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
   
-      var code = variable_name + '.girar_izquierda_a(' + value_distance + ')\r\n';
+      let code = variable_name + '.girar_izquierda_a(' + value_distance + ')\r\n';
       return code;
     };
   }

@@ -30,10 +30,10 @@ export default function initSetLateralSpeedBlock(){
   };
 
   Blockly.JavaScript['set_lateral'] = function(block) {
-    var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
-    var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+    let robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
+    let value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = robotvar + '.setL(' + value + '); \n';
+    let code = robotvar + '.setL(' + value + '); \n';
     return code;
   };
 

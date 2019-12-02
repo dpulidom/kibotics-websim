@@ -39,11 +39,11 @@ export default function initStartRaycastersBlock(){
   };
 
   Blockly.JavaScript['start_rays'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
-    var number_numofrays = block.getFieldValue('NUMOFRAYS');
-    var number_raydistance = block.getFieldValue('RAYDISTANCE');
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let number_numofrays = block.getFieldValue('NUMOFRAYS');
+    let number_raydistance = block.getFieldValue('RAYDISTANCE');
 
-    var code = variable_robotvar + '.startRaycasters(' + number_raydistance + ',' + number_numofrays + ');\n';
+    let code = variable_robotvar + '.startRaycasters(' + number_raydistance + ',' + number_numofrays + ');\n';
     return code;
   };
 }

@@ -49,7 +49,7 @@ export default function initRobotInstanceBlock(){
 
   Blockly.Python['robot_instance'] = function(block) {
  
-    var dropdown_options = Blockly.Python.variableDB_.getName(block.getFieldValue('OPTIONS'), Blockly.Variables.NAME_TYPE)
+    let dropdown_options = Blockly.Python.variableDB_.getName(block.getFieldValue('OPTIONS'), Blockly.Variables.NAME_TYPE)
     
     if(dropdown_options === "pibot"){
       var code = 'PiBot()\r\n';

@@ -30,20 +30,17 @@ export default function initMoveBackWardToBlock(){
     };
   
     Blockly.JavaScript['move_backward_to'] = function(block) {
-      var variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-      var value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
-      var vel = 1;
-      var t = value_distance/vel;
-      vel  = vel*-1;
-      var code = variable_name + '.setV('+vel+'); \nawait sleep('+t+');\n'+variable_name + '.setV(0); \n';
+      let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+      let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
+      let code = 'await ' + variable_name + '.retrocederHasta('+value_distance+');';
       return code;
     };
   
     Blockly.Python['move_backward_to'] = function(block) {
-      var variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-      var value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
+      let variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+      let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
   
-      var code = variable_name + '.retroceder_a(' + value_distance + ')\r\n';
+      let code = variable_name + '.retroceder_a(' + value_distance + ')\r\n';
       return code;
     };
   }

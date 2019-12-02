@@ -23,9 +23,9 @@ export default function initGetDistancesBlock(){
   };
 
   Blockly.JavaScript['get_distances'] = function(block) {
-    var variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
+    let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    var code = variable_robotvar + '.getDistances()';
+    let code = variable_robotvar + '.getDistances()';
 
     return [code, Blockly.JavaScript.ORDER_NONE];
   };

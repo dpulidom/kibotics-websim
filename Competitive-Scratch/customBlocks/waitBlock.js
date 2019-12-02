@@ -26,16 +26,16 @@ export default function initWaitBlock(){
   };
 
   Blockly.JavaScript['wait_block'] = function(block) {
-    var value_time_input = block.getFieldValue('TIME');
+    let value_time_input = block.getFieldValue('TIME');
 
-    var code = 'await sleep(' + value_time_input + ');\n';
+    let code = 'await sleep(' + value_time_input + ');\n';
     return code;
   };
 
   Blockly.Python['wait_block'] = function(block) {
-    var value_time_input = block.getFieldValue('TIME');
+    let value_time_input = block.getFieldValue('TIME');
 
-    var code = 'time.sleep(' + value_time_input + ')\r\n';
+    let code = 'time.sleep(' + value_time_input + ')\r\n';
     return code;
   };
 }

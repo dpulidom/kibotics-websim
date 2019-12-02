@@ -25,7 +25,7 @@ import initTurnLeftBlock from '../customBlocks/turnLeftBlock.js'
 import initTurnRightBlock from '../customBlocks/turnRightBlock.js'
 import initWaitBlock from '../customBlocks/waitBlock.js'
 import initRobotInstanceBlock from '../customBlocks/robotInstanceBlock.js'
-import initTakeoffBlock from '../customBlocks/takeoffBlock.js'
+import initTakeOffBlock from '../customBlocks/takeOffBlock.js'
 import initLandBlock from '../customBlocks/landBlock.js'
 import initStartBlock from '../customBlocks/startBlock.js'
 import initMoveBackwardToBlock from '../customBlocks/moveBackwardToBlock.js'
@@ -211,7 +211,7 @@ function configureCustomBlocks() {
   initTurnRightBlock();
   initWaitBlock();
   initSetLateralSpeedBlock();
-  initTakeoffBlock();
+  initTakeOffBlock();
   initLandBlock();
   initStartBlock();
   initMoveBackwardToBlock();

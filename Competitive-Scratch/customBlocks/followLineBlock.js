@@ -34,11 +34,11 @@ export default function initFollowLineBlock(){
   };
 
   Blockly.JavaScript['follow_line'] = function(block) {
-    var variable_robot = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT'), Blockly.Variables.NAME_TYPE);
-    var text_colour = block.getFieldValue('COLOUR');
-    var value_speed = Blockly.JavaScript.valueToCode(block, 'INPUT_SPEED', Blockly.JavaScript.ORDER_ATOMIC);
+    let variable_robot = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT'), Blockly.Variables.NAME_TYPE);
+    let text_colour = block.getFieldValue('COLOUR');
+    let value_speed = Blockly.JavaScript.valueToCode(block, 'INPUT_SPEED', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = variable_robot + '.followLine("' + text_colour.toString() + '",' + value_speed + ');\n';
+    let code = variable_robot + '.followLine("' + text_colour.toString() + '",' + value_speed + ');\n';
     return code;
   };
 }
