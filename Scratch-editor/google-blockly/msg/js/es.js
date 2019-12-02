@@ -435,7 +435,7 @@ Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 /**
  * Declare text and tooltip text for ROBOT custom blocks
  */
-
+ Blockly.Msg["MOVE_COMBINED_ALL_TEXT"] = "Mover %1 a velocidad lineal %2 velocidad angular %3 y velocidad vertical %4";
 Blockly.Msg["MOVE_COMBINED_TEXT"] = "Mover %1 a velocidad lineal %2 y velocidad angular %3";
 Blockly.Msg["MOVE_COMBINED_TOOLTIP"] = "Configura dos velocidades, la velocidad de avance del robot y la velocidad de giro";
 Blockly.Msg["MOVE_FORWARD_TEXT"] = "Avanzar %1 a velocidad %2";
