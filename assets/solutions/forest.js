@@ -17,13 +17,13 @@ while(true){
     if(menor<9){
       if(id==15){
         myRobot.setV(0.75);
-        myRobot.setW(-0.4);
+        myRobot.setW(-0.1);
       }else if(id<15){
         myRobot.setV(1);
-        myRobot.setW(0.2);
+        myRobot.setW(0.05);
       }else if(id>15){
         myRobot.setV(1);
-        myRobot.setW(-0.2);
+        myRobot.setW(-0.05);
       }
     }
 }

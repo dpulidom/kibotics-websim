@@ -73,18 +73,19 @@
             "attr": {
                 "position": { "x":20.06, "y":0, "z":-4.5},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
-                "src": "../assets/models/forest/tree1.gltf",
-                "static-body":{"mass": 1}
-            }
+                "src": "../assets/models/forest/tree6.gltf",
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.1;radiusTop:0.5,height:5"            }
         },
         {
           "tag": "a-gltf-model",
             "attr": {
                 "position": { "x":20.06, "y":0, "z":18.48},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
-                "src": "../assets/models/forest/tree1.gltf",
+                "src": "../assets/models/forest/tree6.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.1;radiusTop:0.5,height:5"
             }
         },
         {
@@ -112,8 +113,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree3.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-                }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.2,height:5"                }
         },
         {
           "tag": "a-gltf-model",
@@ -122,8 +123,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree3.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-                }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.2,height:5"                }
         },
         {
           "tag": "a-gltf-model",
@@ -132,8 +133,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 4}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.2,height:5"            }
         },
         {
           "tag": "a-gltf-model",
@@ -142,8 +143,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 4}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.2,height:5"            }
         },
         {
           "tag": "a-gltf-model",
@@ -172,7 +173,7 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree4.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
         {
@@ -182,7 +183,7 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree4.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
         {
@@ -245,7 +246,7 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree5.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
             {
@@ -255,7 +256,7 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree5.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
           {
@@ -265,7 +266,7 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree6.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 10}
+                "static-body":{"shape": "cylinder","mass": 10}
             }
         },
             {
@@ -275,27 +276,27 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree6.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 10}
+                "static-body":{"shape": "cylinder","mass": 10}
             }
         },
         {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":-26.53, "y":0, "z":8.26},
+                "position": { "x":-26.53, "y":-0.2, "z":8.26},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree7.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
          {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":-26.53, "y":0, "z":-15.1},
+                "position": { "x":-26.53, "y":-0.2, "z":-15.1},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree7.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "cylinder","mass": 1}
             }
         },
         {
