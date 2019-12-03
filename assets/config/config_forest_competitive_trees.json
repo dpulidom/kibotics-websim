@@ -74,8 +74,8 @@
                 "position": { "x":20.06, "y":0, "z":-4.5},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree1.gltf",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.3,height:5"            }
         },
         {
           "tag": "a-gltf-model",
@@ -84,7 +84,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree1.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.2;radiusTop:0.3,height:5"
             }
         },
         {
@@ -93,7 +94,8 @@
                 "position": { "x":2.63, "y":0, "z":18.52},
                 "src": "../assets/models/forest/bush.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:2;"
                 }
         },
         {
@@ -102,7 +104,8 @@
                 "position": { "x":2.63, "y":0, "z":-4.29},
                 "src": "../assets/models/forest/bush.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:2;"
                 }
         },
         {
@@ -112,8 +115,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree3.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-                }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
         {
           "tag": "a-gltf-model",
@@ -122,8 +126,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree3.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-                }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
         {
           "tag": "a-gltf-model",
@@ -132,8 +137,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 4}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
         {
           "tag": "a-gltf-model",
@@ -142,8 +148,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 4}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
         {
           "tag": "a-gltf-model",
@@ -152,8 +159,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/stone1.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:2;"
+                }
         },
         {
           "tag": "a-gltf-model",
@@ -162,8 +170,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/stone1.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:2;"
+                          }
         },
         {
           "tag": "a-gltf-model",
@@ -172,8 +181,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree4.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+              }
         },
         {
           "tag": "a-gltf-model",
@@ -182,27 +192,30 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree4.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+              }
         },
         {
           "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":11.91, "y":0.5, "z":-9.49},
+                "position": { "x":11.91, "y":0.3, "z":-9.49},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
-                "src": "../assets/models/forest/stones.gltf",
+                "src": "../assets/models/forest/stone2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:1.2;"
                 }
         },
             {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":11.91, "y":0.5, "z":14.48},
+                "position": { "x":11.91, "y":0.3, "z":14.48},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
-                "src": "../assets/models/forest/stones.gltf",
+                "src": "../assets/models/forest/stone2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:1.2;"
                 }
         },
         {
@@ -245,8 +258,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree5.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+                }
         },
             {
             "tag": "a-gltf-model",
@@ -255,8 +269,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree5.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
           {
             "tag": "a-gltf-model",
@@ -265,8 +280,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree6.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 10}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+              }
         },
             {
             "tag": "a-gltf-model",
@@ -275,28 +291,31 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree6.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 10}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+               }
         },
         {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":-26.53, "y":0, "z":8.26},
+                "position": { "x":-26.53, "y":-0.3, "z":8.26},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree7.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+              }
         },
          {
             "tag": "a-gltf-model",
             "attr": {
-                "position": { "x":-26.53, "y":0, "z":-15.1},
+                "position": { "x":-26.53, "y":-0.3, "z":-15.1},
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/tree7.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: cylinder; radiusBottom:0.3;radiusTop:0.3,height:5"
+              }
         },
         {
           "tag": "a-gltf-model",
@@ -305,7 +324,8 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/stone2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:1.2;"
             }
         },
         {
@@ -315,8 +335,9 @@
                 "scale": { "x":1.5, "y":1.5, "z":1.5},
                 "src": "../assets/models/forest/stone2.gltf",
                 "class":"collidable",
-                "static-body":{"mass": 1}
-            }
+                "static-body":{"shape": "none", "mass": 1},
+                "shape__main": "shape: sphere; radius:1.2;"
+                }
         },
         {
           "tag": "a-robot",
@@ -324,7 +345,7 @@
               "id": "a-car1",
               "gltf-model":"../assets/models/f1_renault.gltf",
               "scale": { "x":20, "y":20, "z":20},
-              "position": { "x":40.24, "y":0.5, "z":10.6},
+              "position": { "x":40.34, "y":0.3, "z":10.6},
               "rotation": { "x":0, "y":180, "z":0},
               "dynamic-body":{"mass": 1}
             },
@@ -359,7 +380,7 @@
                 "id": "a-car2",
                 "gltf-model":"../assets/models/f1_williams.gltf",
                 "scale": { "x":20, "y":20, "z":20},
-                "position": { "x":40.24, "y":0.5, "z":-11.63},
+                "position": { "x":40.34, "y":0.3, "z":-11.63},
                 "rotation": { "x":0, "y":180, "z":0},
                 "dynamic-body":{"mass": 1}
             },
