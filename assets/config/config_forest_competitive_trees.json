@@ -1,0 +1,410 @@
+{
+    "scene-parent-id": "myIFrame",
+    "scene": {
+        "id": "scene",
+        "gravity": -9.8,
+        "ground": "../assets/textures/bump&go.png",
+        "sky": "../assets/textures/sky.png",
+        "background": "color: gray;",
+        "inspector": "url: https://aframe.io/releases/0.4.0/aframe-inspector.min.js",
+        "embedded": true,
+        "stats": true,
+        "physics": "debug: true; friction: 0.0000001"
+    },
+    "robots_config": [
+        {
+            "controller": "user1",
+            "id": "a-car1"
+        },
+        {
+            "controller": "user2",
+            "id": "a-car2"
+        }
+    ],
+    "assets": [
+        {
+            "tag": "img",
+            "attr": {
+                "id": "ground",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/escenarioBosque-min.png"
+            }
+        },
+        {
+            "tag": "a-asset-item",
+            "attr": {
+                "id": "model-pibot"
+            }
+        },
+        {
+            "tag": "img",
+            "attr": {
+                "id": "sky",
+                "alt": "Texture for the scene ground",
+                "src": "../assets/textures/sky.png"
+            }
+        }
+    ],
+    "objects":[
+        {
+            "tag": "a-entity",
+            "attr": {
+                "id": "sceneCamWrapper",
+                "position":{ "x":1, "y":9, "z":15},
+                "rotation": { "x":0, "y":0, "z":0},
+                "movement-controls": "fly:true"
+            },
+            "childs": [
+                {
+                    "tag": "a-camera",
+                    "attr": {
+                        "id": "sceneCam",
+                        "position": { "x":0, "y":0, "z":0},
+                        "rotation": { "x":0, "y":0, "z":0},
+                        "active": true,
+                        "wasd-controls-enabled": true,
+                        "look-controls-enabled": true
+                    }
+                }
+            ]
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":20.06, "y":0, "z":-4.5},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree1.gltf",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":20.06, "y":0, "z":18.48},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree1.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":2.63, "y":0, "z":18.52},
+                "src": "../assets/models/forest/bush.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":2.63, "y":0, "z":-4.29},
+                "src": "../assets/models/forest/bush.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":0, "y":0, "z":-15.02},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree3.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":0, "y":0, "z":8.53},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree3.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":28, "y":0, "z":10.63},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree2.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 4}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":28, "y":0, "z":-11.63},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree2.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 4}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":22, "y":0, "z":3.02},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stone1.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":22, "y":0, "z":-18.68},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stone1.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":32.46, "y":0, "z":-4.29},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree4.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":32.46, "y":0, "z":18.75},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree4.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":11.91, "y":0.5, "z":-9.49},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stones.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+            {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":11.91, "y":0.5, "z":14.48},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stones.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+                }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-1.22, "y":0, "z":-1},
+                "scale": { "x":1, "y":1, "z":1.5},
+                "rotation": { "x":0, "y":90, "z":0},
+                "src": "../assets/models/forest/wall.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 10}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-1.22, "y":0, "z":21.89},
+                "scale": { "x":1, "y":1, "z":1.5},
+                "rotation": { "x":0, "y":90, "z":0},
+                "src": "../assets/models/forest/wall.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 10}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-1.22, "y":0, "z":-22.87},
+                "scale": { "x":1, "y":1, "z":1.5},
+                "rotation": { "x":0, "y":90, "z":0},
+                "src": "../assets/models/forest/wall.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 10}
+            }
+        },
+            {
+              "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-11.46, "y":0, "z":2.57},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree5.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+            {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-11.46, "y":0, "z":-18.72},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree5.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+          {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-16.91, "y":0, "z":14.24},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree6.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 10}
+            }
+        },
+            {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-16.91, "y":0, "z":-9.26},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree6.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 10}
+            }
+        },
+        {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-26.53, "y":0, "z":8.26},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree7.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+         {
+            "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-26.53, "y":0, "z":-15.1},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/tree7.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-29.79, "y":0, "z":-6.74},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stone2.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-gltf-model",
+            "attr": {
+                "position": { "x":-29.79, "y":0, "z":16},
+                "scale": { "x":1.5, "y":1.5, "z":1.5},
+                "src": "../assets/models/forest/stone2.gltf",
+                "class":"collidable",
+                "static-body":{"mass": 1}
+            }
+        },
+        {
+          "tag": "a-robot",
+          "attr": {
+              "id": "a-car1",
+              "gltf-model":"../assets/models/f1_renault.gltf",
+              "scale": { "x":20, "y":20, "z":20},
+              "position": { "x":40.24, "y":0.5, "z":10.6},
+              "rotation": { "x":0, "y":180, "z":0},
+              "dynamic-body":{"mass": 1}
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "a-robot",
+            "attr": {
+                "id": "a-car2",
+                "gltf-model":"../assets/models/f1_williams.gltf",
+                "scale": { "x":20, "y":20, "z":20},
+                "position": { "x":40.24, "y":0.5, "z":-11.63},
+                "rotation": { "x":0, "y":180, "z":0},
+                "dynamic-body":{"mass": 1}
+            },
+            "childs": [
+                {
+                    "tag": "a-entity",
+                    "attr": {
+                        "id": "a-pibotCamera1Wrapper",
+                        "position": { "x": 0.02, "y": 0.025, "z": 0},
+                        "rotation": { "x": 0, "y":-90, "z":0}
+                    },
+                    "childs": [
+                        {
+                            "tag": "a-camera",
+                            "attr": {
+                                "id": "a-pibotCamera1",
+                                "position": { "x":0, "y":0, "z":0},
+                                "rotation": { "x":0, "y":0, "z":0},
+                                "active": false,
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "wasd-controls-enabled": false,
+                                "look-controls-enabled": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "a-plane",
+            "attr": {
+                "static-body": {
+                    "mass": 100000
+                },
+                "position": { "x":0, "y":0, "z":0 },
+                "rotation": { "x":-90, "y":0, "z":0 },
+                "width": "100",
+                "height": "100",
+                "src":"#ground"
+            }
+        },
+        {
+            "tag": "a-sky",
+            "attr": {
+                "src": "#sky"
+            }
+        }]
+  }
