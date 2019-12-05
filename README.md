@@ -77,19 +77,18 @@ This project needs the following installations.
 
 The following instructions works on Ubuntu 16.04 and 18.04.
 
-- **Step 1**: Add PPA repositories, two options possible, use **current** release of NodeJS or use the **LTS** release of NodeJS.
+- **Step 1**: Add PPA repositories, two options possible, use **current** release of NodeJS or use the **LTS** release (recommended) of NodeJS.
 
 ``` bash
 ## Current version
-sudo apt-get install curl python-software-properties
-[MAY BE DEPRECATED. IF SO, USE: sudo apt-get install curl software-properties-common]
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install curl software-properties-common
+curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 ```
 
 ``` bash
 ## LTS version
-sudo apt-get install curl python-software-properties
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install curl software-properties-common
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 ```
 
 - **Step 2**: Once added NodeJS to repositories, install via `apt-get`.
@@ -103,10 +102,12 @@ sudo apt-get install nodejs
 ``` bash
 node -v
 ```
+output: v12.13.1 (minimum v12.x.x)
 
 ``` bash
 npm -v
 ```
+output: 6.12.1 (minimum 6.x.x)
 
 **NOTE**: Installation of *LTS Version* is recommended.
 
@@ -137,7 +138,7 @@ sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
 sudo apt-get install npm
 ```
 
-This will create `package-lock.json` file and `node_modules` on current directory. If there are no errors in the installation all dependencies are ready for local development.
+This will create `package-lock.json` file and `node_modules` on the parent directory (i.e. _kibotics-websim/package-lock.json_ and _kibotics-websim/node_modules/_). If there are no errors in the installation all dependencies are ready for local development.
 
 
 ### Running project <a name="run"></a>
