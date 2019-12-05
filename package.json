@@ -9,6 +9,16 @@
     "start": "webpack-dev-server --mode development --open"
   },
   "author": "Alvaro Paniagua Tena",
+  "contributors": [
+    {
+      "name": "Carlos Awadallah Estevez",
+      "email": "carlosawadallah@gmail.com"
+    },
+    {
+      "name": "Ruben Alvarez Martin",
+      "email": "r.alvarezmar@gmail.com"
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
