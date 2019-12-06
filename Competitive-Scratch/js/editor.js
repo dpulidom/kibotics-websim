@@ -81,17 +81,33 @@ var editorRobot1 = robIDs[0];
 var editorRobot2 = robIDs[1];
 
 // Editor Control Variables for each Robot
-var codeFirst = {
-  js:"",
-  xml:null,
-  edit:true
-};
+if (window.userCode1) {
+    var codeFirst = {
+      js:"",
+      xml:window.userCode1,
+      edit:true
+    };
+} else {
+    var codeFirst = {
+      js:"",
+      xml:null,
+      edit:true
+    };
+}
 
-var codeSecond = {
-  js:"",
-  xml: null,
-  edit: false
-};
+if (window.userCode2) {
+    var codeSecond = {
+      js:"",
+      xml: window.userCode2,
+      edit: false
+    };
+} else {
+    var codeSecond = {
+      js:"",
+      xml: null,
+      edit: false
+    };
+}
 
 $(document).ready(async ()=>{
   configureCustomBlocks();

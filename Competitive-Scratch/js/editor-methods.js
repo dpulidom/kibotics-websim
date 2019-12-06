@@ -15,9 +15,6 @@ editor.setup = () =>{
   if (window.userCode1) {
     editor.ui = editor.injectCode(editor.ui, window.userCode1); // Inject (Load) blockly user code in editor
   }
-  if (window.userCode2) {
-    editor.ui = editor.injectCode(editor.ui, window.userCode2); // Inject (Load) blockly user code in editor
-  }
 }
 
 editor.setupBlockly = (workspace) =>{
