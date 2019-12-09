@@ -251,7 +251,7 @@
                 {
                     "tag": "a-entity",
                     "attr": {
-                        "id": "a-pibotCamera1Wrapper",
+                        "id": "a-car1Wrapper",
                         "position": { "x": 0.02, "y": 0.025, "z": 0},
                         "rotation": { "x": 0, "y":-90, "z":0}
                     },
@@ -259,11 +259,11 @@
                         {
                             "tag": "a-camera",
                             "attr": {
-                                "id": "a-pibotCamera1",
+                                "id": "a-car1",
                                 "position": { "x":0, "y":0, "z":0},
                                 "rotation": { "x":0, "y":0, "z":0},
                                 "active": false,
-                                "spectator": "canvas:#spectatorDiv; canvasID: a-pibotCamera1Canvas;",
+                                "spectator": "canvas:#spectatorDiv; canvasID: a-car1Canvas;",
                                 "wasd-controls-enabled": false,
                                 "look-controls-enabled": false
                             }
