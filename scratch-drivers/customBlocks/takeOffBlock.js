@@ -27,7 +27,7 @@ export default function initTakeOffBlock(){
     Blockly.JavaScript['takeoff'] = function(block) {
         var robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
   
-        let code = 'await ' + robotvar + '.despegar();\n';
+        let code = 'await ' + robotvar + '.takeOff();\n';
         return code;
     };
   
