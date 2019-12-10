@@ -28,7 +28,7 @@ export default function intiLandBlock(){
      Blockly.JavaScript['land'] = function(block) {
         let robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
 
-        let code = 'await ' + robotvar + '.aterrizar();\n';
+        let code = 'await ' + robotvar + '.land();\n';
         return code;
     };
   

@@ -33,7 +33,7 @@ export default function initTurnRightToBlock(){
     Blockly.JavaScript['turn_right_to'] = function(block) {
         let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
         let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
-        let code = 'await ' + variable_name + '.girarDerechaHasta(' + value_distance + ');\n';
+        let code = 'await ' + variable_name + '.turnUpTo(' + value_distance + ');\n';
 
         return code;
     };

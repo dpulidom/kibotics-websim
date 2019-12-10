@@ -41,7 +41,7 @@ export default function initMoveBackwardBlock(){
     let variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
     let value_robotvar = Blockly.Python.valueToCode(block, 'ROBOTVAR', Blockly.Python.ORDER_ATOMIC);
 
-    let code = variable_name + '.retroceder(' + value_robotvar + ')\r\n';
+    let code = variable_name + '.advance(-' + value_robotvar + ')\r\n';
     return code;
   };
 }
