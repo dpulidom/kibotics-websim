@@ -129,6 +129,52 @@ export class RobotI {
         this.setL(h);
     }
 
+    advance(linearSpeed) {
+        this.setV(linearSpeed);
+    }
+
+    async advanceTo(distance) {
+        let initial_position_x = this.getPosition().x;
+        let initial_position_z = this.getPosition().z;
+        distance > 0 ? this.setV(1) : this.setV(-1);
+        while (Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
+            + Math.pow(initial_position_z-this.getPosition().z,2)) <= Math.abs(distance)) {
+            await sleep(0.01);
+        }
+        this.setV(0);
+    }
+
+    async turnUpTo(angle) {
+        let initial_position = this.getPosition().theta;
+        angle > 0 ? this.setW(-0.15) : this.setW(0.15);
+        while (Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
+            await sleep(0.001);
+        }
+        this.setW(0);
+    }
+
+    async land() {
+        let position = this.getPosition();
+        if (position.y > 2) {
+            while (this.getPosition().y > 2) {
+                this.setL(-2);
+				await sleep(0.2);
+            }
+            this.setL(0);
+        }
+    }
+
+    async takeOff() {
+        let position = this.getPosition();
+        if (position.y < 10) {
+            while (this.getPosition().y < 10) {
+                this.setL(2);
+				await sleep(0.2);
+            }
+            this.setL(0);
+        }
+    }
+
     getV() {
         return this.velocity.x;
     }
@@ -609,98 +655,40 @@ export class RobotI {
         return this.readIR();
     }
 
-    avanzar(velocidadLineal) {
-        return this.setV(Math.abs(velocidadLineal));
+    avanzar(linearSpeed) {
+        this.advance(linearSpeed);
     }
 
     async avanzarHasta(distance) {
-        let initial_position_x = this.getPosition().x;
-        let initial_position_z = this.getPosition().z;
-        this.setV(1);
-        while (Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
-            + Math.pow(initial_position_z-this.getPosition().z,2)) <= distance) {
-            await sleep(0.01);
-        }
-        this.setV(0);
+        this.advanceTo(distance);
     }
 
-    async retrocederHasta(distance) {
-        let initial_position_x = this.getPosition().x;
-        let initial_position_z = this.getPosition().z;
-        this.setV(-1);
-        while (Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
-            + Math.pow(initial_position_z-this.getPosition().z,2)) <= distance) {
-            await sleep(0.01);
-        }
-        this.setV(0);
+    girar(turningSpeed) {
+        return this.setW(turningSpeed);
     }
 
-    retroceder(velocidadLineal) {
-        if (velocidadLineal > 0) {
-            return this.setV(-velocidadLineal);
-        } else {
-            return this.setV(velocidadLineal);
-        }
-    }
-
-    girarIzquierda(velocidadGiro) {
-        return this.setW(velocidadGiro);
-    }
-
-    girarDerecha(velocidadGiro) {
-        return this.setW(-velocidadGiro);
-    }
-
-    async girarDerechaHasta(angle) {
-        let initial_position = this.getPosition().theta;
-        this.setW(-0.15);
-        while (Math.abs(initial_position - this.getPosition().theta) <= angle) {
-            await sleep(0.01);
-        }
-        this.setW(0);
-    }
-
-    async girarIzquierdaHasta(angle) {
-        var initial_position = this.getPosition().theta;
-        this.setW(0.15);
-        while (Math.abs(initial_position - this.getPosition().theta) <= angle) {
-            await sleep(0.01);
-        }
-        this.setW(0);
+    async girarHasta(angle) {
+        this.turnUpTo(angle);
     }
 
     async aterrizar() {
-        let position = this.getPosition();
-        if (position.y > 2) {
-            while (this.getPosition().y > 2) {
-                this.setL(-2);
-				await sleep(0.2);
-            }
-            this.setL(0);
-        }
+        this.land();
     }
 
     async despegar() {
-        let position = this.getPosition();
-        if (position.y < 10) {
-            while (this.getPosition().y < 10) {
-                this.setL(2);
-				await sleep(0.2);
-            }
-            this.setL(0);
-        }
+        this.takeOff();
     }
 
     parar() {
-        return this.move(0, 0, 0);
+        this.move(0, 0, 0);
     }
 
     leerUltrasonido() {
         return this.getDistance();
     }
 
-    dameObjeto(filtroBajo, filtroAlto) {
-        return this.getObjectColorRGB(filtroBajo, filtroAlto);
+    dameObjeto(lowFilter, highFilter) {
+        return this.getObjectColorRGB(lowFilter, highFilter);
     }
 
     dameImagen() {
