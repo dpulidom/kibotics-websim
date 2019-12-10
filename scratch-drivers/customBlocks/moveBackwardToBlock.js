@@ -32,7 +32,7 @@ export default function initMoveBackWardToBlock(){
     Blockly.JavaScript['move_backward_to'] = function(block) {
       let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
       let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
-      let code = 'await ' + variable_name + '.retrocederHasta('+value_distance+');';
+      let code = 'await ' + variable_name + '.advanceTo(-'+value_distance+');';
       return code;
     };
   

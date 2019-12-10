@@ -33,7 +33,7 @@ export default function initMoveForwardBlock(){
     let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
     let value_robotvar = Blockly.JavaScript.valueToCode(block, 'ROBOTVAR', Blockly.JavaScript.ORDER_ATOMIC);
 
-    let code = variable_name + '.setV(' + value_robotvar + '); \n';
+    let code = variable_name + '.advance(' + value_robotvar + '); \n';
     return code;
   };
 
