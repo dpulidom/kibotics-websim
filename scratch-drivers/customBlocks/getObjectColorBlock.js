@@ -51,7 +51,7 @@ export default function initGetObjectColorBlock(){
     let dropdown_options = block.getFieldValue('OPTIONS');
     let text_colour = block.getFieldValue('COLOUR');
 
-    let code = variable_robotvar + '.getObjectColorPosition("' + text_colour + '",'+ dropdown_options+')';
+    let code = variable_robotvar + '.getObjectColorPosition("' + dropdown_options + '", "' + text_colour + '")';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
