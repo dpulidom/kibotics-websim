@@ -49,7 +49,7 @@ export default function initGetPositionBlock(){
     let dropdown_position_options = block.getFieldValue('POSITION_OPTIONS');
     let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    let code = variable_robotvar + '.getPosition("' + dropdown_position_options + '");';
+    let code = variable_robotvar + '.getPositionValue("' + dropdown_position_options + '");';
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
 }
