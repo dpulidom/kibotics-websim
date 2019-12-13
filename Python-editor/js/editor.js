@@ -43,9 +43,20 @@ $(document).ready(async ()=>{
      * - Stop thread for a robot if exists and running
      * - Resume thread for a robot if exists and not running
      */
-    var pythonCodeString = editor.getCode()
+    var iconRunBtn = document.querySelector("#runbtn").firstChild;
+    if ($(iconRunBtn).hasClass("glyphicon-stop")){
+        iconRunBtn.classList.remove("glyphicon-stop");
+        iconRunBtn.classList.add("glyphicon-play");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Pausar Código', 'Ejecutar Código');
+    } else {
+        iconRunBtn.classList.remove("glyphicon-play");
+        iconRunBtn.classList.add("glyphicon-stop");
+        document.querySelector("#runbtn").innerHTML = document.querySelector("#runbtn").innerHTML.replace('Ejecutar Código','Pausar Código');
+    }
+
+    var pythonCodeString = editor.getCode();
     console.log(pythonCodeString);
-    const request = new Request('http://www.kibotics.org/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
+    const request = new Request('/get_python_to_javascript_code', {method: 'POST', body: '{"python_code": "' + pythonCodeString +'"}'});
     fetch(request)
       .then(response => {
         return response.text();
