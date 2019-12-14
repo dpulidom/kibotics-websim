@@ -255,11 +255,8 @@ $(document).ready(async ()=>{
       document.getElementById("saveCode").disabled = false;
       socket.onclose = function (evt) {
         console.error(evt.data);
-        console.log("Cierre de conexión WebSockets detectado. Intentando Reconectar.")
+        console.log("Cierre de conexión WebSockets detectado.")
         document.getElementById("saveCode").disabled = true
-        setTimeout(function() {
-          socket = editor.WebSocketConnection(wsUri);
-        },500);
       };
     } else {
       socket = editor.WebSocketConnection(wsUri); // Create WebSocket connection with server to save system

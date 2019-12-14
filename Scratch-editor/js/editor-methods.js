@@ -176,7 +176,8 @@ editor.WebSocketConnection = (uri) =>{
   };
 
   socket.onclose = function (evt) {
-    editor.wsClose(evt);
+    //editor.wsClose(evt);
+    console.log("Cierre de conexión WebSockets detectado.")
   };
 
   return socket
