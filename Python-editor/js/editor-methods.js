@@ -7,7 +7,7 @@ editor.ui = {};
 editor.setup = () =>{
   editor.ui = ace.edit("ace");
   editor.ui.setTheme("ace/theme/monokai");
-  editor.ui.session.setMode("ace/mode/javascript");
+  editor.ui.session.setMode("ace/mode/python");
 }
 
 editor.toggleCamera = () =>{
