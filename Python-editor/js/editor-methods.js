@@ -34,20 +34,6 @@ editor.sendEvent = (eventName, eventDetail = '') =>{
   document.dispatchEvent(ev);
 }
 
-editor.saveCode = (demoWorkspace, socket) =>{
-  console.log("Getting code from the embedded editor.")
-  var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
-  var xml_text = Blockly.Xml.domToText(xml);
-
-  var message = {
-      type: "save_scratch",
-      content: xml_text
-  };
-
-  socket.send(JSON.stringify(message));
-}
-
-
 editor.getCode = () =>{
   /**
    * Function that extracts code of the current context

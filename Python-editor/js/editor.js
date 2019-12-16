@@ -1,12 +1,6 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
 
-var wsUri = window.wsUri;
-console.log("-----===================---------------------------------");
-console.log("@@@@@@@@@" + wsUri);
-console.log("----------------------===========----------------");
-var socket = "";
-
 // parse robots config
 var r = new XMLHttpRequest();
 r.overrideMimeType("application/json");
@@ -82,10 +76,6 @@ $(document).ready(async ()=>{
     });
   });
 
-  $("#saveCode").click(()=>{
-    editor.saveCode(editor.ui, socket); // Declare function that extracts code from editor and sends to server via connection.send
-  });
-
   $('#resetRobot').click(()=>{
     editor.sendEvent('reset');
   });
@@ -93,19 +83,6 @@ $(document).ready(async ()=>{
   $('#simButton').click(()=>{
     Websim.simulation.toggleSimulation();
   });
-
-  // Only should try connect to Ws Server if wsUri is not null. Its necesary for avoiding error with no registered users
-  if (wsUri != null){
-    socket = wsocket; // declared in WebServer Template
-    if (socket.readyState == WebSocket.OPEN) {
-      document.getElementById("saveCode").disabled = false;
-      socket.onclose = function (evt) {
-        console.error(evt.data);
-        console.log("Cierre de conexión WebSockets detectado.")
-        document.getElementById("saveCode").disabled = true
-      };
-    }
-  }
 
   // Init Websim simulator with config contained in the file passed
   // as parameter
