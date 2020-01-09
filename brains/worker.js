@@ -1,15 +1,8 @@
-const utils = require('../simcore/utils/index.js');
-const adapter = require('./adapter.js');
-const sleep = utils.sleep;
-const setIntervalSynchronous = utils.setIntervalSynchronous;
+// const utils = require('../simcore/utils/index.js');
+// const sleep = utils.sleep;
+// const setIntervalSynchronous = utils.setIntervalSynchronous;
+//
 
-var brains = {};
-brains.threadsBrains = [];
-
-const PYTHON_WHILE = "while(true)";
-const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
-const START_USER_CODE = "// START USER CODE";
-const END_USER_CODE = "// END USER CODE";
 
 function getLoopEnd(loop) {
   let endWhile;
@@ -42,6 +35,10 @@ function getLoopEnd(loop) {
 
 
 function cleanCode(code) {
+  const PYTHON_WHILE = "while(true)";
+  const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
+  const START_USER_CODE = "// START USER CODE";
+  const END_USER_CODE = "// END USER CODE";
   /* Remove anything subsequent to an infinite loop */
   if (code.split(PYTHON_WHILE).length <= 2 && code.indexOf(PYTHON_WHILE) != -1) {
     // only one infinite loop allowed
@@ -56,9 +53,19 @@ function cleanCode(code) {
   }
 }
 
-var stopTimeoutRequested;
-brains.createTimeoutBrain = (code, myRobot, id)=>{
+
+function initializeWorker(){
+  console.log("LOG -----> Starting worker");
+  importScripts("../../simcore/robots/interfacesRobotWW.js");
+  worker = {};
+  worker.threadsWorker = [];
   stopTimeoutRequested = false;
+  //cargar HALapiWebWorker
+  //obtener código de usuario
+}
+
+function createTimeout(code, myRobot, id){
+  var stopTimeoutRequested = false;
   var iterative_code, sequential_code;
   // SI+ Applications
   if (code.split(PYTHON_WHILE).length <= 2 && code.split(PYONBROWSER_WHILE).length <= 2) {
@@ -119,84 +126,46 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
     });*/
     return undefined;
   }
-};
+}
 
-brains.runBrain = (robotID, code) =>{
-  /**
-   * Function to create a "thread" and execute UI code
-   * also saves the "thread" on an array of running threadss
-   *
-   * @param {Object} myRobot RobotI object used to run code from UI
-   */
-
-  code = cleanCode(code);
-  code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
-  brains.threadsBrains.push({
-    "id": robotID,
-    "running": true,
-    "iteration": brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID),
-    "codeRunning": code
-  });
-};
-
-brains.threadExists = (robotID)=>{
-  return brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-};
-
-brains.isThreadRunning = (robotID)=>{
-  /**
-   * Function to check if a thread is running
-   *
-   * @param {string} threadID ID of the thread to check if running
-   */
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  return threadBrain.running;
-};
-
-brains.resumeBrain = (robotID, code) =>{
-  code = cleanCode(code);
-  code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  threadBrain.iteration = brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID);
-  threadBrain.running = true;
-  threadBrain.codeRunning = code;
-};
-
-brains.stopBrain = (robotID) =>{
-  /**
-   * Stops all threads running
-   */
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  stopTimeoutRequested = true;
-  clearTimeout(threadBrain.iteration);
-  threadBrain.running = false;
-};
-
-brains.runWorkerBrain = (robotID,code) =>{
-  if(typeof(Worker)!=="undefined"){
-      //crear el código yuxtaposición de runWorkerHALAPI y codigo usuario
-      brains.w = new Worker("../../brains/worker.js"); // starting worker
-      //añadir codigo, robotID, HALapiWW
-      var myRobot = Websim.robots.getHalAPI(robotID);
-      console.log(myRobot);
-      brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
-      brains.w.onmessage = function(e) { //respuesta del codigo principal
-        adapter.reply(e.data,myRobot);
+function createTimeoutWorker(code,myRobot,id){
+  let workerIteration = setTimeout(async function iteration(){
+      await eval(code);
+      if (!stopTimeoutRequested) {
+          var t = setTimeout(iteration, 100);
+          var threadsWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == id);
+          threadsWorker.iteration = t;
       }
-      //brainsWW.w.terminate();
-  }else{
-    console.log("Your browser does not support web workers");
-  }
+  }, 100);
+  return workerIteration;
 }
 
 
-brains.showThreads = ()=>{
-  /**
-   * Function used for debugging, prints all threads data
-   */
-  brains.threadsBrains.forEach((threadBrain)=>{
-    console.log(threadBrain);
-  })
+async function createTimeout(code,myRobot){
+  code = cleanCode(code);
+  code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
+  var robotID = myRobot.myRobotID;
+  worker.threadsWorker.push({
+    "id": robotID,
+    "running": true,
+    //"iteration": createTimeout(code, Websim.robots.getHalAPI(robotID), robotID),
+    "iteration": createTimeoutWorker(code,myRobot,robotID),
+    "codeRunning": code
+  });
+  await eval(code);
+}
+
+onmessage = function (e) {
+  var data = e.data;
+  switch (data.message) {
+    case "user_code":
+      var myRobot = new RobotIWW(data.robotID);
+      setTimeout(createTimeout,100,data.code,myRobot);
+      //postMessage({"message":"setV","parameter":0.1});
+      break;
+    default:
+      console.log("otro mensaje");
+  }
 };
 
-module.exports = brains;
+initializeWorker();
