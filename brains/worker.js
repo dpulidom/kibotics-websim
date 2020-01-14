@@ -1,8 +1,10 @@
-// const utils = require('../simcore/utils/index.js');
-// const sleep = utils.sleep;
-// const setIntervalSynchronous = utils.setIntervalSynchronous;
-//
 
+function initializeWorker(){
+  console.log("LOG -----> Starting worker");
+  importScripts("../../simcore/robots/interfacesRobotWW.js");
+  worker = {};
+  worker.threadsWorker = [];
+}
 
 function getLoopEnd(loop) {
   let endWhile;
@@ -23,16 +25,10 @@ function getLoopEnd(loop) {
     }
   }
   if (endWhile+1 < loop.length-1) {
-    alert('Detectado código después del bucle infinito. Ese código se ignorará.')
-    /*Swal.fire({
-      type: 'info',
-      text: 'Ese código no se ejecutará',
-      title: 'Detectado código después del bucle infinito',
-    });*/
+    console.log('Detectado código después del bucle infinito. Ese código se ignorará.')
   }
   return endWhile;
 }
-
 
 function cleanCode(code) {
   const PYTHON_WHILE = "while(true)";
@@ -53,19 +49,12 @@ function cleanCode(code) {
   }
 }
 
-
-function initializeWorker(){
-  console.log("LOG -----> Starting worker");
-  importScripts("../../simcore/robots/interfacesRobotWW.js");
-  worker = {};
-  worker.threadsWorker = [];
+function createTimeoutWorker(code,myRobot,id){
+  const PYTHON_WHILE = "while(true)";
+  const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
+  const START_USER_CODE = "// START USER CODE";
+  const END_USER_CODE = "// END USER CODE";
   stopTimeoutRequested = false;
-  //cargar HALapiWebWorker
-  //obtener código de usuario
-}
-
-function createTimeout(code, myRobot, id){
-  var stopTimeoutRequested = false;
   var iterative_code, sequential_code;
   // SI+ Applications
   if (code.split(PYTHON_WHILE).length <= 2 && code.split(PYONBROWSER_WHILE).length <= 2) {
@@ -98,10 +87,10 @@ function createTimeout(code, myRobot, id){
       sequential_code = code;
       iterative_code = null;
     }
-    // console.log('sequential:\n'+sequential_code);
-    // console.log('iterative:\n'+iterative_code);
+    console.log('sequential:\n'+sequential_code);
+    console.log('iterative:\n'+iterative_code);
 
-    let brainIteration = setTimeout(async function iteration(){
+    let workerIteration = setTimeout(async function iteration(){
       if (sequential_code != null) {
         await eval(sequential_code);
         sequential_code = null;
@@ -109,50 +98,30 @@ function createTimeout(code, myRobot, id){
       if (iterative_code != null) {
         await eval(iterative_code);
         if (!stopTimeoutRequested) {
-            var t = setTimeout(iteration, 100);
-            var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == id);
-            threadBrain.iteration = t;
+          var t = setTimeout(iteration, 100);
+          var threadsWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == id);
+          threadsWorker.iteration = t;
         }
       }
     }, 100);
-    return brainIteration;
-
-  } else {
-    alert('Error en el código.\nSólo puedes poner un bucle infinito.');
-    /*Swal.fire({
-      type: 'error',
-      text: 'Modifica el código y vuelve a ejecutar',
-      title: 'Error en el código.\nSólo puedes poner un bucle infinito',
-    });*/
+    return workerIteration;
+  }else{
+    console.log('Error en el código.\nSólo puedes poner un bucle infinito.');
     return undefined;
   }
 }
 
-function createTimeoutWorker(code,myRobot,id){
-  let workerIteration = setTimeout(async function iteration(){
-      await eval(code);
-      if (!stopTimeoutRequested) {
-          var t = setTimeout(iteration, 100);
-          var threadsWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == id);
-          threadsWorker.iteration = t;
-      }
-  }, 100);
-  return workerIteration;
-}
-
-
-async function createTimeout(code,myRobot){
+async function createArray(code,myRobot){
   code = cleanCode(code);
   code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
   var robotID = myRobot.myRobotID;
+  console.log(code);
   worker.threadsWorker.push({
     "id": robotID,
     "running": true,
-    //"iteration": createTimeout(code, Websim.robots.getHalAPI(robotID), robotID),
     "iteration": createTimeoutWorker(code,myRobot,robotID),
     "codeRunning": code
   });
-  await eval(code);
 }
 
 onmessage = function (e) {
@@ -160,11 +129,11 @@ onmessage = function (e) {
   switch (data.message) {
     case "user_code":
       var myRobot = new RobotIWW(data.robotID);
-      setTimeout(createTimeout,100,data.code,myRobot);
-      //postMessage({"message":"setV","parameter":0.1});
+      createArray(data.code,myRobot);
       break;
     default:
       console.log("otro mensaje");
+      console.log(data);
   }
 };
 
