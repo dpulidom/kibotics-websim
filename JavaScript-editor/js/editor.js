@@ -25,7 +25,7 @@ $(document).ready(async ()=>{
      * - Resume thread for a robot if exists and not running
      */
     var code = editor.getCode()
-    console.log(code);
+    //console.log(code);
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
         brains.stopBrain(editorRobot1);
@@ -34,6 +34,7 @@ $(document).ready(async ()=>{
       }
     }else{
       brains.runBrain(editorRobot1,code);
+      //brains.runWorkerBrain(editorRobot1,code);
     }
   });
 

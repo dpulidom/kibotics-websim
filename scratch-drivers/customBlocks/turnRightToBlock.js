@@ -22,14 +22,13 @@ export default function initTurnRightToBlock(){
       "tooltip": "%{BKY_TURN_RIGHT_TO_TOOLTIP}",
       "helpUrl": ""
     }
-  
+
     Blockly.Blocks['turn_right_to'] = {
       init: function() {
-        this.jsonInit(turnRightToBlock);
-  
+        this.jsonInit(turnRightToBlock);  
       }
     };
-  
+
     Blockly.JavaScript['turn_right_to'] = function(block) {
         let variable_name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
         let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
@@ -37,7 +36,7 @@ export default function initTurnRightToBlock(){
 
         return code;
     };
-  
+
     Blockly.Python['turn_right_to'] = function(block) {
         let variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
         let value_distance = Blockly.JavaScript.valueToCode(block, 'DISTANCE', Blockly.JavaScript.ORDER_ATOMIC);
@@ -46,4 +45,3 @@ export default function initTurnRightToBlock(){
         return code;
     };
   }
-  

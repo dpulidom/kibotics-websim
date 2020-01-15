@@ -5,7 +5,7 @@ class RobotIWW {
       this.velocity = {x: 0, y: 0, z: 0, ax: 0, ay: 0, az: 0};
       this.position = {x: 0, y: 0, z: 0};
       this.rotation = {x: 0, y: 0, z: 0};
-      this.distanceArray = [];
+      this.distanceArray = 10;
       this.object;
       this.camera = [];
       this.handlerMessages();
@@ -15,383 +15,372 @@ class RobotIWW {
     onmessage= function(e){
       switch (e.data.message) {
         case "finished":
-          console.log("posición alcanzada, desbloqueo worker");
-          this.finished = true;
-          break;
-        case "velocidad":
-          console.log("velocidad obtenida, desbloqueo worker");
-          this.finished=true;
-          if(e.data.function == "getV"){
-            this.velocity = {x: e.data.parameter, y: 0, z: 0, ax: 0, ay: 0, az: 0};
-            //this.velocity.x = e.data.parameter;
-          }else if(e.data.function == "getW"){
-            this.velocity = {x: 0, y: 0, z: 0, ax: 0, ay: e.data.parameter, az: 0};
-            //this.velocity.ay = e.data.parameter;
-          }else if(e.data.function == "getL"){
-            this.velocity = {x: 0, y: e.data.parameter, z: 0, ax: 0, ay: 0, az: 0};
-            //this.velocity.y = e.data.parameter;
-          }
           break;
         case "sensor":
-          this.finished = true;
-          if(e.data.function == "getDistance" || e.data.function == "getDistances"){
+          if(e.data.function == "getV" || e.data.function == "getW" || e.data.function == "getL"){
+            this.velocity = e.data.parameter;
+          }else if(e.data.function == "getDistance" || e.data.function == "getDistances"){
             this.distanceArray = e.data.parameter;
-            console.log(this.distanceArray);
-          }else if(e.data.function == "getObjectColor" || e.data.function == "readIR"){
-            this.object = e.data.parameter;
+          }else if(e.data.function == "getPosition"){
+            this.position = e.data.parameter;
+          }else if(e.data.function == "getRotation"){
+            this.rotation = e.data.parameter;
           }
           break;
+        case "camera":
+          this.object = e.data.parameter;
+          break;
+        case "image":
+          this.camera = e.data.parameter;
+          break;
         default:
-          console.log("Otro mensaje");
+          console.log("Mensaje recibido: " + e.data);
       }
+      this.finished=true;
     }
   }
+
+
   async  getRotation() {
-        /*
-          Returns an object with rotation properties.
-        */
-        return this.robot.getAttribute('rotation');
-    }
-
-
-    setV(v) {
-      console.log("llamo a halapiWW setV");
-      postMessage({message:"lineal",function:"setV",parameter:v});
-    }
-
-    advance(linearSpeed){
-      this.setV(linearSpeed);
-    }
-
-    setW(w) {
-      postMessage({message:"lineal",function:"setW",parameter: w * 10});
-    }
-
-    setL(l) {
-      postMessage({message:"lineal",function:"setL",parameter: l});
-    }
-
-    move(v, w, h) {
-      postMessage({message:"move",function:"move",v:v,w:w*10,h:h});
-    }
-
-    async getV() {
-      postMessage({message:"velocidad",function:"getV"})
-      this.finished=false;
-      var bucle=true;
-      var velocity;
-      while(bucle){
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            velocity = this.velocity.x;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+    postMessage({message:"sensor",function:"getRotation"});
+    this.finished=false;
+    var bucle=true,rotation;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        rotation = this.rotation;
       }
-      return velocity.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return rotation;
+  }
 
-    async getW() {
-      postMessage({message:"velocidad",function:"getW"})
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var velocity = this.velocity.ay;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  setV(v) {
+    postMessage({message:"lineal",function:"setV",parameter:v});
+  }
+
+  advance(linearSpeed){
+    this.setV(linearSpeed);
+  }
+
+  setW(w) {
+    postMessage({message:"lineal",function:"setW",parameter: w * 10});
+  }
+
+  setL(l) {
+    postMessage({message:"lineal",function:"setL",parameter: l});
+  }
+
+  move(v, w, h) {
+    postMessage({message:"move",v:v,w:w*10,h:h});
+  }
+
+  async getV() {
+    postMessage({message:"sensor",function:"getV"})
+    this.finished=false;
+    var bucle=true,velocity;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        velocity = this.velocity;
       }
-      return velocity.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return velocity;
+  }
 
-    async getL() {
-      postMessage({message:"velocidad",function:"getL"});
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var velocity = this.velocity.y;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getW() {
+    postMessage({message:"sensor",function:"getW"})
+    this.finished=false;
+    var bucle=true,velocity;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        velocity = this.velocity;
       }
-      console.log("devuelvo: ", velocity);
-      return velocity.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return velocity;
+  }
 
-    async getDistance() {
-    /*
-      This function returns the distance for the raycaster in the center of the arc of rays.
-    */
-      postMessage({message:"sensor",function:"getDistance"});
-      this.finished = false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var distance = this.distanceArray[0];
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getL() {
+    postMessage({message:"sensor",function:"getL"});
+    this.finished=false;
+    var bucle=true,velocity;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        velocity = this.velocity;
       }
-      return distance.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return velocity;
+  }
 
-    async getDistances() {
-    /*
-      This function returns an array with all the distances detected by the rays.
-    */
-      postMessage({message:"sensor",function:"getDistances"});
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var distances = this.distanceArray;
-
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getDistance() {
+    postMessage({message:"sensor",function:"getDistance"});
+    this.finished = false;
+    var bucle=true, distance;
+    var interval = setInterval(function(){
+      if(this.finished){
+        distance = this.distanceArray;
+        bucle=false;
       }
-      return distances.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return distance;
+  }
 
-    async getPosition() {
-    /*
-      This function returns an object with X-Y-Z positions and rotation (theta)
-      for the Y axis.
-    */
-      postMessage({message:"sensor",function:"getPosition"});
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var position = this.position;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getDistances() {
+    postMessage({message:"sensor",function:"getDistances"});
+    this.finished=false;
+    var bucle=true,distance;
+    var interval = setInterval(function(){
+      if(this.finished){
+        distance = this.distanceArray;
+        bucle=false;
       }
-      return position.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return distance;
+  }
 
-
-    async getObjectColor(colorAsString){
-      console.log("llamo a funcion");
-      postMessage({message:"sensor",function:"getObjectColor",color:colorAsString});
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var objectPos = this.object;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getPosition() {
+    postMessage({message:"sensor",function:"getPosition"});
+    this.finished=false;
+    var bucle=true,position;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        position = this.position;
       }
-      return objectPos.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return position;
+  }
 
-    async getObjectColorRGB(lowval, highval) {
-    /*
-      This function filters an object in the scene with a given color, uses OpenCVjs to filter
-      by color and calculates the center of the object.
-
-      Returns center: CenterX (cx), CenterY (cy) and the area of the object detected in the image.
-    */
-        var image = this.getImage();
-        var binImg = new cv.Mat();
-        var M = cv.Mat.ones(5, 5, cv.CV_8U);
-        var anchor = new cv.Point(-1, -1);
-        var lowThresh = new cv.Mat(image.rows, image.cols, image.type(), lowval);
-        var highThresh = new cv.Mat(image.rows, image.cols, image.type(), highval);
-        var contours = new cv.MatVector();
-        var hierarchy = new cv.Mat();
-
-        cv.morphologyEx(image, image, cv.MORPH_OPEN, M, anchor, 2,
-            cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue()); // Erosion followed by dilation
-
-        cv.inRange(image, lowThresh, highThresh, binImg);
-        cv.findContours(binImg, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
-        if (contours.size() > 0) {
-
-            let stored = contours.get(0);
-            var objArea = cv.contourArea(stored, false);
-
-            let moments = cv.moments(stored, false);
-            var cx = moments.m10 / moments.m00;
-            var cy = moments.m01 / moments.m00;
-
-        }
-        return {center: [parseInt(cx), parseInt(cy)], area: parseInt(objArea)};
-    }
-
-
-    async readIR(reqColor) {
-      postMessage({message:"sensor",function:"readIR",color:reqColor});
-      this.finished=false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-            var objectPos = this.object;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getObjectColor(colorAsString){
+    postMessage({message:"camera",function:"getObjectColor",color:colorAsString});
+    this.finished=false;
+    var bucle=true,objectPos;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        objectPos = this.object;
       }
-      return objectPos.resolve();
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return objectPos;
+  }
 
+  dameObjeto(lowFilter, highFilter) {
+      return this.getObjectColorRGB(lowFilter, highFilter);
+  }
 
-    avanzar(linearSpeed) {
-      postMessage({message:"lineal",function:"setV",parameter: linearSpeed});
-    }
-
-    async avanzarHasta(distance){
-      this.advanceTo(distance);
-    }
-
-    async advanceTo(distance) {
-      postMessage({message:"avanzar", parameter:distance});
-      this.finished = false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getObjectColorRGB(lowval, highval) {
+    postMessage({message:"cameraRGB",function:"getObjectColorRGB",color:[lowval,highval]});
+    this.finished=false;
+    var bucle=true,objectPos;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        objectPos = this.object;
       }
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return objectPos;
+  }
 
-    girar(turningSpeed) {
-      postMessage({message:"lineal",function:"setW",parameter: turningSpeed});
-    }
 
-    async girarHasta(angle){
-      this.turnUpTo(angle);
-    }
-
-    async turnUpTo(angle) {
-      postMessage({message:"girar",parameter:angle});
-      this.finished = false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async readIR(reqColor) {
+    postMessage({message:"camera",function:"readIR",color:reqColor});
+    this.finished=false;
+    var bucle=true,objectPos;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        objectPos = this.object;
       }
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return objectPos;
+  }
 
-    async aterrizar(){
-      this.land();
-    }
-
-    async land() {
-      postMessage({message:"aterrizar"});
-      this.finished = false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async getImage(camaraID){
+    postMessage({message:"image",function:"getImage",id:cameraID});
+    this.finished=false;
+    var bucle=true,camera;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+        camera = this.camera;
       }
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
     }
+    clearInterval(interval);
+    return camera;
+  }
 
-    async despegar(){
-      this.takeOff();
-    }
+  avanzar(linearSpeed) {
+    postMessage({message:"lineal",function:"setV",parameter: linearSpeed});
+  }
 
-    async takeOff() {
-      postMessage({message:"despegar"});
-      this.finished = false;
-      var bucle=true;
-      while(bucle){
-        console.log(this.finished);
-        var interval = setInterval(function(){
-          if(this.finished){
-            bucle=false;
-          }
-          clearInterval(interval);
-        },500);
-        await this.sleep(0.1);
-        console.log("-----Hilo dormido:worker");
+  async avanzarHasta(distance){
+    this.advanceTo(distance);
+  }
+
+  async advanceTo(distance) {
+    postMessage({message:"avanzar", parameter:distance});
+    this.finished = false;
+    var bucle=true;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
       }
+    },200);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
+    }
+    clearInterval(interval);
+  }
+
+  async turnUpTo(angle) {
+    postMessage({message:"girar",parameter:angle});
+    this.finished = false;
+    var bucle=true;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+      }
+    },200);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
+    }
+    clearInterval(interval);
+  }
+
+  async land() {
+    postMessage({message:"aterrizar"});
+    this.finished = false;
+    var bucle=true;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+      }
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
+    }
+    clearInterval(interval);
+  }
+
+  async takeOff() {
+    postMessage({message:"despegar"});
+    this.finished = false;
+    var bucle=true;
+    var interval = setInterval(function(){
+      if(this.finished){
+        bucle=false;
+      }
+    },500);
+    while(bucle){
+      await this.sleep(0.1);
+      //console.log("-----Hilo dormido:worker");
+    }
+    clearInterval(interval);
+  }
+  /*
+    SPANISH API: This methods calls the same method in english
+  */
+
+  parar() {
+    postMessage({message:"move",v:0,w:0,h:0});
+  }
+
+  async despegar(){
+    this.takeOff();
+  }
+
+ async aterrizar(){
+        this.land();
     }
 
-    parar() {
-      postMessage({message:"move",function:"move",v:0,w:0,h:0});
-    }
+  leerUltrasonido() {
+      return this.getDistance();
+  }
 
-    leerUltrasonido() {
-        return this.getDistance();
-    }
+  dameObjeto(lowFilter, highFilter) {
+      return this.getObjectColorRGB(lowFilter, highFilter);
+  }
 
-    dameObjeto(lowFilter, highFilter) {
-        return this.getObjectColorRGB(lowFilter, highFilter);
-    }
+  dameImagen() {
+      return this.getImage();
+  }
 
-    dameImagen() {
-        return this.getImage();
-    }
+  async girarHasta(angle){
+    this.turnUpTo(angle);
+  }
 
-    sleep(s) {
-    /**
-     * Auxiliar function to implement a throttle of code.
-     *
-     * @param {integer} s Number of seconds to stop the code
-     */
-      var ms = s*1000;
-      return new Promise(resolve => setTimeout(resolve, ms));
+  girar(turningSpeed) {
+        postMessage({message:"lineal",function:"setW",parameter: turningSpeed});
+  }
+
+  leerUltrasonido() {
+      return this.getDistance();
+  }
+
+  dameImagen() {
+      return this.getImage();
+  }
+
+  sleep(s) {
+    var ms = s*1000;
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

@@ -125,6 +125,7 @@ $(document).ready(async ()=>{
       }
     }else{
       brains.runBrain(editorRobot1,code);
+      //brains.runWorkerBrain(editorRobot1,code);
       for (var agent in agentsIDs) {
         agents.runAgent(agentsIDs[agent][0], agentsIDs[agent][1]);
       }

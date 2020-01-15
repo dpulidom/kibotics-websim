@@ -5,6 +5,7 @@ const setIntervalSynchronous = utils.setIntervalSynchronous;
 
 var brains = {};
 brains.threadsBrains = [];
+brains.workerActive = false;
 
 const PYTHON_WHILE = "while(true)";
 const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
@@ -173,17 +174,23 @@ brains.stopBrain = (robotID) =>{
 };
 
 brains.runWorkerBrain = (robotID,code) =>{
+  /**
+   * Function to create a webworker and send it user code
+   *
+   * @param {Object} myRobot RobotI object used to run code from UI
+   */
+  if(brains.workerActive){
+    brains.w.terminate();
+    console.log("Worker ya lanzado. Se sustituye el existente");
+  }
   if(typeof(Worker)!=="undefined"){
-      //crear el código yuxtaposición de runWorkerHALAPI y codigo usuario
+      brains.workerActive=true;
       brains.w = new Worker("../../brains/worker.js"); // starting worker
-      //añadir codigo, robotID, HALapiWW
       var myRobot = Websim.robots.getHalAPI(robotID);
-      console.log(myRobot);
       brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
-      brains.w.onmessage = function(e) { //respuesta del codigo principal
-        adapter.reply(e.data,myRobot);
+      brains.w.onmessage = function(e) { //main code reply
+        adapter.reply(e.data,brains.w,myRobot);
       }
-      //brainsWW.w.terminate();
   }else{
     console.log("Your browser does not support web workers");
   }

@@ -10,10 +10,8 @@ async function advanceTo(distance,myRobot,worker){
   while(Math.sqrt(Math.pow(pos_x-myRobot.getPosition().x,2)
       + Math.pow(pos_z-myRobot.getPosition().z,2)) <= Math.abs(distance)) {
         await sleep(0.1);
-        console.log("----------Hilo dormido: proxy");
   }
   myRobot.setV(0);
-  console.log("posicion alcanzada, desbloqueo proxy");
   worker.postMessage({message:"finished"});
 }
 
@@ -22,10 +20,8 @@ async function turnUpTo(angle,myRobot,worker) {
   angle > 0 ? myRobot.setW(-0.15) : myRobot.setW(0.15);
   while (Math.abs(initial_position - myRobot.getPosition().theta) <= Math.abs(angle)) {
       await sleep(0.1);
-      console.log("----------Hilo dormido: proxy");
   }
   myRobot.setW(0);
-  console.log("posicion alcanzada, desbloqueo proxy");
   worker.postMessage({message:"finished"});
 }
 
@@ -36,10 +32,9 @@ async function land(myRobot,worker){
           myRobot.setL(-2);
           await sleep(0.2);
       }
-      myRobot.setL(0);
-      console.log("posicion alcanzada, desbloqueo proxy");
-      worker.postMessage({message:"finished"});
   }
+  myRobot.setL(0);
+  worker.postMessage({message:"finished"});
 }
 
 async function takeOff(myRobot,worker){
@@ -49,10 +44,9 @@ async function takeOff(myRobot,worker){
           myRobot.setL(2);
           await sleep(0.2);
       }
-      myRobot.setL(0);
-      console.log("posicion alcanzada, desbloqueo proxy");
-      worker.postMessage({message:"finished"});
   }
+  myRobot.setL(0);
+  worker.postMessage({message:"finished"});
 }
 
 export function reply(message,worker,myRobot){
@@ -83,14 +77,22 @@ Miniproxy: To handler messages from worker and translate to HALapi
       worker.postMessage({message:"velocidad",function:message.function,parameter:velocity});
       break;
     case "sensor":
-      if(message.function == "getObjectColor" || message.function == "readIR"){
-        var sensor = eval("myRobot." + message.function + "( " + message.color + ");");
-      }else{
-        var sensor = eval("myRobot."+message.function + "();");
-      }
+      var sensor = eval("myRobot."+message.function + "();");
       worker.postMessage({message:"sensor",function:message.function,parameter:sensor});
       break;
+    case "camera":
+      var sensor = eval("myRobot." + message.function + "(\"" + message.color + "\");");
+      worker.postMessage({message:"camera",function:message.function,parameter:sensor});
+      break;
+    case "cameraRGB":
+      var sensor = myRobot.getObjectColorRGB(message.color[0],message.color[1]);
+      worker.postMessage({message:"camera",function:message.function,parameter:sensor});
+      break;
+    case "image":
+      var camera = myRobot.getImage(message.id);
+      worker.postMessage({message:"image",function:message.function,parameter:camera});
+      break;
     default:
-      console.log("otro mensaje");
+      console.log("Mensaje recibido: " + message);
   }
 }

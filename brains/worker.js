@@ -87,9 +87,7 @@ function createTimeoutWorker(code,myRobot,id){
       sequential_code = code;
       iterative_code = null;
     }
-    console.log('sequential:\n'+sequential_code);
-    console.log('iterative:\n'+iterative_code);
-
+    
     let workerIteration = setTimeout(async function iteration(){
       if (sequential_code != null) {
         await eval(sequential_code);
@@ -132,8 +130,7 @@ onmessage = function (e) {
       createArray(data.code,myRobot);
       break;
     default:
-      console.log("otro mensaje");
-      console.log(data);
+      console.log("mensaje recibido: " + data);
   }
 };
 
