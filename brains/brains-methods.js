@@ -5,7 +5,7 @@ const setIntervalSynchronous = utils.setIntervalSynchronous;
 
 var brains = {};
 brains.threadsBrains = [];
-brains.workerActive = false;
+brains.workerActive = [];
 
 const PYTHON_WHILE = "while(true)";
 const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
@@ -179,21 +179,31 @@ brains.runWorkerBrain = (robotID,code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
-  if(brains.workerActive){
-    brains.w.terminate();
-    console.log("Worker ya lanzado. Se sustituye el existente");
-  }
+    brains.workerActive.forEach(element=>{
+      if(element.robotID==robotID && element.running){
+        brains.w.terminate();
+        console.log("Worker ya lanzado. Se sustituye el existente");
+        const index = brains.workerActive.indexOf(element);
+        if (index > -1) {
+          brains.workerActive.splice(index, 1);
+        }
+      }
+    });
   if(typeof(Worker)!=="undefined"){
-      brains.workerActive=true;
+      brains.workerActive.push({robotID:robotID,running:true})
       brains.w = new Worker("../../brains/worker.js"); // starting worker
       var myRobot = Websim.robots.getHalAPI(robotID);
       brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
-      brains.w.onmessage = function(e) { //main code reply
-        adapter.reply(e.data,brains.w,myRobot);
+      brains.w.onmessage = function(e) {
+        adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
       }
   }else{
     console.log("Your browser does not support web workers");
   }
+}
+
+brains.stopWorker = () => {
+  brains.w.terminate();
 }
 
 
