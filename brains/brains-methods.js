@@ -150,8 +150,8 @@ brains.isThreadRunning = (robotID)=>{
    *
    * @param {string} threadID ID of the thread to check if running
    */
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  return threadBrain.running;
+   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+   return threadBrain.running;
 };
 
 brains.resumeBrain = (robotID, code) =>{
@@ -173,6 +173,18 @@ brains.stopBrain = (robotID) =>{
   threadBrain.running = false;
 };
 
+brains.isWorkerRunning = (robotID)=>{
+  /**
+   * Function to check if a worker is running
+   *
+   */
+   brains.workerActive.forEach(element=>{
+     if(element.robotID==robotID){
+       return element.running;
+     }
+   });
+};
+
 brains.runWorkerBrain = (robotID,code) =>{
   /**
    * Function to create a webworker and send it user code
@@ -186,6 +198,7 @@ brains.runWorkerBrain = (robotID,code) =>{
         const index = brains.workerActive.indexOf(element);
         if (index > -1) {
           brains.workerActive.splice(index, 1);
+          return;
         }
       }
     });
@@ -202,8 +215,18 @@ brains.runWorkerBrain = (robotID,code) =>{
   }
 }
 
-brains.stopWorker = () => {
-  brains.w.terminate();
+brains.stopWorker = (robotID) => {
+  brains.workerActive.forEach(element=>{
+    if(element.robotID==robotID && element.running){
+      brains.w.terminate();
+      console.log("Worker detenido");
+      Websim.robots.getHalAPI(robotID).parar();
+      const index = brains.workerActive.indexOf(element);
+      if (index > -1) {
+        brains.workerActive.splice(index, 1);
+      }
+    }
+  });
 }
 
 
