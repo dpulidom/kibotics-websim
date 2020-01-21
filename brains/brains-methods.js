@@ -191,25 +191,30 @@ brains.runWorkerBrain = (robotID,code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
+   var enabled = true;
     brains.workerActive.forEach(element=>{
       if(element.robotID==robotID && element.running){
         brains.w.terminate();
-        console.log("Worker ya lanzado. Se sustituye el existente");
+        enabled = false;
+        console.log("Stopping worker");
         const index = brains.workerActive.indexOf(element);
         if (index > -1) {
           brains.workerActive.splice(index, 1);
-          return;
         }
       }
     });
   if(typeof(Worker)!=="undefined"){
-      brains.workerActive.push({robotID:robotID,running:true})
-      brains.w = new Worker("../../brains/worker.js"); // starting worker
-      var myRobot = Websim.robots.getHalAPI(robotID);
-      brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
-      brains.w.onmessage = function(e) {
-        adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
-      }
+    var myRobot = Websim.robots.getHalAPI(robotID);
+    if(enabled){
+        brains.workerActive.push({robotID:robotID,running:true})
+        brains.w = new Worker("../../brains/worker.js"); // starting worker
+        brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
+        brains.w.onmessage = function(e) {
+          adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
+        }
+    }else{
+      myRobot.parar(); //stop robot when there is a worker active and user press play
+    }
   }else{
     console.log("Your browser does not support web workers");
   }

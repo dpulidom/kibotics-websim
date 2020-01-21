@@ -33,8 +33,8 @@ $(document).ready(async ()=>{
         brains.resumeBrain(editorRobot1,code);
       }
     }else{
-      brains.runBrain(editorRobot1,code);
-      //brains.runWorkerBrain(editorRobot1,code);
+      //brains.runBrain(editorRobot1,code);
+      brains.runWorkerBrain(editorRobot1,code);
     }
   });
 
