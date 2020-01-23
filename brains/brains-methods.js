@@ -1,9 +1,11 @@
 const utils = require('../simcore/utils/index.js');
+const adapter = require('./adapter.js');
 const sleep = utils.sleep;
 const setIntervalSynchronous = utils.setIntervalSynchronous;
 
 var brains = {};
 brains.threadsBrains = [];
+brains.workerActive = [];
 
 const PYTHON_WHILE = "while(true)";
 const PYONBROWSER_WHILE = "while ( (__PyTrue__).__bool__ () === __PyTrue__)";
@@ -148,8 +150,8 @@ brains.isThreadRunning = (robotID)=>{
    *
    * @param {string} threadID ID of the thread to check if running
    */
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  return threadBrain.running;
+   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+   return threadBrain.running;
 };
 
 brains.resumeBrain = (robotID, code) =>{
@@ -170,6 +172,68 @@ brains.stopBrain = (robotID) =>{
   clearTimeout(threadBrain.iteration);
   threadBrain.running = false;
 };
+
+brains.isWorkerRunning = (robotID)=>{
+  /**
+   * Function to check if a worker is running
+   *
+   */
+   brains.workerActive.forEach(element=>{
+     if(element.robotID==robotID){
+       return element.running;
+     }
+   });
+};
+
+brains.runWorkerBrain = (robotID,code) =>{
+  /**
+   * Function to create a webworker and send it user code
+   *
+   * @param {Object} myRobot RobotI object used to run code from UI
+   */
+   var enabled = true;
+    brains.workerActive.forEach(element=>{
+      if(element.robotID==robotID && element.running){
+        brains.w.terminate();
+        enabled = false;
+        console.log("Stopping worker");
+        const index = brains.workerActive.indexOf(element);
+        if (index > -1) {
+          brains.workerActive.splice(index, 1);
+        }
+      }
+    });
+  if(typeof(Worker)!=="undefined"){
+    var myRobot = Websim.robots.getHalAPI(robotID);
+    if(enabled){
+        brains.workerActive.push({robotID:robotID,running:true})
+        brains.w = new Worker("../../brains/worker.js"); // starting worker
+        brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
+        brains.w.onmessage = function(e) {
+          adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
+        }
+    }else{
+      myRobot.parar(); //stop robot when there is a worker active and user press play
+    }
+  }else{
+    console.log("Your browser does not support web workers");
+  }
+}
+
+brains.stopWorker = (robotID) => {
+  brains.workerActive.forEach(element=>{
+    if(element.robotID==robotID && element.running){
+      brains.w.terminate();
+      console.log("Worker detenido");
+      Websim.robots.getHalAPI(robotID).parar();
+      const index = brains.workerActive.indexOf(element);
+      if (index > -1) {
+        brains.workerActive.splice(index, 1);
+      }
+    }
+  });
+}
+
 
 brains.showThreads = ()=>{
   /**

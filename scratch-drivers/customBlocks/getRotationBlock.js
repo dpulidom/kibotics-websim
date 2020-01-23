@@ -25,7 +25,7 @@ export default function initGetRotationBlock(){
   Blockly.JavaScript['getRotation'] = function(block) {
     let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    let code = variable_robotvar + '.getRotation()';
+    let code = 'await ' + variable_robotvar + '.getRotation()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };

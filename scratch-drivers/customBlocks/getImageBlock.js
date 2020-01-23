@@ -26,7 +26,7 @@ export default function initGetImageBlock(){
   Blockly.JavaScript['get_image'] = function(block) {
     let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    let code = variable_robotvar.toString() + '.getImage()';
+    let code = 'await ' + variable_robotvar.toString() + '.getImage()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };

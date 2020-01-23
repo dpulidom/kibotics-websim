@@ -26,7 +26,7 @@ export default function initGetDistanceBlock(){
   Blockly.JavaScript['get_distance'] = function(block) {
     let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    let code = variable_robotvar + '.getDistance()';
+    let code = 'await ' + variable_robotvar + '.getDistance()';
 
     return [code, Blockly.JavaScript.ORDER_NONE];
   };

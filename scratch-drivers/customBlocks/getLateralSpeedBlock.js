@@ -25,7 +25,7 @@ export default function initGetLateralSpeed(){
   Blockly.JavaScript['getLateralSpeed'] = function(block) {
     let variable_robotvar = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOTVAR'), Blockly.Variables.NAME_TYPE);
 
-    let code = variable_robotvar + '.getL()';
+    let code = 'await ' + variable_robotvar + '.getL()';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };

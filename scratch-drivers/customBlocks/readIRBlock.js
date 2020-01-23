@@ -31,7 +31,7 @@ export default function initReadIRBlock(){
     var variable_robot_var = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ROBOT_VAR'), Blockly.Variables.NAME_TYPE);
     var value_name = '"'+block.getFieldValue('NAME') +'"';
 
-    var code = variable_robot_var + '.readIR(' + value_name + ')';
+    var code = 'await ' + variable_robot_var + '.readIR(' + value_name + ')';
 
     return [code, Blockly.JavaScript.ORDER_ATOMIC];
   };
