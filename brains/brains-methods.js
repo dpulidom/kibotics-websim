@@ -193,22 +193,25 @@ brains.runWorkerBrain = (robotID,code) =>{
    */
    var enabled = true;
     brains.workerActive.forEach(element=>{
-      if(element.robotID==robotID && element.running){
-        brains.w.terminate();
+      if(element.robotID==robotID && element.running ){
         enabled = false;
+        element.running=false;
+        //brains.workerActive.splice(brains.workerActive.indexOf(element), 1);
         console.log("Stopping worker");
-        const index = brains.workerActive.indexOf(element);
-        if (index > -1) {
-          brains.workerActive.splice(index, 1);
-        }
+        brains.w.postMessage({message:"stopping_code",robotID:robotID});
+        //brains.w.terminate();
+      }else if(element.robotID==robotID && !element.running){
+          enabled = false;
+          element.running = true;
+          brains.w.postMessage({message:"resume_code",robotID:robotID,code:code});
       }
     });
   if(typeof(Worker)!=="undefined"){
     var myRobot = Websim.robots.getHalAPI(robotID);
     if(enabled){
-        brains.workerActive.push({robotID:robotID,running:true})
+        brains.workerActive.push({robotID:robotID,code:code,running:true})
         brains.w = new Worker("../../brains/worker.js"); // starting worker
-        brains.w.postMessage({"message":"user_code","robotID":robotID,"code":code});
+        brains.w.postMessage({message:"user_code",robotID:robotID,code:code});
         brains.w.onmessage = function(e) {
           adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
         }
@@ -242,6 +245,6 @@ brains.showThreads = ()=>{
   brains.threadsBrains.forEach((threadBrain)=>{
     console.log(threadBrain);
   })
-};
+} ;
 
 module.exports = brains;

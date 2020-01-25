@@ -93,6 +93,6 @@ Miniproxy: To handler messages from worker and translate to HALapi
       worker.postMessage({message:"image",function:message.function,parameter:camera});
       break;
     default:
-      console.log("Mensaje recibido: " + message);
+      console.log("Mensaje recibido en proxy: " + message);
   }
 }

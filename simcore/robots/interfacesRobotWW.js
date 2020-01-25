@@ -1,8 +1,8 @@
 class RobotIWW {
     constructor(robotId) {
-      //this.finished = require('../globals');
-      //this.finished = false;
       this.finished = {status:false};
+      console.log("constructor " + robotId);
+
       this.myRobotID = robotId;
       this.sensors = {
                       velocity:{x: 0, y: 0, z: 0, ax: 0, ay: 0, az: 0},
@@ -12,10 +12,10 @@ class RobotIWW {
                       object:0,
                       camera:[],
                     }
-      this.handlerMessages(this.finished,this.sensors);
+      this.handlerMessages(this.finished,this.sensors,this);
     }
 
-  handlerMessages(finished,sensors){
+  handlerMessages(finished,sensors,classWW){
     onmessage= function(e){
       switch (e.data.message) {
         case "finished":
@@ -37,11 +37,24 @@ class RobotIWW {
         case "image":
           sensors.camera = e.data.parameter;
           break;
+        case "stopping_code":
+          var threadWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == e.data.robotID);
+          stopTimeoutRequested = true;
+          clearTimeout(threadWorker.iteration);
+          threadWorker.running = false;
+          break;
+        case "resume_code":
+          var code = cleanCode(e.data.code);
+          code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
+          var threadsWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == e.data.robotID);
+          threadsWorker.iteration = createTimeoutWorker(code,classWW,e.data.robotID);
+          threadsWorker.running = true;
+          threadsWorker.codeRunning = code;
+          break;
         default:
-          console.log("Mensaje recibido: " + e.data);
+          console.log("Mensaje recibido en interfaceWW: " + e.data);
       }
       finished.status=true;
-      //console.log("Recibo mensaje: " + );
     }
   }
 

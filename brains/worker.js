@@ -4,6 +4,18 @@ function initializeWorker(){
   importScripts("../../simcore/robots/interfacesRobotWW.js");
   worker = {};
   worker.threadsWorker = [];
+
+  onmessage = function (e) {
+    var data = e.data;
+    switch (data.message) {
+      case "user_code":
+        var myRobot = new RobotIWW(data.robotID);
+        createArray(data.code,myRobot);
+        break;
+      default:
+        console.log("mensaje recibido en worker: " + data);
+    }
+  };
 }
 
 function getLoopEnd(loop) {
@@ -87,7 +99,8 @@ function createTimeoutWorker(code,myRobot,id){
       sequential_code = code;
       iterative_code = null;
     }
-    
+    console.log('sequential:\n'+sequential_code);
+    console.log('iterative:\n'+iterative_code);
     let workerIteration = setTimeout(async function iteration(){
       if (sequential_code != null) {
         await eval(sequential_code);
@@ -96,12 +109,12 @@ function createTimeoutWorker(code,myRobot,id){
       if (iterative_code != null) {
         await eval(iterative_code);
         if (!stopTimeoutRequested) {
-          var t = setTimeout(iteration, 100);
+          var t = setTimeout(iteration, 50);
           var threadsWorker = worker.threadsWorker.find((threadsWorker)=> threadsWorker.id == id);
           threadsWorker.iteration = t;
         }
       }
-    }, 100);
+    }, 50);
     return workerIteration;
   }else{
     console.log('Error en el código.\nSólo puedes poner un bucle infinito.');
@@ -121,17 +134,5 @@ async function createArray(code,myRobot){
     "codeRunning": code
   });
 }
-
-onmessage = function (e) {
-  var data = e.data;
-  switch (data.message) {
-    case "user_code":
-      var myRobot = new RobotIWW(data.robotID);
-      createArray(data.code,myRobot);
-      break;
-    default:
-      console.log("mensaje recibido: " + data);
-  }
-};
 
 initializeWorker();
