@@ -13,6 +13,7 @@ import initGetObjectColorBlock from '../../scratch-drivers/customBlocks/getObjec
 import initGetPositionBlock from '../../scratch-drivers/customBlocks/getPositionBlock.js'
 import initGetRotationBlock from '../../scratch-drivers/customBlocks/getRotationBlock.js'
 import initMoveBackwardBlock from '../../scratch-drivers/customBlocks/moveBackwardBlock.js'
+import initGetObjectColorRGB from '../../scratch-drivers/customBlocks/getObjectColorRgbBlock.js'
 import initMoveBlock from '../../scratch-drivers/customBlocks/moveBlock.js'
 import initMoveAllBlock from '../../scratch-drivers/customBlocks/moveAllBlock.js'
 import initMoveForwardBlock from '../../scratch-drivers/customBlocks/moveForwardBlock.js'
@@ -219,4 +220,5 @@ function configureCustomBlocks() {
   initTurnLeftToBlock();
   initTurnRightToBlock();
   initGetImageOfBlock();
+  initGetObjectColorRGB();
 }
