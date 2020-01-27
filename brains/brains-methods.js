@@ -196,14 +196,17 @@ brains.runWorkerBrain = (robotID,code) =>{
       if(element.robotID==robotID && element.running ){
         enabled = false;
         element.running=false;
-        //brains.workerActive.splice(brains.workerActive.indexOf(element), 1);
         console.log("Stopping worker");
         brains.w.postMessage({message:"stopping_code",robotID:robotID});
-        //brains.w.terminate();
-      }else if(element.robotID==robotID && !element.running){
+      }else if(element.robotID==robotID && !element.running && element.code == code){
           enabled = false;
           element.running = true;
           brains.w.postMessage({message:"resume_code",robotID:robotID,code:code});
+      }else if(element.robotID==robotID && !element.running && element.code != code){
+        enabled = true;
+        brains.workerActive.splice(brains.workerActive.indexOf(element), 1);
+        brains.w.terminate();
+        brains.w = undefined;
       }
     });
   if(typeof(Worker)!=="undefined"){
@@ -215,9 +218,10 @@ brains.runWorkerBrain = (robotID,code) =>{
         brains.w.onmessage = function(e) {
           adapter.reply(e.data,brains.w,myRobot);//reply function (mini-proxy)
         }
-    }else{
-      myRobot.parar(); //stop robot when there is a worker active and user press play
-    }
+      }
+    // }else{
+    //   myRobot.parar(); //stop robot when there is a worker active and user press play
+    // }
   }else{
     console.log("Your browser does not support web workers");
   }
