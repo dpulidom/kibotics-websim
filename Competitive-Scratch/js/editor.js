@@ -34,6 +34,7 @@ import initMoveForwardToBlock from '../../scratch-drivers/customBlocks/moveForwa
 import initTurnLeftToBlock from '../../scratch-drivers/customBlocks/turnLeftToBlock.js'
 import initTurnRightToBlock from '../../scratch-drivers/customBlocks/turnRightToBlock.js'
 import initGetImageOfBlock from '../../scratch-drivers/customBlocks/getImageOfBlock.js'
+import initGetObjectColorRGB from '../../scratch-drivers/customBlocks/getObjectColorRgbBlock.js'
 
 
 // Load enviroment variables defined in the html template
@@ -312,4 +313,5 @@ function configureCustomBlocks() {
   initTurnLeftToBlock();
   initTurnRightToBlock();
   initGetImageOfBlock();
+  initGetObjectColorRGB();
 }

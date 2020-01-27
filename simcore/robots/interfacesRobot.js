@@ -96,7 +96,6 @@ export class RobotI {
         this.velocity = {x: 0, y: 0, z: 0, ax: 0, ay: 0, az: 0};
         this.robot.body.position.set(this.robot.body.initPosition.x, this.robot.body.initPosition.y, this.robot.body.initPosition.z);
         this.robot.body.quaternion.set(this.robot.body.initQuaternion.x, this.robot.body.initQuaternion.y, this.robot.body.initQuaternion.z, this.robot.body.initQuaternion.w)
-
     }
 
     storeInitialPosition(positionObject) {
@@ -148,7 +147,11 @@ export class RobotI {
         let initial_position = this.getPosition().theta;
         angle > 0 ? this.setW(-0.15) : this.setW(0.15);
         while (Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
-            await sleep(0.001);
+          await sleep(0.001);
+        }
+        if(!this.simulationEnabled){
+          console.log("prueba");
+          this.move(0,0,0);
         }
         this.setW(0);
     }
@@ -568,6 +571,16 @@ export class RobotI {
 
     getObjectColorPosition(position, color) {
         let image = this.getObjectColor(color);
+        if (position === 'X') {
+            return image.center[0];
+        } else if (position === 'Y') {
+            return image.center[1];
+        } else {
+            return image.area;
+        }
+    }
+    getObjectColorPositionRGB(position, valuemin,valuemax) {
+        let image = this.getObjectColorRGB(valuemin,valuemax);
         if (position === 'X') {
             return image.center[0];
         } else if (position === 'Y') {

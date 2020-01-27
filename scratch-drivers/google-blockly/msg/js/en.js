@@ -463,6 +463,8 @@ Blockly.Msg["GET_IMAGE_TEXT"] = "Get image from embedded camera of %1";
 Blockly.Msg["GET_IMAGE_TOOLTIP"] = "Get image from embedded camer for the robot and returns an";
 Blockly.Msg["GET_OBJCOLOR_TEXT"] = "From the camera of %1 get %2 for the object with color %3";
 Blockly.Msg["GET_OBJCOLOR_TOOLTIP"] = "Gets coordinate X, Y or Z for the object seen in the camera of the robot";
+Blockly.Msg["GET_OBJECT_RGB_TEXT"] = "From the camera of %1 get %2 for the object with color %3 to %4";
+
 Blockly.Msg["GET_DISTANCE_TEXT"] = "For %1 get distance to the object in front";
 Blockly.Msg["GET_DISTANCE_TOOLTIP"] = "Get distance to the object in front of the robot (meters)";
 Blockly.Msg["GET_DISTANCES_TEXT"] = "For %1 get distances in 180 degrees arc";

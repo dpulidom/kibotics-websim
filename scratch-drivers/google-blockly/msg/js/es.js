@@ -435,7 +435,7 @@ Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 /**
  * Declare text and tooltip text for ROBOT custom blocks
  */
- Blockly.Msg["MOVE_COMBINED_ALL_TEXT"] = "Mover %1 a velocidad lineal %2 velocidad angular %3 y velocidad vertical %4";
+Blockly.Msg["MOVE_COMBINED_ALL_TEXT"] = "Mover %1 a velocidad lineal %2 velocidad angular %3 y velocidad vertical %4";
 Blockly.Msg["MOVE_COMBINED_TEXT"] = "Mover %1 a velocidad lineal %2 y velocidad angular %3";
 Blockly.Msg["MOVE_COMBINED_TOOLTIP"] = "Configura dos velocidades, la velocidad de avance del robot y la velocidad de giro";
 Blockly.Msg["MOVE_FORWARD_TEXT"] = "Avanzar %1 a velocidad %2";
@@ -463,6 +463,7 @@ Blockly.Msg["STOP_ROBOT_TOOLTIP"] = "Para el robot configurando todas sus veloci
 Blockly.Msg["GET_IMAGE_TEXT"] = "Obtener la imagen de la cámara de %1";
 Blockly.Msg["GET_IMAGE_TOOLTIP"] = "Devuelve una lista con la imagen de la cámara integrada en el robot";
 Blockly.Msg["GET_OBJCOLOR_TEXT"] = "De la cámara de %1 obtener %2 del objeto de color %3";
+Blockly.Msg["GET_OBJECT_RGB_TEXT"] = "De la cámara de %1 obtener %2 objeto de color con filtro %3 a %4";
 Blockly.Msg["GET_OBJCOLOR_TOOLTIP"] = "Obtiene la coordenada, X o Y del objeto con el color declarado que visualiza la cámara integrada en el robot";
 Blockly.Msg["GET_IMAGE_OF_TEXT"] = "Obtener la imagen de la cámara %1 de %2";
 Blockly.Msg["GET_IMAGE_OF_TOOLTIP"] = "Obtiene la imagen de la cámara especificada del robot";
