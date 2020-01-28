@@ -28,20 +28,26 @@ $(document).ready(async ()=>{
     //console.log(code);
     if (brains.threadExists(editorRobot1)){
       if (brains.isThreadRunning(editorRobot1)){
-        brains.stopBrain(editorRobot1);
+        //Websim.simulation.toggleSimulation();
+        brains.stopWorker(editorRobot1);
+      //  brains.stopBrain(editorRobot1);
       }else{
-        brains.resumeBrain(editorRobot1,code);
+        //brains.resumeBrain(editorRobot1,code);
+        brains.resumeWorker(editorRobot1,code);
+      //  Websim.simulation.toggleSimulation();
       }
     }else{
-      //brains.runBrain(editorRobot1,code);
+    //  brains.runBrain(editorRobot1,code);
       brains.runWorkerBrain(editorRobot1,code);
+      var runbtn = document.querySelector("#runbtn").firstChild;
+      runbtn.src ="../assets/resources/stop-icon.png";
     }
   });
 
   $('#resetRobot').click(()=>{
     editor.sendEvent('reset');
   });
-
+  
   $('#simButton').click(()=>{
     Websim.simulation.toggleSimulation();
   });

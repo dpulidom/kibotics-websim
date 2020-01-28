@@ -99,8 +99,8 @@ function createTimeoutWorker(code,myRobot,id){
       sequential_code = code;
       iterative_code = null;
     }
-    console.log('sequential:\n'+sequential_code);
-    console.log('iterative:\n'+iterative_code);
+    //console.log('sequential:\n'+sequential_code);
+    //console.log('iterative:\n'+iterative_code);
     let workerIteration = setTimeout(async function iteration(){
       if (sequential_code != null) {
         await eval(sequential_code);
@@ -125,8 +125,8 @@ function createTimeoutWorker(code,myRobot,id){
 async function createArray(code,myRobot){
   code = cleanCode(code);
   code = 'async function myAlgorithm(){\n'+code+'\n}\nmyAlgorithm();';
+  console.log("code");
   var robotID = myRobot.myRobotID;
-  console.log(code);
   worker.threadsWorker.push({
     "id": robotID,
     "running": true,
