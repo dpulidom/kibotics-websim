@@ -16,10 +16,15 @@ async function advanceTo(distance,myRobot,worker){
 }
 
 async function turnUpTo(angle,myRobot,worker) {
-  let initial_position = myRobot.getPosition().theta;
+  let initial_position = myRobot.getPosition().theta + 180.0; // [0, 360]
   angle > 0 ? myRobot.setW(-0.15) : myRobot.setW(0.15);
-  while (Math.abs(initial_position - myRobot.getPosition().theta) <= Math.abs(angle)) {
-      await sleep(0.1);
+  var current_position = myRobot.getPosition().theta + 180.0; // [0, 360]
+  if (initial_position -angle < 0.0) {
+    angle = angle - 360.0; // discontinuity
+  }
+  while (Math.abs(current_position - ((initial_position - angle)%360.0)) >= 5.0) {
+      await sleep(0.0001);
+      current_position = myRobot.getPosition().theta + 180.0; // [0, 360]
   }
   myRobot.setW(0);
   worker.postMessage({message:"finished"});

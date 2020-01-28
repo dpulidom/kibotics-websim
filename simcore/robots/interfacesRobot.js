@@ -209,6 +209,8 @@ export class RobotI {
             let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
             this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
             this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
+        } else {
+            this.robot.body.angularVelocity.set(0.0, 0.0, 0.0);
         }
         this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 50);
     }
