@@ -532,6 +532,13 @@ export class RobotI {
 
       Returns center: CenterX (cx), CenterY (cy) and the area of the object detected in the image.
     */
+
+        if(lowval.length == 3){
+          lowval.push(0);
+        }
+        if(highval.length == 3){
+          highval.push(255);
+        }
         var image = this.getImage();
         var binImg = new cv.Mat();
         var M = cv.Mat.ones(5, 5, cv.CV_8U);
