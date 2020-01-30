@@ -145,10 +145,15 @@ export class RobotI {
     }
 
     async turnUpTo(angle) {
-        let initial_position = this.getPosition().theta;
+        let initial_position = this.getPosition().theta + 180.0; // [0, 360]
         angle > 0 ? this.setW(-0.15) : this.setW(0.15);
-        while (Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
-            await sleep(0.001);
+        var current_position = this.getPosition().theta + 180.0; // [0, 360]
+        if (initial_position -angle < 0.0) {
+            angle = angle - 360.0; // discontinuity
+        }
+        while (Math.abs(current_position - ((initial_position - angle)%360.0)) >= 5.0) {
+            await sleep(0.0001);
+            current_position = this.getPosition().theta + 180.0; // [0, 360]
         }
         this.setW(0);
     }
@@ -204,6 +209,8 @@ export class RobotI {
             let newpos = this.updatePosition(rotation, this.velocity, this.robot.body.position);
             this.robot.body.position.set(newpos.x, newpos.y, newpos.z);
             this.robot.body.angularVelocity.set(this.velocity.ax, this.velocity.ay, this.velocity.az);
+        } else {
+            this.robot.body.angularVelocity.set(0.0, 0.0, 0.0);
         }
         this.timeoutMotors = setTimeout(this.setVelocity.bind(this), 50);
     }
