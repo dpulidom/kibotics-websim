@@ -88,7 +88,7 @@
                 "id": "a-pibot",
                 "gltf-model":"../assets/models/drone_animation.gltf",
                 "scale": { "x":0.3, "y":0.3, "z":0.3},
-                "position": { "x":12.4, "y":3, "z":25},
+                "position": { "x":12.4, "y":2, "z":25},
                 "rotation": { "x":0, "y":43.70, "z":0},
                 "dynamic-body":{"mass": 1}
 
@@ -99,7 +99,7 @@
                     "attr": {
                         "id": "a-pibotCamera1Wrapper",
                         "position": { "x": 2.74, "y": 0.1, "z": -0.1},
-                        "rotation": { "x": -90, "y":-90, "z":0}
+                        "rotation": { "x": -70, "y":-90, "z":0}
                     },
                     "childs": [
                         {
