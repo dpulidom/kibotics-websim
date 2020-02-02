@@ -39,8 +39,7 @@ $(document).ready(async ()=>{
         brains.resumeBrain(editorRobot1,code);
       }
     }else{
-      arrayBrainsStatus.push({id:editorRobot1,status:"RUNNING"});
-      console.log(code);
+      arrayBrainsStatus.push({id:editorRobot1,status:"RUNNING",blocking_instruction:false});
       brains.runBrain(editorRobot1,code);
       //brains.runWorkerBrain(editorRobot1,code);
       var runbtn = document.querySelector("#runbtn").firstChild;

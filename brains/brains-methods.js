@@ -99,6 +99,7 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
     //console.log('sequential:\n'+sequential_code);
     //console.log('iterative:\n'+iterative_code);
     let brainIteration = setTimeout(async function iteration(){
+      await("while(brainStatus.status==\"RECHARGING_REQUEST\"){await sleep(0.01);};\n")
       if (sequential_code != null) {
         await eval(sequential_code);
         sequential_code = null;
@@ -107,12 +108,12 @@ brains.createTimeoutBrain = (code, myRobot, id)=>{
         await eval(iterative_code);
         await eval("if(brainStatus.status==\"RECHARGING_REQUEST\"){brainStatus.status=\"RECHARGING_READY\"; }");
         if (!stopTimeoutRequested){
-          //brainStatus.status== "RUNNING" || brainStatus.status=="RECHARGING_READY") {
             var t = setTimeout(iteration, 100);
             var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == id);
             threadBrain.iteration = t;
             brainStatus.status = "RUNNING";
         }else{
+          console.log("here");
           while(brainStatus.status== "RECHARGING_REQUEST"){
             await sleep(0.001);
           }
@@ -141,17 +142,13 @@ brains.runBrain = (robotID, code) =>{
    *
    * @param {Object} myRobot RobotI object used to run code from UI
    */
-  //globals.arrayBrainsStatus.push({id:robotID,running:true,codeChanged:false,blocking:false});
   brainStatus = getBrainStatus(robotID);
   code = cleanCode(code);
-  var preCode = "while(brainStatus.status==\"RECHARGING_REQUEST\"){await sleep(0.01);};\n";
-  var postCode = "\n if(brainStatus.status==\"RECHARGING_REQUEST\"){\nbrainStatus.status=\"RECHARGING_READY\";\n }";
-  newCode = 'async function myAlgorithm(){\n'+ preCode + code + postCode + '\n}\nmyAlgorithm();';
-  console.log(newCode);
+  code = 'async function myAlgorithm(){\n'+ code + '\n}\nmyAlgorithm();';
   brains.threadsBrains.push({
     "id": robotID,
     "running": true,
-    "iteration": brains.createTimeoutBrain(newCode, Websim.robots.getHalAPI(robotID), robotID),
+    "iteration": brains.createTimeoutBrain(code, Websim.robots.getHalAPI(robotID), robotID),
     "codeRunning": code
   });
 };
@@ -175,15 +172,17 @@ brains.resumeBrain = (robotID, code) =>{
   brainStatus = getBrainStatus(robotID);
   code = cleanCode(code);
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
+  code = 'async function myAlgorithm(){\n'+ code + '\n}\nmyAlgorithm();';
   if(threadBrain.codeRunning != code){
-    var preCode = "while(brainStatus.status==\"RECHARGING_REQUEST\"){await sleep(0.01)};\n";
-    var postCode = "\nbrainStatus.status=\"RECHARGING_READY\";";
-    var newCode = 'async function myAlgorithm(){\n'+ preCode + code + postCode + '\n }\nmyAlgorithm();';
     stopTimeoutRequested = true;
     brainStatus.status = "RECHARGING_REQUEST";
     clearTimeout(threadBrain.iteration);
-    brains.newCode = newCode;
-    //threadBrain.iteration = brains.createTimeoutBrain(newCode, Websim.robots.getHalAPI(robotID), robotID);
+    brains.newCode = code;
+    if(!brainStatus.blocking_instruction){
+      var myRobot = Websim.robots.getHalAPI(robotID);
+      myRobot.parar()
+      threadBrain.iteration = brains.createTimeoutBrain(code, myRobot, robotID);
+    }
   }else{
     brainStatus.status = "RUNNING";
   }
@@ -201,18 +200,6 @@ brains.pauseBrain = (robotID) =>{
   var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
   threadBrain.running = false;
 };
-
-brains.stopBrain = (robotID) =>{
-  /**
-   * Stops all threads running
-   */
-  var threadBrain = brains.threadsBrains.find((threadBrain)=> threadBrain.id == robotID);
-  stopTimeoutRequested = true;
-  clearTimeout(threadBrain.iteration);
-  threadBrain.running = false;
-};
-
-
 
 brains.isWorkerRunning = (robotID)=>{
   /**

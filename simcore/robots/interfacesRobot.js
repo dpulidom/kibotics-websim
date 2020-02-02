@@ -94,21 +94,15 @@ export class RobotI {
     }
 
     setV(v) {
-        if (simEnabled) {
             this.velocity.x = v;
-        }
     }
 
     setW(w) {
-        if (simEnabled) {
             this.velocity.ay = w * 10;
-        }
     }
 
     setL(l) {
-        if (simEnabled) {
-            this.velocity.y = l;
-        }
+          this.velocity.y = l;
     }
 
     move(v, w, h) {
@@ -122,14 +116,15 @@ export class RobotI {
     }
 
     async advanceTo(distance,status) {
+        status.blocking_instruction = true;
         let initial_position_x = this.getPosition().x;
         let initial_position_z = this.getPosition().z;
         distance > 0 ? this.setV(1) : this.setV(-1);
         while (status.status!="RECHARGING_REQUEST" && Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
             + Math.pow(initial_position_z-this.getPosition().z,2)) <= Math.abs(distance)) {
             await sleep(0.01);
-            //console.log("bucle avanzar  ");
         }
+        status.blocking_instruction = false;
         this.setV(0);
     }
 
@@ -139,37 +134,43 @@ export class RobotI {
     // }
 
     async turnUpTo(angle,status) {
+      status.blocking_instruction = true;
       let initial_position = this.getPosition().theta;
       angle > 0 ? this.setW(-0.15) : this.setW(0.15);
       while (status.status!="RECHARGING_REQUEST" && Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
         await sleep(0.001);
         //console.log("bucle girar ");
       }
+      status.blocking_instruction = false;
       this.setW(0);
     }
 
 
 
     async land() {
-        let position = this.getPosition();
-        if (position.y > 2) {
-            while (simEnabled && this.getPosition().y > 2) {
-                this.setL(-2);
-				        await sleep(0.2);
-            }
-            this.setL(0);
-        }
+      status.blocking_instruction = true;
+      let position = this.getPosition();
+      if (position.y > 2) {
+          while (status.status!="RECHARGING_REQUEST" && this.getPosition().y > 2) {
+              this.setL(-2);
+			        await sleep(0.2);
+          }
+          this.setL(0);
+      }
+      status.blocking_instruction = false;
     }
 
     async takeOff() {
+      status.blocking_instruction = true;
         let position = this.getPosition();
         if (position.y < 10) {
-            while (simEnabled && this.getPosition().y < 10) {
+            while (status.status!="RECHARGING_REQUEST" && this.getPosition().y < 10) {
                 this.setL(2);
 				        await sleep(0.2);
             }
             this.setL(0);
         }
+        status.blocking_instruction = false;
     }
 
     getV() {
