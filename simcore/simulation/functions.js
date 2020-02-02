@@ -1,5 +1,5 @@
 import {spectObject, intersectionHandlerObj, followBodyObj} from './aframe-components';
-import {arrayIds, arrayLoadedBodyRobots, simEnabled, arrayRobots, changeSimulationValue} from '../globals';
+import {arrayIds, arrayLoadedBodyRobots, simEnabled, arrayRobots, changeSimulationValue, arrayBrainsStatus} from '../globals';
 export var active = false;
 export var refreshInterval = null;
 
@@ -27,10 +27,19 @@ export function extendAFrame(){
 }
 
 export function toggleSimulation(){
+  var runbtn = document.querySelector("#runbtn").firstChild;
+  var scene = document.querySelector("#scene");
+  if(!simEnabled){
+    scene.play();
+    runbtn.src ="../assets/resources/stop-icon.png";
+  }else{
+    runbtn.src ="../assets/resources/play-icon.png";
+    scene.pause();
+  }
   console.log('Setting simulation state to:', !simEnabled);
   changeSimulationValue(!simEnabled);
-  arrayRobots.forEach(robot =>{
-    robot.changeSimulationState(simEnabled);
-    console.log(robot);
-  });
+  // arrayRobots.forEach(robot =>{
+  //   robot.changeSimulationValue(simEnabled);
+  //   console.log(robot);
+  // });
 }

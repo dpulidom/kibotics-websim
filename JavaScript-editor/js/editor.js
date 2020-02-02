@@ -1,6 +1,7 @@
 import editor from './editor-methods.js'
 import brains from '../../brains/brains-methods.js'
 import evaluators from '../../brains/evaluators-methods.js'
+import {arrayBrainsStatus} from '../../simcore/globals';
 
 var editorRobot1 = 'a-pibot';
 var editorRobot2 = 'alvaro-robot';
@@ -26,15 +27,24 @@ $(document).ready(async ()=>{
      */
     var code = editor.getCode()
     //console.log(code);
+    //if(typeof(brains.w) !="undefined"){
     if (brains.threadExists(editorRobot1)){
+      Websim.simulation.toggleSimulation();
+      //brains.stopWorker(editorRobot1);
       if (brains.isThreadRunning(editorRobot1)){
-        brains.stopBrain(editorRobot1);
+        brains.pauseBrain(editorRobot1);
+        //console.log(arrayBrainsStatus);
+        //brains.stopBrain(editorRobot1);
       }else{
         brains.resumeBrain(editorRobot1,code);
       }
     }else{
-      //brains.runBrain(editorRobot1,code);
-      brains.runWorkerBrain(editorRobot1,code);
+      arrayBrainsStatus.push({id:editorRobot1,status:"RUNNING"});
+      console.log(code);
+      brains.runBrain(editorRobot1,code);
+      //brains.runWorkerBrain(editorRobot1,code);
+      var runbtn = document.querySelector("#runbtn").firstChild;
+      runbtn.src ="../assets/resources/stop-icon.png";
     }
   });
 
@@ -42,9 +52,9 @@ $(document).ready(async ()=>{
     editor.sendEvent('reset');
   });
 
-  $('#simButton').click(()=>{
-    Websim.simulation.toggleSimulation();
-  });
+  // $('#simButton').click(()=>{
+  //   Websim.simulation.toggleSimulation();
+  // });
 
   // Init Websim simulator with config contained in the file passed
   // as parameter

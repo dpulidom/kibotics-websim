@@ -1,4 +1,5 @@
 import {sleep} from '../utils';
+import {simEnabled, arrayBrainsStatus} from '../globals';
 
 export class RobotI {
     constructor(robotId) {
@@ -26,7 +27,6 @@ export class RobotI {
             black: {low: [0, 0, 0, 255], high: [105, 105, 105, 255]}
         };
         this.velocity = {x: 0, y: 0, z: 0, ax: 0, ay: 0, az: 0};
-        this.simulationEnabled = true;
 
         this.storeInitialPosition(this.robot.getAttribute('position'));
         this.findCameras();
@@ -37,17 +37,6 @@ export class RobotI {
             'detail': this
         });
         document.dispatchEvent(robotEvent);
-    }
-
-    changeSimulationState(state) {
-        /**
-         * Change the simulation state (SIM-API)
-         *
-         * @param {boolean} state State of the simulation to be set up
-         */
-        if (typeof state === 'boolean') {
-            this.simulationEnabled = state;
-        }
     }
 
     getID() {
@@ -105,19 +94,19 @@ export class RobotI {
     }
 
     setV(v) {
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             this.velocity.x = v;
         }
     }
 
     setW(w) {
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             this.velocity.ay = w * 10;
         }
     }
 
     setL(l) {
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             this.velocity.y = l;
         }
     }
@@ -132,36 +121,41 @@ export class RobotI {
         this.setV(linearSpeed);
     }
 
-    async advanceTo(distance) {
+    async advanceTo(distance,status) {
         let initial_position_x = this.getPosition().x;
         let initial_position_z = this.getPosition().z;
         distance > 0 ? this.setV(1) : this.setV(-1);
-        while (Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
+        while (status.status!="RECHARGING_REQUEST" && Math.sqrt(Math.pow(initial_position_x-this.getPosition().x,2)
             + Math.pow(initial_position_z-this.getPosition().z,2)) <= Math.abs(distance)) {
             await sleep(0.01);
+            //console.log("bucle avanzar  ");
         }
         this.setV(0);
     }
 
-    async turnUpTo(angle) {
-        let initial_position = this.getPosition().theta;
-        angle > 0 ? this.setW(-0.15) : this.setW(0.15);
-        while (Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
-          await sleep(0.001);
-        }
-        if(!this.simulationEnabled){
-          console.log("prueba");
-          this.move(0,0,0);
-        }
-        this.setW(0);
+    // async turnUpTo(angle){
+    //   console.log(arrayBrainsStatus);
+    //   await this.turnUp(angle,arrayBrainsStatus[0]);
+    // }
+
+    async turnUpTo(angle,status) {
+      let initial_position = this.getPosition().theta;
+      angle > 0 ? this.setW(-0.15) : this.setW(0.15);
+      while (status.status!="RECHARGING_REQUEST" && Math.abs(initial_position - this.getPosition().theta) <= Math.abs(angle)) {
+        await sleep(0.001);
+        //console.log("bucle girar ");
+      }
+      this.setW(0);
     }
+
+
 
     async land() {
         let position = this.getPosition();
         if (position.y > 2) {
-            while (this.getPosition().y > 2) {
+            while (simEnabled && this.getPosition().y > 2) {
                 this.setL(-2);
-				await sleep(0.2);
+				        await sleep(0.2);
             }
             this.setL(0);
         }
@@ -170,9 +164,9 @@ export class RobotI {
     async takeOff() {
         let position = this.getPosition();
         if (position.y < 10) {
-            while (this.getPosition().y < 10) {
+            while (simEnabled && this.getPosition().y < 10) {
                 this.setL(2);
-				await sleep(0.2);
+				        await sleep(0.2);
             }
             this.setL(0);
         }
@@ -195,7 +189,7 @@ export class RobotI {
           This code run continiously, setting the speed of the robot every 30ms
           This function will not be callable, use setV, setW or setL
         */
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             if (this.robot.body.position.y > 1) { //to activate animation of drone
                 var robot = document.querySelector("#" + this.myRobotID);
                 robot.setAttribute('animation-mixer', "clip:*;timeScale:1.5");
@@ -212,6 +206,7 @@ export class RobotI {
     }
 
     updatePosition(rotation, velocity, robotPos) {
+      if (simEnabled) {
         let x = velocity.x / 10 * Math.cos(rotation.y * Math.PI / 180);
         let z = velocity.x / 10 * Math.sin(-rotation.y * Math.PI / 180);
         let y = (velocity.y / 10);
@@ -219,6 +214,7 @@ export class RobotI {
         robotPos.z += z;
         robotPos.y += y;
         return robotPos;
+      }
     }
 
     getCameraDescription() {
@@ -286,7 +282,7 @@ export class RobotI {
       "imagedata", this allows to obtain image from the robot
       with getImage() function.
     */
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             for (var i = 0; i < this.camerasData.length; i++) {
                 this.camerasData[i]['image'] = cv.imread(this.camerasData[i]['canvasID']);
             }
@@ -607,7 +603,7 @@ export class RobotI {
       This function is a simple implementation of follow line algorithm, the robot filters an object with
       a given color and follows it.
     */
-        if (this.simulationEnabled) {
+        if (simEnabled) {
             var data = this.getObjectColorRGB(lowval, highval); // Filters image
 
             this.setV(speed);
@@ -680,15 +676,15 @@ export class RobotI {
     }
 
     async avanzarHasta(distance) {
-        this.advanceTo(distance);
+        await this.advanceTo(distance);
     }
 
     girar(turningSpeed) {
         return this.setW(turningSpeed);
     }
 
-    async girarHasta(angle) {
-        this.turnUpTo(angle);
+   async girarHasta(angle,status) {
+        await this.turnUpTo(angle);
     }
 
     async aterrizar() {

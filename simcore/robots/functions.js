@@ -1,5 +1,5 @@
 import {RobotI} from './interfacesRobot.js';
-import {arrayRobots, arrayIds, arrayLoadedBodyRobots, simEnabled} from '../globals';
+import {arrayRobots, arrayIds, arrayLoadedBodyRobots, simEnabled, arrayBrainsStatus} from '../globals';
 import {sleep, arraysEqual} from '../utils';
 
 export function resetRobots(){
@@ -51,7 +51,7 @@ function createRobot(htmlID){
      */
     return new Promise(async (resolve, reject)=>{
         await arrayRobots.push(new RobotI(htmlID));
-        console.log("Added robot to,", arrayRobots)
+        console.log("Added robot to,", arrayRobots);
         resolve();
     })
 }

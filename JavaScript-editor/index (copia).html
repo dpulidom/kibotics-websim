@@ -15,7 +15,7 @@
       //var evaluator_icon1 = "../assets/resources/car1.svg";
       //var evaluator_icon2 = "../assets/resources/car2.svg";
     </script>
-    <script>var config_file = '../assets/config/config_tello_follow_line.json';</script>
+    <script>var config_file = '../assets/config/config_tello_2.0.json';</script>
   </head>
   <body>
     <nav id="navbar">
@@ -42,8 +42,8 @@
           */
           console.log(await myRobot.getObjectColorRGB([110, 0, 0],[255, 30, 30]));
           while(true){
-            await myRobot.turnUpTo(45,brainStatus);
-            await myRobot.advanceTo(10,brainStatus);
+            await myRobot.turnUpTo(45);
+            await myRobot.advanceTo(10);
           }
         </div>
         <div id="cameras" style="display:inline-flex;">
